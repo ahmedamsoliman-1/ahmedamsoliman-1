@@ -127,17 +127,17 @@ app.use(linkedinRoutes);
 var argv = require("minimist")(process.argv.slice(2));
 
 //config file
-// var configFile = argv.config || ".config";
-// var config = require(path.join(__dirname, configFile));
+var configFile = argv.config || ".config";
+var config = require(path.join(__dirname, configFile));
 
 // //authenticates requests
-// app.get(
-//   "/houndifyAuth",
-//   Houndify.HoundifyExpress.createAuthenticationHandler({
-//     clientId: config.clientId,
-//     clientKey: config.clientKey,
-//   })
-// );
+app.get(
+  "/houndifyAuth",
+  Houndify.HoundifyExpress.createAuthenticationHandler({
+    clientId: config.clientId,
+    clientKey: config.clientKey,
+  })
+);
 
 //sends the request to Houndify backend with authentication headers
 app.post(

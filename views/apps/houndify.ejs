@@ -1,4 +1,10 @@
-<%- include ('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask Houndify</title>
+
     <script src="https://unpkg.com/houndify@3.1.11/dist/houndify.js"></script>
     <link
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
@@ -46,7 +52,21 @@
           </button>
         </div>
 
-        <div>
+        <div
+          id="returnedStatus"
+          class="bg-blue-100 text-blue-700 p-4 my-4 rounded"
+        >
+          <div class="text-xs font-bold text-blue-700">
+            Waiting for question to give you an answer!
+          </div>
+          <p class="text-sm"></p>
+        </div>
+        <div id="domain" class="bg-blue-100 text-blue-700 p-4 my-4 rounded">
+          <div class="text-xs font-bold text-blue-700"></div>
+          <p class="text-sm"></p>
+        </div>
+
+        <!-- <div>
           <h3 class="text-lg font-bold">Audio upload</h3>
           <label class="ui label block" for="file"
             >Upload a recorded voice query from a file.</label
@@ -58,7 +78,7 @@
             onchange="onFileUpload()"
             class="bg-gray-200 hover:bg-gray-400 py-2 px-4 rounded block my-4"
           />
-        </div>
+        </div> -->
 
         <div class="flex mb-4">
           <div class="w-1/2 h-12">
@@ -86,6 +106,8 @@
       const responseElt = document.getElementById("responseJSON");
       const infoElt = document.getElementById("infoJSON");
       const statusElt = document.getElementById("status");
+      const returnedElt = document.getElementById("returnedStatus");
+      const domain = document.getElementById("domain");
       const transcriptElt = document.getElementById("query");
       const voiceIcon = document.getElementById("voiceIcon");
 
@@ -277,6 +299,19 @@
         statusElt.innerText = "Received response.";
         responseElt.parentNode.hidden = false;
         responseElt.value = response.stringify(undefined, 2);
+        // responseElt.value = response.AllResults[0].SpokenResponseLong;
+        returnedElt.innerText = response.AllResults[0].SpokenResponseLong;
+        // domain.innerText =
+        //   response.DomainUsage[0].Domain +
+        //   ", " +
+        //   response.DomainUsage[1].Domain;
+        // console.log(response.DomainUsage.length);
+
+        domain.innerText = "Domain Usage:    ";
+        response.DomainUsage.forEach((element) => {
+          domain.innerText += element.Domain + ",  ";
+        });
+
         infoElt.parentNode.hidden = false;
         infoElt.value = JSON.stringify(info, undefined, 2);
       }
