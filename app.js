@@ -39,7 +39,8 @@ var express = require("express"),
   appsRoutes = require("./routes/apps/apps"),
   appsRoutes_HarryPotter = require("./routes/apps/harryPotter"),
   linkedinRoutes = require("./routes/linkedin"),
-  User = require("./models/user");
+  User = require("./models/user"),
+  middleware = require("./middleware");
 
 mongoose.connect(process.env.MONGO_URL);
 
@@ -137,6 +138,9 @@ app.use(function (req, res, next) {
 });
 
 // =========================================================
+
+app.use(middleware.addTimestamp);
+app.use(middleware.logger);
 
 app.use(indexRoutes);
 app.use(gallaryRoutes);

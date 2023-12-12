@@ -74,4 +74,19 @@ middlewareJbj.isLoggedInAsAdmin = function (req, res, next) {
 //   }
 // };
 
+
+middlewareJbj.addTimestamp = function (req, res, next) {
+  const timestamp = Date.now();
+  req.timestamp = new Date(timestamp).toLocaleString();
+  next();
+}
+
+middlewareJbj.logger = function(req, res, next) {
+  const url = req.originalUrl;
+  if (!url.endsWith('.css') && !url.endsWith('.png') && !url.endsWith('.js')) {
+      console.log(`${req.timestamp}-${req.method} ${req.ip}${url}`);
+  }
+  next();
+}
+
 module.exports = middlewareJbj;
