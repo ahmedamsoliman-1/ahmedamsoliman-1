@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AhmedAliMSoliman</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="crossorigin"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+      />
+    </noscript>
+    <link href="mdb.min.css?ver=1.2.1" rel="stylesheet" />
+    <link href="aos.css?ver=1.2.1" rel="stylesheet" />
+    <link href="index.css?ver=1.2.1" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+    <!-- <link href="games.css" rel="stylesheet">
+    <link href="font-awesome/css/all.min.css?ver=1.2.1" rel="stylesheet"> -->
+
+
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+          opacity: 1 !important;
+          transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body class="bg-light" id="top">
+    <header class="d-print-none">
+      <div class="container text-center text-lg-left">
+        <div class="pt-4 clearfix">
+          <h1 class="site-title mb-0">
+            <a href="http://webresume.s3-website-us-east-1.amazonaws.com/"
+              >Ahmed Ali M. Soliman</a
+            >
+          </h1>
+          <div class="site-nav">
+            <nav role="navigation">
+              <ul class="nav justify-content-center">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="http://webresume.s3-website-us-east-1.amazonaws.com/"
+                    title="Home"
+                    ><span class="menu-title">HOME</span></a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="container">
+        <div class="resume-container">
+          <div class="shadow-1-strong bg-white my-5" id="intro">
+            <div class="bg-info text-white">
+              <div class="cover bg-image">
+                <img src="header-background.jpg" />
+                <div
+                  class="mask"
+                  style="
+                    background-color: rgba(0, 0, 0, 0.7);
+                    backdrop-filter: blur(2px);
+                  "
+                >
+                  <div class="text-center p-5">
+                    <div class="avatar p-1">
+                      <img
+                        class="img-thumbnail shadow-2-strong"
+                        src="avatar.jpg"
+                        width="160"
+                        height="160"
+                      />
+                    </div>
+                    <div class="header-bio mt-3">
+                      <div data-aos="zoom-in" data-aos-delay="0">
+                        <h2 class="h1">Ahmed Ali M. Soliman</h2>
+                        <p>Software Developer</p>
+                      </div>
+                      <div class="d-print-none">
+                        <a
+                          class="btn btn-outline-light btn-lg shadow-sm mt-1 me-3"
+                          href="https://ahmedamsoliman-cv.s3.amazonaws.com/Ahmed_Ali_M_Soliman_SW_Engineer_en_HCL.pdf"
+                          data-aos="fade-right"
+                          data-aos-delay="700"
+                          >Download Printaple CV</a
+                        >
+                        <a
+                          class="btn btn-danger btn-lg shadow-sm mt-1"
+                          href="#contact"
+                          data-aos="fade-left"
+                          data-aos-delay="700"
+                          >Hire Me</a
+                        >
+                        <a
+                          class="btn btn-info btn-lg shadow-sm mt-1"
+                          target="_blank"
+                          href="https://ae.linkedin.com/in/ahmed-ali-m-soliman-01aa54120"
+                          data-aos="fade-left"
+                          data-aos-delay="700"
+                          >Linkedin</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <header class="jumbotron">
+            <h1>Weclome To The Certifications Section</h1>
+          </header>
+
+
+      <header class="jumbotron">
+        <h2>Other Certifications</h2>
+        <h4>count: <%= other.length %></h4>
+      </header>
+      <div class="container">
+        <% other.forEach(function(pic) { %>
+        <div class="col-md-3 col-sm-6">
+          <div class="thumbnail">
+            <img src="<%= pic %>" />
+            <div class="caption">
+              <h4>
+                <%=
+                pic.split("ahmedalimsoliman-other-certs/")[1].replace(".jpg",
+                "") %>
+              </h4>
+            </div>
+            <p>
+              <a href="<%= pic %>" target="_blank" class="btn btn-danger"
+                >Open</a
+              >
+            </p>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <script src="mdb.min.js?ver=1.2.1"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({ anchorPlacement: "top-left", duration: 1000 });
+    </script>
+    <!-- <script src="scripts/aos.js?ver=1.2.1"></script> -->
+    <script src="main.js?ver=1.2.1"></script>
+  </body>
+</html>
