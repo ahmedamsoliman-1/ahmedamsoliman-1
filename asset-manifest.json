@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ahmedamsoliman-1/static/css/main.e6c13ad2.css",
+    "main.js": "/ahmedamsoliman-1/static/js/main.f6b0f1c1.js",
+    "static/js/453.6cfdf23d.chunk.js": "/ahmedamsoliman-1/static/js/453.6cfdf23d.chunk.js",
+    "index.html": "/ahmedamsoliman-1/index.html",
+    "main.e6c13ad2.css.map": "/ahmedamsoliman-1/static/css/main.e6c13ad2.css.map",
+    "main.f6b0f1c1.js.map": "/ahmedamsoliman-1/static/js/main.f6b0f1c1.js.map",
+    "453.6cfdf23d.chunk.js.map": "/ahmedamsoliman-1/static/js/453.6cfdf23d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.f6b0f1c1.js"
+  ]
+}
