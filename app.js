@@ -19,7 +19,7 @@ var express = require("express"),
   // Picture = require("./models/picture"),
   // Comment = require("./models/comment"),
 
-  port = process.env.APP_PORT,
+  port = process.env.APP_PORT || 3333,
   ipAddress = require("ip").address(),
   hostName = require("os").hostname(),
   weatherData = require("./utils/weatherData"),
