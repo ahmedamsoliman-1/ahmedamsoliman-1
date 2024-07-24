@@ -113,7 +113,7 @@ jobs:
       - name: Check for version changes
         id: check_version
         run: |
-          VERSION_FILE=".version"
+          VERSION_FILE="1.1.1"
           if [[ -f $VERSION_FILE ]]; then
             PREVIOUS_VERSION=$(cat $VERSION_FILE)
           else
