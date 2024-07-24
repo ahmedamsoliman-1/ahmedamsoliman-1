@@ -113,13 +113,12 @@ jobs:
       - name: Check for version changes
         id: check_version
         run: |
-          PREVIOUS_VERSION="1.1.1"
-          # VERSION_FILE="1.1.1"
-          # if [[ -f $VERSION_FILE ]]; then
-          #   PREVIOUS_VERSION=$(cat $VERSION_FILE)
-          # else
-          #   PREVIOUS_VERSION=""
-          # fi
+          VERSION_FILE="1.1.1"
+          if [[ -f $VERSION_FILE ]]; then
+            PREVIOUS_VERSION=$(cat $VERSION_FILE)
+          else
+            PREVIOUS_VERSION=""
+          fi
           if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
             echo "$VERSION" > $VERSION_FILE
             echo "VERSION_CHANGED=true" >> $GITHUB_ENV
