@@ -22,7 +22,7 @@ node-templates
 *.tfstate
 *.tfstate.*
 *.hcl
-*.json
+# *.json
 # Crash log files
 crash.log
 crash.*.log
