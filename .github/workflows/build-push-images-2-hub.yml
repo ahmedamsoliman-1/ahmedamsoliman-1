@@ -73,6 +73,7 @@ jobs:
   #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-order-svc:${{ env.VERSION }} --push ./apps/nodejs/order-svc
   #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-user-svc:${{ env.VERSION }} --push ./apps/nodejs/user-svc
 
+  # personal-cloud-build-push-image:
   personal-cloud-build-push-image:
     runs-on: ubuntu-latest
 
@@ -99,7 +100,7 @@ jobs:
           BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Install dependencies
+      - name: Install dependencies for frontend service
         run: |
           cd ./apps/nodejs/personal-cloud
           npm install
@@ -110,17 +111,24 @@ jobs:
           VERSION=$(cat ./apps/nodejs/personal-cloud/version.txt)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
+      - name: Download previous version artifact
+        id: download_version
+        uses: actions/download-artifact@v3
+        with:
+          name: previous-version
+        continue-on-error: true
+
       - name: Check for version changes
         id: check_version
         run: |
-          VERSION_FILE="1.1.1"
-          if [[ -f $VERSION_FILE ]]; then
-            PREVIOUS_VERSION=$(cat $VERSION_FILE)
+          if [[ -f previous-version/version.txt ]]; then
+            PREVIOUS_VERSION=$(cat previous-version/version.txt)
           else
             PREVIOUS_VERSION=""
           fi
           if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
-            echo "$VERSION" > $VERSION_FILE
+            mkdir -p previous-version
+            echo "$VERSION" > previous-version/version.txt
             echo "VERSION_CHANGED=true" >> $GITHUB_ENV
           else
             echo "VERSION_CHANGED=false" >> $GITHUB_ENV
@@ -132,5 +140,12 @@ jobs:
           echo $VERSION_CHANGED
           echo $VERSION_CHANGED
           echo $VERSION_CHANGED
-          echo ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:${{ env.VERSION }}
+          echo $VERSION_CHANGED
           # docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:${{ env.VERSION }} --push ./apps/nodejs/personal-cloud
+
+      - name: Upload current version artifact
+        if: env.VERSION_CHANGED == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: previous-version
+          path: previous-version/version.txt
