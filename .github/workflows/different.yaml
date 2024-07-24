@@ -37,3 +37,10 @@ jobs:
           echo "Branch Name:"
           echo $BRANCH_NAME
           echo "-------------------"
+      
+      - name: Docker images tag
+        env:
+          IMAGE_VERSION: ${{ env.BRANCH_NAME }}-${{ github.sha }}
+        run: |
+          echo $IMAGE_VERSION
+          # docker buildx build
