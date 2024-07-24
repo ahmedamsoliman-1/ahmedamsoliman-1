@@ -1,0 +1,132 @@
+name: 'build-push-image-2-docker-hub'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  svc-build-push-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract branch name
+        id: extract_version
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            BRANCH_NAME="pr-${GITHUB_REF##*/}"
+          fi
+          BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          cd ./apps/nodejs/frontend-svc
+          npm install
+          cd ../order-svc
+          npm install
+          cd ../user-svc
+          npm start
+
+      - name: Get current version
+        id: get_version
+        run: |
+          VERSION=$(cat ./apps/nodejs/frontend-svc/version.txt)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Check for version changes
+        id: check_version
+        run: |
+          VERSION_FILE=".version"
+          if [[ -f $VERSION_FILE ]]; then
+            PREVIOUS_VERSION=$(cat $VERSION_FILE)
+          else
+            PREVIOUS_VERSION=""
+          fi
+          if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
+            echo "$VERSION" > $VERSION_FILE
+            echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+          else
+            echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Build and push Docker images
+        if: env.VERSION_CHANGED == 'true'
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-frontend-svc:${{ env.VERSION }} --push ./apps/nodejs/frontend-svc
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-order-svc:${{ env.VERSION }} --push ./apps/nodejs/order-svc
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-user-svc:${{ env.VERSION }} --push ./apps/nodejs/user-svc
+
+  personal-cloud-build-push-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract branch name
+        id: extract_version
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            BRANCH_NAME="pr-${GITHUB_REF##*/}"
+          fi
+          BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          cd ./apps/nodejs/personal-cloud
+          npm install
+
+      - name: Get current version
+        id: get_version
+        run: |
+          VERSION=$(cat ./apps/nodejs/personal-cloud/version.txt)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Check for version changes
+        id: check_version
+        run: |
+          VERSION_FILE=".version"
+          if [[ -f $VERSION_FILE ]]; then
+            PREVIOUS_VERSION=$(cat $VERSION_FILE)
+          else
+            PREVIOUS_VERSION=""
+          fi
+          if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
+            echo "$VERSION" > $VERSION_FILE
+            echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+          else
+            echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Build and push Docker images
+        if: env.VERSION_CHANGED == 'true'
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:${{ env.VERSION }} --push ./apps/nodejs/personal-cloud

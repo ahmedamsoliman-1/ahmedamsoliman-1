@@ -3,6 +3,8 @@
       "!PERSONAL_TOKEN",
       "!DOCKER_PASSWORD",
       "!DOCKER_REGISTRY",
+      "!VERSION_CHANGED",
+      "!VERSION",
       
       "!VERSION",
       "!BRANCH_NAME"
