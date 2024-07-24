@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        continue-on-error: true
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -37,6 +38,7 @@ jobs:
           echo "Branch Name:"
           echo $BRANCH_NAME
           echo "-------------------"
+        continue-on-error: true
       
       - name: Docker images tag
         env:
