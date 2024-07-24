@@ -1,0 +1,70 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: monitoring-cert
+  namespace: default
+spec:
+  secretName: monitoring-cert-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: tendered.ahmedalimsoliman.com
+  dnsNames:
+  - tendered.ahmedalimsoliman.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-cert
+  namespace: monitoring
+spec:
+  secretName: grafana-cert-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: grafana.ahmedalimsoliman.com
+  dnsNames:
+  - grafana.ahmedalimsoliman.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: prometheus-cert
+  namespace: monitoring
+spec:
+  secretName: prometheus-cert-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: prom.ahmedalimsoliman.com
+  dnsNames:
+  - prom.ahmedalimsoliman.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argo-cert
+  namespace: argo-cd
+spec:
+  secretName: argocd-server-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: argo.ahmedalimsoliman.com
+  dnsNames:
+  - argo.ahmedalimsoliman.com
+# # dashboard-cert.yaml
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: dashboard-cert
+#   namespace: kubernetes-dashboard
+# spec:
+#   secretName: dashboard-cert-tls
+#   issuerRef:
+#     name: letsencrypt-prod
+#     kind: ClusterIssuer
+#   commonName: dashboard.ahmedalimsoliman.com
+#   dnsNames:
+#   - dashboard.ahmedalimsoliman.com
+---
