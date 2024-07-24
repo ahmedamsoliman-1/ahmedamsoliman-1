@@ -54,5 +54,3 @@ grafana
 prom*
 new-relic
 grafana
-kubernetes-dashboard
-ingress*x
