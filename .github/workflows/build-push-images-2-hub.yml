@@ -122,11 +122,16 @@ jobs:
           name: previous-version
         continue-on-error: true
       
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       - name: Check if Docker image with current version exists
         id: check_docker_image
         run: |
-          IMAGE_EXISTS=$(curl -s https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud/tags/${VERSION}/ | jq -r '.name')
-          if [ "$IMAGE_EXISTS" == "null" ]; then
+          IMAGE_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud/tags/${{ env.VERSION }})
+          echo $IMAGE_EXISTS
+          echo ${{ env.VERSION }}
+          if [ "$IMAGE_EXISTS" == "404" ]; then
             echo "VERSION_CHANGED=true" >> $GITHUB_ENV
           else
             echo "VERSION_CHANGED=false" >> $GITHUB_ENV

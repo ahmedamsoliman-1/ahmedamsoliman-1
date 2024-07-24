@@ -3,7 +3,7 @@ name: 'apply-branch-protection'
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   apply-branch-protection:
