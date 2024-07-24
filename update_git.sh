@@ -27,6 +27,6 @@ git push origin $branch
 git config user.name "Ahmed Soliman"
 git config user.email "ahmed.soliman@avrioc.com"
 
-git branch --set-upstream-to=origin/test "$branch"
+git branch --set-upstream-to=origin/$branch "$branch"
 
 sleep 3s
