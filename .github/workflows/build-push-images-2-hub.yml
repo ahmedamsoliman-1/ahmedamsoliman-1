@@ -126,7 +126,11 @@ jobs:
             echo "VERSION_CHANGED=false" >> $GITHUB_ENV
           fi
 
-      # - name: Build and push Docker images
-      #   if: env.VERSION_CHANGED == 'true'
-      #   run: |
-      #     docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:${{ env.VERSION }} --push ./apps/nodejs/personal-cloud
+      - name: Build and push Docker images
+        if: env.VERSION_CHANGED == 'true'
+        run: |
+          echo $VERSION_CHANGED
+          echo $VERSION_CHANGED
+          echo $VERSION_CHANGED
+          echo ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:${{ env.VERSION }}
+          # docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:${{ env.VERSION }} --push ./apps/nodejs/personal-cloud
