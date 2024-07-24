@@ -54,3 +54,18 @@ grafana
 prom*
 new-relic
 grafana
+
+
+
+# PYTHON
+__pycache__
+*.pyc
+
+
+
+
+# LATEX
+*.aux
+*.gz
+*latexmk
+*fls
