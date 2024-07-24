@@ -1,0 +1,51 @@
+
+.dropdown {
+  /* Add styles to the select element */
+  appearance: none; /* This is for removing default browser styles (not supported in all browsers) */
+  padding: 10px;
+  border: 1px solid #5a5858;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  width: 200px;
+}
+
+.dropdown option {
+  /* Add styles to the option elements */
+  padding: 5px;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 14px;
+}
+
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100px; /* Set the width to your preference */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.custom-dropdown select {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-dropdown::before {
+  content: "\25BC"; /* Down arrow Unicode character */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

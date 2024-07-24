@@ -1,0 +1,41 @@
+
+
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1>Avrioc Cloud</h1>
+    <h2>Data and AI</h2>
+</div>
+
+<% for (const [namespace, services] of Object.entries(namespaces)) { %>
+    <div class="jumbotron">
+        <h3><%= namespace %></h3>
+        <div class="card-deck">
+            <% services.forEach(function(service) { %>
+                <div class="card">
+                    <div class="btn btn-light">
+                        <%- svgs.k8_red %>
+                        <%= service.name %>
+                        <div>
+                            <a target="_blank" href="<%= `http://10.10.25.207:${service.expose_on_port}` %>" class="btn btn-success">IP</a>
+                            <a target="_blank" href="<%= `http://dgx.io:${service.expose_on_port}` %>" class="btn btn-warning">Local</a>
+                            <% if (service.dns) { %>
+                                <a target="_blank" href="<%= service.dns %>" class="btn btn-primary">DNS</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+<% } %>
+
+<div class="container text-center">
+    <img src="/img/avr.png" alt="Centered Image" width="500" height="500">
+</div>
+
+<div class="jumbotron">
+    <a href="#" class="btn btn-danger"><%= node %></a>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,5 +1,6 @@
 *.env
 *.log
+*.tar
 secrets
 scripts/bin/zshrc
 

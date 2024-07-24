@@ -1,0 +1,43 @@
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adjust the gap as needed */
+  }
+  
+  .card {
+    max-width: 18rem; /* Adjust the maximum width as needed */
+    width: 100%;
+    position: relative;
+    border: none;
+    background-color: #333 !important; /* Dark gray background color */
+}
+
+
+  
+  .card .card-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card .card-inner .card-img-top {
+    flex-grow: 1;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  
+  .card .card-inner .card-body {
+    text-align: center;
+    padding: 1rem;
+    display: none;
+  }
+  
+  .card:hover .card-inner .card-body {
+    display: block;
+  }
+  
+  .card .card-inner .card-body a {
+    display: block;
+  }
+  

@@ -1,0 +1,108 @@
+.container {
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: center;
+  height: 45vh;
+  flex-direction: row;
+}
+
+.left-content, .right-content {
+  flex: 1;
+  padding: 20px;
+  /* border: 1px solid #ccc; */
+}
+
+.right-content {
+  display: grid;
+  place-items: center;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+
+th {
+    background-color: rgb(6, 6, 95);
+    color: white;
+}
+
+/* tr:nth-child(even) {
+    background-color: #410cc6;
+} */
+
+tr:hover {
+    background-color: #9d2020;
+}
+
+
+
+
+
+.max-text-size-table {
+  width: auto;
+  table-layout: auto;
+}
+
+
+
+
+.spaced-button {
+  margin-right: 10px; /* Adjust the value to control the spacing */
+}
+
+
+
+
+.run {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.generation {
+  font-weight: bold;
+}
+
+.games_list {
+  font-weight: lighter;
+  text-transform: lowercase;
+}
+
+
+
+
+/* CSS for the game container */
+.game-container {
+  display: flex; /* Use flex layout */
+  align-items: center; /* Align items vertically in the center */
+}
+
+/* CSS for the game buttons */
+.game-button {
+  margin-right: 10px; /* Add some space between buttons */
+}
+
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon{
+    filter: invert(49%) sepia(68%) saturate(550%) hue-rotate(140deg) brightness(93%) contrast(90%);
+}
