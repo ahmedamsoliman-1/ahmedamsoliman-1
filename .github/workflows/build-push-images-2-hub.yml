@@ -110,21 +110,21 @@ jobs:
           VERSION=$(cat ./apps/nodejs/personal-cloud/version.txt)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      # - name: Check for version changes
-      #   id: check_version
-      #   run: |
-      #     VERSION_FILE=".version"
-      #     if [[ -f $VERSION_FILE ]]; then
-      #       PREVIOUS_VERSION=$(cat $VERSION_FILE)
-      #     else
-      #       PREVIOUS_VERSION=""
-      #     fi
-      #     if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
-      #       echo "$VERSION" > $VERSION_FILE
-      #       echo "VERSION_CHANGED=true" >> $GITHUB_ENV
-      #     else
-      #       echo "VERSION_CHANGED=false" >> $GITHUB_ENV
-      #     fi
+      - name: Check for version changes
+        id: check_version
+        run: |
+          VERSION_FILE=".version"
+          if [[ -f $VERSION_FILE ]]; then
+            PREVIOUS_VERSION=$(cat $VERSION_FILE)
+          else
+            PREVIOUS_VERSION=""
+          fi
+          if [[ "$VERSION" != "$PREVIOUS_VERSION" ]]; then
+            echo "$VERSION" > $VERSION_FILE
+            echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+          else
+            echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+          fi
 
       # - name: Build and push Docker images
       #   if: env.VERSION_CHANGED == 'true'
