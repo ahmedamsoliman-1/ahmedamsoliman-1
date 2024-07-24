@@ -99,16 +99,16 @@ jobs:
           BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      # - name: Install dependencies
-      #   run: |
-      #     cd ./apps/nodejs/personal-cloud
-      #     npm install
+      - name: Install dependencies
+        run: |
+          cd ./apps/nodejs/personal-cloud
+          npm install
 
-      # - name: Get current version
-      #   id: get_version
-      #   run: |
-      #     VERSION=$(cat ./apps/nodejs/personal-cloud/version.txt)
-      #     echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Get current version
+        id: get_version
+        run: |
+          VERSION=$(cat ./apps/nodejs/personal-cloud/version.txt)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       # - name: Check for version changes
       #   id: check_version
