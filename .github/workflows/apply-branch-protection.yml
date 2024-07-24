@@ -1,0 +1,31 @@
+name: 'apply-branch-protection'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply-branch-protection:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Apply branch protection rules
+      run: |
+        echo "Applying relaxed branch protection rules to ${{ github.repository }}"
+
+        curl -X PUT \
+          -H "Authorization: token ${{ secrets.PERSONAL_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "required_status_checks": null,
+            "enforce_admins": false,
+            "required_pull_request_reviews": null,
+            "restrictions": null,
+            "required_linear_history": false,
+            "allow_force_pushes": false,
+            "allow_deletions": false
+          }' \
+          https://api.github.com/repos/${{ github.repository }}/branches/main/protection
+      env:
+        MY_GITHUB_PAT: ${{ secrets.PERSONAL_TOKEN }}

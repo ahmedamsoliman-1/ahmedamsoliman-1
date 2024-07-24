@@ -1,0 +1,17 @@
+<%- include ('header') %>
+
+
+  <h1>Manage Users</h1>
+  <ul>
+    <% users.forEach(user => { %>
+      <li><%= user.name %> (<%= user.email %>)</li>
+    <% }); %>
+  </ul>
+  <form action="/users" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Create User</button>
+  </form>
+
+<%- include ('footer') %>
+
