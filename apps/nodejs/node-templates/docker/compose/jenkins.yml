@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins"
+    networks:
+      - jenkins-net
+
+networks:
+  jenkins-net:
+
+volumes:
+  jenkins_home:

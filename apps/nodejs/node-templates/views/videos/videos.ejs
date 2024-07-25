@@ -1,0 +1,80 @@
+<%- include ('../partials/header') %>
+
+<style>
+  .jumbotron {
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: black; /* Set the title color to black */
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+  }
+</style>
+
+<div class="jumbotron">
+  <h1>AAMS</h1>
+  <h2>Videos Player</h2>
+</div>
+
+<div class="jumbotron">
+  <a href="/videos/upload" class="btn btn-primary mb-4">Upload a new video</a>
+  <div class="row">
+    <% if (videos.length === 0) { %>
+      <p>No videos available.</p>
+    <% } else { %>
+      <% videos.forEach((video, index) => { %>
+        <% if (video.error) { %>
+          <div class="col-12">
+            <div class="alert alert-danger">
+              <%= video.error %>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="col-md-3">
+            <div class="card mb-4">
+              <video class="card-img-top" width="320" height="240" controls>
+                <source src="<%= video.url %>" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="card-body">
+                <h5 class="card-title"><%= video.name %></h5>
+                <a href="/videos/delete/<%= video.name %>" class="btn btn-danger">Delete</a>
+                <a href="#" class="btn btn-warning">Soruce <%= video.source %></a>
+              </div>
+            </div>
+          </div>
+        <% } %>
+        <% if ((index + 1) % 4 === 0) { %>
+          </div><div class="row">
+        <% } %>
+      <% }) %>
+    <% } %>
+  </div>
+</div>
+
+<%- include ('../partials/footer') %>

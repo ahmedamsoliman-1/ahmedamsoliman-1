@@ -1,0 +1,34 @@
+filebeat.inputs:
+- type: filestream
+  id: cs2-datapipeline-alpha-filestream
+  paths:
+    - ingest_data/*.log
+
+
+filebeat.autodiscover:
+ providers:
+   - type: docker
+     hints.enabled: true
+
+
+processors:
+- add_docker_metadata: ~
+
+
+setup.kibana:
+ host: ${AVR_KIBANA_HOST}
+ username: ${AVR_ELASTIC_USER}
+ password: ${AVR_ELASTIC_PASSWORD}
+
+
+output.elasticsearch:
+ hosts: ${AVR_ELASTIC_HOST}
+ username: ${AVR_ELASTIC_USER}
+ password: ${AVR_ELASTIC_PASSWORD}
+ ssl.enabled: true
+ ssl.certificate_authorities: ["/usr/share/filebeat/certs/ca.crt"]
+ index: "cs2-datapipeline-alpha-%{+yyyy.MM.dd}"
+
+setup.template.name: "cs2-datapipeline-alpha"
+setup.template.pattern: "cs2-datapipeline-alpha-*"
+setup.template.enabled: true

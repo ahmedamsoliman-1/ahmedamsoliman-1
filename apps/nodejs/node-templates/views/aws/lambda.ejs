@@ -1,0 +1,35 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2></h2>
+</div>
+
+<div class="jumbotron">
+  <h1>Lambda Functions</h1>
+  
+  <% if (lambdas && lambdas.length > 0) { %>
+      <ul>
+          <% lambdas.forEach(function(lambda) { %>
+              <li>
+                  <strong>Function Name: <%= lambda.FunctionName %></strong><br>
+                  Description: <%= lambda.Description %><br>
+                  Runtime: <%= lambda.Runtime %><br>
+                  Timeout: <%= lambda.Timeout %> seconds<br>
+                  Memory Size: <%= lambda.MemorySize %> MB<br>
+                  Handler: <%= lambda.Handler %><br>
+                  Role: <%= lambda.Role %><br>
+                  Package Type: <%= lambda.PackageType %><br>
+                  Code Size: <%= lambda.CodeSize %> bytes<br>
+                  Last Modified: <%= lambda.LastModified %><br>
+                  Logging Config: <%= lambda.LoggingConfig.LogGroup %><br>
+                  Architectures: <%= lambda.Architectures.join(', ') %><br>
+              </li>
+          <% }); %>
+      </ul>
+  <% } else { %>
+      <p>No Lambda Functions Found</p>
+  <% } %>
+</div>
+
+<%- include ('../partials/footer') %>

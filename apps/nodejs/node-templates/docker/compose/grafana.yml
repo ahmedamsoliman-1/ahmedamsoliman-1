@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - '3090:3000'
+    environment:
+      - 'GF_SECURITY_ADMIN_PASSWORD=yourpassword'
+    volumes:
+      - ../volumes/grafana:/var/lib/grafana
+    networks:
+      - monitoring
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+  
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  grafana:
+    driver: local

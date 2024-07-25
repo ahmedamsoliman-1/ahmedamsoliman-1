@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  tomcat:
+    image: tomcat:latest
+    container_name: tomcat  
+    ports:
+      - "8087:8080"
+    restart: always

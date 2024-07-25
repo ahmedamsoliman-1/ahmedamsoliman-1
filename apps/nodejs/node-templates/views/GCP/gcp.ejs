@@ -1,0 +1,102 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Google Cloud Platform</h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>Welcome!</h1>
+    <p>Server started at <%= time %></p>
+    
+    <% if (connectionStatus) { %>
+      <p>prjectID: <%= connectionStatus %></p>
+      <p>region: <%= connectionStatus.region %></p>
+      <p>Account: <%= connectionStatus.account %></p>
+      <p>Role/User: <%= connectionStatus.role_or_user %></p>
+    <% } else { %>
+      <p>Connection status not available for profile <%= profile %></p>
+    <% } %>
+    </div>
+
+
+
+
+    <style>
+      .card {
+        width: 250px;
+        height: auto;
+        margin: 10px; /* Add margin to create space between cards */
+        float: left; /* Make cards float */
+      }
+    
+      .card-label {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: black; /* Set label color to black */
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white; /* Add background color to ensure text visibility */
+        padding: 5px 10px; /* Add padding to the label */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+      }
+    </style>
+    
+    <div class="jumbotron">
+      <div class="card-deck">
+
+        <div class="card" style="position: relative;">
+          <a href="/aams/cloud/gcp/iam">
+            <%- svgs.iam %> 
+            <span class="card-label">GCP IAM</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aams/cloud/gcp/buckets">
+            <%- svgs.bucket %> 
+            <span class="card-label">GCP Buckets</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="#">
+          
+            <span class="card-label"></span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="#">
+            <span class="card-label"></span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="#">
+            <span class="card-label"></span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+  <div class="jumbotron">
+    <a href="#" class="btn btn-success">#</a>
+    <a href="#" class="btn btn-success">#</a>
+    <a href="#" class="btn btn-success">#</a>
+    <a href="#" class="btn btn-success">#</a>
+  </div>
+
+
+  
+<%- include ('../partials/footer') %>
+

@@ -1,0 +1,197 @@
+<%- include ('../partials/header') %>
+
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Docker Compose Manager</h2>
+</div>
+
+<div class="jumbotron">
+    <h4>Containers: <%= containers.length %> </h4>
+</div>
+
+<div class="jumbotron">
+    <h3>All Containers</h3>
+    <h4>Containers: <%= containers.length %> </h4>
+    <form action="/start-all-docker-containers" method="post" style="display: inline;">
+        <button type="submit" class="btn btn-success"> Start All Containers</button>
+    </form>
+    <form action="/stop-all-docker-containers" method="post" style="display: inline;">
+        <button type="submit" class="btn btn-warning"> Stop All Containers</button>
+    </form>
+    <form action="/delete-all-docker-containers" method="post" style="display: inline;">
+        <button type="submit" class="btn btn-danger"> Delete All Containers</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+<div class="jumbotron">
+    <% if (containers.length > 0) { %>
+        <% for (let i = 0; i < containers.length; i += 6) { %>
+            <div class="row">
+                <% for (let j = i; j < Math.min(i + 6, containers.length); j++) { %>
+                    <% const container = containers[j]; %>
+                    <% const containerName = container.name.replace(/-/g, '_'); %>
+                    <% const svg = svgs[containerName] || ''; %>
+                    <div class="col-md-2"> <!-- Adjust the column width as per your requirement -->
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark"><%= container.name %></h5> <!-- Change text color to black -->
+                                <%- svg %>
+                                <% if (container.status.includes('Up')) { %>  
+                                    <!-- Container is running, render stop/restart/delete buttons -->
+                                    <form action="/docker-container/stop" method="post" style="display: inline;">
+                                        <input type="hidden" name="containerName" value="<%= container.name %>">
+                                        <button type="submit" class="btn btn-danger">Stop</button>
+                                    </form>
+                                    <form action="/docker-container/restart" method="post" style="display: inline;">
+                                        <input type="hidden" name="containerName" value="<%= container.name %>">
+                                        <button onclick="Notify('Container <%= container.name %> Restarted')" type="submit" class="btn btn-warning">Restart</button>
+                                    </form>
+                                    <form action="/docker-container/delete" method="post" style="display: inline;">
+                                        <input type="hidden" name="containerName" value="<%= container.name %>">
+                                        <button type="submit" class="btn btn-secondary">Delete</button>
+                                    </form>
+                                    <form action="/docker-container/display-compose-logs" method="post" style="display: inline;">
+                                        <input type="hidden" name="containerName" value="<%= container.name %>">
+                                        <button type="submit" class="btn btn-info">Logs</button>
+                                    </form>
+                                    
+                                    <!-- Iterate over the ports object and generate links -->
+                                    <% Object.keys(container.ports).forEach(port => { %>
+                                        <% if (container.ports[port] !== null) { %>
+                                            <a href="http://localhost:<%= container.ports[port][0].HostPort %>" class="btn btn-success" target="_blank"><%= container.ports[port][0].HostPort %></a>
+                                        <% } %>
+                                    <% }); %>
+                                    
+                                <% } else { %>
+                                    <!-- Container is stopped, render start button -->
+                                    <form action="/docker-container/start" method="post" style="display: inline;">
+                                        <input type="hidden" name="containerName" value="<%= container.name %>">
+                                        <button type="submit" class="btn btn-success">Start</button>
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <br> <!-- Add a line break after each row of cards -->
+        <% } %>
+    <% } else { %>
+        <p>No running containers found.</p>
+    <% } %>
+</div>
+
+
+
+
+<div class="jumbotron">
+    <h3>Docker Compose Files:</h3>
+    <div class="row">
+        <% composeFiles.forEach((file, index) => { %>
+            <% const svg = svgs[file.replace('.yml', '').replace('.yaml', '').replace('.conf', '')] || ''; %>
+            <div class="col-md-2"> <!-- Adjust the column width as per your requirement -->
+                <div class="card mb-3 bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-light"><%= file %></h5>
+                        <form action="/docker-compose/display/<%= encodeURIComponent(file) %>" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-info">Display</button>
+                        </form>
+                        <form action="/docker-compose/run" method="post" style="display: inline;">
+                            <input type="hidden" name="composeFile" value="<%= file %>">
+                            <button type="submit" class="btn btn-danger">Start</button>
+                        </form>
+                        <%- svg %>
+                    </div>
+                </div>
+            </div>
+            <% if ((index + 1) % 6 === 0) { %>
+                </div><div class="row">
+            <% } %>
+        <% }); %>
+    </div>
+</div>
+
+
+
+<div class="jumbotron">
+    <h3>Select a Docker Compose file to run:</h3>
+    <form action="/docker-compose/run" method="post">
+        <select name="composeFile">
+            <% composeFiles.forEach(file => { %>
+                <option value="<%= file %>"><%= file %></option>
+            <% }); %>
+        </select>
+        <button class="btn btn-primary" type="submit">Run Docker Compose</button>
+    </form>
+</div>
+
+
+
+<div class="jumbotron">
+    <h3>Config Files:</h3>
+    <% configFiles.forEach(file => { %>
+        <form action="/docker-compose/display/<%= encodeURIComponent(file) %>" method="get" style="display: inline;">
+            <button type="submit" class="btn btn-info"><%= file %></button>
+        </form>
+    <% }); %>
+</div>
+
+
+
+
+
+<div class="jumbotron">
+    <% if (containers.length > 0) { %>
+        <ul>
+            <% containers.forEach(container => { %>
+                <li>
+                    <%= container.name %>
+                    <% if (container.status.includes('Up')) { %>
+                        <!-- Container is running, render stop/restart/delete buttons -->
+                        <form action="/docker-container/stop" method="post" style="display: inline;">
+                            <input type="hidden" name="containerName" value="<%= container.name %>">
+                            <button type="submit" class="btn btn-danger">Stop</button>
+                        </form>
+                        <form action="/docker-container/restart" method="post" style="display: inline;">
+                            <input type="hidden" name="containerName" value="<%= container.name %>">
+                            <button onclick="Notifiy('<%= `Container ${container.name} Restarted` %>')" type="submit" class="btn btn-warning">Restart</button>
+                        </form>
+                        <form action="/docker-container/delete" method="post" style="display: inline;">
+                            <input type="hidden" name="containerName" value="<%= container.name %>">
+                            <button type="submit" class="btn btn-secondary">Delete</button>
+                        </form>
+                        <form action="/docker-container/display-compose-logs" method="post" style="display: inline;">
+                            <input type="hidden" name="containerName" value="<%= container.name %>">
+                            <button type="submit" class="btn btn-info">Logs</button>
+                        </form>
+                        
+                        <!-- Iterate over the ports object and generate links -->
+                        <% Object.keys(container.ports).forEach(port => { %>
+                            <% if (container.ports[port] !== null) { %>
+                                <a href="http://localhost:<%= container.ports[port][0].HostPort %>" class="btn btn-success" target="_blank"><%= container.ports[port][0].HostPort %></a>
+                            <% } %>
+                        <% }); %>
+                        
+                    <% } else { %>
+                        <!-- Container is stopped, render start button -->
+                        <form action="/docker-container/start" method="post" style="display: inline;">
+                            <input type="hidden" name="containerName" value="<%= container.name %>">
+                            <button type="submit" class="btn btn-success">Start</button>
+                        </form>
+                    <% } %>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No running containers found.</p>
+    <% } %>
+</div>
+
+<%- include ('../partials/footer') %>

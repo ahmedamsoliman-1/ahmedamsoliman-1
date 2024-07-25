@@ -1,0 +1,44 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>ECS Manager</h1>
+    
+      <% if (ecs_clusters && ecs_clusters.length > 0) { %>
+        <p>AWS ECS Clusters/Services:</p>
+        <ul>
+          <% ecs_clusters.forEach(function(cluster) { %>
+            <li><%= cluster.clusterArn %></li>
+            <ul>
+              <% cluster.services.forEach(function(service) { %>
+                <li><%= service %></li>
+                <ul>
+                  <% cluster.tasks.forEach(function(task) { %>
+                    <li>TaskArn: <%= task.taskArn %></li>
+                    <li>TaskDefinitionArn: <%= task.taskDefinitionArn %></li>
+                    <li>TaskVersion: <%= task.version %></li>
+                    <li>TaskMemory: <%= task.memory %>, TaskCPU: <%= task.cpu %></li>
+                  <% }); %>
+                </ul>
+              <% }); %>
+            </ul>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No Cluster Found</p>
+      <% } %>
+    </div>
+    
+    
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+

@@ -1,0 +1,35 @@
+<%- include ('../../partials/header') %>
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Cassandra Info</h2>
+    </div>
+
+    <div class="jumbotron">
+        <h3>Cassandra Information</h3>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Current Cassandra DB</h1>
+        <div id="cassandra"> </div>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Tables Content</h1>
+        <div id="cassandra-table"> </div>
+    </div>
+
+
+
+
+    
+    <script src="/scripts/script_cassandra.js"></script>
+    <script>
+        const which_cassandra = '<%= which_cassandra %>';
+        populateCassandraData(which_cassandra);
+    </script>
+
+
+
+<%- include ('../../partials/footer') %>
+

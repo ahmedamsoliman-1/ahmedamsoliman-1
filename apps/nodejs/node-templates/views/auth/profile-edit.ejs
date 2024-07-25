@@ -1,0 +1,39 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>Update Profile</h1>
+</div>
+
+<div class="container">
+    <form action="/auth/profile/edit" method="POST" class="form">
+
+        <div class="form-group">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Update username" value="<% if (user) { user.username } %>">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Update email" value="<% if (user) { user.email } %>">
+
+            <label for="phone">Mobile:</label>
+            <input type="number" id="phone" name="phone" placeholder="Update Mobile Number" value="<% if (user) { user.mobile } %>">
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Update password">
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Update First Name" value="<% if (user) { user.first_name } %>">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Update Last Name" value="<% if (user) { user.last_name } %>">
+
+            <label for="user_avatar">Avatar:</label>
+            <input type="text" id="user_avatar" name="user_avatar" placeholder="Update User Avatar" value="<% if (user) { user.avatar } %>">
+
+        </div>
+
+        <button type="submit" class="signup-button">Update Profile</button>
+    </form>
+</div>
+
+<%- include ('../partials/footer') %>

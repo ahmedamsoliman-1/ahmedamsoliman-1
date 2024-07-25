@@ -1,0 +1,39 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Kubernetes Manager</h2>
+</div>
+
+<div class="jumbotron">
+    <h2>Select Namespace:</h2>
+    <select id="namespaceSelect">
+        <% namespaces.forEach(namespace => { %>
+            <option class="btn btn-primary" value="<%= namespace %>"><%= namespace %></option>
+        <% }) %>
+    </select>
+    <button id="submitBtn" class="btn btn-danger">Submit</button>
+
+    <div class="services">
+        <h2>Services <span id="selectedNamespace"></span></h2>
+        <ul id="serviceList"></ul>
+    </div>
+
+    <div class="pods">
+        <h2>Pods <span id="selectedNamespacePods"></span></h2>
+        <ul id="podList"></ul>
+    </div>
+
+    <div class="deployments">
+        <h2>Deployments <span id="selectedNamespaceDeplotments"></span></h2> 
+        <ul id="deploymentsList"></ul>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <h4>Context: <%= context %> </h4>
+</div>
+
+<script src="/scripts/script_k8.js"></script>
+
+<%- include ('../partials/footer') %>

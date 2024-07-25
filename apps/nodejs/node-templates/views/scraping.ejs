@@ -1,0 +1,48 @@
+<%- include ('partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Scraping Websites</h2>
+</div>
+
+<div class="jumbotron">
+    <div class="jumbotron">
+        <h1>Get random quote</h1>
+        <div id="random-quote">
+          Loading...
+        </div>
+        <button class="btn btn-warning" id="get-random-quote">Get Random Quote</button>
+    </div>
+</div>
+
+
+
+<div class="jumbotron">
+    <div class="jumbotron">
+        <h1>Get Website Title</h1>
+        <form id="generic-scrape-form-title">
+          <input class="form-control mr-sm-2" ="text" placeholder="Enter Website URL:" id="websiteUrl" name="websiteUrl" style="width: 400px;" required>
+          <button class="btn btn-warning" type="submit">Get Title</button>
+        </form>
+        <div id="website-title"></div>
+    </div>
+</div>
+
+
+
+<div class="jumbotron">
+    <div class="jumbotron">
+        <h1>Get Website Content</h1>
+        <form id="generic-scrape-content">
+          <input class="form-control mr-sm-2" ="text" placeholder="Enter Website URL:" id="websiteUrl" name="websiteUrl" style="width: 400px;" required>
+          <button class="btn btn-warning" type="submit">Get Content</button>
+        </form>
+        <div id="website-content"></div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/scripts/script_scraping.js"></script>
+
+<%- include ('partials/footer') %>

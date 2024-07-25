@@ -1,0 +1,37 @@
+<%- include ('../partials/header') %>
+
+<style>
+    li {
+        font-size: smaller;
+    }
+</style>
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2></h2>
+</div>
+
+<div class="jumbotron">
+  <h1>CloudWatch Logs</h1>
+  
+  <% function cleanLog(log) { const cleanedLog = log.replace(/\[35m|\[33m|\[32m|\[36m|\[31m|\[90m|\[0m|- host:.*$/g, ''); return cleanedLog.trim(); }  %>
+  
+  <% if (cloud_watch && cloud_watch.length > 0) { %>
+      <% cloud_watch.forEach(function(logGroup) { %>
+          <h3>Log Group: <%= logGroup.logGroupName %></h3>
+          <ul>
+              <% logGroup.logStreams.forEach(function(logStream) { %>
+                  <li>Log Stream: <%= logStream.logStreamName %></li>
+                  <ul>
+                      <% logStream.logEvents.forEach(function(logEvent) { %>
+                          <li>Log Event: <%= cleanLog(logEvent.message) %></li>
+                      <% }); %>
+                  </ul>
+              <% }); %>
+          </ul>
+      <% }); %>
+  <% } else { %>
+      <p>No Logs Found</p>
+  <% } %>
+</div>
+
+<%- include ('../partials/footer') %>

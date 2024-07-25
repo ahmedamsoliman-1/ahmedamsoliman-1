@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  activemq:
+    image: webcenter/activemq:latest
+    container_name: activemq
+    ports:
+      - "8161:8161"  # Web Console
+      - "61616:61616" # OpenWire
+      - "5673:5673"   # AMQP
+      - "61613:61613" # STOMP
+      - "1883:1883"   # MQTT
+    volumes:
+      - ../volumes/data_activemq:/data/activemq  # Mounting a volume for persistence
+    environment:
+      ACTIVEMQ_CONFIG_MINMEMORY: 512
+      ACTIVEMQ_CONFIG_MAXMEMORY: 2048
+      ACTIVEMQ_CONFIG_SCHEDULERENABLED: "true"

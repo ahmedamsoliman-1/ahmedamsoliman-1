@@ -1,0 +1,30 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Kafka</h2>
+</div>
+
+
+
+<div class="jumbotron">
+    <h2>Kafka Info</h2>
+    <ul>
+        <li><strong>Host:</strong> <%= kafkaInfo.host %></li>
+    </ul>
+</div>
+
+<div class="jumbotron">
+    <div class="jumbotron">
+        <h1>Kafka</h1>
+        <div id="kafka">
+          Loading...
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/scripts/script_kafka.js"></script>
+
+<%- include ('../partials/footer') %>

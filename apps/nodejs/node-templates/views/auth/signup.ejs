@@ -1,0 +1,39 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>Sign up to AAMS</h1>
+</div>
+
+<div class="container">
+    <form action="/auth/signup" method="POST" class="form">
+
+        <div class="form-group">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+            <label for="email">Username:</label>
+            <input type="email" id="email" name="email" placeholder="Choose an email">
+
+            <label for="mobile">First Name:</label>
+            <input type="number" id="mobile" name="mobile" placeholder="Mobile Number">
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter a secure password" required>
+
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" placeholder="First Name">
+
+            <label for="last-name">First Name:</label>
+            <input type="text" id="last-name" name="last-name" placeholder="Last Name">
+
+            <label for="avatar">Avatar:</label>
+            <input type="text" id="avatar" name="avatar" placeholder="User Avatar">
+
+        </div>
+
+        <button type="submit" class="signup-button">Sign Up</button>
+    </form>
+</div>
+
+<%- include ('../partials/footer') %>

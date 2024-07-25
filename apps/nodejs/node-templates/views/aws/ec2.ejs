@@ -1,0 +1,34 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>EC2 Instances</h1>
+      
+      <% if (instances && instances.length > 0) { %>
+          <ul>
+              <% instances.forEach(function(instance) { %>
+                  <li>
+                      <strong>Instance ID:</strong> <%= instance.InstanceId %><br>
+                      Instance Type: <%= instance.InstanceType %><br>
+                      State: <%= instance.State.Name %><br>
+                      Tags: <%= instance.Tags.map(tag => tag.Key + ': ' + tag.Value).join(', ') %><br>
+                  </li>
+              <% }); %>
+          </ul>
+      <% } else { %>
+          <p>No EC2 Instances Found</p>
+      <% } %>
+    </div>
+    
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+

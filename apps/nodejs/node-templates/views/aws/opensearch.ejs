@@ -1,0 +1,32 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>AWS Open Search</h1>
+  
+      <% if (domains && domains.length > 0) { %>
+          <p>AWS OpenSearch Domains:</p>
+          <ul>
+              <% domains.forEach(function(domain) { %>
+                  <li>
+                      <strong>Domain Name:</strong> <%= domain %> <br>
+                  </li>
+              <% }); %>
+          </ul>
+      <% } else { %>
+          <p>AWS not Connected</p>
+      <% } %>
+    </div>
+  
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+

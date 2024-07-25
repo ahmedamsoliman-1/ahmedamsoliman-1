@@ -1,0 +1,316 @@
+version: '3'
+
+services:
+
+  # cassandra:
+  #   image: cassandra:latest
+  #   container_name: cassandra
+  #   ports:
+  #     - 9042:9042
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '3'
+  #         memory: 3096M
+  #   volumes:
+  #     - ./volumes/cassandra:/var/lib/cassandra
+  #     # - ./temp/cassandra/cassandra.yaml:/etc/cassandra/cassandra.yaml
+  #   restart: always
+
+
+
+  # prome-example-app:
+  #   image: prome-example-app
+  #   ports:
+  #     - 3008:3008
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 50M
+    
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8085:8080
+  #   volumes:
+  #     - ./volumes/adminer:/etc/tmp/adminer
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 50M
+      
+  # postgres:
+  #   image: postgres:latest
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     - POSTGRES_USER=monitoring
+  #     - POSTGRES_PASSWORD=secret
+  #     - POSTGRES_DB=monitoring-article
+  #   volumes:
+  #     - ./volumes/pg:/etc/tmp/gp
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 50M
+      
+  # mysql:
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_DATABASE: 'aams-db-1'
+  #     MYSQL_USER: 'ahmed'
+  #     MYSQL_PASSWORD: 'password'
+  #     MYSQL_ROOT_PASSWORD: 'password'
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+  #   ports:
+  #     - '3306:3306'
+  #   expose:
+  #     - '3306'
+  #   volumes:
+  #     - ./volumes/mysql:/var/lib/mysql
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 256M
+
+  # mongodb:
+  #   image: mongo
+  #   ports:
+  #     - '27017:27017'
+  #   volumes:
+  #     - ./volumes/mongodb_data:/data/db
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=admin
+  #     - MONGO_INITDB_ROOT_PASSWORD=adminpassword
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 50M
+
+  # redis:
+  #   image: redis:latest
+  #   container_name: redis
+  #   command: ["redis-server", "/etc/redis/redis.conf"]
+  #   volumes:
+  #     - ./config/redis:/etc/redis/
+  #   ports:
+  #     - "6379:6379"
+  #   restart: always
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 50M
+          
+
+  # redis-commander-local:
+  #   container_name: redis-commander-local
+  #   hostname: redis-commander-local
+  #   image: ghcr.io/joeferner/redis-commander:latest
+  #   build: .
+  #   restart: always
+  #   environment:
+  #     - REDIS_LABEL=Docker
+  #     - REDIS_HOST=host.docker.internal
+  #     - REDIS_PASSWORD=05T76BsOI1YjneFB
+      
+  #   ports:
+  #     - "8084:8081"
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 50M
+
+  redis-commander-cs2:
+    container_name: redis-commander-cs2
+    hostname: redis-commander-cs2
+    image: ghcr.io/joeferner/redis-commander:latest
+    build: .
+    restart: always
+    environment:
+      - REDIS_LABEL=CS2
+      - REDIS_HOST=172.27.88.205
+      - REDIS_PASSWORD=05T76BsOI1YjneFB
+    ports:
+      - "8085:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
+
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.12.1
+  #   container_name: elasticsearch
+  #   volumes:
+  #     - elasticsearch-data:/usr/share/elasticsearch/data
+  #   ports:
+  #     - 9200:9200
+  #   restart: always
+  #   environment:
+  #     - discovery.type=single-node
+  #     - ELASTIC_USER=aams
+  #     - ELASTIC_USERNAME=aams
+  #     - ELASTIC_PASSWORD=ggimdalbit
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '4'
+  #         memory: 4096M
+
+  # kibana:
+  #   depends_on:
+  #     - elasticsearch
+  #   image: docker.elastic.co/kibana/kibana:8.12.1
+  #   container_name: kibana
+  #   volumes:
+  #     - ./volumes/kibana-data:/usr/share/kibana/data
+  #     - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+  #   ports:
+  #     - 5601:5601
+  #   restart: always
+  #   environment:
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #     - ELASTICSEARCH_USERNAME=aams
+  #     - ELASTICSEARCH_PASSWORD=ggimdalbit
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 2048M
+
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.4.0
+  #   container_name: elasticsearch
+  #   volumes:
+  #     - elasticsearch-data:/usr/share/elasticsearch/data
+  #   ports:
+  #     - 9200:9200
+  #   restart: always
+  #   environment:
+  #     - xpack.security.enabled=false
+  #     - discovery.type=single-node
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 2048M
+        
+  # kibana:
+  #   depends_on:
+  #     - elasticsearch
+  #   image: docker.elastic.co/kibana/kibana:8.4.0
+  #   container_name: kibana
+  #   volumes:
+  #     - kibana-data:/usr/share/kibana/data
+  #   ports:
+  #    - 5601:5601
+  #   restart: always
+  #   environment:
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 2048M
+
+  # rabbitmq:
+  #   image: "rabbitmq:3-management"
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   environment:
+  #     - RABBITMQ_ERLANG_COOKIE=unique-cookie
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '3'
+  #         memory: 2048M
+  
+  # prometheus:
+  #   image: prom/prometheus
+  #   ports:
+  #     - '9090:9090'
+  #   volumes:
+  #     - ./config/prometheus:/etc/prometheus
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   networks:
+  #     - monitoring
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '1'
+  #         memory: 512M
+
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - '3090:3000'
+  #   environment:
+  #     - 'GF_SECURITY_ADMIN_PASSWORD=yourpassword'
+  #   volumes:
+  #     - ./volumes/grafana:/var/lib/grafana
+  #   networks:
+  #     - monitoring
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '1'
+  #         memory: 512M
+  
+  # jenkins:
+  #   image: jenkins/jenkins:lts
+  #   container_name: jenkins
+  #   ports:
+  #     - "8086:8080"
+  #     - "50000:50000"
+  #   volumes:
+  #     - jenkins:/var/jenkins_home
+  #   restart: unless-stopped
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 2048M
+
+
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  jenkins: 
+    driver: local
+  prometheus:
+    driver: local
+  grafana:
+    driver: local
+  cassandra_data:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  kibana-data:
+    driver: local
+  mysql:
+    driver: local
+  mongodb_data:
+    driver: local

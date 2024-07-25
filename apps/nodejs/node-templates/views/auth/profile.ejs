@@ -1,0 +1,42 @@
+<%- include ('../partials/header') %>    
+
+<div class="jumbotron">
+    <h1>User Profile</h1>
+</div>
+
+
+<div class="jumbotron">
+
+
+    <div class="profile-card">
+        <div class="profile-header">
+            <h1><%= user.username %></h1>
+        </div>
+        <div class="profile-info">
+            <div class="profile-picture">
+                <!-- You can add an avatar or profile picture here if available -->
+                <!-- <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" alt="Profile Picture"> -->
+                <img src="<%= user.user_avatar %>" alt="Profile Picture">
+            </div>
+            <div class="user-details">
+                <h2>ID</h2>
+                <p><%= user.user_id %></p>
+                <h2>Username</h2>
+                <p><%= user.username %></p>
+                <h2>Email</h2>
+                <p><%= user.email || 'Not provided yet' %></p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a class="nav-link btn btn-info" href="/auth/profile/edit">Edit</a>
+    </div>
+
+
+
+</div>
+
+
+<%- include ('../partials/footer') %>
+

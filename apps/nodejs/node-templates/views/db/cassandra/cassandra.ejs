@@ -1,0 +1,55 @@
+<%- include ('../../partials/header') %>
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Cassandra Info</h2>
+    </div>
+
+    <div class="jumbotron">
+        <h3>Cassandras</h3>
+    </div>
+
+
+
+
+
+    <div class="jumbotron">
+        <div class="card-deck">
+
+           <div class="card">
+             <a href="/cassandra/cassandra_localhost" class="btn btn-light">    
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.cassandra %>"/></svg>      
+               Localhost
+             </a>
+           </div>
+
+           <div class="card">
+            <a href="/cassandra/cassandra_alpha" class="btn btn-light">    
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.cassandra %>"/></svg>      
+              Alpha - 172.27.89.125
+            </a>
+          </div>
+
+          <div class="card">
+            <a href="/cassandra/cassandra_beta" class="btn btn-light">    
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.cassandra %>"/></svg>      
+              Beta - 172.27.88.248 
+            </a>
+          </div>
+
+          <div class="card">
+             <a href="/cassandra/remote" class="btn btn-light">    
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.cassandra %>"/></svg>      
+                192.168.8.105
+             </a>
+           </div>
+           
+         </div>
+     </div>   
+
+
+    
+
+
+<%- include ('../../partials/footer') %>
+

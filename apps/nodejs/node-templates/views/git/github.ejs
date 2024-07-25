@@ -1,0 +1,45 @@
+<%- include ('../partials/header') %>
+<!-- Add this CSS in your HTML or include it in your stylesheets -->
+<style>
+    .card {
+        color: black;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>GitHub Info</h2>
+</div>
+
+
+<div class="jumbotron">
+    <h1>GitHub Repos</h1>
+    <div id="gallery">
+        <% for (var i = 0; i < repos.length; i += 7) { %>
+            <div class="row">
+                <% for (var j = i; j < Math.min(i + 7, repos.length); j++) { %>
+                    <div class="col">
+                        <div class="card">
+                            <p><%- repos[j].name %></p>
+                            <div>
+                                <a href="<%- repos[j].urls.html_url %>" class="btn btn-dark">Web</a>
+                                <a href="<%- repos[j].urls.ssh_url %>" class="btn btn-dark">SSH</a>
+                                <a href="<%- repos[j].urls.https %>" class="btn btn-dark">HTTPS</a>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="/scripts/script_github.js"></script>
+
+<%- include ('../partials/footer') %>
+

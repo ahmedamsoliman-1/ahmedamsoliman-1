@@ -1,0 +1,22 @@
+node_modules
+.env
+*.log
+# *.json
+*.sql
+*.db
+*.zip
+*.crt
+*.key
+docker/config/redis
+docker/config/cassandra/*
+uploads
+gcp/*.json
+certs
+docker/volumes
+dolcker/config/cassandra
+docker/temp/cassandra
+.cassandraWorkbench
+aams-token.json
+crede
+.vscode
+*.mp4

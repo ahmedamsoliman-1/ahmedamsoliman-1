@@ -1,0 +1,55 @@
+<%- include ('partials/header') %>
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Currently Used Ports</h2>
+    </div>
+
+
+
+
+
+    <div class="jumbotron">
+        <h3>Total Listening Ports:   <%= ports.length %> </h3>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Ports:</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Process</th>
+                    <th>PID</th>
+                    <th>User</th>
+                    <th>File Descriptor</th>
+                    <th>IPv</th>
+                    <th>Address</th>
+                    <th>Go</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% ports.forEach(port => { %>
+                    <tr>
+                        <td><%= port.processName %></td>
+                        <td><%= port.pid %></td>
+                        <td><%= port.user %></td>
+                        <td><%= port.fileDescriptor %></td>
+                        <td><%= port.ipVersion %></td>
+                        <td><%= port.address %></td>
+                        <td><a target="_blank" href="http://localhost:<%= port.link %>" class="btn btn-light"><%= port.link %></a></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    
+
+
+
+
+
+
+<%- include ('partials/footer') %>
+

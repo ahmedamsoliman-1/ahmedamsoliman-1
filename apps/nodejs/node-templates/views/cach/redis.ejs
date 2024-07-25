@@ -1,0 +1,41 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Redis</h2>
+</div>
+
+
+<div class="jumbotron">
+    <div class="card-deck">
+
+       <div class="card">
+         <a href="/redis/redis_localhost" class="btn btn-light">    
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.redis %>"/></svg>      
+           Localhost
+         </a>
+       </div>
+
+       <div class="card">
+        <a href="/redis/redis_remote_1" class="btn btn-light">    
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.redis %>"/></svg>      
+          Alpha - 172.27.88.205
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/redis/redis_remote_2" class="btn btn-light">    
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.redis %>"/></svg>      
+        </a>
+      </div>
+
+      <div class="card">
+         <a href="/redis/redis_remote_3" class="btn btn-light">    
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.redis %>"/></svg>      
+         </a>
+       </div>
+       
+     </div>
+ </div> 
+
+<%- include ('../partials/footer') %>

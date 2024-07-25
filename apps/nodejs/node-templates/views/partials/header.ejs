@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AAMS<%= pageTitle ? ' - ' + pageTitle : '' %></title>
+    <link rel="icon" href="/img/mag.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <link rel="stylesheet" href="/styles/quote.css"> 
+    <link rel="stylesheet" href="/styles/main.css"> 
+    <link rel="stylesheet" href="/styles/login.css"> 
+    <link rel="stylesheet" href="/styles/dark-theme.css"> 
+    <!-- Add this in the head section of your HTML file -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.4/lib/noty.css" />
+<script src="https://cdn.jsdelivr.net/npm/noty@3.1.4/lib/noty.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">AAMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/aams/cloud">AAMS Cloud</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/docker-compose">Docker</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/git">Git</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/dbs">DBs</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/queues">Queues</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/cache">Cache</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link btn btn-info" href="/external">External</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger" onclick="Notifiy('<%= time %>')" href="#">Time</a>
+                </li>
+
+            </ul>
+        </div>
+        
+    
+
+        <div>
+            <% if (user) { %>
+                <a class="nav-link btn btn-dark" onclick="Notifiy('<%= user.aws_user_role %>')"><%= user.aws_user_role %></a>
+            <% } %>
+        </div>
+
+        <div>
+            <% if (user) { %>
+                <a class="nav-link btn btn-warning" onclick="Notifiy('User <%= user.username %> logged out')" href="/auth/logout">Logout - <%= user.username %></a>
+            <% } else { %>
+                <a class="nav-link btn btn-warning" href="/auth/login">Login</a>
+            <% } %>
+        </div>
+        
+        <div>
+            <% if (user) { %>
+                <a class="nav-link btn btn-success" href="/auth/profile">Profile</a>
+            <% } else { %>
+                <a class="nav-link btn btn-warning"  href="/auth/signup">Signup</a>
+            <% } %>
+        </div>
+
+        <div class="custom-control custom-switch ml-3">
+            <input type="checkbox" class="custom-control-input" id="darkModeSwitch">
+            <label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+        </div>
+    </nav>
+    
+
+    

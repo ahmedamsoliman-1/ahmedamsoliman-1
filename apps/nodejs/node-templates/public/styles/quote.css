@@ -1,0 +1,24 @@
+/* Add these styles for better presentation */
+#random-quote {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.quote p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333; /* Ensure text color is visible on the background */
+}
+
+.author {
+  font-style: italic;
+  color: #555;
+}
+
+.tags {
+  color: #555;
+  font-size: 14px;
+}

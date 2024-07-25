@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8084:8080
+    volumes:
+      - ../volumes/adminer:/etc/tmp/adminer
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M

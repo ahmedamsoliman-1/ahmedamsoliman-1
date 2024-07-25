@@ -1,5 +1,6 @@
 *.env
 *.log
+*.jsonc
 *.tar
 secrets
 scripts/bin/zshrc
@@ -8,7 +9,7 @@ scripts/bin/zshrc
 
 # NodeJS
 node_modules
-node-templates
+# node-templates
 
 
 

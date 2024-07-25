@@ -1,0 +1,33 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2></h2>
+</div>
+
+<div class="jumbotron">
+    <h1>ECR Manager</h1>
+
+    <% if (repositories && repositories.length > 0) { %>
+        <% repositories.forEach(function(repo) { %>
+            <h3>Repository: <%= repo.repository.repositoryName %></h3>
+            <p>Images:</p>
+            <ul>
+                <% repo.images.forEach(function(image) { %>
+                    <li>
+                        Image Tags:
+                        <% if (image.imageTags && image.imageTags.length > 0) { %>
+                            <%= image.imageTags.join(', ') %>
+                        <% } else { %>
+                            No tags found
+                        <% } %>
+                    </li>
+                <% }); %>
+            </ul>
+        <% }); %>
+    <% } else { %>
+        <p>No repositories found</p>
+    <% } %>
+</div>
+
+<%- include ('../partials/footer') %>

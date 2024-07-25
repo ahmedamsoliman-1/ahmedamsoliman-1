@@ -1,0 +1,29 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>DynamoDB Manager</h1>
+    
+      <% if (list && list.length > 0) { %>
+        <p>AWS DynamoDB Tables:</p>
+        <ul>
+          <% list.forEach(function(table) { %>
+            <li><%= table %></li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No Table Found</p>
+      <% } %>
+    </div>
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+

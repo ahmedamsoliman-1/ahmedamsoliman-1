@@ -1,0 +1,28 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>My PostgreSQL</h2>
+</div>
+
+<div class="jumbotron">
+    <h1>PostgreSQL Availabe DBs</h1>
+
+    <% if (dbs.rows && dbs.rows.length > 0) { %>
+        <p>Databases:</p>
+        <ul>
+            <% dbs.rows.forEach(function(db) { %>
+                <li>
+                    <strong>Databse:</strong> <%= db.datname %> <br>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>Not Connected to PostgreSQL</p>
+    <% } %>
+</div>
+
+
+<script src="/scripts/script_postgresql.js"></script>
+
+<%- include ('../partials/footer') %>

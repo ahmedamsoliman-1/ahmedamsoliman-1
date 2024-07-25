@@ -1,0 +1,270 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Amazon Web Services</h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>Welcome!</h1>
+    <p>Server started at <%= time %></p>
+    
+    <% if (connectionStatus) { %>
+      <p>profile: <%= connectionStatus.profile %></p>
+      <p>region: <%= connectionStatus.region %></p>
+      <p>Account: <%= connectionStatus.account %></p>
+      <p>Role/User: <%= connectionStatus.role_or_user %></p>
+    <% } else { %>
+      <p>Connection status not available for profile <%= profile %></p>
+    <% } %>
+    </div>
+
+
+
+
+    <style>
+      .card {
+        width: 250px;
+        height: auto;
+        margin: 10px; /* Add margin to create space between cards */
+        float: left; /* Make cards float */
+      }
+    
+      .card-label {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: black; /* Set label color to black */
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white; /* Add background color to ensure text visibility */
+        padding: 5px 10px; /* Add padding to the label */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+      }
+    </style>
+    
+    <div class="jumbotron">
+      <div class="card-deck">
+
+        <div class="card" style="position: relative;">
+          <a href="/aws/opensearch">
+            <img src="<%= svgs.opensearch %>" class="btn btn-light">
+            <span class="card-label">AWS OpenSearch</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/dynamodb">
+            <img src="<%= svgs.dynamodb %>" class="btn btn-light">
+            <span class="card-label">AWS DynamoDB</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/sqs">
+            <img src="<%= svgs.aws_sqs %>" class="btn btn-light">
+            <span class="card-label">AWS --</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/cloudformation">
+            <img src="<%= svgs.aws_cf %>" class="btn btn-light">
+            <span class="card-label">AWS --</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/cloudwatch">
+            <img src="<%= svgs.aws_cw %>" class="btn btn-light">
+            <span class="card-label">AWS --</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    
+    <div class="jumbotron">
+      <div class="card-deck">
+
+        <div class="card" style="position: relative;">
+          <a href="/aws/iam">
+            <img src="<%= svgs.aws_iam %>" class="btn btn-light">
+            <span class="card-label">AWS IAM</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/sns">
+            <img src="<%= svgs.aws_sns %>" class="btn btn-light">
+            <span class="card-label">AWS SNS</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/sqs">
+            <img src="<%= svgs.aws_sqs %>" class="btn btn-light">
+            <span class="card-label">AWS SQS</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/cloudformation">
+            <img src="<%= svgs.aws_cf %>" class="btn btn-light">
+            <span class="card-label">Cloudformation</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/cloudwatch">
+            <img src="<%= svgs.aws_cw %>" class="btn btn-light">
+            <span class="card-label">CloudWatch</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="card-deck">
+
+        <div class="card" style="position: relative;">
+          <a href="/aws/ec2">
+            <img src="<%= svgs.aws_ec2 %>" class="btn btn-light">
+            <span class="card-label">AWS EC2</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/lambda">
+            <img src="<%= svgs.aws_lambda %>" class="btn btn-light">
+            <span class="card-label">AWS Lambda</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/ECS">
+            <img src="<%= svgs.aws_ecs %>" class="btn btn-light">
+            <span class="card-label">AWS ECS</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/eks">
+            <img src="<%= svgs.aws_eks %>" class="btn btn-light">
+            <span class="card-label">AWS EKS</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/ecr">
+            <img src="<%= svgs.aws_ecr %>" class="btn btn-light">
+            <span class="card-label">AWS ECR</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    
+    
+    <div class="jumbotron">
+      <div class="card-deck">
+
+        <div class="card" style="position: relative;">
+          <a href="/aws/s3">
+            <img src="<%= svgs.aws_s3 %>" class="btn btn-light">
+            <span class="card-label">AWS S3</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/#">
+            <img src="<%= svgs.aws_sns %>" class="btn btn-light">
+            <span class="card-label"></span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/#">
+            <img src="<%= svgs.aws_sns %>" class="btn btn-light">
+            <span class="card-label"></span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/#">
+            <img src="<%= svgs.aws_sns %>" class="btn btn-light">
+            <span class="card-label"></span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/#">
+            <img src="<%= svgs.aws_sns %>" class="btn btn-light">
+            <span class="card-label"></span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="card-deck">
+
+        <div class="card" style="position: relative;">
+          <a href="/aws/dynamo">
+            <img src="<%= svgs.aws_dynamo %>" class="btn btn-light">
+            <span class="card-label">AWS DynamoDB</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/rds">
+            <img src="<%= svgs.aws_rds %>" class="btn btn-light">
+            <span class="card-label">AWS RDS</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/aurora">
+            <img src="<%= svgs.aws_aurora %>" class="btn btn-light">
+            <span class="card-label">AWS Aurora</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/elastic-cache">
+            <img src="<%= svgs.aws_elastic_cache %>" class="btn btn-light">
+            <span class="card-label">AWS Elastic Cache</span>
+          </a>
+        </div>
+    
+        <div class="card" style="position: relative;">
+          <a href="/aws/doc">
+            <img src="<%= svgs.aws_doc %>" class="btn btn-light">
+            <span class="card-label">AWS DocumentDB</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    
+    
+
+
+
+
+
+  <div class="jumbotron">
+    <a href="#" class="btn btn-success">#</a>
+    <a href="#" class="btn btn-success">#</a>
+    <a href="#" class="btn btn-success">#</a>
+    <a href="#" class="btn btn-success">#</a>
+  </div>
+
+
+  
+<%- include ('../partials/footer') %>
+

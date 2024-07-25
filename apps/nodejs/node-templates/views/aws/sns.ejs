@@ -1,0 +1,29 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>SNS Manager</h1>
+    
+      <% if (sns_topics_list && sns_topics_list.length > 0) { %>
+        <p>AWS SNS Topics:</p>
+        <ul>
+          <% sns_topics_list.forEach(function(topic) { %>
+            <li><%= topic.TopicArn %></li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No Topic Found</p>
+      <% } %>
+    </div>
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+

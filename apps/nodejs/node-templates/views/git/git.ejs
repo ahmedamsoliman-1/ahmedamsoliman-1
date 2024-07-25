@@ -1,0 +1,104 @@
+<%- include ('../partials/header') %>
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Git Info</h2>
+    </div>
+
+    <div class="jumbotron">
+        <a href="/git/git-status" class="btn btn-success">Git Status</a>
+        <a href="/git/update-git" class="btn btn-danger">Update Git</a>
+
+    </div>
+    
+    
+    <div class="jumbotron">
+        <h1>Current Branch: <a href="#" class="btn btn-warning"><%= currentBranch %></a></h1>
+        <h2>All Branches:</h2>
+        <ul>
+            <% branches.forEach(branch => { %>
+            <li><%= branch %></li>
+            <% }); %>
+        </ul>
+        <h2>Status:</h2>
+        <ul>
+            <% status.forEach(item => { %>
+            <li><%= item %></li>
+            <% }); %>
+        </ul>
+        <h2>Remotes:</h2>
+        <ul>
+            <% remotes.forEach(remote => { %>
+            <li><%= remote %></li>
+            <% }); %>
+        </ul>
+
+    </div>
+
+    <div class="jumbotron">
+        <div class="card-deck">
+
+        <div class="card">
+            <a href="/github" class="btn btn-light">
+                <%- svgs.github %> 
+                GitHub
+            </a>
+        </div>
+
+        <div class="card">
+            <a href="/gitlab" class="btn btn-light">
+                <%- svgs.gitlab %> 
+                GitLab
+            </a>
+        </div>
+
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        
+        
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        
+        <div class="card">
+            <a href="#" class="btn btn-light">
+            </a>
+        </div>
+        
+        </div>
+  </div>
+
+
+    
+
+
+
+<%- include ('../partials/footer') %>
+

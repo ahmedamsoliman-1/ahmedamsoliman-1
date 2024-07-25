@@ -1,0 +1,34 @@
+filebeat.inputs:
+- type: filestream
+  id: cassandra-cs2-alpha-logs-filestream
+  paths:
+    - ingest_data/*.log
+
+
+filebeat.autodiscover:
+ providers:
+   - type: docker
+     hints.enabled: true
+
+
+processors:
+- add_docker_metadata: ~
+
+
+setup.kibana:
+ host: ${AVR_KIBANA_HOST}
+ username: ${AVR_ELASTIC_USER}
+ password: ${AVR_ELASTIC_PASSWORD}
+
+
+output.elasticsearch:
+ hosts: ${AVR_ELASTIC_HOST}
+ username: ${AVR_ELASTIC_USER}
+ password: ${AVR_ELASTIC_PASSWORD}
+ ssl.enabled: true
+ ssl.certificate_authorities: ["/usr/share/filebeat/certs/ca.crt"]
+ index: "cassandra-cs2-alpha-logs-%{+yyyy.MM.dd}"
+
+setup.template.name: "cassandra-cs2-alpha-logs"
+setup.template.pattern: "cassandra-cs2-alpha-logs-*"
+setup.template.enabled: true

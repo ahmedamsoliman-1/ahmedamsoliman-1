@@ -1,0 +1,38 @@
+<%- include ('../partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Rabbit MQ</h2>
+</div>
+
+
+
+<div class="jumbotron">
+    <h2>Rabbit MQ Info</h2>
+    <ul>
+        <li><strong>Host:</strong> <%= rabbitInfo.host %></li>
+        <li><strong>Port:</strong> <%= rabbitInfo.port %></li>
+        <li><strong>User:</strong> <%= rabbitInfo.user %></li>
+        <li><strong>RabbitMQ URI:</strong> <%= rabbitInfo.rabbitmqUri %></li>
+        <li><strong>Connection Status:</strong> <%= rabbitInfo.isConnected ? 'Connected' : 'Disconnected' %></li>
+    </ul>
+</div>
+
+
+
+
+
+<div class="jumbotron">
+    <div class="jumbotron">
+        <h1>Rabbit MQ Availabe Exchange and Queues</h1>
+        <div id="mongodb">
+          Loading...
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/scripts/script_rabbit.js"></script>
+
+<%- include ('../partials/footer') %>

@@ -1,0 +1,54 @@
+<%- include ('../../partials/header') %>
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Elastic Search</h2>
+    </div>
+
+    <div class="jumbotron">
+        <h3>Elastic Search Info</h3>
+    </div>
+
+
+
+
+
+    <div class="jumbotron">
+        <div class="card-deck">
+
+           <div class="card">
+             <a href="/es/local?which_elastic=local" class="btn btn-light">    
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.es %>"/></svg>      
+               Localhost
+             </a>
+           </div>
+
+           <div class="card">
+            <a href="/es/dev?which_elastic=dev" class="btn btn-light">    
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.es %>"/></svg>      
+              Dev
+            </a>
+          </div>
+          
+          <div class="card">
+            <a href="#" class="btn btn-light">    
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.es %>"/></svg>      
+            </a>
+          </div>
+
+          <div class="card">
+             <a href="#" class="btn btn-light">    
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="<%= svgs.es %>"/></svg>      
+                
+             </a>
+           </div>
+           
+         </div>
+     </div>   
+
+
+    
+
+
+<%- include ('../../partials/footer') %>
+

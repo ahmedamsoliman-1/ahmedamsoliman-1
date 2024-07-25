@@ -1,0 +1,55 @@
+<%- include ('../partials/header') %>
+
+<style>
+    .keyDiv {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.keyDiv p {
+  margin-right: 10px;
+}
+
+.btn {
+  margin-right: 5px;
+}
+</style>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>Redis</h2>
+</div>
+
+
+<div class="jumbotron">
+    <h1>Redis Keys</h1>
+    <div id="keysList" class="keys-list"></div>
+</div>
+
+
+
+
+
+<div class="jumbotron">
+    <h2>CS2 Redis Info</h2>
+    <div id="redis_info">
+        <% 
+        var infoArray = info.split('\n');
+        infoArray.forEach(function(line) {
+            var parts = line.split(':');
+            var key = parts[0].trim();
+            var value = parts.slice(1).join(':').trim();
+        %>
+            <p><strong><%= key %>:</strong> <%= value %></p>
+        <% }); %>
+    </div>
+</div>
+
+
+
+
+
+<script src="/scripts/script_redis.js"></script>
+
+<%- include ('../partials/footer') %>

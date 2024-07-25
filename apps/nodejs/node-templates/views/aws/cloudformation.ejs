@@ -1,0 +1,56 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2></h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>AWS Cloudformation Templates: </h1>
+        <p>Time: <%= time %></p>
+        <p>Profile: <%= profile %></p>
+        <p>Region: <%= region %></p>
+        
+
+        <p>Time: <%= time %></p>
+        <p>Profile: <%= profile %></p>
+        <p>Region: <%= region %></p>
+        
+        <% if (stacks && stacks.length > 0) { %>
+        
+        <% stacks.forEach(stack => { %>
+            <div class="stack">
+              <h2><strong>Stack Name:</strong> <%= stack.name %></h2>
+              <ul class="status">
+                <li><strong>Status:</strong> <%= stack.status %></li>
+              </ul>
+              <% if (stack.outputs && stack.outputs.length > 0) { %>
+                <ul class="output">
+                  <li><strong>Outputs:</strong>
+                    <ul>
+                      <% stack.outputs.forEach(output => { %>
+                        <li><%= output.OutputKey %> - <%= output.OutputValue %></li>
+                      <% }); %>
+                    </ul>
+                  </li>
+                </ul>
+              <% } else { %>
+                <li><strong>No outputs found for this stack.</strong></li>
+              <% } %>
+              <li><a target="_blank" href="<%= stack.stackUrl %>">View Stack</a></li>
+            </div>
+          <% }); %>
+        <% } else { %>
+            <p>No Stacks Found</p>
+        <% } %>
+
+    </div>
+    
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+

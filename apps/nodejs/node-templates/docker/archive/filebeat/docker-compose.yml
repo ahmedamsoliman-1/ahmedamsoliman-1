@@ -1,0 +1,42 @@
+version: "3.8"
+
+
+volumes:
+ certs:
+   driver: local
+ esdata01:
+   driver: local
+ kibanadata:
+   driver: local
+ metricbeatdata01:
+   driver: local
+ filebeatdata01:
+   driver: local
+ filebeatdata_external: 
+  driver: local
+
+
+networks:
+ default:
+   name: elastic
+   external: false
+
+
+services:
+ filebeat_external:
+   image: docker.elastic.co/beats/filebeat:${STACK_VERSION}
+   user: root
+   volumes:
+     - certs:/usr/share/filebeat/certs
+     - filebeatdata_external:/usr/share/filebeat/data
+     - "./filebeat_ingest_data/:/usr/share/filebeat/ingest_data/"
+     - "./filebeat_external.yml:/usr/share/filebeat/filebeat_external.yml:ro" 
+     - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+     - "/var/run/docker.sock:/var/run/docker.sock:ro"
+   environment:
+     - ELASTIC_USER=SVC-logging
+     - ELASTIC_PASSWORD=SVCLog456$4
+     - KIBANA_PASSWORD=SVCLog456$4
+     - ELASTIC_HOSTS=172.27.89.77
+     - KIBANA_HOSTS=https://aichess-kibana-dev.avrioc.io
+     - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt

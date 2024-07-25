@@ -1,0 +1,32 @@
+<%- include ('../partials/header') %>
+
+
+    <div class="jumbotron">
+        <h1>AAMS</h1>
+        <h2>Amazon Web Services</h2>
+    </div>
+
+    <div class="jumbotron">
+      <h1>GCP Bucket Manager</h1>
+  
+      <% if (buckets && buckets.length > 0) { %>
+          <p>GCP Buckets:</p>
+          <ul>
+              <% buckets.forEach(function(bucket) { %>
+                  <li>
+                      <strong>Bucket Name:</strong> <%= bucket.name %> <br>
+                  </li>
+              <% }); %>
+          </ul>
+      <% } else { %>
+          <p>AWS not Connected</p>
+      <% } %>
+    </div>
+  
+    
+
+    
+
+
+<%- include ('../partials/footer') %>
+
