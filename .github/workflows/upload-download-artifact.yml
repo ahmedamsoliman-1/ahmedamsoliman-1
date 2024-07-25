@@ -1,0 +1,39 @@
+name: upload-download-artifact
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-upload-download-artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build project
+        run: |
+          mkdir -p output
+          echo "Build output" > output/build.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: output/build.txt
+
+  deploy-upload-download-artifact:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+
+      - name: Use artifact
+        run: |
+          cat build-artifact/build.txt

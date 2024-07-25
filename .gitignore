@@ -70,3 +70,6 @@ __pycache__
 *.gz
 *latexmk
 *fls
+.nx/installation
+.nx/cache
+.nx/workspace-data
