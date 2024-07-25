@@ -51,6 +51,7 @@
 
 
 
+
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
@@ -81,15 +82,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload first artifact
+      - name: Upload resume-dev-web artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'apps/static/resume-dev-web'
+          name: resume-dev-web
 
-      - name: Upload second artifact
+      - name: Upload resume-dev-web2 artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'apps/static/resume-dev-web2'
+          name: resume-dev-web2
 
       - name: Sanity check
         run: |
@@ -102,3 +105,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
