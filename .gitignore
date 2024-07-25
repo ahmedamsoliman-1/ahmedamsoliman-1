@@ -74,3 +74,46 @@ __pycache__
 .nx/installation
 .nx/cache
 .nx/workspace-data
+
+
+
+
+
+
+
+
+# CPP
+# C++ build files
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/Dump/
+/Makefile
+*.o
+*.a
+*.so
+*.dylib
+*.out
+# C++ temporary files
+*.tmp
+*.swp
+*.swo
+*.log
+# IDE-specific files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.csproj
+# Dependency directories
+/external/asio/
+/external/Crow/
+# Operating System specific files
+.DS_Store
+Thumbs.db
+# Miscellaneous
+*.orig
+*.rej
