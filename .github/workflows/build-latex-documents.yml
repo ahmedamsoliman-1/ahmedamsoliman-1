@@ -20,10 +20,86 @@ jobs:
         with:
           root_file: docs/latex/main/ahmedalimsoliman-dev-en.tex
         env:
-          TEXINPUTS: ".:docs/latex/main//:"  # Add the directory containing mteck.sty
+          TEXINPUTS: ".:docs/latex/main//:"
 
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
-          name: PDF
+          name: ahmedalimsoliman-dev-en.pdf
           path: ahmedalimsoliman-dev-en.pdf
+
+  build-latex-documents-ahmedalimsoliman-devops-en:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: docs/latex/main/ahmedalimsoliman-devops-en.tex
+        env:
+          TEXINPUTS: ".:docs/latex/main//:"
+
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: ahmedalimsoliman-devops-en.pdf
+          path: ahmedalimsoliman-devops-en.pdf
+
+  build-latex-documents-ahmedalimsoliman-ts-en:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: docs/latex/main/ahmedalimsoliman-ts-en.tex
+        env:
+          TEXINPUTS: ".:docs/latex/main//:"
+
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: ahmedalimsoliman-ts-en.pdf
+          path: ahmedalimsoliman-ts-en.pdf
+
+  build-latex-documents-ahmedalimsoliman-data-en:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: docs/latex/main/ahmedalimsoliman-data-en.tex
+        env:
+          TEXINPUTS: ".:docs/latex/main//:"
+
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: ahmedalimsoliman-data-en.pdf
+          path: ahmedalimsoliman-data-en.pdf
+
+  build-latex-documents-ahmedalimsoliman-it-en:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: docs/latex/main/ahmedalimsoliman-it-en.tex
+        env:
+          TEXINPUTS: ".:docs/latex/main//:"
+
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: ahmedalimsoliman-it-en.pdf
+          path: ahmedalimsoliman-it-en.pdf
