@@ -38,6 +38,14 @@ jobs:
         with:
           # Upload entire repository
           path: 'apps/static/resume-devops-pdf'
+      - name: check path
+        run: |
+          echo "Sanity checl"
+          pwd
+          ls
+          ls apps/static/
+        continue-on-error: true
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
