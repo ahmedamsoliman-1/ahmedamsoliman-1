@@ -37,13 +37,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'apps/static/resume-devops-pdf'
+          path: 'ahmed/apps/static/resume-devops-pdf'
       - name: check path
         run: |
-          echo "Sanity checl"
+          echo "pwd:"
           pwd
+          echo "ls:"
           ls
-          ls apps/static/
         continue-on-error: true
       - name: Deploy to GitHub Pages
         id: deployment
