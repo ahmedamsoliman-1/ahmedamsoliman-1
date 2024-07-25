@@ -20,4 +20,4 @@ jobs:
           folder: apps/static/resume-devops-podf
         env:
           # GitHub token for authentication
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
