@@ -9,17 +9,21 @@ on:
       - main
 
 jobs:
-  build-latex-documents-:
+  build-latex-documents-ahmedalimsoliman-dev-en:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: docs/latex/main/ahmedalimsoliman-dev-en.tex
+        env:
+          TEXINPUTS: ".:docs/latex/main//:"  # Add the directory containing mteck.sty
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
           name: PDF
-          path: ahmedalimsoliman-dev-en.pdf
+          path: docs/latex/main/ahmedalimsoliman-dev-en.pdf
