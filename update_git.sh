@@ -21,7 +21,7 @@ done
 # Check if a commit message parameter is provided
 if [ "$#" -gt 0 ]; then
   user_commit_message="$1"
-  commit_message="Custom message: '$user_commit_message'. $commit_message"
+  commit_message="'$user_commit_message'. $commit_message"
 fi
 
 # Commit and push the changes
