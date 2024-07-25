@@ -118,3 +118,13 @@ Thumbs.db
 *.orig
 *.rej
 cpp_external
+
+
+
+
+
+
+
+
+# GCP
+comaamsdngcp2-*.json
