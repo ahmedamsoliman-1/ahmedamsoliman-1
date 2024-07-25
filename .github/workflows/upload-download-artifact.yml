@@ -39,4 +39,4 @@ jobs:
 
       - name: Use artifact
         run: |
-          cat build-artifact/build.txt
+          cat build.txt
