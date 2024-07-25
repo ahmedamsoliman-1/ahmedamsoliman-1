@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'ahmed/apps/static/resume-devops-pdf'
+          path: 'apps/static/resume-devops-pdf'
       - name: check path
         run: |
           echo "pwd:"
