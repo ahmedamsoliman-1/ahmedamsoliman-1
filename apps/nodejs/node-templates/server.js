@@ -93,12 +93,12 @@ const dbs = require('./routes/db/dbs');
 const cassandra = require('./routes/db/cassandra');
 const cassandraInitializer = require('./db/cassandra/cassandraInitializer');
 const es = require("./routes/db/es");
-const mongo = require('./routes/db/mongo');
+// const mongo = require('./routes/db/mongo');
 const PostgreSQL = require('./routes/db/PostgreSQL');
 app.use(dbs);
 app.use(cassandra);
 app.use(es);
-app.use(mongo);
+// app.use(mongo);
 app.use(PostgreSQL);
 
 
@@ -145,7 +145,7 @@ app.use(awsRoutes);
 app.use(azureRoutes);
 app.use(gcpRoutes);
 
-const k8 = require("./routes/k8/k8");
+// const k8 = require("./routes/k8/k8");
 const compose = require("./routes/compose");
 const ports = require("./routes/ports");
 const external = require('./routes/external');
@@ -154,7 +154,7 @@ const { azure } = require('./SVGs');
 
 
 
-app.use(k8);
+// app.use(k8);
 app.use(compose);
 app.use(ports);
 app.use(external);

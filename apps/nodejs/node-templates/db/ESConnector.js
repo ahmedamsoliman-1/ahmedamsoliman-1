@@ -25,6 +25,9 @@ const open_search_passcode = config.OPENSEARCH.OPENSEARCH_PASSCODE;
 const open_search_port = config.OPENSEARCH.OPENSEARCH_PORT;
 const open_search_domain = config.OPENSEARCH.OPENSEARCH_DOMAIN_NAME;
 
+const temp_dev_certificate = 'package.json'
+const temp_local_certificate = 'package.json'
+
 const es_client_dev = new elasticsearch.Client({
   node: `https://${dev_host}:${port}`,
   auth: {
@@ -32,7 +35,7 @@ const es_client_dev = new elasticsearch.Client({
     password: dev_espasscode,
   },
   tls: {
-    ca: fs.readFileSync(dev_certificate),
+    ca: fs.readFileSync(temp_dev_certificate),
     rejectUnauthorized: false
   },
   requestTimeout: timeout,
@@ -46,7 +49,7 @@ const es_client_local = new elasticsearch.Client({
     password: local_espasscode,
   },
   tls: {
-    ca: fs.readFileSync(local_certificate),
+    ca: fs.readFileSync(temp_local_certificate),
     rejectUnauthorized: false
   },
   requestTimeout: timeout,
