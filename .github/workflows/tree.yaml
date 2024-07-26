@@ -73,3 +73,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         continue-on-error: true
+  jobs-05:
+    needs: 'jobs-04'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-06:
+    needs: 'jobs-05'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-07:
+    needs: 
+      - jobs-04
+      - jobs-05
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
