@@ -242,7 +242,7 @@ jobs:
           # docker buildx build
 
   jobs-collection-different-1-5:
-    needs: 'jobs-collection-different'
+    needs: 'jobs-collection-different-1-1'
     runs-on: ubuntu-latest
 
     steps:
@@ -281,7 +281,7 @@ jobs:
           # docker buildx build
 
   jobs-collection-different-6:
-    needs: 'jobs-collection-different-1'
+    needs: 'jobs-collection-different-1-1'
     runs-on: ubuntu-latest
 
     steps:
