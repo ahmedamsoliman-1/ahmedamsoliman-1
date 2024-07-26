@@ -33,7 +33,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-data-eng-pdf:latest --push ./apps/static/aams-resume-data-eng-pdf
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-data-eng-pdf:latest --push ./apps/static/resume-data-eng-pdf
 
   build-push-image-dev:
     runs-on: ubuntu-latest
