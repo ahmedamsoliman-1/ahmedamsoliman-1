@@ -2,7 +2,7 @@ name: deploy-static-resume-dev-web
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
   workflow_dispatch:
 
