@@ -1,0 +1,101 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: A template for static hosting using S3 bucket and CloudFront
+
+Parameters:
+  MyDNS:
+    Type: String
+    Description: ACMC ertificate DNS Name
+    Default: vite.ahmedalimsoliman.click
+  S3DomainName:
+    Type: String
+    Description: ACMC ertificate DNS Name
+    Default: vite.ahmedalimsoliman.click.s3.me-central-1.amazonaws.com
+  MyCertificateARN:
+    Type: String
+    Description: ARN
+    Default: XX
+
+Outputs:
+  S3BucketName:
+    Value:
+      Ref: S3Bucket
+
+  OriginAccessControl:
+    Value:
+      Ref: CloudFrontOriginAccessControl
+
+  CloudFrontDist:
+    Value:
+      Ref: CloudFrontDistribution
+
+Resources:
+  DistRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: Z07706771WL0WO5D92PH2
+      Comment: CloudFront Distribution Alias
+      Name: !Ref MyDNS
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFrontDistribution.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2 # CloudFront zone ID
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      BucketName: !Ref MyDNS
+
+  CloudFrontOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Description: "origin access control (OAC) for allowing cloudfront to access S3 bucket"
+        Name: !Ref MyDNS
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    DependsOn:
+      - S3Bucket
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName: !Ref S3DomainName
+            Id: static-hosting
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+            OriginAccessControlId: !GetAtt CloudFrontOriginAccessControl.Id
+        Enabled: "true"
+        Comment: !Ref MyDNS
+        DefaultRootObject: index.html
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+        HttpVersion: http2
+        Aliases:
+          - !Ref MyDNS
+        ViewerCertificate:
+          AcmCertificateArn: !Ref MyCertificateARN
+          MinimumProtocolVersion: TLSv1.2_2021
+          SslSupportMethod: sni-only
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+          Compress: true
+          TargetOriginId: static-hosting
+          ForwardedValues:
+            QueryString: "false"
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
