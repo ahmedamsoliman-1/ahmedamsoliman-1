@@ -29,6 +29,7 @@ jobs:
         run: |
           cd ./apps/NextJS/portfolio
           npm install
+          npm run build
 
       - name: Build and push Docker images
         if: success()
