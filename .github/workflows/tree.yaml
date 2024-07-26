@@ -9,9 +9,16 @@ on:
       - master
 
 jobs:
-  jobs-1:
+  jobs-0:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
 
+  jobs-1:
+    needs: 'jobs-0'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +26,6 @@ jobs:
   jobs-2:
     needs: 'jobs-1'
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -27,7 +33,6 @@ jobs:
   jobs-3:
     needs: 'jobs-2'
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -35,7 +40,35 @@ jobs:
   jobs-4:
     needs: 'jobs-3'
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  
+  jobs-01:
+    needs: 'jobs-0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-02:
+    needs: 'jobs-1'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-03:
+    needs: 'jobs-2'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-04:
+    needs: 'jobs-3'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
