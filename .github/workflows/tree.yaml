@@ -24,21 +24,21 @@ jobs:
         uses: actions/checkout@v3
         continue-on-error: true
   jobs-2:
-    needs: 'jobs-1'
+    needs: 'jobs-0'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         continue-on-error: true
   jobs-3:
-    needs: 'jobs-2'
+    needs: 'jobs-1'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         continue-on-error: true
   jobs-4:
-    needs: 'jobs-3'
+    needs: 'jobs-1'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -46,14 +46,14 @@ jobs:
         continue-on-error: true
   
   jobs-01:
-    needs: 'jobs-0'
+    needs: 'jobs-2'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         continue-on-error: true
   jobs-02:
-    needs: 'jobs-01'
+    needs: 'jobs-2'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
