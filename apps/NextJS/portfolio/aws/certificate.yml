@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Certificate US-EAST-1
+
+Parameters:
+  ACMCertificateName:
+    Type: String
+    Description: ACMC ertificate DNS Name
+    Default: xxx.ahmedalimsoliman.click
+
+Resources:
+  ACMCertificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: !Ref ACMCertificateName
+      DomainValidationOptions:
+        - DomainName: !Ref ACMCertificateName
+          HostedZoneId: Z07706771WL0WO5D92PH2
+      ValidationMethod: DNS
