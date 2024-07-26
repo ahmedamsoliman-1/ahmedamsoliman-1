@@ -1,0 +1,42 @@
+name: 'different'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  jobs-1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-2:
+    needs: 'jobs-1'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-3:
+    needs: 'jobs-2'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+  jobs-4:
+    needs: 'jobs-3'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
