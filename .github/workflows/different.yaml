@@ -46,3 +46,81 @@ jobs:
         run: |
           echo $IMAGE_VERSION
           # docker buildx build
+
+  jobs-collection-different-1:
+    needs: 'jobs-collection-different'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract branch name
+        id: extract_version
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          # Handle PRs and replace slashes
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            BRANCH_NAME="pr-${GITHUB_REF##*/}"
+          fi
+          # Sanitize branch name for Docker tags
+          BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "-------------------"
+          echo "Branch Name:"
+          echo $BRANCH_NAME
+          echo "-------------------"
+        continue-on-error: true
+      
+      - name: Docker images tag
+        env:
+          IMAGE_VERSION: ${{ env.BRANCH_NAME }}-${{ github.sha }}
+        run: |
+          echo $IMAGE_VERSION
+          # docker buildx build
+
+  jobs-collection-different-2:
+    needs: 'jobs-collection-different-1'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        continue-on-error: true
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract branch name
+        id: extract_version
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          # Handle PRs and replace slashes
+          if [[ $GITHUB_REF == refs/pull/* ]]; then
+            BRANCH_NAME="pr-${GITHUB_REF##*/}"
+          fi
+          # Sanitize branch name for Docker tags
+          BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "-------------------"
+          echo "Branch Name:"
+          echo $BRANCH_NAME
+          echo "-------------------"
+        continue-on-error: true
+      
+      - name: Docker images tag
+        env:
+          IMAGE_VERSION: ${{ env.BRANCH_NAME }}-${{ github.sha }}
+        run: |
+          echo $IMAGE_VERSION
+          # docker buildx build
