@@ -10,7 +10,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./iac/terraform/gcp/buckets/aams-terraform-hcp
+    working-directory: ./IaC/terraform/gcp/buckets/aams-terraform-hcp
     
 jobs:
   terraform-deploy-aams-bucket:

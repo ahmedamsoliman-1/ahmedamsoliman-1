@@ -47,7 +47,7 @@ Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collect
     - **`cloud/`**: Access cloud-specific configurations and scripts for AWS, Azure, and GCP.
     - **`docker/`**: Review Docker Compose files and generic Docker configurations.
     - **`docs/`**: Check the documentation for the repository and applications.
-    - **`iac/`**: Manage infrastructure as code with Ansible and Terraform.
+    - **`IaC/`**: Manage infrastructure as code with Ansible and Terraform.
     - **`kubernetes/`**: View Helm charts and Kubernetes manifests.
     - **`scripts/`**: Use utility scripts for automation and other tasks.
 
@@ -56,7 +56,7 @@ Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collect
     - Add cloud-specific scripts and configurations in `cloud/`.
     - Manage Docker-related files in `docker/`.
     - Update documentation in `docs/`.
-    - Configure infrastructure as code in `iac/`.
+    - Configure infrastructure as code in `IaC/`.
     - Include Kubernetes configurations and Helm charts in `kubernetes/`.
     - Add utility scripts in `scripts/`.
 

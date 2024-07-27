@@ -10,7 +10,7 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./iac/terraform/gcp/gke/aams-dev-gke-1
+    working-directory: ./IaC/terraform/gcp/gke/aams-dev-gke-1
     
 jobs:
   terraform-deploy-aams-gcp2-gke2:
