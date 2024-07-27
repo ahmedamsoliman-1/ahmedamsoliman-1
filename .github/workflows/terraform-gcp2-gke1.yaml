@@ -10,9 +10,10 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./iac/terraform/gcp/aams-terraform-hcp
+    working-directory: ./iac/terraform/gcp/gke/aams-dev-gke-1
+    
 jobs:
-  terraform-deploy-aams-bucket:
+  terraform-deploy-aams-gcp2-gke1:
     name: 'Terraform'
     runs-on: ubuntu-latest
 
