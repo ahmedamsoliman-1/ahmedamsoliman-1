@@ -41,8 +41,8 @@ jobs:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform destroy
 
-    # - name: Terraform Apply
-    #   if: github.event_name == 'push'
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform apply -auto-approve
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
