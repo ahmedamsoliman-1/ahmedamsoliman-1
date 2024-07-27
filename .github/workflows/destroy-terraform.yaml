@@ -1,4 +1,4 @@
-name: destroy-gke-terraform
+name: destroy-terraform
 
 on:
   workflow_dispatch:
