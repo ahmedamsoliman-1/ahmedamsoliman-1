@@ -1,0 +1,33 @@
+name: deploy-helm-charts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-helm-charts-gcp1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        version: 'latest'
+
+    - name: Authenticate with Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+      run: |
+        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+
+    - name: Get GKE Cluster Credentials
+        run: |
+          gcloud container clusters get-credentials aams-gke2-gcp2-gke-primary-cluster --zone us-east1-b --project ${{ secrets.GCP2_PROJECT_ID }}
+          kubectl get nodes
+
+      
