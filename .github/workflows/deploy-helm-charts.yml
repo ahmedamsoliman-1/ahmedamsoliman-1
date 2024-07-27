@@ -3,7 +3,7 @@ name: deploy-helm-charts
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy-helm-charts-gcp2:
