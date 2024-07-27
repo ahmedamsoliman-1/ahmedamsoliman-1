@@ -417,7 +417,7 @@ ingressShim: {}
 #          - key: foo.bar.com/role
 #            operator: In
 #            values:
-#            - main
+#            - master
 affinity: {}
 
 # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
@@ -763,7 +763,7 @@ webhook:
   #          - key: foo.bar.com/role
   #            operator: In
   #            values:
-  #            - main
+  #            - master
   affinity: {}
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
@@ -1055,7 +1055,7 @@ cainjector:
   #          - key: foo.bar.com/role
   #            operator: In
   #            values:
-  #            - main
+  #            - master
   affinity: {}
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
@@ -1253,7 +1253,7 @@ startupapicheck:
   #          - key: foo.bar.com/role
   #            operator: In
   #            values:
-  #            - main
+  #            - master
   affinity: {}
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
