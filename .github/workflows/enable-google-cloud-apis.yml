@@ -25,6 +25,9 @@ jobs:
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
+    - name: Set project
+      run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
+
     - name: Enable Compute Engine API
       run: gcloud services enable compute.googleapis.com
 
