@@ -19,8 +19,8 @@ jobs:
         version: 'latest'
 
     - name: Install GKE Cloud Auth plugin
-        run: |
-          gcloud components install gke-gcloud-auth-plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
 
     - name: Authenticate with Google Cloud
       env:
