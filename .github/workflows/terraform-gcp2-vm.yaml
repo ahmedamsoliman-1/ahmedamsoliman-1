@@ -1,4 +1,4 @@
-name: apply-gke-terraform
+name: apply-vm-terraform
 
 on:
   push:
