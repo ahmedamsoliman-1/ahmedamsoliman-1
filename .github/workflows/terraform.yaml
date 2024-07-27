@@ -26,13 +26,10 @@ jobs:
         terraform_version: 1.9.2
 
     - name: Terraform Init
-      run: |
-      pwd
-      ls
-      terraform init
+      run: pwd
 
-    - name: Terraform Plan
-      run: terraform plan
+    # - name: Terraform Plan
+    #   run: terraform plan
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
