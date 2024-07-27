@@ -25,6 +25,12 @@ resource "google_storage_bucket" "aams_state_files_bucket" {
   name          = var.bucket_name_1
   location      = var.location
   force_destroy = false
+
+  labels = {
+    environment = "dev"
+    team        = "devops"
+    triggered_by = "github_actions"
+  }
 }
 
 variable "project_id" {
