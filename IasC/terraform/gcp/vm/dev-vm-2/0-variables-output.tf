@@ -4,6 +4,8 @@ variable "project_id" { type  =  string }
 variable "region" { type  =  string }
 variable "location_a" { type  =  string }
 
+variable "avr_mac_ssh_key" { type  =  string }
+
 variable "machine_type" { default = "n1-standard-1" }
 variable "instance_name" { default = "ahmed-dev-vm-ubuntu" }
 variable "image_family" { default = "ubuntu-2004-lts" }

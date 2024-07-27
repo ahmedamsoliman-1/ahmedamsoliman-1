@@ -17,7 +17,8 @@ resource "google_compute_instance" "default" {
   }
 
   metadata = {
-    ssh-keys = "user:${file("~/.ssh/id_rsa.pub")}"
+    # ssh-keys = "user:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "user:${var.avr_mac_ssh_key}"
   }
 }
 
