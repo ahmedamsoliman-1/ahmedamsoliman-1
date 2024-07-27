@@ -39,20 +39,3 @@ resource "google_dns_managed_zone" "ahmedalimsoliman2" {
 
   visibility = "public"
 }
-
-# A Records
-resource "google_dns_record_set" "a_record_1" {
-  name         = "www.${var.dns_name_gcp_2}"
-  managed_zone = google_dns_managed_zone.ahmedalimsoliman2.name
-  type         = "A"
-  ttl          = 300
-  rrdatas      = ["1.2.3.4"]
-}
-
-resource "google_dns_record_set" "a_record_2" {
-  name         = "api.${var.dns_name_gcp_2}"
-  managed_zone = google_dns_managed_zone.ahmedalimsoliman2.name
-  type         = "A"
-  ttl          = 300
-  rrdatas      = ["5.6.7.8"]
-}
