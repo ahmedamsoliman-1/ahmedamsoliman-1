@@ -11,8 +11,8 @@ output "dns_zone_id" { value = google_dns_managed_zone.ahmedalimsoliman2.id }
 # Outputs:
 # dns_zone_id = "projects/comaamsdngcp2-project-1/managedZones/ahmedalimsoliman2-com"
 # dns_zone_name_servers = tolist([
-#   "ns-cloud-e1.googledomains.com.",
-#   "ns-cloud-e2.googledomains.com.",
-#   "ns-cloud-e3.googledomains.com.",
-#   "ns-cloud-e4.googledomains.com.",
+#   "ns-cloud-d1.googledomains.com.",
+#   "ns-cloud-d2.googledomains.com.",
+#   "ns-cloud-d3.googledomains.com.",
+#   "ns-cloud-d4.googledomains.com.",
 # ])
