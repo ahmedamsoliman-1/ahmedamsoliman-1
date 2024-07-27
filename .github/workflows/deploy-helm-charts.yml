@@ -49,12 +49,12 @@ jobs:
       working-directory: ./kubernetes/helm-charts/ingress-nginx
       run: |
         chmod +x deploy.sh
-        pwd
+        ./deploy.sh
 
     - name: Deploy/Upgrade Helm Charts - Cert Manager 
       working-directory: ./kubernetes/helm-charts/cert-manager
       run: |
         chmod +x deploy.sh
-        pwd
+        ./deploy.sh
 
       
