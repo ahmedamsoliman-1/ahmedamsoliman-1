@@ -29,13 +29,13 @@ resource "google_project_service" "dns" {
 }
 
 
-# DNS Hosted Zone
-resource "google_dns_managed_zone" "ahmedalimsoliman2" {
-  name     = "ahmedalimsoliman2-com"
-  dns_name = var.dns_name_gcp_2
-  project  = var.project_id
+# # DNS Hosted Zone
+# resource "google_dns_managed_zone" "ahmedalimsoliman2" {
+#   name     = "ahmedalimsoliman2-com"
+#   dns_name = var.dns_name_gcp_2
+#   project  = var.project_id
 
-  description = "Managed zone for ahmedalimsoliman2.com"
+#   description = "Managed zone for ahmedalimsoliman2.com"
 
-  visibility = "public"
-}
+#   visibility = "public"
+# }
