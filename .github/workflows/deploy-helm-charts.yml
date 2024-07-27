@@ -33,5 +33,13 @@ jobs:
       run: |
         gcloud container clusters get-credentials aams-gke2-gcp2-gke-primary-cluster --zone us-east1-b --project ${{ secrets.GCP2_PROJECT_ID }}
         kubectl get nodes
+        kubectl get namespaces
+        kubectl get pods --all-namespaces
+    
+    - name: Check versions
+      run: 
+        echo "KUBECTL"
+        kubectl version
+        helm version
 
       
