@@ -20,7 +20,7 @@ jobs:
 
     - name: Authenticate with Google Cloud
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
       run: gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
     - name: Enable Compute Engine API
