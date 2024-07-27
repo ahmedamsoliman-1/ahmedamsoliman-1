@@ -10,10 +10,10 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./IasC/terraform/gcp/gke/dns
+    working-directory: ./IasC/terraform/gcp/dns
     
 jobs:
-  terraform-deploy-aams-gcp2-gke2:
+  terraform-deploy-aams-gcp2-dns2:
     runs-on: ubuntu-latest
 
     steps:
