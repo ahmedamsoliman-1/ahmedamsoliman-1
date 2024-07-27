@@ -62,17 +62,23 @@ jobs:
       working-directory: ./kubernetes/helm-charts/cert-manager
       run: |
         kubectl get nodes
-        echo "Namespaces: ====================================="
+        echo "==============================================================================================================="
+        echo "Namespaces: "
         kubectl get namespaces
-        echo "Pods: ====================================="
+        echo "==============================================================================================================="
+        echo "Pods: "
         kubectl get pods --all-namespaces
-        echo "SVC: ====================================="
+        echo "==============================================================================================================="
+        echo "SVC: "
         kubectl get svc --all-namespaces
-        echo "CERTIFICATE: ====================================="
-        kubectl get cert --all-namespaces
-        echo "IINGRESS: ====================================="
+        echo "==============================================================================================================="
+        echo "CERTIFICATE: "
+        kubectl get certificate --all-namespaces
+        echo "==============================================================================================================="
+        echo "IINGRESS: "
         kubectl get ingress --all-namespaces
-        echo "HELM CHARTS: ====================================="
+        echo "==============================================================================================================="
+        echo "HELM CHARTS: "
         helm list --all-namespaces
       continue-on-error: true
 
