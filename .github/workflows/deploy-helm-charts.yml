@@ -36,10 +36,19 @@ jobs:
         kubectl get namespaces
         kubectl get pods --all-namespaces
     
-    - name: Check versions
-      run: 
-        echo "KUBECTL"
-        kubectl version
+    - name: Install Helm if not present
+      run: |
+        # Check if Helm is installed
+        if ! helm version >/dev/null 2>&1; then
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          bash get_helm.sh
+        fi
         helm version
+
+    - name: Deploy/Upgrade Helm Charts - Frontend SVC
+      working-directory: ./kubernetes/helm-charts/ingress-nginx
+      run: |
+        chmod +x deploy.sh
+        pwd
 
       
