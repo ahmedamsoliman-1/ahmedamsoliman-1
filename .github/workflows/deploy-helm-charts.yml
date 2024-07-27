@@ -56,5 +56,22 @@ jobs:
       run: |
         chmod +x deploy.sh
         ./deploy.sh
+    
+    - name: Check Helm charts / Resources
+      working-directory: ./kubernetes/helm-charts/cert-manager
+      run: |
+        kubectl get nodes
+        echo "Namespaces: ====================================="
+        kubectl get namespaces
+        echo "Pods: ====================================="
+        kubectl get pods --all-namespaces
+        echo "SVC: ====================================="
+        kubectl get svc --all-namespaces
+        echo "CERTIFICATE: ====================================="
+        kubectl get cert --all-namespaces
+        echo "IINGRESS: ====================================="
+        kubectl get ingress --all-namespaces
+        echo "HELM CHARTS: ====================================="
+        helm list --all-namespaces
 
       
