@@ -16,4 +16,4 @@ variable "allow_ssh" { default = "aams-gke2-gcp2-ssh-allow" }
 
 variable "pod_range_name" { default = "aams-gke2-gcp2-dev-k8s-pod-range" }
 variable "svc_range_name" { default = "aams-gke2-gcp2-dev-k8s-service-range" }
-variable "workload_identity_config" { default = "${project_id}.svc.id.goog" }
+variable "workload_identity_config" { default = "comaamsdngcp2-project-1.svc.id.goog" }
