@@ -32,7 +32,7 @@ jobs:
       run: gcloud services enable compute.googleapis.com
 
     - name: Enable Kubernetes Engine API
-      run: gcloud services disable container.googleapis.com
+      run: gcloud services enable container.googleapis.com
 
     - name: Enable IAM API
       run: gcloud services enable iam.googleapis.com
