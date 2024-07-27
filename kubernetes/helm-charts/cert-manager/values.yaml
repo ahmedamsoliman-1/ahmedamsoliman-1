@@ -378,17 +378,17 @@ nodeSelector:
 # +docs:ignore
 ingressShim: {}
 
-  # Optional default issuer to use for ingress resources.
-  # +docs:property=ingressShim.defaultIssuerName
-  # defaultIssuerName: ""
+# Optional default issuer to use for ingress resources.
+# +docs:property=ingressShim.defaultIssuerName
+# defaultIssuerName: ""
 
-  # Optional default issuer kind to use for ingress resources.
-  # +docs:property=ingressShim.defaultIssuerKind
-  # defaultIssuerKind: ""
+# Optional default issuer kind to use for ingress resources.
+# +docs:property=ingressShim.defaultIssuerKind
+# defaultIssuerKind: ""
 
-  # Optional default issuer group to use for ingress resources.
-  # +docs:property=ingressShim.defaultIssuerGroup
-  # defaultIssuerGroup: ""
+# Optional default issuer group to use for ingress resources.
+# +docs:property=ingressShim.defaultIssuerGroup
+# defaultIssuerGroup: ""
 
 # Use these variables to configure the HTTP_PROXY environment variables.
 
@@ -417,7 +417,7 @@ ingressShim: {}
 #          - key: foo.bar.com/role
 #            operator: In
 #            values:
-#            - master
+#            - main
 affinity: {}
 
 # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
@@ -682,10 +682,10 @@ webhook:
     # +docs:property
     namespaceSelector:
       matchExpressions:
-        - key: "cert-manager.io/disable-validation"
-          operator: "NotIn"
-          values:
-            - "true"
+      - key: "cert-manager.io/disable-validation"
+        operator: "NotIn"
+        values:
+        - "true"
 
   mutatingWebhookConfiguration:
     # Configure spec.namespaceSelector for mutating webhooks.
@@ -763,7 +763,7 @@ webhook:
   #          - key: foo.bar.com/role
   #            operator: In
   #            values:
-  #            - master
+  #            - main
   affinity: {}
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
@@ -876,7 +876,7 @@ webhook:
   # Overrides the mutating webhook and validating webhook so they reach the webhook
   # service using the `url` field instead of a service.
   url: {}
-    # host:
+  # host:
 
   # Enables default network policies for webhooks.
   networkPolicy:
@@ -1055,7 +1055,7 @@ cainjector:
   #          - key: foo.bar.com/role
   #            operator: In
   #            values:
-  #            - master
+  #            - main
   affinity: {}
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
@@ -1253,7 +1253,7 @@ startupapicheck:
   #          - key: foo.bar.com/role
   #            operator: In
   #            values:
-  #            - master
+  #            - main
   affinity: {}
 
   # A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).

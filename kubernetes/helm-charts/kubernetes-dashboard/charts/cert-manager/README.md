@@ -540,7 +540,7 @@ affinity:
        - key: foo.bar.com/role
          operator: In
          values:
-         - master
+         - main
 ```
 #### **tolerations** ~ `array`
 > Default value:
@@ -1008,7 +1008,7 @@ affinity:
        - key: foo.bar.com/role
          operator: In
          values:
-         - master
+         - main
 ```
 #### **webhook.tolerations** ~ `array`
 > Default value:
@@ -1386,7 +1386,7 @@ affinity:
        - key: foo.bar.com/role
          operator: In
          values:
-         - master
+         - main
 ```
 #### **cainjector.tolerations** ~ `array`
 > Default value:
@@ -1659,7 +1659,7 @@ affinity:
        - key: foo.bar.com/role
          operator: In
          values:
-         - master
+         - main
 ```
 #### **startupapicheck.tolerations** ~ `array`
 > Default value:

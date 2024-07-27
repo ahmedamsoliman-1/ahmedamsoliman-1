@@ -3,7 +3,7 @@ name: upload-download-artifact
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-upload-download-artifact:
