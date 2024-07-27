@@ -18,6 +18,10 @@ jobs:
       with:
         version: 'latest'
 
+    - name: Install GKE Cloud Auth plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin
+
     - name: Authenticate with Google Cloud
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
