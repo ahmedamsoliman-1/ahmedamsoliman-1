@@ -25,9 +25,9 @@ jobs:
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
-    # - name: Get GKE Cluster Credentials
-    #     run: |
-    #       gcloud container clusters get-credentials aams-gke2-gcp2-gke-primary-cluster --zone us-east1-b --project ${{ secrets.GCP2_PROJECT_ID }}
-    #       kubectl get nodes
+    - name: Get GKE Cluster Credentials
+      run: |
+        gcloud container clusters get-credentials aams-gke2-gcp2-gke-primary-cluster --zone us-east1-b --project ${{ secrets.GCP2_PROJECT_ID }}
+        # kubectl get nodes
 
       
