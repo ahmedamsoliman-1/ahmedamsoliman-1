@@ -1,4 +1,4 @@
-name: apply-terraform
+name: apply-gke-terraform
 
 on:
   push:
@@ -14,7 +14,6 @@ defaults:
     
 jobs:
   terraform-deploy-aams-gcp2-gke1:
-    name: 'Terraform'
     runs-on: ubuntu-latest
 
     steps:

@@ -1,4 +1,4 @@
-name: apply-terraform
+name: apply-gcp-bucket-terraform
 
 on:
   push:
@@ -14,7 +14,6 @@ defaults:
     
 jobs:
   terraform-deploy-aams-bucket:
-    name: 'Terraform'
     runs-on: ubuntu-latest
 
     steps:
