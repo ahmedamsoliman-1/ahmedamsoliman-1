@@ -3,14 +3,14 @@ name: apply-gke-terraform
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
 defaults:
   run:
     shell: bash
-    working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
+    working-directory: ./IasC/terraform/gcp/gke/dns
     
 jobs:
   terraform-deploy-aams-gcp2-gke2:
