@@ -21,8 +21,14 @@ provider "google" {
   region      = var.region
 }
 
-resource "google_storage_bucket" "aams_state_files_bucket" {
+resource "google_storage_bucket" "aams_state_files_bucket_1" {
   name          = var.bucket_name_1
+  location      = var.location
+  force_destroy = false
+}
+
+resource "google_storage_bucket" "aams_state_files_bucket_2" {
+  name          = var.bucket_name_2
   location      = var.location
   force_destroy = false
 }
@@ -43,12 +49,22 @@ variable "bucket_name_1" {
   type        = string
 }
 
+variable "bucket_name_2" {
+  description = "The name of the bucket."
+  default = "aams-gcp-bucket-generic"
+  type        = string
+}
+
 variable "location" {
   description = "The location for the bucket."
   type        = string
 }
 
-output "bucket_name" {
+output "bucket_name_1" {
   description = "The name of the GCP Bucket."
-  value       = google_storage_bucket.aams_state_files_bucket.name
+  value       = google_storage_bucket.aams_state_files_bucket_1.name
+}
+output "bucket_name_2" {
+  description = "The name of the GCP Bucket."
+  value       = google_storage_bucket.aams_state_files_bucket_2.name
 }
