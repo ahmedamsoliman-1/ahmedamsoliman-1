@@ -50,6 +50,7 @@ jobs:
       run: |
         chmod +x deploy.sh
         ./deploy.sh
+      continue-on-error: true
 
     - name: Deploy/Upgrade Helm Charts - Cert Manager 
       working-directory: ./kubernetes/helm-charts/cert-manager
@@ -73,5 +74,6 @@ jobs:
         kubectl get ingress --all-namespaces
         echo "HELM CHARTS: ====================================="
         helm list --all-namespaces
+      continue-on-error: true
 
       
