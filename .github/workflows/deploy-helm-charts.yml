@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy-helm-charts-gcp1:
+  deploy-helm-charts-gcp2:
     runs-on: ubuntu-latest
 
     steps:
