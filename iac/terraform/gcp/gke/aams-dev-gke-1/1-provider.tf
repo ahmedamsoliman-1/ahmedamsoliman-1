@@ -10,7 +10,7 @@ terraform {
     organization = "ahmedalimsoliman-org"
 
     workspaces {
-      name = "ahmedalimsoliman-workspace-gke-1"
+      name = "ahmedalimsoliman-workspace-gcp2-gke-1"
     }
   }
 
