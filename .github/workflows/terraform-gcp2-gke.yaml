@@ -3,7 +3,7 @@ name: apply-gke-terraform
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
       - main
@@ -31,18 +31,18 @@ jobs:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
 
-    # - name: Terraform Plan
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform plan
-    
-    - name: Terraform destroy
+    - name: Terraform Plan
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform destroy
+      run: terraform plan
+    
+    # # - name: Terraform destroy
+    # #   env:
+    # #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    # #   run: terraform destroy
 
-    # - name: Terraform Apply
-    #   if: github.event_name == 'push'
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform apply -auto-approve
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
