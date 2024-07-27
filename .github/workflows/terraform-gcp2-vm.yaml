@@ -13,7 +13,7 @@ defaults:
     working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
     
 jobs:
-  terraform-deploy-aams-gcp2-gke2:
+  terraform-deploy-aams-gcp2-vm2:
     runs-on: ubuntu-latest
 
     steps:
