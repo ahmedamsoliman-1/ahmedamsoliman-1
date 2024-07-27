@@ -13,7 +13,7 @@ defaults:
     working-directory: ./iac/terraform/gcp/gke/aams-dev-gke-1
     
 jobs:
-  terraform-deploy-aams-gcp2-gke1:
+  terraform-deploy-aams-gcp2-gke2:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,13 +36,13 @@ jobs:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform plan
     
-    - name: Terraform destroy
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform destroy
-
-    # - name: Terraform Apply
-    #   if: github.event_name == 'push'
+    # - name: Terraform destroy
     #   env:
     #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform apply -auto-approve
+    #   run: terraform destroy
+
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
