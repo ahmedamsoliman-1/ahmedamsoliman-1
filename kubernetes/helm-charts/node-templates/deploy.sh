@@ -24,5 +24,8 @@ NAMESPACE=aams-node-templates
 box_text "Linting"
 helm lint
 
+box_text "Create namespace $NAMESPACE if it doesn't exist" 36
+kubectl get namespace $NAMESPACE &>/dev/null || kubectl create namespace $NAMESPACE
+
 box_text "Install Helm chart: $NAMESPACE"
 helm upgrade --install $NAMESPACE-release . -f values.yaml

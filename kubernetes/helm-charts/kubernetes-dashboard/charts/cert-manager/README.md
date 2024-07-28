@@ -1,4 +1,4 @@
-# cert-manager
+<!-- # cert-manager
 
 cert-manager is a Kubernetes addon to automate the management and issuance of
 TLS certificates from various issuing sources.
@@ -1815,4 +1815,4 @@ $ helm install my-release -f values.yaml .
 
 ## Contributing
 
-This chart is maintained at [github.com/cert-manager/cert-manager](https://github.com/cert-manager/cert-manager/tree/master/deploy/charts/cert-manager).
+This chart is maintained at [github.com/cert-manager/cert-manager](https://github.com/cert-manager/cert-manager/tree/master/deploy/charts/cert-manager). -->
