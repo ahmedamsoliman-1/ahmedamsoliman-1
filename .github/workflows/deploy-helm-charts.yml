@@ -66,9 +66,7 @@ jobs:
       working-directory: ./kubernetes/helm-charts/cert-manager
       run: |
         chmod +x deploy.sh
-        chmod +x deploy-cert.sh
         ./deploy.sh
-        ./deploy-cert.sh
       continue-on-error: true
     
     # - name: Deploy/Upgrade Helm Charts - Argo-cd with Secrets

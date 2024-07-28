@@ -31,3 +31,9 @@ kubectl get namespace $NAMESPACE &>/dev/null || kubectl create namespace $NAMESP
 box_text "Install"
 helm upgrade --install $NAMESPACE-release . -n $NAMESPACE -f values.yaml
 
+box_text "Apply ClusterIssuer"
+kubectl apply -f ./issuer/cert-manager.crds.yaml
+kubectl apply -f ./issuer/cluster-issuer.yaml
+
+box_text "ClusterIssuer"
+kubectl get ClusterIssuer
