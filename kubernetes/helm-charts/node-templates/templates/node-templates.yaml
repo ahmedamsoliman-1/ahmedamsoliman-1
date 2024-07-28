@@ -79,6 +79,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: aams-node-templates-cert-ingress
+  namespace: aams-node-templates
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"  
@@ -100,3 +101,18 @@ spec:
   - hosts:
     - templates.ahmedalimsoliman2.com
     secretName: aams-node-templates-cert-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: aams-node-templates-cert
+  namespace: aams-node-templates
+spec:
+  secretName: aams-node-templates-cert-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: templates.ahmedalimsoliman2.com
+  dnsNames:
+  - templates.ahmedalimsoliman2.com
+---
