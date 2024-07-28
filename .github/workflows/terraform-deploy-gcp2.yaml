@@ -57,9 +57,9 @@ jobs:
   # # # # # GCP Cloud DNS
   terraform-deploy-aams-gcp2-dns2:
     runs-on: ubuntu-latest
-    defaults:
-      run: |
-        cd IasC/terraform/gcp/dns
+    # defaults:
+    #   run: |
+    #     cd IasC/terraform/gcp/dns
     needs: terraform-deploy-prepare
     
     steps:
@@ -71,6 +71,9 @@ jobs:
     #   with:
     #     terraform_version: 1.9.2
         
+    - name: Switch correct directory:
+      run: |
+        cd IasC/terraform/gcp/dns
 
     - name: Terraform Init
       env:
