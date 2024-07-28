@@ -29,22 +29,22 @@ resource "google_project_service" "dns" {
 }
 
 
-# DNS Hosted Zone
-resource "google_dns_managed_zone" "ahmedalimsoliman2" {
-  name     = "ahmedalimsoliman2-com"
-  dns_name = var.dns_name_gcp_2
-  project  = var.project_id
+# # DNS Hosted Zone
+# resource "google_dns_managed_zone" "ahmedalimsoliman2" {
+#   name     = "ahmedalimsoliman2-com"
+#   dns_name = var.dns_name_gcp_2
+#   project  = var.project_id
 
-  description = "Managed zone for ahmedalimsoliman2.com"
+#   description = "Managed zone for ahmedalimsoliman2.com"
 
-  visibility = "public"
-}
+#   visibility = "public"
+# }
 
-resource "google_dns_record_set" "a_record" {
-  name         = "templates.${google_dns_managed_zone.ahmedalimsoliman2.dns_name}"
-  managed_zone = google_dns_managed_zone.ahmedalimsoliman2.name
-  type         = "A"
-  ttl          = 300
-  rrdatas      = [var.ingress_ip]
-}
+# resource "google_dns_record_set" "a_record" {
+#   name         = "templates.${google_dns_managed_zone.ahmedalimsoliman2.dns_name}"
+#   managed_zone = google_dns_managed_zone.ahmedalimsoliman2.name
+#   type         = "A"
+#   ttl          = 300
+#   rrdatas      = [var.ingress_ip]
+# }
 

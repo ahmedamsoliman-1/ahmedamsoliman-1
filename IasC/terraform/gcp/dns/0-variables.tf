@@ -3,7 +3,7 @@ variable "project_id" {  type = string }
 variable "region" { type = string }
 variable "dns_name_gcp_2" { type = string }
 
-variable "ingress_ip" { type = string }
+# variable "ingress_ip" { type = string }
 
 # # # # OUTPUT
 output "dns_zone_name_servers" { value = google_dns_managed_zone.ahmedalimsoliman2.name_servers }
