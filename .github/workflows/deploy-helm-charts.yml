@@ -81,11 +81,29 @@ jobs:
     #     echo "HELM CHARTS: "
     #     helm list --all-namespaces
     #   continue-on-error: true
+
     - name: Get Nodes
       run: |
         kubectl get nodes
+
     - name: Get Namespaces
       run: |
         kubectl get namespaces
+    
+    - name: Get Pods
+      run: |
+        kubectl get pods --all-namespaces
+        
+    - name: Get Servics
+      run: |
+        kubectl get svc --all-namespaces
+    
+    - name: Get Ingress
+      run: |
+        kubectl get ingress --all-namespaces
+        
+    - name: Get Certificate
+      run: |
+        kubectl get certificate --all-namespaces
 
       
