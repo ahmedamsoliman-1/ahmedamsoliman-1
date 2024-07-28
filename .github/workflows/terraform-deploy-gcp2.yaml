@@ -24,7 +24,7 @@ jobs:
 
     - name: Check terraform
       run: |
-        terraform status
+        terraform -version
 
 
   # # # # # GCP Bucket
