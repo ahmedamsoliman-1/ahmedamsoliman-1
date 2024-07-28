@@ -58,8 +58,8 @@ jobs:
   terraform-deploy-aams-gcp2-dns2:
     runs-on: ubuntu-latest
     defaults:
-      run:
-        working-directory: ./IasC/terraform/gcp/dns
+      run: |
+        cd IasC/terraform/gcp/dns
     needs: terraform-deploy-prepare
     
     steps:
