@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: aams-node-templates-cert
-  namespace: default
+  namespace: aams-node-templates
 spec:
   secretName: aams-node-templates-cert-tls
   issuerRef:
