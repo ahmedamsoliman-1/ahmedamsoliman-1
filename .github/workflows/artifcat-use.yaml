@@ -1,10 +1,8 @@
 name: use-artifact
 
 on:
-  workflow_run:
-    workflows: ["create-artifact"]
-    types:
-      - completed
+  repository_dispatch:
+    types: [use-artifact-trigger]
 
 jobs:
   download-and-use:
