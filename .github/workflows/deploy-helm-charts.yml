@@ -47,6 +47,13 @@ jobs:
         fi
         helm version
       continue-on-error: true
+    
+    - name: Delete prev ns
+      run: |
+        kubectl delete ns aams-node-templates
+        kubectl delete ns cert-manager 
+        kubectl delete ns ingress-nginx
+      continue-on-error: true
 
     - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
       working-directory: ./kubernetes/helm-charts/ingress-nginx
@@ -62,15 +69,6 @@ jobs:
         chmod +x deploy-cert.sh
         ./deploy.sh
         ./deploy-cert.sh
-      continue-on-error: true
-
-    - name: Delete prev ns
-      run: |
-        kubectl delete ns aams-node-templates
-        kubectl delete ns cert-manager 
-        kubectl delete ns ingress-nginx
-
-        # helm delete aams-node-templates-release
       continue-on-error: true
     
     # - name: Deploy/Upgrade Helm Charts - Argo-cd with Secrets
