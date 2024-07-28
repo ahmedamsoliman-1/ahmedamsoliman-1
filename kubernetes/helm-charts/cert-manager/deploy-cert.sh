@@ -22,6 +22,6 @@ box_text() {
 kubectl apply -f ./issuer/cert-manager.crds.yaml
 kubectl apply -f ./issuer/cluster-issuer.yaml
 
-kubectl apply -f ./issuer/certificate-tendered.yaml
+kubectl apply -f ./issuer/certificates.yaml
 # kubectl get certificates -n default
 # kubectl describe ingress monitoring-ingress -n default
