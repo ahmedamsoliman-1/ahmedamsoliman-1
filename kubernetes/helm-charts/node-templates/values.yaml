@@ -1,0 +1,15 @@
+
+replicaCount: 1
+
+
+image:
+  repository: "ahmedalimsolimansd/aams-node-templates"
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  users: "http://user-svc:5000/users"
+  orders: "http://order-svc:5001/orders"

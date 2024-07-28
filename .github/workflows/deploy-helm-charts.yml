@@ -58,11 +58,17 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
-    - name: Deploy/Upgrade Helm Charts - Argo-cd with Secrets
-      working-directory: ./kubernetes/helm-charts/your-helm-chart
-      env:
-        HELM_SECRET_PASSWORD: ${{ secrets.HELM_SECRET_PASSWORD }}
-        HELM_OTHER_SECRET: ${{ secrets.HELM_OTHER_SECRET }}
+    # - name: Deploy/Upgrade Helm Charts - Argo-cd with Secrets
+    #   working-directory: ./kubernetes/helm-charts/your-helm-chart
+    #   env:
+    #     HELM_SECRET_PASSWORD: ${{ secrets.HELM_SECRET_PASSWORD }}
+    #     HELM_OTHER_SECRET: ${{ secrets.HELM_OTHER_SECRET }}
+    #   run: |
+    #     chmod +x deploy.sh
+    #     ./deploy.sh
+
+    - name: Deploy Node Templates Helm chart
+      working-directory: ./kubernetes/helm-charts/node-templates
       run: |
         chmod +x deploy.sh
         ./deploy.sh
