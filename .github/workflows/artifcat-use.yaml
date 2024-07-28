@@ -17,5 +17,8 @@ jobs:
       with:
         name: message-artifact
 
+    - name: List files
+      run: ls -al
+
     - name: Read and display message
       run: cat message.txt
