@@ -67,8 +67,10 @@ jobs:
     - name: Delete prev ns
       run: |
         kubectl delete ns aams-node-templates
-        helm delete aams-node-templates-release
-        kubecl delete ingress aams-node-templates-cert-ingress -n default
+        kubectl delete ns cert-manager 
+        kubectl delete ns ingress-nginx
+
+        # helm delete aams-node-templates-release
       continue-on-error: true
     
     # - name: Deploy/Upgrade Helm Charts - Argo-cd with Secrets
