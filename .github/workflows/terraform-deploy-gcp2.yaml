@@ -10,7 +10,7 @@ on:
     
 jobs:
   # # # # # GCP Bucket
-  terraform-deploy-aams-deploy:
+  terraform-prepare-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,12 +28,12 @@ jobs:
 
 
   # # # # # GCP Bucket
-  terraform-deploy-aams-bucket:
+  terraform-gcp-bucket-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
-    needs: terraform-deploy-aams-deploy
+    needs: terraform-prepare-deploy
     
     steps:
     - name: Checkout code
@@ -61,13 +61,13 @@ jobs:
       run: terraform apply -auto-approve
 
   # # # # # GCP Cloud DNS
-  terraform-deploy-aams-gcp2-dns2:
+  terraform-gcp2-dns2-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/dns
 
-    needs: terraform-deploy-aams-deploy
+    needs: terraform-prepare-deploy
     
     steps:
     - name: Checkout code
@@ -96,13 +96,13 @@ jobs:
       run: terraform apply -auto-approve
 
   # # # # # GCP GKE
-  terraform-deploy-aams-gcp2-gke2:
+  terraform-gcp2-gke2-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
 
-    needs: terraform-deploy-aams-deploy
+    needs: terraform-prepare-deploy
     
     steps:
     - name: Checkout code
@@ -131,13 +131,13 @@ jobs:
       run: terraform apply -auto-approve
 
   # # # # # GCP VM
-  terraform-deploy-aams-gcp2-vm2:
+  terraform-gcp2-vm2-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
 
-    needs: terraform-deploy-aams-deploy
+    needs: terraform-prepare-deploy
     
     steps:
     - name: Checkout code
