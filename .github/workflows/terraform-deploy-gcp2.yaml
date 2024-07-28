@@ -77,8 +77,19 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.9.2
-        
 
+    - name: Download Ingress IP Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: get_node_template_ingress_ip
+
+    - name: Read Ingress IP
+      id: read_ip
+      run: |
+        NODE_TEMPLATE_INGRESS_IP=$(cat get_node_template_ingress_ip.txt)
+        echo $NODE_TEMPLATE_INGRESS_IP
+        echo "NODE_TEMPLATE_INGRESS_IP=$NODE_TEMPLATE_INGRESS_IP" >> $GITHUB_ENV
+        
     - name: Terraform Init
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
@@ -87,13 +98,13 @@ jobs:
     - name: Terraform Plan
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
+      run: terraform plan -var ingress_ip=${{ env.NODE_TEMPLATE_INGRESS_IP }}
 
     - name: Terraform Apply
       if: github.event_name == 'push'
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
+      run: terraform apply -auto-approve -var ingress_ip=${{ env.NODE_TEMPLATE_INGRESS_IP }}
 
   # # # # # GCP GKE
   terraform-gcp2-gke2-deploy:

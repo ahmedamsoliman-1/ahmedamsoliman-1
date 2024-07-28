@@ -39,3 +39,12 @@ resource "google_dns_managed_zone" "ahmedalimsoliman2" {
 
   visibility = "public"
 }
+
+resource "google_dns_record_set" "a_record" {
+  name         = "templates.${google_dns_managed_zone.ahmedalimsoliman2.dns_name}"
+  managed_zone = google_dns_managed_zone.ahmedalimsoliman2.name
+  type         = "A"
+  ttl          = 300
+  rrdatas      = [var.ingress_ip]
+}
+
