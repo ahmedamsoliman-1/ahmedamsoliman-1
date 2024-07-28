@@ -10,88 +10,88 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-  # terraform-destroy-aams-gcp2-dns2:
-  #   runs-on: ubuntu-latest
+  terraform-destroy-aams-gcp2-dns2:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v2
-  #     with:
-  #       terraform_version: 1.9.2
-  #   - name: Terraform Init
-  #     working-directory: ./IasC/terraform/gcp/dns
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-  #   - name: Terraform Destroy
-  #     working-directory: ./IasC/terraform/gcp/dns
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform destroy -auto-approve
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+    - name: Terraform Init
+      working-directory: ./IasC/terraform/gcp/dns
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Destroy
+      working-directory: ./IasC/terraform/gcp/dns
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
   
-  # terraform-destroy-aams-gcp2-buckets:
-  #   runs-on: ubuntu-latest
+  terraform-destroy-aams-gcp2-buckets:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v2
-  #     with:
-  #       terraform_version: 1.9.2
-  #   - name: Terraform Init
-  #     working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+    - name: Terraform Init
+      working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
 
-  #   - name: Terraform Destroy
-  #     working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform destroy -auto-approve
+    - name: Terraform Destroy
+      working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
 
-  # terraform-destroy-aams-gcp2-gke2:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v3
+  terraform-destroy-aams-gcp2-gke2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v2
-  #     with:
-  #       terraform_version: 1.9.2
-  #   - name: Terraform Init
-  #     working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-  #   - name: Terraform Destroy
-  #     working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform destroy -auto-approve
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+    - name: Terraform Init
+      working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Destroy
+      working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
   
-  # terraform-destroy-aams-gcp2-vm2:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v3
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v2
-  #     with:
-  #       terraform_version: 1.9.2
-  #   - name: Terraform Init
-  #     working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-  #   - name: Terraform Destroy
-  #     working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform destroy -auto-approve
+  terraform-destroy-aams-gcp2-vm2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+    - name: Terraform Init
+      working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Destroy
+      working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
