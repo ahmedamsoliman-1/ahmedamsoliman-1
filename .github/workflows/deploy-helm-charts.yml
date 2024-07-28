@@ -116,5 +116,20 @@ jobs:
       run: |
         helm list --all-namespaces
       continue-on-error: true
+    
+    - name: Get Ingress IP
+      id: get_node_template_ingress_ip
+      run: |
+        NODE_TEMPLATE_INGRESS_IP=$(kubectl get ingress aams-node-templates-cert-ingress -n default -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+        echo $NODE_TEMPLATE_INGRESS_IP
+        echo $NODE_TEMPLATE_INGRESS_IP > get_node_template_ingress_ip.txt
+
+    - name: Upload Ingress IP Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: get_node_template_ingress_ip
+        path: get_node_template_ingress_ip.txt
+
+
 
       
