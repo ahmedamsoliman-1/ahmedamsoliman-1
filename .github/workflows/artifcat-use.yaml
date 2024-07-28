@@ -20,7 +20,11 @@ jobs:
     - name: Read and display message
       run: cat message.txt
 
+    - name: Checkout main branch
+      run: |
+        git fetch origin main
+        git checkout main
+
     - name: Cleanup temp branch
       run: |
-        git checkout main
         git push origin --delete temp-branch
