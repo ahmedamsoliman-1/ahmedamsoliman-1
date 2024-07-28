@@ -1,0 +1,23 @@
+name: use-artifact
+
+on:
+  workflow_run:
+    workflows: ["create-artifact"]
+    types:
+      - completed
+
+jobs:
+  download-and-use:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download message artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: message-artifact
+
+    - name: Read and display message
+      run: cat message.txt
