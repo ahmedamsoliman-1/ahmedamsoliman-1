@@ -10,8 +10,9 @@ on:
     
 jobs:
   # # # # # GCP Bucket
-  terraform-deploy-prepare:
+  terraform-deploy-aams-deploy:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -21,14 +22,19 @@ jobs:
       with:
         terraform_version: 1.9.2
 
+    - name: Check terraform
+      run: |
+        terraform status
+
+
   # # # # # GCP Bucket
   terraform-deploy-aams-bucket:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
-    needs: terraform-deploy-prepare
-
+    needs: terraform-deploy-aams-deploy
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -57,23 +63,21 @@ jobs:
   # # # # # GCP Cloud DNS
   terraform-deploy-aams-gcp2-dns2:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run: |
-    #     cd IasC/terraform/gcp/dns
-    needs: terraform-deploy-prepare
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/gcp/dns
+
+    needs: terraform-deploy-aams-deploy
     
     steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v2
-    #   with:
-    #     terraform_version: 1.9.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
         
-    - name: Switch correct directory:
-      run: |
-        cd IasC/terraform/gcp/dns
 
     - name: Terraform Init
       env:
@@ -97,16 +101,17 @@ jobs:
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
-    needs: terraform-deploy-prepare
 
+    needs: terraform-deploy-aams-deploy
+    
     steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v2
-    #   with:
-    #     terraform_version: 1.9.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
         
 
     - name: Terraform Init
@@ -131,16 +136,17 @@ jobs:
     defaults:
       run:
         working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
-    needs: terraform-deploy-prepare
 
+    needs: terraform-deploy-aams-deploy
+    
     steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v2
-    #   with:
-    #     terraform_version: 1.9.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
         
 
     - name: Terraform Init
