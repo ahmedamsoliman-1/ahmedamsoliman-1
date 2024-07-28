@@ -85,6 +85,19 @@ list_bq_datasets() {
     gcloud bigquery datasets list --project="$project_id"
 }
 
+# Function to get GKE cluster credentials and set kubectl context
+get_gke_credentials() {
+    local cluster_name=$1
+    local zone=$2
+    local project_id=$3
+    if [ -z "$cluster_name" ] || [ -z "$zone" ] || [ -z "$project_id" ]; then
+        echo "Please provide the cluster name, zone, and project ID."
+        exit 1
+    fi
+    gcloud container clusters get-credentials "$cluster_name" --zone "$zone" --project "$project_id"
+    echo "kubectl context set to use cluster: $cluster_name"
+}
+
 # Main script logic
 case "$1" in
     list)
@@ -140,8 +153,15 @@ case "$1" in
         fi
         list_bq_datasets "$2"
         ;;
+    get-credentials)
+        if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
+            echo "Usage: $0 get-credentials <cluster-name> <zone> <project-id>"
+            exit 1
+        fi
+        get_gke_credentials "$2" "$3" "$4"
+        ;;
     *)
-        echo "Usage: $0 {list|switch <config-name>|current|delete <config-name>|gke|login|login-service-account <key-file>|create <config-name>|gce|gcs|bq <project-id>}"
+        echo "Usage: $0 {list|switch <config-name>|current|delete <config-name>|gke|login|login-service-account <key-file>|create <config-name>|gce|gcs|bq <project-id>|get-credentials <cluster-name> <zone> <project-id>}"
         exit 1
         ;;
 esac
