@@ -75,6 +75,10 @@ list_gcs_buckets() {
     gcloud storage buckets list
 }
 
+list_google_dns_info() {
+    gcloud dns managed-zones list
+}
+
 # Function to list BigQuery datasets
 list_bq_datasets() {
     local project_id=$1
@@ -143,6 +147,9 @@ case "$1" in
     gce)
         list_gce_instances
         ;;
+    dns)
+        list_google_dns_info
+        ;;
     gcs)
         list_gcs_buckets
         ;;
@@ -153,15 +160,15 @@ case "$1" in
         fi
         list_bq_datasets "$2"
         ;;
-    get-credentials)
+    gke-cred)
         if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
-            echo "Usage: $0 get-credentials <cluster-name> <zone> <project-id>"
+            echo "Usage: $0 gke-cred <cluster-name> <zone> <project-id>"
             exit 1
         fi
         get_gke_credentials "$2" "$3" "$4"
         ;;
     *)
-        echo "Usage: $0 {list|switch <config-name>|current|delete <config-name>|gke|login|login-service-account <key-file>|create <config-name>|gce|gcs|bq <project-id>|get-credentials <cluster-name> <zone> <project-id>}"
+        echo "Usage: $0 {list|switch <config-name>|current|delete <config-name>|gke|login|login-service-account <key-file>|create <config-name>|gce|gcs|dns|bq <project-id>|gke-cred <cluster-name> <zone> <project-id>}"
         exit 1
         ;;
 esac
