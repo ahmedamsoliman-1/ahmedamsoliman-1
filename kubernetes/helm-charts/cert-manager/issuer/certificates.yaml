@@ -4,7 +4,7 @@ metadata:
   name: aams-node-templates-cert
   namespace: aams-node-templates
 spec:
-  secretName: monitoring-cert-tls
+  secretName: aams-node-templates-cert-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

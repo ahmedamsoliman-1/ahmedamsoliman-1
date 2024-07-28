@@ -57,14 +57,14 @@ data:
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
-#   name: monitoring-ingress
+#   name: aams-node-templates-cert-ingress
 #   annotations:
 #     nginx.ingress.kubernetes.io/rewrite-target: /
 #     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 # spec:
 #   ingressClassName: nginx
 #   rules:
-#   - host: tendered.ahmedalimsoliman.com
+#   - host: templates.ahmedalimsoliman2.com
 #     http:
 #       paths:
 #       - path: /
@@ -75,28 +75,28 @@ data:
 #             port:
 #               number: 8080
 
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: frontend-ingress
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /
-#     nginx.ingress.kubernetes.io/ssl-redirect: "true"  
-#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#   - host: tendered.ahmedalimsoliman.com
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: aams-node-templates
-#             port:
-#               number: 8080
-#   tls:
-#   - hosts:
-#     - tendered.ahmedalimsoliman.com
-#     secretName: monitoring-cert-tls
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aams-node-templates-cert-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: templates.ahmedalimsoliman2.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: aams-node-templates
+            port:
+              number: 8080
+  tls:
+  - hosts:
+    - templates.ahmedalimsoliman2.com
+    secretName: aams-node-templates-cert-tls
