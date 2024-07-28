@@ -36,51 +36,27 @@ jobs:
         kubectl get namespaces
         kubectl get pods --all-namespaces
     
-    # - name: Install Helm if not present
-    #   run: |
-    #     # Check if Helm is installed
-    #     if ! helm version >/dev/null 2>&1; then
-    #       curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    #       bash get_helm.sh
-    #     fi
-    #     helm version
+    - name: Install Helm if not present
+      run: |
+        # Check if Helm is installed
+        if ! helm version >/dev/null 2>&1; then
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          bash get_helm.sh
+        fi
+        helm version
 
-    # - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
-    #   working-directory: ./kubernetes/helm-charts/ingress-nginx
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
-    #   continue-on-error: true
+    - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
+      working-directory: ./kubernetes/helm-charts/ingress-nginx
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
+      continue-on-error: true
 
-    # - name: Deploy/Upgrade Helm Charts - Cert Manager 
-    #   working-directory: ./kubernetes/helm-charts/cert-manager
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
-    
-    # - name: Check Helm charts / Resources
-    #   working-directory: ./kubernetes/helm-charts/cert-manager
-    #   run: |
-    #     kubectl get nodes
-    #     echo "==============================================================================================================="
-    #     echo "Namespaces: "
-    #     kubectl get namespaces
-    #     echo "==============================================================================================================="
-    #     echo "Pods: "
-    #     kubectl get pods --all-namespaces
-    #     echo "==============================================================================================================="
-    #     echo "SVC: "
-    #     kubectl get svc --all-namespaces
-    #     # echo "==============================================================================================================="
-    #     # echo "CERTIFICATE: "
-    #     # kubectl get certificate --all-namespaces
-    #     echo "==============================================================================================================="
-    #     echo "IINGRESS: "
-    #     kubectl get ingress --all-namespaces
-    #     echo "==============================================================================================================="
-    #     echo "HELM CHARTS: "
-    #     helm list --all-namespaces
-    #   continue-on-error: true
+    - name: Deploy/Upgrade Helm Charts - Cert Manager 
+      working-directory: ./kubernetes/helm-charts/cert-manager
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
 
     - name: Get Nodes
       run: |
@@ -105,5 +81,11 @@ jobs:
     - name: Get Certificate
       run: |
         kubectl get certificate --all-namespaces
+      continue-on-error: true
+    
+    - name: Get Helm releaes
+      run: |
+        helm list --all-namespaces
+      continue-on-error: true
 
       
