@@ -4,16 +4,6 @@ provider "aws" {
   region  = "me-central-1"
 }
 
-terraform {
-  backend "remote" {
-    organization = "ahmedalimsoliman-org"
-
-    workspaces {
-      name = "ahmedalimsoliman-workspace-avr-aws-ecs-1"
-    }
-  }
-}
-
 
 # Variable
 variable "cluster_name" { type = string }
