@@ -32,7 +32,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   defaults:
   #     run:
-  #       working-directory: ./IasC/terraform/gcp/buckets/aams-terraform-hcp
+  #       working-directory: ./IasC/terraform/GCP/buckets/aams-terraform-hcp
   #   needs: terraform-prepare-deploy
     
   #   steps:
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./IasC/terraform/gcp/dns
+        working-directory: ./IasC/terraform/GCP/dns
 
     needs: terraform-prepare-deploy
     
@@ -113,7 +113,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./IasC/terraform/gcp/gke/aams-dev-gke-1
+        working-directory: ./IasC/terraform/GCP/gke/aams-dev-gke-1
 
     needs: terraform-prepare-deploy
     
@@ -148,7 +148,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   defaults:
   #     run:
-  #       working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
+  #       working-directory: ./IasC/terraform/GCP/vm/dev-vm-2
 
   #   needs: terraform-prepare-deploy
     
@@ -163,7 +163,7 @@ jobs:
         
 
   #   - name: Terraform Init
-  #     working-directory: ./IasC/terraform/gcp/vm/dev-vm-2
+  #     working-directory: ./IasC/terraform/GCP/vm/dev-vm-2
   #     env:
   #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
   #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
