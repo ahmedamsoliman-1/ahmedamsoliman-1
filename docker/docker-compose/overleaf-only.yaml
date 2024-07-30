@@ -1,0 +1,25 @@
+# version: '3'
+# services:
+#   sharelatex:
+#     image: sharelatex/sharelatex:4.2.7-RC1
+#     ports:
+#     - 80:80
+#     networks:
+#     - backend
+#     environment:
+#       OVERLEAF_MONGO_URL: mongodb://mongo:27017/sharelatex
+#       OVERLEAF_REDIS_HOST: redis
+
+#   mongo:
+#     image: mongo
+#     networks:
+#     - backend
+
+#   redis:
+#     image: redis
+#     networks:
+#     - backend
+
+# networks:
+#   backend:
+#     driver: bridge
