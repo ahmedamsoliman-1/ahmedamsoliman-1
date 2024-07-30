@@ -3,7 +3,7 @@ name: 'build-push-docker-images-2-hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master

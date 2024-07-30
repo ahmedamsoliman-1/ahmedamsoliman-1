@@ -4,8 +4,8 @@
 *.tar
 secrets
 scripts/bin/zshrc
-
-
+tree.md
+external
 
 # NodeJS
 node_modules
