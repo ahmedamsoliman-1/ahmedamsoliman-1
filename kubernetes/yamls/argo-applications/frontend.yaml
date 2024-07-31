@@ -1,79 +1,17 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: aams-node-templates-app
-#   namespace: argocd
-# spec:
-#   project: default
-#   source:
-#     repoURL: https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-Infra-3.git
-#     targetRevision: HEAD
-#     path: kubernetes/yamls/
-#     directory:
-#       recurse: true
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: aams-node-templates
-#   syncPolicy:
-#     automated:
-#       prune: false
-#       selfHeal: false
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: frontend-argocd-app
-#   namespace: argocd
-# spec:
-#   project: default
-#   source:
-#     repoURL: https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-Infra-3.git
-#     targetRevision: HEAD
-#     path: helm-charts/frontend-svc-chart
-#     directory:
-#       recurse: true
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: default
-#   syncPolicy:
-#     automated:
-#       prune: false
-#       selfHeal: false
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: frontend-argocd-app-2
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-Infra-3.git
-    targetRevision: HEAD
-    path: helm-charts/frontend-svc-chart
-    directory:
-      recurse: true
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: frontend
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
-    syncOptions:
-    - CreateNamespace=true
-    - ApplyOutOfSyncOnly=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: frontend-argocd-app-3
+  name: frontend-argocd-app
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
-    targetRevision: HEAD
+    targetRevision: main
     path: kubernetes/helm-charts/node-templates
+    helm:
+      valueFiles:
+      - values.yaml
     directory:
       recurse: true
   destination:

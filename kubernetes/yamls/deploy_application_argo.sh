@@ -26,7 +26,7 @@ NAMESPACE=argocd
 
 
 box_text "Apply argo cd application"
-kubectl apply -n $NAMESPACE -f argo-applications/frontend.yaml
+kubectl apply -n $NAMESPACE -f argo-applications/example.yaml
 kubectl apply -n $NAMESPACE -f argo-applications/argocd.yaml
 kubectl apply -n $NAMESPACE -f argo-applications/frontend.yaml
 # kubectl apply -n $NAMESPACE -f argo-applications/app3.yaml
