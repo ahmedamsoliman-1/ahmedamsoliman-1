@@ -18,3 +18,24 @@ spec:
     automated:
       prune: false
       selfHeal: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-app-2
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
+    targetRevision: HEAD
+    path: kubernetes/yamls/example-app-2
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: example-app-2
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
