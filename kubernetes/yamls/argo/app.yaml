@@ -6,7 +6,6 @@ metadata:
 spec:
   project: default
   source:
-    # repoURL: https://github.com/marcel-dempers/docker-development-youtube-series.git
     repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
     targetRevision: HEAD
     path: kubernetes/yamls/example-app

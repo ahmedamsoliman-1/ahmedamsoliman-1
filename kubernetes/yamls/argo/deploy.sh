@@ -32,3 +32,7 @@ kubectl get namespace $NAMESPACE &>/dev/null || kubectl create namespace $NAMESP
 box_text "Install"
 kubectl apply -f install.yaml
 
+
+box_text "Wait for ArgoCD to be ready"
+box_text "Get password"
+argocd admin initial-password -n argocd
