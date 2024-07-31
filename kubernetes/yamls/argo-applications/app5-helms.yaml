@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-frontend-svc-chart
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ahmedamsoliman-1/Tenderd-DevOps-Assignement-Infra-3.git # Replace with your Git repository URL
+    targetRevision: main # Branch or tag in your Git repository
+    path: helm-charts/frontend-svc-chart # Path to the Helm chart in the Git repository
+    helm:
+      releaseName: tenderd-devops-frontend-release
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

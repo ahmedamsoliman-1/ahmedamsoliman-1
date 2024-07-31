@@ -1,0 +1,99 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-cert-manager-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jetstack/cert-manager
+    targetRevision: v1.15.1
+    chart: cert-manager
+    path: charts/cert-manager # Adjust if the chart path is different
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-ingress-nginx-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.11.1
+    chart: ingress-nginx
+    path: charts/ingress-nginx # Adjust if the chart path is different
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-kubernetes-dashboard-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kubernetes/dashboard
+    targetRevision: 7.5.0
+    chart: kubernetes-dashboard
+    path: charts/kubernetes-dashboard
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubernetes-dashboard
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-grafana-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 8.3.6
+    chart: grafana
+    path: charts/grafana
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-prometheus-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: v2.53.1
+    chart: prometheus
+    path: charts/prometheus
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

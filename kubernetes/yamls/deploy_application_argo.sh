@@ -25,14 +25,13 @@ NAMESPACE=argocd
 
 
 
-box_text "Create namespace $NAMESPACE if it doesn't exist" 36
-kubectl get namespace $NAMESPACE &>/dev/null || kubectl create namespace $NAMESPACE
+box_text "Apply argo cd application"
+kubectl apply -n $NAMESPACE -f argo-applications/frontend.yaml
+kubectl apply -n $NAMESPACE -f argo-applications/argocd.yaml
+kubectl apply -n $NAMESPACE -f argo-applications/frontend.yaml
+# kubectl apply -n $NAMESPACE -f argo-applications/app3.yaml
+# kubectl apply -n $NAMESPACE -f argo-applications/app4.yaml
+# kubectl apply -n $NAMESPACE -f argo-applications/app5-helms.yaml
 
-
-box_text "Install"
-kubectl apply -f install.yaml
-
-
-box_text "Wait for ArgoCD to be ready"
-box_text "Get password"
-argocd admin initial-password -n argocd
+box_text "Get application"
+kubectl -n $NAMESPACE get application -o wide
