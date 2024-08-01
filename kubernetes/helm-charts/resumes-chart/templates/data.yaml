@@ -1,0 +1,94 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.data.name }}-svc
+  namespace: {{ .Values.data.namespace }}
+  labels:
+    app: {{ .Values.data.name }}-svc
+spec:
+  replicas: {{ .Values.data.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.data.name }}-svc
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.data.name }}-svc
+    spec:
+      containers:
+        - name: {{ .Values.data.name }}-svc
+          image: {{ .Values.data.image.repository }}:{{ .Values.data.image.tag }}
+          ports:
+            - containerPort: {{ .Values.data.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.data.name }}-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.data.name }}-svc
+  namespace: {{ .Values.data.namespace }}
+  labels:
+    app: {{ .Values.data.name }}-svc
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '{{ .Values.data.service.port }}'
+spec:
+  selector:
+    app: {{ .Values.data.name }}-svc
+  ports:
+    - protocol: TCP
+      port: {{ .Values.data.service.port }}
+      targetPort: {{ .Values.data.service.port }}
+  type: {{ .Values.data.service.type }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.data.name }}-config
+  namespace: {{ .Values.data.namespace }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.data.name }}-ingress
+  namespace: {{ .Values.data.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.data.domain.name }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.data.name }}-svc
+            port:
+              number: {{ .Values.data.service.port }}
+  tls:
+  - hosts:
+    - {{ .Values.data.domain.name }}
+    secretName: {{ .Values.data.name }}-cert-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.data.name }}-cert
+  namespace: {{ .Values.data.namespace }}
+spec:
+  secretName: {{ .Values.data.name }}-cert-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: {{ .Values.data.domain.name }}
+  dnsNames:
+  - {{ .Values.data.domain.name }}
+---

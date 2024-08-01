@@ -1,0 +1,94 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.dev.name }}-svc
+  namespace: {{ .Values.dev.namespace }}
+  labels:
+    app: {{ .Values.dev.name }}-svc
+spec:
+  replicas: {{ .Values.dev.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.dev.name }}-svc
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.dev.name }}-svc
+    spec:
+      containers:
+        - name: {{ .Values.dev.name }}-svc
+          image: {{ .Values.dev.image.repository }}:{{ .Values.dev.image.tag }}
+          ports:
+            - containerPort: {{ .Values.dev.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.dev.name }}-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.dev.name }}-svc
+  namespace: {{ .Values.dev.namespace }}
+  labels:
+    app: {{ .Values.dev.name }}-svc
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '{{ .Values.dev.service.port }}'
+spec:
+  selector:
+    app: {{ .Values.dev.name }}-svc
+  ports:
+    - protocol: TCP
+      port: {{ .Values.dev.service.port }}
+      targetPort: {{ .Values.dev.service.port }}
+  type: {{ .Values.dev.service.type }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.dev.name }}-config
+  namespace: {{ .Values.dev.namespace }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.dev.name }}-ingress
+  namespace: {{ .Values.dev.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.dev.domain.name }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.dev.name }}-svc
+            port:
+              number: {{ .Values.dev.service.port }}
+  tls:
+  - hosts:
+    - {{ .Values.dev.domain.name }}
+    secretName: {{ .Values.dev.name }}-cert-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.dev.name }}-cert
+  namespace: {{ .Values.dev.namespace }}
+spec:
+  secretName: {{ .Values.dev.name }}-cert-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: {{ .Values.dev.domain.name }}
+  dnsNames:
+  - {{ .Values.dev.domain.name }}
+---

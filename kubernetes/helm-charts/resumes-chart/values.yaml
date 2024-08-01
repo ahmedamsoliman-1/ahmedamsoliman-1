@@ -1,0 +1,56 @@
+namespace: resumes
+argocd:
+  name: resumes
+
+data:
+  namespace: resumes
+  name: resumes-data-engineer
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-resume-data-eng-pdf"
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: resume.data.ahmedalimsoliman.com
+
+dev:
+  namespace: resumes
+  name: resumes-developer
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-resume-dev-pdf"
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: resume.dev.ahmedalimsoliman.com
+
+ts:
+  namespace: resumes
+  name: resumes-ts
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-resume-ts-pdf"
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: resume.ts.ahmedalimsoliman.com
+
+devops:
+  namespace: resumes
+  name: resumes-devops-engineer
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-resume-devops-pdf"
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: resume.devops.ahmedalimsoliman.com
+
