@@ -1,7 +1,8 @@
 
 name: portfolio
+namespace: portfolio
 
-replicaCount: 3
+replicaCount: 30
 
 
 image:

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.namespace }}
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
+    targetRevision: main
+    path: kubernetes/helm-charts/portfolio-chart
+    helm:
+      valueFiles:
+      - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.namespace }}
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+---
