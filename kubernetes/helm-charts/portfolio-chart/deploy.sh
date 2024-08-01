@@ -9,29 +9,26 @@ box_text() {
   local text_length=${#text}
   local box_width=$((text_length + padding * 2))
 
-  # Top border
+  # Top bfrontend
   echo -e "\033[${color}m$(printf '%*s' "$box_width" '' | tr ' ' '*')\033[0m"
 
   # Text with padding
   echo -e "\033[${color}m$(printf '%*s' "$padding" '')$text$(printf '%*s' "$padding" '')\033[0m"
 
-  # Bottom border
+  # Bottom bfrontend
   echo -e "\033[${color}m$(printf '%*s' "$box_width" '' | tr ' ' '*')\033[0m"
 }
 
 
-
-NAMESPACE=argocd
-
+NS=portfolio
 
 
-box_text "Apply argo cd application"
-# kubectl apply -n $NAMESPACE -f argo-applications/example.yaml
-# kubectl apply -n $NAMESPACE -f argo-applications/argocd.yaml
-# kubectl apply -n $NAMESPACE -f argo-applications/frontend.yaml
-kubectl apply -n $NAMESPACE -f argo-applications/tenderd.yaml
-# kubectl apply -n $NAMESPACE -f argo-applications/app4.yaml
-# kubectl apply -n $NAMESPACE -f argo-applications/app5-helms.yaml
+box_text "Create namespace $NS if it doesn't exist" 36
+kubectl get namespace $NS &>/dev/null || kubectl create namespace $NS
 
-box_text "Get application"
-kubectl -n $NAMESPACE get application -o wide
+
+box_text "Linting"
+helm lint
+
+box_text "Install Helm chart: $NS"
+helm upgrade --install $NS-release . -f values.yaml -n $NS

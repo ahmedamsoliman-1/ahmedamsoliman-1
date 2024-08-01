@@ -1,0 +1,16 @@
+
+name: portfolio
+
+replicaCount: 3
+
+
+image:
+  repository: "ahmedalimsolimansd/aams-portfolio"
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+
+domain:
+  name: portfolio.ahmedalimsoliman.com
