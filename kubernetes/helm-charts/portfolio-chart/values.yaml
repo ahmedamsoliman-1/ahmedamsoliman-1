@@ -2,7 +2,7 @@
 name: portfolio
 namespace: portfolio
 
-replicaCount: 30
+replicaCount: 2
 
 
 image:
