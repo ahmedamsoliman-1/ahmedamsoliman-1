@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .status { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .status h2 { margin-top: 0; }
+        .status p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MongoDB Status</h1>
+        <% statuses.forEach((status, index) => { %>
+            <div class="status">
+                <h2>Database <%= index + 1 %></h2>
+                <p><strong>Status:</strong> <%= status.status %></p>
+                <p><strong>Collections:</strong></p>
+                <ul>
+                    <% status.collections.forEach(collection => { %>
+                        <li><%= collection %></li>
+                    <% }); %>
+                </ul>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>

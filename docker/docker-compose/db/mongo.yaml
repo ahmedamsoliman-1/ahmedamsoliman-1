@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # mongodb-v4:
+  #   image: mongo:4.4
+  #   container_name: mongodb_v4
+  #   ports:
+  #   - "27017:27017"
+  #   volumes:
+  #   - ../../docker-volumes/mongo/mongodb_v4_data:/data/db
+  #   networks:
+  #   - mongodb_net
+
+  mongodb-v5:
+    image: mongo:5.0
+    container_name: mongodb_v5
+    ports:
+    - "27018:27017"
+    volumes:
+    - ../../docker-volumes/mongo/mongodb_v5_data:/data/db
+    networks:
+    - mongodb_net
+
+volumes:
+  # mongodb_v4_data:
+  mongodb_v5_data:
+
+networks:
+  mongodb_net:
