@@ -3,14 +3,30 @@ name: build-latex-documents
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
 
 jobs:
+  leader:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, leader'
+
+  resumes:
+    runs-on: ubuntu-latest
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, resumes'
+
   build-latex-documents-ahmedalimsoliman-dev-en:
     runs-on: ubuntu-latest
+    needs: resumes
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
@@ -30,6 +46,7 @@ jobs:
 
   build-latex-documents-ahmedalimsoliman-devops-en:
     runs-on: ubuntu-latest
+    needs: resumes
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
@@ -49,6 +66,7 @@ jobs:
 
   build-latex-documents-ahmedalimsoliman-ts-en:
     runs-on: ubuntu-latest
+    needs: resumes
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
@@ -68,6 +86,7 @@ jobs:
 
   build-latex-documents-ahmedalimsoliman-data-en:
     runs-on: ubuntu-latest
+    needs: resumes
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
@@ -87,6 +106,7 @@ jobs:
 
   build-latex-documents-ahmedalimsoliman-it-en:
     runs-on: ubuntu-latest
+    needs: resumes
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
