@@ -224,11 +224,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/static/resume-dev-web
-          npm install
-
       - name: Build and push Docker images
         if: success()
         run: |
