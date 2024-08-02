@@ -3,7 +3,7 @@ name: 'build-push-docker-images-2-hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
@@ -207,6 +207,32 @@ jobs:
         if: success()
         run: |
           docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-pdf:latest --push ./apps/static/resume-dev-pdf
+    
+  build-push-image-dev-web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install dependencies
+        run: |
+          cd ./apps/static/resume-dev-web
+          npm install
+
+      - name: Build and push Docker images
+        if: success()
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-web:latest --push ./apps/static/resume-dev-web
   
   build-push-image-devops:
     runs-on: ubuntu-latest
