@@ -3,7 +3,7 @@ name: terraform-gcp-big-star-deploy
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
       - master
