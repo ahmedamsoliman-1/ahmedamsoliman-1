@@ -16,7 +16,7 @@ variable "allow_ssh" { default = "gcp-big-star-gke3-ssh-allow" }
 
 variable "pod_range_name" { default = "gcp-big-star-gke3-k8s-pod-range" }
 variable "svc_range_name" { default = "gcp-big-star-gke3-k8s-service-range" }
-variable "workload_identity_config" { default = "comaamsdngcp2-project-1.svc.id.goog" }
+variable "workload_identity_config" { default = "big-star-420419.svc.id.goog" }
 
 
 
