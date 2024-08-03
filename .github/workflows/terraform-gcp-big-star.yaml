@@ -28,7 +28,7 @@ jobs:
 
 
   # # # # # GCP Bucket
-  terraform-gcp2-bucket-deploy:
+  terraform-gcp-big-star-bucket-deploy:
     runs-on: ubuntu-latest
     needs: terraform-prepare-deploy
     defaults:
