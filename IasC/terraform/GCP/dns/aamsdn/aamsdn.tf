@@ -10,7 +10,7 @@ terraform {
     organization = "ahmedalimsoliman-org-gcp-big-star"
 
     workspaces {
-      name = "ahmedalimsoliman-workspace-aams-terraform-gcp-star-bucket"
+      name = "ahmedalimsoliman-workspace-aams-terraform-gcp-star-dns-aamsdn"
     }
   }
 
