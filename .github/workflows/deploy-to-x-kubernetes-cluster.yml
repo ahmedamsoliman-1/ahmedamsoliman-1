@@ -1,47 +1,47 @@
-name: deploy-to-kubernetes-cluster
+# name: deploy-to-kubernetes-cluster
 
-on:
-  push:
-    branches:
-      - main 
+# on:
+#   push:
+#     branches:
+#       - main 
 
-jobs:
-  deploy-to-x-kubernetes-cluster:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy-to-x-kubernetes-cluster:
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
 
-    - name: Install kubectl
-      run: |
-        curl -LO "https://dl.k8s.io/release/v1.30.1/bin/linux/amd64/kubectl"
-        chmod +x ./kubectl
-        sudo mv ./kubectl /usr/local/bin/kubectl
-        kubectl version
-      continue-on-error: true
+#     - name: Install kubectl
+#       run: |
+#         curl -LO "https://dl.k8s.io/release/v1.30.1/bin/linux/amd64/kubectl"
+#         chmod +x ./kubectl
+#         sudo mv ./kubectl /usr/local/bin/kubectl
+#         kubectl version
+#       continue-on-error: true
 
-    - name: Configure Kubernetes
-      run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBECONFIG_BIG_STAR }}" > $HOME/.kube/config
-      continue-on-error: true
+#     - name: Configure Kubernetes
+#       run: |
+#         mkdir -p $HOME/.kube
+#         echo "${{ secrets.KUBECONFIG_BIG_STAR }}" > $HOME/.kube/config
+#       continue-on-error: true
 
-    - name: Install Helm if not present
-      run: |
-        # Check if Helm is installed
-        if ! helm version >/dev/null 2>&1; then
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-          bash get_helm.sh
-        fi
-        helm version
-      continue-on-error: true
+#     - name: Install Helm if not present
+#       run: |
+#         # Check if Helm is installed
+#         if ! helm version >/dev/null 2>&1; then
+#           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+#           bash get_helm.sh
+#         fi
+#         helm version
+#       continue-on-error: true
 
-    - name: Deploy Helm Chart
-      run: |
-        # helm upgrade --install my-release ./chart-directory -n my-namespace --set secret.password=${{ secrets.GG }}
-        helm version
-        kubectl version
-        kubectl get nodes
-        kubectl get ns
-        kubectl get pods --all-namespaces
+#     - name: Deploy Helm Chart
+#       run: |
+#         # helm upgrade --install my-release ./chart-directory -n my-namespace --set secret.password=${{ secrets.GG }}
+#         helm version
+#         kubectl version
+#         kubectl get nodes
+#         kubectl get ns
+#         kubectl get pods --all-namespaces
