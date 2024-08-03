@@ -29,7 +29,7 @@ jobs:
     #   run: terraform plan
 
     - name: Terraform Destroy
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform destroy -auto-approve
@@ -60,7 +60,7 @@ jobs:
     #   run: terraform plan
 
     - name: Terraform Destroy
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform destroy -auto-approve
@@ -92,7 +92,7 @@ jobs:
     #   run: terraform plan
 
     - name: Terraform Destroy
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform destroy -auto-approve
