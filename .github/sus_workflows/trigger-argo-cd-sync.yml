@@ -3,7 +3,7 @@ name: trigger-argo-cd-sync
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   trigger-argo-cd-sync:
