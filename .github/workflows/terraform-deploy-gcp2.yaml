@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./IasC/terraform/GCP/dns
+        working-directory: ./IasC/terraform/GCP/dns/dns
 
     needs: terraform-prepare-deploy
     
