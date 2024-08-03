@@ -7,10 +7,10 @@ provider "google" {
 # https://www.terraform.io/language/settings/backends/gcs
 terraform {
   backend "remote" {
-    organization = "ahmedalimsoliman-org-gcp-big-star"
+    organization = "aamsdn-org-gcp-big-star"
 
     workspaces {
-      name = "ahmedalimsoliman-workspace-aams-terraform-gcp-star-dns-aamsdn"
+      name = "aamsdn-ws-terraform-gcp-star-dns"
     }
   }
 

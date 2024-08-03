@@ -1,10 +1,10 @@
 # main.tf
 terraform {
   backend "remote" {
-    organization = "ahmedalimsoliman-org-gcp-big-star"
+    organization = "aamsdn-org-gcp-big-star"
 
     workspaces {
-      name = "ahmedalimsoliman-workspace-aams-terraform-gcp-star-bucket"
+      name = "aamsdn-ws-terraform-gcp-star-bucket"
     }
   }
 
