@@ -33,4 +33,7 @@ box_text "install argocd application for argocd it self"
 kubectl apply -f argocd-application.yaml
 
 box_text "Admin password" 36
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
+kubectl -n $NAMESPACE get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
+
+box_text "Deploy ingress"
+kubectl -n $NAMESPACE apply -f argocd-ingress.yaml

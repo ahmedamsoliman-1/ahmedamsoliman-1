@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.argocd.name }}-argocd
-  namespace: argocd
+  name: {{ .Values.name }}
+  namespace: argo-cd
 spec:
   project: default
   source:
     repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
     targetRevision: main
-    path: kubernetes/helm-charts/resumes-chart
+    path: kubernetes/helm-charts/portfolio-chart
     helm:
       valueFiles:
       - values.yaml
@@ -22,4 +22,3 @@ spec:
     syncOptions:
     - CreateNamespace=true
     - ApplyOutOfSyncOnly=true
----
