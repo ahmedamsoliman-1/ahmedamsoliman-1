@@ -1,4 +1,4 @@
-name: terraform-gcp-big-star
+name: terraform-gcp-big-star-deploy
 
 on:
   push:

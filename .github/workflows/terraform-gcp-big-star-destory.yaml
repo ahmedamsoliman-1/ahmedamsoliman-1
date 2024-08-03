@@ -1,0 +1,78 @@
+name: terraform-gcp-big-star-destory
+
+# on:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+#     branches:
+#       - master
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform-gcp-big-star-bucket-destroy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/GCP/buckets/aams-terraform-gcp-star-bucket    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
+
+    - name: Terraform Destroy
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
+
+
+
+
+  # # # # # GCP Cloud DNS
+  terraform-gcp-big-star-dns-aamsdn-com-destroy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/GCP/dns/aamsdn
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+        
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
+
+    - name: Terraform Destroy
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
