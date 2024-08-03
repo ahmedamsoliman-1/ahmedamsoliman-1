@@ -34,9 +34,7 @@ resource "google_dns_managed_zone" "aamsdn" {
   name     = "aamsdn-com"
   dns_name = var.dns_name
   project  = var.project_id
-
   description = "Managed zone for aamsdn.com"
-
   visibility = "public"
 }
 
