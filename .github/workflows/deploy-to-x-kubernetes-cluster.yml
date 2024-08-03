@@ -23,7 +23,7 @@ jobs:
 
     - name: Configure Kubernetes
       run: |
-        mkdir $HOME/.kube/config
+        mkdir -p $HOME/.kube
         echo "${{ secrets.KUBECONFIG_BIG_STAR }}" > $HOME/.kube/config
       continue-on-error: true
 
