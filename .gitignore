@@ -52,7 +52,7 @@ tfc-getting-started
 
 
 # Helm
-argo-cd
+# argo-cd
 grafana
 prom*
 new-relic
