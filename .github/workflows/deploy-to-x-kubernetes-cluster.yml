@@ -13,10 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Kubernetes
-      uses: azure/setup-kubectl@v1
-      with:
-        version: '1.24.0'
+    - name: Install kubectl
+      run: |
+        curl -LO "https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+        kubectl version --client
       continue-on-error: true
 
     - name: Configure Kubernetes
