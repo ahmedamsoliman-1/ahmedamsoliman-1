@@ -15,18 +15,21 @@ jobs:
 
     - name: Install kubectl
       run: |
-        curl -LO "https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl"
+        curl -LO "https://dl.k8s.io/release/v1.30.1/bin/linux/amd64/kubectl"
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/local/bin/kubectl
-        kubectl version --client
+        kubectl version
       continue-on-error: true
 
     - name: Configure Kubernetes
       run: |
+        mkdir $HOME/.kube/config
         echo "${{ secrets.KUBECONFIG_BIG_STAR }}" > $HOME/.kube/config
+      continue-on-error: true
 
     - name: Set up Helm
       uses: azure/setup-helm@v1
+      continue-on-error: true
 
     - name: Deploy Helm Chart
       run: |
