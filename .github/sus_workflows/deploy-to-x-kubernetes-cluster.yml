@@ -3,7 +3,7 @@ name: deploy-to-kubernetes-cluster
 on:
   push:
     branches:
-    - main
+    - master
 
 jobs:
   deploy-to-x-kubernetes-cluster:

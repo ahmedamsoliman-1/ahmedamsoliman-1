@@ -3,15 +3,15 @@ name: trigger-argo-cd-sync
 on:
   push:
     branches:
-      - main
+    - master
 
 jobs:
   trigger-argo-cd-sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Trigger Argo CD sync
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"project": "default", "syncOptions": ["Prune=false"]}' -H "Authorization: Bearer ${{ secrets.ARGOCD_TOKEN }}" https://argo.ahmedalimsoliman.com/api/v1/applications/your-application/sync
+    - name: Trigger Argo CD sync
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{"project": "default", "syncOptions": ["Prune=false"]}' -H "Authorization: Bearer ${{ secrets.ARGOCD_TOKEN }}" https://argo.ahmedalimsoliman.com/api/v1/applications/your-application/sync

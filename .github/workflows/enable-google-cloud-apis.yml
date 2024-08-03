@@ -3,7 +3,7 @@ name: enable-google-cloud-apis
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   # enable-google-cloud-apis-gcp1:

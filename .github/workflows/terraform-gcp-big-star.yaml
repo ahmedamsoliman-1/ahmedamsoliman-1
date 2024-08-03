@@ -1,0 +1,183 @@
+name: terraform-gcp-big-star
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - master
+    
+jobs:
+  # # # # # GCP Bucket
+  terraform-prepare-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.9.2
+
+    - name: Check terraform
+      run: |
+        terraform -version
+
+
+  # # # # # # GCP Bucket
+  # terraform-gcp2-bucket-deploy:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/buckets/aams-terraform-hcp
+  #   needs: terraform-prepare-deploy
+    
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v3
+
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v2
+  #     with:
+  #       terraform_version: 1.9.2
+
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
+
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
+
+
+
+
+  # # # # # # GCP Cloud DNS
+  # terraform-gcp2-dns2-deploy:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/dns
+
+  #   needs: terraform-prepare-deploy
+    
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v3
+
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v2
+  #     with:
+  #       terraform_version: 1.9.2
+
+  #   - name: Download Ingress IP Artifact
+  #     uses: actions/download-artifact@v2
+  #     with:
+  #       name: get_node_template_ingress_ip
+  #     continue-on-error: true
+
+  #   - name: Read Ingress IP
+  #     id: read_ip
+  #     run: |
+  #       NODE_TEMPLATE_INGRESS_IP=$(cat get_node_template_ingress_ip.txt)
+  #       echo $NODE_TEMPLATE_INGRESS_IP
+  #       echo "NODE_TEMPLATE_INGRESS_IP=$NODE_TEMPLATE_INGRESS_IP" >> $GITHUB_ENV
+  #     continue-on-error: true
+        
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan # -var ingress_ip=${{ env.NODE_TEMPLATE_INGRESS_IP }}
+
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve # -var ingress_ip=${{ env.NODE_TEMPLATE_INGRESS_IP }}
+
+  # # # # # # GCP GKE
+  # terraform-gcp2-gke2-deploy:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/gke/aams-dev-gke-1
+
+  #   needs: terraform-prepare-deploy
+    
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v3
+
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v2
+  #     with:
+  #       terraform_version: 1.9.2
+        
+
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
+
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
+
+  # # # # # # GCP VM
+  # terraform-gcp2-vm2-deploy:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/vm/dev-vm-2
+
+  #   needs: terraform-prepare-deploy
+    
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v3
+
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v2
+  #     with:
+  #       terraform_version: 1.9.2
+        
+
+  #   - name: Terraform Init
+  #     working-directory: ./IasC/terraform/GCP/vm/dev-vm-2
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
+
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
