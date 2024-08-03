@@ -3,7 +3,7 @@ name: deploy-helm-charts
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy-helm-charts-gcp2:
@@ -47,13 +47,6 @@ jobs:
         fi
         helm version
       continue-on-error: true
-    
-    # - name: Delete prev ns
-    #   run: |
-    #     kubectl delete ns aams-node-templates
-    #     kubectl delete ns cert-manager 
-    #     kubectl delete ns ingress-nginx
-    #   continue-on-error: true
 
     - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
       working-directory: ./kubernetes/helm-charts/ingress-nginx
