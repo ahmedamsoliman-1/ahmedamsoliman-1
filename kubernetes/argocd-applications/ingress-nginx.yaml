@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argo-cd
+spec:
+  project: infra
+  source:
+    repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
+    targetRevision: main
+    path: kubernetes/helm-charts/ingress-nginx
+    helm:
+      valueFiles:
+      - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
