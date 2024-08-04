@@ -265,26 +265,6 @@ jobs:
         fi
         helm version
 
-    # - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
-    #   working-directory: ./kubernetes/helm-charts/ingress-nginx
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
-
-    # - name: Deploy/Upgrade Helm Charts - Cert Manager 
-    #   working-directory: ./kubernetes/helm-charts/cert-manager
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
-
-  deploy-helms-gke3:
-    runs-on: ubuntu-latest
-    needs: prepare-helm-ktl-gcp2-gke3-deploy
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
     - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
       working-directory: ./kubernetes/helm-charts/ingress-nginx
       run: |
@@ -293,6 +273,12 @@ jobs:
 
     - name: Deploy/Upgrade Helm Charts - Cert Manager 
       working-directory: ./kubernetes/helm-charts/cert-manager
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
+    
+    - name: Deploy/Upgrade Helm Charts - Dashboard
+      working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
       run: |
         chmod +x deploy.sh
         ./deploy.sh
