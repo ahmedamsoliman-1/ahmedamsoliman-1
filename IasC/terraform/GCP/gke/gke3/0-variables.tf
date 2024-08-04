@@ -5,18 +5,18 @@ variable "location_a" { default = "us-east1-a" }
 variable "location_b" { default = "us-east1-b" }
 
 
-variable "caluster_name" { default = "gcp-big-star-gke3-cluster" }
-variable "vpc_name" { default = "gcp-big-star-gke3-main-vpc" }
-variable "spot_name" { default = "gcp-big-star-gke3-spot" }
-variable "general_name" { default = "gcp-big-star-gke3-general" }
-variable "router_name" { default = "gcp-big-star-gke3-router" }
-variable "subnet_name" { default = "gcp-big-star-gke3-private" }
-variable "nat_name" { default = "gcp-big-star-gke3-nat" }
-variable "allow_ssh" { default = "gcp-big-star-gke3-ssh-allow" }
+variable "caluster_name" { default = "aamsd-gcp2-gke3-cluster" }
+variable "vpc_name" { default = "aamsd-gcp2-gke3-main-vpc" }
+variable "spot_name" { default = "aamsd-gcp2-gke3-spot" }
+variable "general_name" { default = "aamsd-gcp2-gke3-general" }
+variable "router_name" { default = "aamsd-gcp2-gke3-router" }
+variable "subnet_name" { default = "aamsd-gcp2-gke3-private" }
+variable "nat_name" { default = "aamsd-gcp2-gke3-nat" }
+variable "allow_ssh" { default = "aamsd-gcp2-gke3-ssh-allow" }
 
-variable "pod_range_name" { default = "gcp-big-star-gke3-k8s-pod-range" }
-variable "svc_range_name" { default = "gcp-big-star-gke3-k8s-service-range" }
-variable "workload_identity_config" { default = "big-star-420419.svc.id.goog" }
+variable "pod_range_name" { default = "aamsd-gcp2-gke3-k8s-pod-range" }
+variable "svc_range_name" { default = "aamsd-gcp2-gke3-k8s-service-range" }
+variable "workload_identity_config" { default = "comaamsdngcp2-project-1.svc.id.goog" }
 
 
 
