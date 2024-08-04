@@ -17,14 +17,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v3
+    #   with:
+    #     terraform_version: 1.9.2
 
-    - name: Check terraform
-      run: |
-        terraform -version
+    # - name: Check terraform
+    #   run: |
+    #     terraform -version
   
   enable-google-cloud-apis-gcp2:
     runs-on: ubuntu-latest
@@ -34,35 +34,35 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
-      with:
-        version: 'latest'
+    # - name: Set up Google Cloud CLI
+    #   uses: google-github-actions/setup-gcloud@v2
+    #   with:
+    #     version: 'latest'
 
-    - name: Authenticate with Google Cloud
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
-      run: |
-        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
-        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+    # - name: Authenticate with Google Cloud
+    #   env:
+    #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
+    #   run: |
+    #     echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+    #     gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
-    - name: Set project
-      run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
+    # - name: Set project
+    #   run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
 
-    - name: Enable Compute Engine API
-      run: gcloud services enable compute.googleapis.com
+    # - name: Enable Compute Engine API
+    #   run: gcloud services enable compute.googleapis.com
 
-    - name: Enable Kubernetes Engine API
-      run: gcloud services enable container.googleapis.com
+    # - name: Enable Kubernetes Engine API
+    #   run: gcloud services enable container.googleapis.com
 
-    - name: Enable IAM API
-      run: gcloud services enable iam.googleapis.com
+    # - name: Enable IAM API
+    #   run: gcloud services enable iam.googleapis.com
 
-    - name: Enable Cloud Storage API
-      run: gcloud services enable storage.googleapis.com
+    # - name: Enable Cloud Storage API
+    #   run: gcloud services enable storage.googleapis.com
     
-    - name: Enable DNS API
-      run: gcloud services enable dns.googleapis.com
+    # - name: Enable DNS API
+    #   run: gcloud services enable dns.googleapis.com
 
 
   # # # # # # GCP Bucket
@@ -180,26 +180,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
   
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v3
+    #   with:
+    #     terraform_version: 1.9.2
         
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    # - name: Terraform Init
+    #   env:
+    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    #   run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
   
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
+    # - name: Terraform Plan
+    #   env:
+    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    #   run: terraform plan
   
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
+    # - name: Terraform Apply
+    #   if: github.event_name == 'push'
+    #   env:
+    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    #   run: terraform apply -auto-approve
     
     - name: Build project
       run: |
