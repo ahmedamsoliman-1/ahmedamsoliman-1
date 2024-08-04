@@ -247,12 +247,12 @@ jobs:
         echo "get-credentials"
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
         gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
-        echo "get nodes"
-        kubectl get nodes
-        echo "get ns"
-        kubectl get namespaces
-        echo "get pods"
-        kubectl get pods --all-namespaces
+        # echo "get nodes"
+        # kubectl get nodes
+        # echo "get ns"
+        # kubectl get namespaces
+        # echo "get pods"
+        # kubectl get pods --all-namespaces
 
     
     - name: Install Helm if not present
