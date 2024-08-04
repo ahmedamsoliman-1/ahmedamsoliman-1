@@ -201,23 +201,35 @@ jobs:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform apply -auto-approve
     
-    - name: Terraform Output
-      id: terraform_output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    - name: Build project
       run: |
         mkdir -p output
-        terraform output -json > terraform_outputs.json
-        cp terraform_outputs.json output/terraform_outputs.json
-        ls -al
-        ls output
-        cat output/terraform_outputs.json
+        echo "Build output" > output/build.txt
 
-    - name: Upload Terraform Outputs
+    - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: terraform-outputs
-        path: output/terraform_outputs.json
+        name: build-artifact
+        path: output/build.txt
+    
+    # - name: Terraform Output
+    #   id: terraform_output
+    #   env:
+    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    #   run: |
+    #     mkdir -p output
+    #     terraform output -json > terraform_outputs.json
+    #     cp terraform_outputs.json output/terraform_outputs.json
+    #     ls -al
+    #     ls output
+    #     cat output/terraform_outputs.json
+
+    # - name: Upload Terraform Outputs
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: terraform-outputs
+    #     path: output/terraform_outputs.json
+
 
   # subsequent-gke:
   #   runs-on: ubuntu-latest
