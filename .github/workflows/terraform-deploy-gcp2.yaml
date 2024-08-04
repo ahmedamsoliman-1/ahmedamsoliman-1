@@ -175,11 +175,11 @@ jobs:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform plan
 
-    # - name: Terraform Apply
-    #   if: github.event_name == 'push'
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform apply -auto-approve
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
   
   subsequent-dns:
     runs-on: ubuntu-latest
@@ -194,7 +194,7 @@ jobs:
 
     steps:
       - name: Testing
-        run: pwd
+        run: nslookup aamsdn.com
 
   # # # # # # GCP GKE
   # terraform-gcp-gcp2-gke3-deploy:
