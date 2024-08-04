@@ -166,13 +166,17 @@ jobs:
       with:
         name: ingress-ip
     - name: List Files in Current Directory
-      run: ls -la
+      run: |
+        echo "ls -la"
+        ls -la
+        echo "ls /home/runner/work/ahmed/ahmed"
+        ls /home/runner/work/ahmed/ahmed/
       
 
     - name: Set Ingress IP Environment Variable
       run: |
         # Adjust path if necessary based on listing above
-        INGRESS_IP=$(cat ingress-ip/ingress_ip.txt)
+        INGRESS_IP=$(cat  /home/runner/work/ahmed/ahmed/ingress_ip.txt)
         echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
 
     - name: Terraform Init
