@@ -229,9 +229,6 @@ jobs:
       run: |
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
-    
-    # - name: Checkout code
-    #   uses: actions/checkout@v4
 
     - name: Download Terraform Outputs
       uses: actions/download-artifact@v3
@@ -239,6 +236,8 @@ jobs:
         name: terraform-outputs
 
     - name: Get GKE Cluster Credentials
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
       run: |
         echo "Info"
         CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
