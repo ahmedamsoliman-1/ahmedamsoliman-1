@@ -178,11 +178,15 @@ jobs:
         INGRESS_IP=$(cat /home/runner/work/ahmed/ahmed/ingress_ip.txt)
         echo "INGRESS_IP=${INGRESS_IP}"
         echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
-        # echo "INGRESS_IP=${INGRESS_IP}" >> /home/runner/work/ahmed/ahmed/$GITHUB_ENV
-  
+        
+    - name: Create terraform.tfvars
+      run: |
+        echo "ingress_ip = \"${{ env.INGRESS_IP }}\"" > terraform.tfvars
+
     - name: Terraform Init
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+        TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
       run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
   
     - name: Terraform Plan
