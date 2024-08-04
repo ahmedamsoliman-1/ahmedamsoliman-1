@@ -7,17 +7,17 @@ provider "google" {
 # https://www.terraform.io/language/settings/backends/gcs
 terraform {
   backend "remote" {
-    organization = "aamsdn-org-gcp-big-star"
+    organization = "ahmedalimsoliman-org"
 
     workspaces {
-      name = "aamsdn-ws-terraform-gcp-star-gke"
+      name = "aamsdn-ws-gcp2-gke3"
     }
   }
 
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
