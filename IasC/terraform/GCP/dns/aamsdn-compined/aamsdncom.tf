@@ -31,9 +31,18 @@ resource "google_dns_managed_zone" "aamsdn" {
   description = "Managed zone for aamsdn.com"
 }
 
-# Create the A record
-resource "google_dns_record_set" "a_record" {
-  name         = "${var.dns_name}."
+# # Create the A record
+# resource "google_dns_record_set" "a_record" {
+#   name         = "${var.dns_name}."
+#   managed_zone = google_dns_managed_zone.aamsdn.name
+#   type         = "A"
+#   ttl          = 300
+
+#   rrdatas = [var.ingress_ip]
+# }
+# Create the A record for the subdomain
+resource "google_dns_record_set" "subdomain_record" {
+  name         = "${var.subdomain}.${var.dns_name}." # e.g., "subdomain.aamsd.com."
   managed_zone = google_dns_managed_zone.aamsdn.name
   type         = "A"
   ttl          = 300
@@ -44,15 +53,12 @@ resource "google_dns_record_set" "a_record" {
 variable "project_id" { type = string }
 variable "region" { type = string }
 
-variable "ingress_ip" {
-  description = "Ingress IP address"
-  type        = string
-  default     = ""
-}
+variable "ingress_ip" { type = string }
 
 variable "dns_name" { default = "aamsd.com" }
 variable "ddns_name" { default = "aamsd.com." }
 variable "zdns_name" { default = "aamsd-com" }
+variable "subdomain" { default = "argo" }
 
 variable "recipients" { default = "Mohamed Ali Ali Mohamed Soliman" }
 variable "mobile" { default = "+971507065214" }
@@ -67,3 +73,4 @@ variable "address" { default = "Abu Dhabi Khalifa City" }
 # # # # # OUTPUT
 output "name_servers" { value = google_dns_managed_zone.aamsdn.name_servers }
 output "domain_name" { value = google_dns_managed_zone.aamsdn.name }
+output "ingress_ip_debug" { value = var.ingress_ip }
