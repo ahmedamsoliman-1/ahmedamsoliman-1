@@ -7,7 +7,7 @@ provider "google" {
 # Configure the Terraform backend to use Terraform Cloud
 terraform {
   backend "remote" {
-    organization = "aamsdn-org-gcp-big-star"
+    organization = "ahmedalimsoliman-org"
 
     workspaces {
       name = "aamsdn-ws-terraform-gcp-star-dns"
