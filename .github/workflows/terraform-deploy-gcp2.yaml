@@ -180,60 +180,56 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
   
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v3
-    #   with:
-    #     terraform_version: 1.9.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
         
-    # - name: Terraform Init
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
   
-    # - name: Terraform Plan
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform plan
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
   
-    # - name: Terraform Apply
-    #   if: github.event_name == 'push'
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: terraform apply -auto-approve
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
+    
+    # # # - name: Terraform Output
+    # # #   id: terraform_output
+    # # #   env:
+    # # #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    # # #   run: |
+    # # #     echo "Build output" > build.txt
+    # # #     ls -al
+    # # #     cat build.txt
+
+    # # # - name: Upload Terraform Outputs
+    # # #   uses: actions/upload-artifact@v3
+    # # #   with:
+    # # #     name: terraform-outputs
+    # # #     path: ./IasC/terraform/GCP/gke/gke3/build.txt
     
     - name: Terraform Output
       id: terraform_output
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: |
-        echo "Build output" > build.txt
+        terraform output -json > terraform_outputs.json
         ls -al
-        cat build.txt
+        cat terraform_outputs.json
 
     - name: Upload Terraform Outputs
       uses: actions/upload-artifact@v3
       with:
         name: terraform-outputs
-        path: ./IasC/terraform/GCP/gke/gke3/build.txt
-      # working-directory: ./IasC/terraform/GCP/gke/gke3
-    
-    # - name: Terraform Output
-    #   id: terraform_output
-    #   env:
-    #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    #   run: |
-    #     mkdir -p output
-    #     terraform output -json > terraform_outputs.json
-    #     cp terraform_outputs.json output/terraform_outputs.json
-    #     ls -al
-    #     ls output
-    #     cat output/terraform_outputs.json
-
-    # - name: Upload Terraform Outputs
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: terraform-outputs
-    #     path: output/terraform_outputs.json
+        path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
 
 
   # subsequent-gke:
