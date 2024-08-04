@@ -71,7 +71,7 @@ jobs:
     needs: enable-google-cloud-apis-gcp2
     defaults:
       run:
-        working-directory: ./IasC/terraform/GCP/buckets/aams-terraform-gcp2-bucket-1
+        working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
     steps:
     - name: Checkout code
       uses: actions/checkout@v3

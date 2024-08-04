@@ -10,7 +10,7 @@ terraform {
     organization = "ahmedalimsoliman-org"
 
     workspaces {
-      name = "aamsdn-ws-terraform-gcp-star-dns"
+      name = "aamsdn-ws-gcp2-dns-zone"
     }
   }
 
