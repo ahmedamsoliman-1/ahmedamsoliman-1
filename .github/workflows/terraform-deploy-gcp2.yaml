@@ -17,14 +17,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v3
-    #   with:
-    #     terraform_version: 1.9.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
 
-    # - name: Check terraform
-    #   run: |
-    #     terraform -version
+    - name: Check terraform
+      run: |
+        terraform -version
   
   enable-google-cloud-apis-gcp2:
     runs-on: ubuntu-latest
@@ -34,139 +34,124 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # - name: Set up Google Cloud CLI
-    #   uses: google-github-actions/setup-gcloud@v2
-    #   with:
-    #     version: 'latest'
+    - name: Set up Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        version: 'latest'
 
-    # - name: Authenticate with Google Cloud
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
-    #   run: |
-    #     echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
-    #     gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+    - name: Authenticate with Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
+      run: |
+        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
-    # - name: Set project
-    #   run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
+    - name: Set project
+      run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
 
-    # - name: Enable Compute Engine API
-    #   run: gcloud services enable compute.googleapis.com
+    - name: Enable Compute Engine API
+      run: gcloud services enable compute.googleapis.com
 
-    # - name: Enable Kubernetes Engine API
-    #   run: gcloud services enable container.googleapis.com
+    - name: Enable Kubernetes Engine API
+      run: gcloud services enable container.googleapis.com
 
-    # - name: Enable IAM API
-    #   run: gcloud services enable iam.googleapis.com
+    - name: Enable IAM API
+      run: gcloud services enable iam.googleapis.com
 
-    # - name: Enable Cloud Storage API
-    #   run: gcloud services enable storage.googleapis.com
+    - name: Enable Cloud Storage API
+      run: gcloud services enable storage.googleapis.com
     
-    # - name: Enable DNS API
-    #   run: gcloud services enable dns.googleapis.com
+    - name: Enable DNS API
+      run: gcloud services enable dns.googleapis.com
 
 
-  # # # # # # GCP Bucket
-  # terraform-gcp-gcp2-bucket-deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: enable-google-cloud-apis-gcp2
-  #   defaults:
-  #     run:
-  #       working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v3
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v3
-  #     with:
-  #       terraform_version: 1.9.2
-  #   - name: Terraform Init
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-  #   - name: Terraform Plan
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform plan
-  #   - name: Terraform Apply
-  #     if: github.event_name == 'push'
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform apply -auto-approve
-  #   - name: Terraform Output
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform output
+  # # # # # GCP Bucket
+  terraform-gcp-gcp2-bucket-deploy:
+    runs-on: ubuntu-latest
+    needs: enable-google-cloud-apis-gcp2
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
+    - name: Terraform Output
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform output
       
   
-  # subsequent-bucket:
-  #   runs-on: ubuntu-latest
-  #   needs: terraform-gcp-gcp2-bucket-deploy
+  subsequent-pwd-bucket:
+    runs-on: ubuntu-latest
+    needs: terraform-gcp-gcp2-bucket-deploy
 
-  #   steps:
-  #     - name: Testing
-  #       run: pwd
-
-  # subsequent-bucket-2:
-  #   runs-on: ubuntu-latest
-  #   needs: terraform-gcp-gcp2-bucket-deploy
-
-  #   steps:
-  #     - name: Testing
-  #       run: pwd
+    steps:
+      - name: Testing
+        run: pwd
 
 
 
-  # # # # # # GCP Cloud DNS
-  # terraform-gcp-gcp2-dns-aamsdn-com-deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: enable-google-cloud-apis-gcp2
-  #   defaults:
-  #     run:
-  #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
+  # # # # # GCP Cloud DNS
+  terraform-gcp-gcp2-dns-aamsdn-com-deploy:
+    runs-on: ubuntu-latest
+    needs: enable-google-cloud-apis-gcp2
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
 
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-  #   - name: Setup Terraform
-  #     uses: hashicorp/setup-terraform@v3
-  #     with:
-  #       terraform_version: 1.9.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
         
-  #   - name: Terraform Init
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
 
-  #   - name: Terraform Plan
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform plan
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
 
-  #   - name: Terraform Apply
-  #     if: github.event_name == 'push'
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform apply -auto-approve
-  #   - name: Terraform Output
-  #     env:
-  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-  #     run: terraform output
+    - name: Terraform Apply
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform apply -auto-approve
+    - name: Terraform Output
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform output
   
-  # subsequent-dns:
-  #   runs-on: ubuntu-latest
-  #   needs: terraform-gcp-gcp2-dns-aamsdn-com-deploy
+  subsequent-dns-nslookup:
+    runs-on: ubuntu-latest
+    needs: terraform-gcp-gcp2-dns-aamsdn-com-deploy
 
-  #   steps:
-  #     - name: Testing
-  #       run: pwd
-  # subsequent-dns-2:
-  #   runs-on: ubuntu-latest
-  #   needs: terraform-gcp-gcp2-dns-aamsdn-com-deploy
-
-  #   steps:
-  #     - name: Testing
-  #       run: nslookup aamsdn.com
+    steps:
+      - name: Testing
+        run: nslookup aamsdn.com
 
   # # # # # GCP GKE
   terraform-gcp-gcp2-gke3-deploy:
@@ -201,21 +186,6 @@ jobs:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform apply -auto-approve
     
-    # # # - name: Terraform Output
-    # # #   id: terraform_output
-    # # #   env:
-    # # #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-    # # #   run: |
-    # # #     echo "Build output" > build.txt
-    # # #     ls -al
-    # # #     cat build.txt
-
-    # # # - name: Upload Terraform Outputs
-    # # #   uses: actions/upload-artifact@v3
-    # # #   with:
-    # # #     name: terraform-outputs
-    # # #     path: ./IasC/terraform/GCP/gke/gke3/build.txt
-    
     - name: Terraform Output
       id: terraform_output
       env:
@@ -232,7 +202,7 @@ jobs:
         path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
 
 
-  subsequent-gke:
+  subsequent-pwd-gke:
     runs-on: ubuntu-latest
     needs: terraform-gcp-gcp2-gke3-deploy
 
@@ -268,7 +238,6 @@ jobs:
       run: |
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
-      continue-on-error: true
     
     - name: Checkout code
       uses: actions/checkout@v3
@@ -281,45 +250,57 @@ jobs:
     - name: List files
       run: ls -R
 
-    # - name: Use Terraform Outputs
-    #   run: |
-    #     cat terraform_outputs.json
-    #     # Extract specific values from the JSON if needed
-    #     kubectl config set-cluster $(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json) --server=https://example.com --certificate-authority=/path/to/ca.pem
-    #     # Further commands to use the extracted values
-
     - name: Get GKE Cluster Credentials
       run: |
+        box_text() {
+          local text="$1"
+          local color="${2:-32}" # Default to green if no color is specified
+          local padding=40
+        
+          # Calculate text length and total width of the box
+          local text_length=${#text}
+          local box_width=$((text_length + padding * 2))
+        
+          # Top border
+          echo -e "\033[${color}m$(printf '%*s' "$box_width" '' | tr ' ' '*')\033[0m"
+        
+          # Text with padding
+          echo -e "\033[${color}m$(printf '%*s' "$padding" '')$text$(printf '%*s' "$padding" '')\033[0m"
+        
+          # Bottom border
+          echo -e "\033[${color}m$(printf '%*s' "$box_width" '' | tr ' ' '*')\033[0m"
+        }
+        box_text "Info"
         CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
         ZONE=$(jq -r '.location.value' terraform_outputs.json)
-        echo $ZONE
         echo $CLUSTER_NAME
-        # gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
-        # kubectl get nodes
-        # kubectl get namespaces
-        # kubectl get pods --all-namespaces
+        box_text "get-credentials"
+        gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
+        box_text "get nodes"
+        kubectl get nodes
+        box_text "get ns"
+        kubectl get namespaces
+        box_text "get pods"
+        kubectl get pods --all-namespaces
 
     
-    # - name: Install Helm if not present
-    #   run: |
-    #     # Check if Helm is installed
-    #     if ! helm version >/dev/null 2>&1; then
-    #       curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    #       bash get_helm.sh
-    #     fi
-    #     helm version
-    #   continue-on-error: true
+    - name: Install Helm if not present
+      run: |
+        # Check if Helm is installed
+        if ! helm version >/dev/null 2>&1; then
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          bash get_helm.sh
+        fi
+        helm version
 
-    # - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
-    #   working-directory: ./kubernetes/helm-charts/ingress-nginx
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
-    #   continue-on-error: true
+    - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
+      working-directory: ./kubernetes/helm-charts/ingress-nginx
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
 
-    # - name: Deploy/Upgrade Helm Charts - Cert Manager 
-    #   working-directory: ./kubernetes/helm-charts/cert-manager
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
-    #   continue-on-error: true
+    - name: Deploy/Upgrade Helm Charts - Cert Manager 
+      working-directory: ./kubernetes/helm-charts/cert-manager
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
