@@ -255,11 +255,6 @@ jobs:
         # echo "get pods"
         # kubectl get pods --all-namespaces
     
-    - name: Get Ingress IP
-      run: |
-        kubectl get nodes
-        kubectl -n ingress-nginx get pods
-    
     - name: Install Helm if not present
       run: |
         # Check if Helm is installed
@@ -287,3 +282,30 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
   
+    - name: Get Ingress IP
+      run: |
+        INGRESS_IP=$(kubectl get ingress --all-namespaces -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}')
+        echo $INGRESS_IP > ingress_ip.txt
+
+    - name: Upload Ingress IP Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ingress-ip
+        path: ingress_ip.txt
+  
+  read-ingress-ip:
+    runs-on: ubuntu-latest
+    needs: prepare-helm-ktl-gcp2-gke3-deploy
+
+    steps:
+    - name: Download Ingress IP Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: ingress-ip
+
+    - name: Display Ingress IP
+      run: |
+        cat ingress_ip.txt
+        cat ingress_ip.txt
+        cat ingress_ip.txt
+        cat ingress_ip.txt
