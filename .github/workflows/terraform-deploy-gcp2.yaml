@@ -282,6 +282,9 @@ jobs:
     needs: prepare-helm-ktl-gcp2-gke3-deploy
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
     - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
       working-directory: ./kubernetes/helm-charts/ingress-nginx
       run: |
