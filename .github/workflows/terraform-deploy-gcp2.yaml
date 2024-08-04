@@ -34,6 +34,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Install GKE Cloud Auth plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+        
     - name: Set up Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v2
       with:
@@ -214,14 +218,15 @@ jobs:
       with:
         name: tf-outputs
 
+    - name: Install GKE Cloud Auth plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+
     - name: Set up Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v2
       with:
         version: 'latest'
 
-    - name: Install GKE Cloud Auth plugin
-      run: |
-        gcloud components install gke-gcloud-auth-plugin
 
     - name: Authenticate with Google Cloud
       env:
