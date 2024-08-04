@@ -200,10 +200,20 @@ jobs:
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform apply -auto-approve
+    
     - name: Terraform Output
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform output
+      id: terraform_output
+      run: |
+        terraform output -json > terraform_outputs.json
+        cat terraform_outputs.json
+
+    - name: Upload Terraform Outputs
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-outputs
+        path: terraform_outputs.json
 
   subsequent-gke:
     runs-on: ubuntu-latest
@@ -220,6 +230,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Download Terraform Outputs
+      uses: actions/download-artifact@v3
+      with:
+        name: terraform-outputs
 
     - name: Set up Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v2
@@ -240,10 +255,13 @@ jobs:
 
     - name: Get GKE Cluster Credentials
       run: |
+        CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
+        ZONE=$(jq -r '.location.value' terraform_outputs.json)
+        gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
         kubectl get nodes
         kubectl get namespaces
         kubectl get pods --all-namespaces
-      continue-on-error: true
+
     
     # - name: Install Helm if not present
     #   run: |
