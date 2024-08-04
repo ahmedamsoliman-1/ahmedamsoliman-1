@@ -12,7 +12,7 @@ terraform {
     organization = "ahmedalimsoliman-org"
 
     workspaces {
-      name = "aamsdn-ws-terraform-gcp-star-dns-domain-reg"
+      name = "aamsdn-ws-gcp2-domain-reg"
     }
   }
 

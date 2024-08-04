@@ -4,7 +4,7 @@ terraform {
     organization = "ahmedalimsoliman-org"
 
     workspaces {
-      name = "aamsdn-ws-terraform-gcp2-bucket-1"
+      name = "aamsdn-ws-gcp2-bucket-1"
     }
   }
 
