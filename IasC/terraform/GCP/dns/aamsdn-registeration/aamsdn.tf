@@ -45,15 +45,15 @@ resource "google_clouddomains_registration" aamsdn {
     }
   }
   contact_settings {
-    privacy = "PRIVATE_CONTACT_DATA"
+    privacy = "REDACTED_CONTACT_DATA"
     registrant_contact {
       phone_number = var.mobile
       email        = var.email
       postal_address {
         region_code         = var.regioncode
         postal_code         = var.postalcode
-        administrative_area = var.area
-        locality            = var.city
+        administrative_area = var.administrative_area
+        locality            = var.locality
         address_lines       = [var.address]
         recipients          = [var.recipients]
       }
@@ -64,8 +64,8 @@ resource "google_clouddomains_registration" aamsdn {
       postal_address {
         region_code         = var.regioncode
         postal_code         = var.postalcode
-        administrative_area = var.area
-        locality            = var.city
+        administrative_area = var.administrative_area
+        locality            = var.locality
         address_lines       = [var.address]
         recipients          = [var.recipients]
       }
@@ -76,8 +76,8 @@ resource "google_clouddomains_registration" aamsdn {
       postal_address {
         region_code         = var.regioncode
         postal_code         = var.postalcode
-        administrative_area = var.area
-        locality            = var.city
+        administrative_area = var.administrative_area
+        locality            = var.locality
         address_lines       = [var.address]
         recipients          = [var.recipients]
       }
@@ -85,20 +85,19 @@ resource "google_clouddomains_registration" aamsdn {
   }
 }
 
-
-variable "project_id" {  type = string }
+variable "project_id" { type = string }
 variable "region" { type = string }
 variable "dns_name" { default = "aamsdn.com" }
 
-variable "recipients" { default = "Ahmed Soliman" }
+variable "recipients" { default = "Mohamed Ali Ali Mohamed Soliman" }
 variable "mobile" { default = "+971507065214" }
 variable "email" { default = "ahmed-3010@hotmail.com" }
-variable "organization" { default = "aamsdn" }
-variable "regioncode" { default = "US" }
+variable "organization" { default = "AAMSDN" }
+variable "regioncode" { default = "AE" }
 variable "postalcode" { default = "00000" }
-variable "area" { default = "Dubai" }
-variable "city" { default = "Dubai" }
-variable "address" { default = "Dubai" }
+variable "administrative_area" { default = "Abu Dhabi" }
+variable "locality" { default = "Abu Dhabi Khalifa City" }
+variable "address" { default = "Abu Dhabi Khalifa City" }
 
 # # # # # OUTPUT
 output "domain_name" { value = google_clouddomains_registration.aamsdn.domain_name }
