@@ -1,0 +1,140 @@
+name: destroy-terraform-gcp2
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  # # # # # GCP Bucket
+  tf-prepare-destroy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
+
+    - name: Check terraform
+      run: |
+        terraform -version
+
+
+  # # # # # GCP Bucket
+  tf-gcp-gcp2-bucket-destroy:
+    runs-on: ubuntu-latest
+    needs: tf-prepare-destroy
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
+    - name: Terraform destroy
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
+
+
+  # tf-gcp-gcp2-dns-aamsdn-com-destroy:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-prepare-destroy
+
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
+  
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
+  
+  #   - name: Download Ingress IP Artifact
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: ingress-ip
+  #   - name: List Files in Current Directory
+  #     run: |
+  #       echo "ls -la"
+  #       ls -la
+  #       echo "ls /home/runner/work/ahmed/ahmed"
+  #       ls /home/runner/work/ahmed/ahmed/
+      
+
+  #   - name: Set Ingress IP Environment Variable
+  #     run: |
+  #       # Adjust path if necessary based on listing above
+  #       INGRESS_IP=$(cat  /home/runner/work/ahmed/ahmed/ingress_ip.txt)
+  #       echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
+
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #       TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
+  #     run: terraform plan
+  
+  #   - name: Terraform destroy
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #       TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
+  #     run: terraform destroy -auto-approve
+  
+
+  # # # # # GCP GKE
+  tf-gcp-gcp2-gke3-destroy:
+    runs-on: ubuntu-latest
+    needs: tf-prepare-destroy
+    defaults:
+      run:
+        working-directory: ./IasC/terraform/GCP/gke/gke3
+  
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+  
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.9.2
+        
+    - name: Terraform Init
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  
+    - name: Terraform Plan
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform plan
+  
+    - name: Terraform Destroy
+      if: github.event_name == 'push'
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform destroy -auto-approve
+    
