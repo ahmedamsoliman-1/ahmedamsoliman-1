@@ -178,7 +178,7 @@ jobs:
         INGRESS_IP=$(cat /home/runner/work/ahmed/ahmed/ingress_ip.txt)
         echo "INGRESS_IP=${INGRESS_IP}"
         echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
-        echo "INGRESS_IP=${INGRESS_IP}" >> /home/runner/work/ahmed/ahmed/$GITHUB_ENV
+        # echo "INGRESS_IP=${INGRESS_IP}" >> /home/runner/work/ahmed/ahmed/$GITHUB_ENV
   
     - name: Terraform Init
       env:
