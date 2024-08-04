@@ -206,16 +206,15 @@ jobs:
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: |
-        terraform output -json > terraform_outputs.json
+        terraform output -json > terraform_outputs.json || (echo "Error generating terraform outputs" && exit 1)
         ls -al
         cat terraform_outputs.json
-  
+
     - name: Upload Terraform Outputs
       uses: actions/upload-artifact@v3
       with:
         name: terraform-outputs
         path: terraform_outputs.json
-  
 
   subsequent-gke:
     runs-on: ubuntu-latest
@@ -254,15 +253,33 @@ jobs:
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
       continue-on-error: true
+    
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Get GKE Cluster Credentials
-      run: |
-        CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
-        ZONE=$(jq -r '.location.value' terraform_outputs.json)
-        gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
-        kubectl get nodes
-        kubectl get namespaces
-        kubectl get pods --all-namespaces
+    - name: Download Terraform Outputs
+      uses: actions/download-artifact@v3
+      with:
+        name: terraform-outputs
+
+    - name: List files
+      run: ls -R
+
+    # - name: Use Terraform Outputs
+    #   run: |
+    #     cat terraform_outputs.json
+    #     # Extract specific values from the JSON if needed
+    #     kubectl config set-cluster $(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json) --server=https://example.com --certificate-authority=/path/to/ca.pem
+    #     # Further commands to use the extracted values
+
+    # - name: Get GKE Cluster Credentials
+    #   run: |
+    #     CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
+    #     ZONE=$(jq -r '.location.value' terraform_outputs.json)
+    #     gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
+    #     kubectl get nodes
+    #     kubectl get namespaces
+    #     kubectl get pods --all-namespaces
 
     
     # - name: Install Helm if not present
