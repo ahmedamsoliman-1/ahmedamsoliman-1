@@ -1,6 +1,6 @@
 variable "project_id" {  type = string }
 variable "region" { type = string }
-variable "location" { type = string }
+variable "location" { default = "US" }
 variable "location_a" { default = "us-east1-a" }
 variable "location_b" { default = "us-east1-b" }
 

@@ -75,27 +75,28 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.9.2
-
     - name: Terraform Init
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-
     - name: Terraform Plan
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform plan
-
     - name: Terraform Apply
       if: github.event_name == 'push'
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform apply -auto-approve
+    - name: Terraform Output
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform output
+      
   
   subsequent-bucket:
     runs-on: ubuntu-latest
@@ -147,6 +148,10 @@ jobs:
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform apply -auto-approve
+    - name: Terraform Output
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform output
   
   subsequent-dns:
     runs-on: ubuntu-latest
@@ -195,6 +200,10 @@ jobs:
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform apply -auto-approve
+    - name: Terraform Output
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      run: terraform output
 
   subsequent-gke:
     runs-on: ubuntu-latest
@@ -231,7 +240,6 @@ jobs:
 
     - name: Get GKE Cluster Credentials
       run: |
-        # gcloud container clusters get-credentials aams-gke2-gcp2-gke-primary-cluster --zone us-east1-b --project ${{ secrets.GCP2_PROJECT_ID }}
         kubectl get nodes
         kubectl get namespaces
         kubectl get pods --all-namespaces
