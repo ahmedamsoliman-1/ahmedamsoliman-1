@@ -277,14 +277,20 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
-    - name: Deploy/Upgrade Helm Charts - Elasticsearch
-      working-directory: ./kubernetes/helm-charts/dbs/elk/elasticsearch
+    - name: Deploy/Upgrade Helm Charts - ArgoCD
+      working-directory: ./kubernetes/helm-charts/argo-cd
       run: |
-        chmod +x deploy_elastic.sh
-        ./deploy_elastic.sh
+        chmod +x deploy.sh
+        ./deploy.sh
 
-    - name: Deploy/Upgrade Helm Charts - Kibana
-      working-directory: ./kubernetes/helm-charts/dbs/elk/kibana
-      run: |
-        chmod +x deploy_kibana.sh
-        ./deploy_kibana.sh
+    # - name: Deploy/Upgrade Helm Charts - Elasticsearch
+    #   working-directory: ./kubernetes/helm-charts/dbs/elk/elasticsearch
+    #   run: |
+    #     chmod +x deploy_elastic.sh
+    #     ./deploy_elastic.sh
+
+    # - name: Deploy/Upgrade Helm Charts - Kibana
+    #   working-directory: ./kubernetes/helm-charts/dbs/elk/kibana
+    #   run: |
+    #     chmod +x deploy_kibana.sh
+    #     ./deploy_kibana.sh
