@@ -345,6 +345,12 @@ jobs:
     #   run: |
     #     chmod +x deploy.sh
     #     ./deploy.sh
+
+    - name: Deploy/Upgrade Helm Charts - portfolio
+      working-directory: ./kubernetes/helm-charts/portfolio-chart
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
   
     - name: Get Ingress IP
       run: |
