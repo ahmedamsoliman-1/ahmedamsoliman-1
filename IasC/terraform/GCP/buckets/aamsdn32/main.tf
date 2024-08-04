@@ -30,6 +30,6 @@ resource "google_storage_bucket" "aams_state_files_bucket_1" {
 variable "project_id" { type = string }
 variable "region" { type = string }
 variable "bucket_name_1" { default = "aams-terraform-gcp2-bucket-32" }
-variable "location" { type = string }
+variable "location" { default = "US" }
 
 output "bucket_name_1" { value = google_storage_bucket.aams_state_files_bucket_1.name }
