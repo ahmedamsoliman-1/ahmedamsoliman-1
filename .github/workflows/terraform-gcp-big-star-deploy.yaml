@@ -60,6 +60,9 @@ jobs:
 
     - name: Enable Cloud Storage API
       run: gcloud services enable storage.googleapis.com
+    
+    - name: Enable DNS API
+      run: gcloud services enable dns.googleapis.com
 
 
   # # # # # GCP Bucket
