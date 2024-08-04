@@ -165,14 +165,16 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ingress-ip
-    - name: List files for debugging
-      run: ls -la ingress-ip
+    - name: List Files in Current Directory
+      run: ls -la
+      
+
     - name: Set Ingress IP Environment Variable
       run: |
+        # Adjust path if necessary based on listing above
         INGRESS_IP=$(cat ingress-ip/ingress_ip.txt)
         echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
 
-  
     - name: Terraform Init
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
