@@ -201,18 +201,21 @@ jobs:
     #     TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
     #   run: terraform apply -auto-approve
     
-    - name: Build project
+    - name: Terraform Output
+      id: terraform_output
+      env:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: |
-        mkdir -p output
-        echo "Build output" > output/build.txt
-        pwd
-        ls
+        echo "Build output" > build.txt
+        ls -al
+        cat build.txt
 
-    - name: Upload artifact
+    - name: Upload Terraform Outputs
       uses: actions/upload-artifact@v3
       with:
-        name: build-artifact
-        path: output/build.txt
+        name: terraform-outputs
+        path: ./IasC/terraform/GCP/gke/gke3/build.txt
+      # working-directory: ./IasC/terraform/GCP/gke/gke3
     
     # - name: Terraform Output
     #   id: terraform_output
