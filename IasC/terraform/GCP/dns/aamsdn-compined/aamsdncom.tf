@@ -31,67 +31,6 @@ resource "google_dns_managed_zone" "aamsdn" {
   description = "Managed zone for aamsdn.com"
 }
 
-# Register the domain
-# resource "google_clouddomains_registration" "aamsdn" {
-#   domain_name = var.dns_name
-#   location    = "global"
-#   labels = {
-#     labelkey = "labelvalue"
-#   }
-#   yearly_price {
-#     currency_code = "USD"
-#     units         = 12
-#   }
-#   dns_settings {
-#     custom_dns {
-#       name_servers = [
-#         google_dns_managed_zone.aamsdn.name_servers[0],
-#         google_dns_managed_zone.aamsdn.name_servers[1],
-#         google_dns_managed_zone.aamsdn.name_servers[2],
-#         google_dns_managed_zone.aamsdn.name_servers[3]
-#       ]
-#     }
-#   }
-#   contact_settings {
-#     privacy = "REDACTED_CONTACT_DATA"
-#     registrant_contact {
-#       phone_number = var.mobile
-#       email        = var.email
-#       postal_address {
-#         region_code         = var.regioncode
-#         postal_code         = var.postalcode
-#         administrative_area = var.administrative_area
-#         locality            = var.locality
-#         address_lines       = [var.address]
-#         recipients          = [var.recipients]
-#       }
-#     }
-#     admin_contact {
-#       phone_number = var.mobile
-#       email        = var.email
-#       postal_address {
-#         region_code         = var.regioncode
-#         postal_code         = var.postalcode
-#         administrative_area = var.administrative_area
-#         locality            = var.locality
-#         address_lines       = [var.address]
-#         recipients          = [var.recipients]
-#       }
-#     }
-#     technical_contact {
-#       phone_number = var.mobile
-#       email        = var.email
-#       postal_address {
-#         region_code         = var.regioncode
-#         postal_code         = var.postalcode
-#         administrative_area = var.administrative_area
-#         locality            = var.locality
-#         address_lines       = [var.address]
-#         recipients          = [var.recipients]
-#       }
-#     }
-#   }
-# }
 
 variable "project_id" { type = string }
 variable "region" { type = string }
@@ -113,5 +52,3 @@ variable "address" { default = "Abu Dhabi Khalifa City" }
 # # # # # OUTPUT
 output "name_servers" { value = google_dns_managed_zone.aamsdn.name_servers }
 output "domain_name" { value = google_dns_managed_zone.aamsdn.name }
-# output "domain_name" { value = google_clouddomains_registration.aamsdn.domain_name }
-# output "location" { value = google_clouddomains_registration.aamsdn.location }
