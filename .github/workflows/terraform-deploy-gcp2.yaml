@@ -9,201 +9,282 @@ on:
       - master
     
 jobs:
-  # # # # # GCP Bucket
-  tf-prepare-deploy:
-    runs-on: ubuntu-latest
+  # # # # # # GCP Bucket
+  # tf-prepare-deploy:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
 
-    - name: Check terraform
-      run: |
-        terraform -version
+  #   - name: Check terraform
+  #     run: |
+  #       terraform -version
   
-  enable-google-cloud-apis-gcp2:
-    runs-on: ubuntu-latest
-    needs: tf-prepare-deploy
+  # enable-google-cloud-apis-gcp2:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-prepare-deploy
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
 
-    - name: Set up Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
-      with:
-        version: 'latest'
+  #   - name: Set up Google Cloud CLI
+  #     uses: google-github-actions/setup-gcloud@v2
+  #     with:
+  #       version: 'latest'
 
-    - name: Authenticate with Google Cloud
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
-      run: |
-        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
-        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+  #   - name: Authenticate with Google Cloud
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
+  #     run: |
+  #       echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
-    - name: Set project
-      run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
+  #   - name: Set project
+  #     run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
 
-    - name: Enable Compute Engine API
-      run: gcloud services enable compute.googleapis.com
+  #   - name: Enable Compute Engine API
+  #     run: gcloud services enable compute.googleapis.com
 
-    - name: Enable Kubernetes Engine API
-      run: gcloud services enable container.googleapis.com
+  #   - name: Enable Kubernetes Engine API
+  #     run: gcloud services enable container.googleapis.com
 
-    - name: Enable IAM API
-      run: gcloud services enable iam.googleapis.com
+  #   - name: Enable IAM API
+  #     run: gcloud services enable iam.googleapis.com
 
-    - name: Enable Cloud Storage API
-      run: gcloud services enable storage.googleapis.com
+  #   - name: Enable Cloud Storage API
+  #     run: gcloud services enable storage.googleapis.com
     
-    - name: Enable DNS API
-      run: gcloud services enable dns.googleapis.com
+  #   - name: Enable DNS API
+  #     run: gcloud services enable dns.googleapis.com
 
 
-  # # # # # GCP Bucket
-  tf-gcp-gcp2-bucket-deploy:
-    runs-on: ubuntu-latest
-    needs: enable-google-cloud-apis-gcp2
-    defaults:
-      run:
-        working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
-    - name: Terraform Output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform output
+  # # # # # # GCP Bucket
+  # tf-gcp-gcp2-bucket-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: enable-google-cloud-apis-gcp2
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
+  #   - name: Terraform Output
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform output
       
   
-  subsequent-pwd-bucket:
-    runs-on: ubuntu-latest
-    needs: tf-gcp-gcp2-bucket-deploy
+  # subsequent-pwd-bucket:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-gcp-gcp2-bucket-deploy
 
-    steps:
-      - name: Testing
-        run: pwd
+  #   steps:
+  #     - name: Testing
+  #       run: pwd
 
 
 
-  # # # # # GCP Cloud DNS
-  tf-gcp-gcp2-dns-aamsdn-com-deploy:
-    runs-on: ubuntu-latest
-    needs: enable-google-cloud-apis-gcp2
-    defaults:
-      run:
-        working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
+  # # # # # # GCP Cloud DNS
+  # tf-gcp-gcp2-dns-aamsdn-com-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: enable-google-cloud-apis-gcp2
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
         
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
 
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
 
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
-    - name: Terraform Output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform output
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
+  #   - name: Terraform Output
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform output
   
-  subsequent-dns-nslookup:
-    runs-on: ubuntu-latest
-    needs: tf-gcp-gcp2-dns-aamsdn-com-deploy
+  # subsequent-dns-nslookup:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-gcp-gcp2-dns-aamsdn-com-deploy
 
-    steps:
-      - name: Testing
-        run: nslookup aamsdn.com
+  #   steps:
+  #     - name: Testing
+  #       run: nslookup aamsdn.com
 
-  # # # # # GCP GKE
-  tf-gcp-gcp2-gke3-deploy:
-    runs-on: ubuntu-latest
-    needs: enable-google-cloud-apis-gcp2
-    defaults:
-      run:
-        working-directory: ./IasC/terraform/GCP/gke/gke3
+  # # # # # # GCP GKE
+  # tf-gcp-gcp2-gke3-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: enable-google-cloud-apis-gcp2
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/gke/gke3
   
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
   
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
         
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
   
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
   
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
     
-    - name: Terraform Output
-      id: terraform_output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: |
-        terraform output -json > terraform_outputs.json
-        ls -al
-        cat terraform_outputs.json
+  #   - name: Terraform Output
+  #     id: terraform_output
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: |
+  #       terraform output -json > terraform_outputs.json
+  #       ls -al
+  #       cat terraform_outputs.json
 
-    - name: Upload Terraform Outputs
-      uses: actions/upload-artifact@v3
-      with:
-        name: tf-outputs
-        path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
+  #   - name: Upload Terraform Outputs
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: tf-outputs
+  #       path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
 
-  prepare-helm-ktl-gcp2-gke3-deploy:
+  # prepare-helm-ktl-gcp2-gke3-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-gcp-gcp2-gke3-deploy
+
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+
+  #   - name: Download Terraform Outputs
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: tf-outputs
+
+  #   - name: Set up Google Cloud CLI
+  #     uses: google-github-actions/setup-gcloud@v2
+  #     with:
+  #       version: 'latest'
+
+  #   - name: Install GKE Cloud Auth plugin
+  #     run: |
+  #       gcloud components install gke-gcloud-auth-plugin
+
+  #   - name: Authenticate with Google Cloud
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+  #     run: |
+  #       echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+
+  #   - name: Download Terraform Outputs
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: tf-outputs
+
+  #   - name: Get GKE Cluster Credentials
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+  #     run: |
+  #       echo "Info"
+  #       CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
+  #       ZONE=$(jq -r '.location.value' terraform_outputs.json)
+  #       echo $CLUSTER_NAME
+  #       echo $ZONE
+  #       echo "get-credentials"
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+  #       gcloud container clusters list --project ${{ secrets.GCP2_PROJECT_ID }}
+  #       gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
+  #       # echo "get nodes"
+  #       # kubectl get nodes
+  #       # echo "get ns"
+  #       # kubectl get namespaces
+  #       # echo "get pods"
+  #       # kubectl get pods --all-namespaces
+
+    
+  #   - name: Install Helm if not present
+  #     run: |
+  #       # Check if Helm is installed
+  #       if ! helm version >/dev/null 2>&1; then
+  #         curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+  #         bash get_helm.sh
+  #       fi
+  #       helm version
+
+  #   - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
+  #     working-directory: ./kubernetes/helm-charts/ingress-nginx
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+
+  #   - name: Deploy/Upgrade Helm Charts - Cert Manager 
+  #     working-directory: ./kubernetes/helm-charts/cert-manager
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+    
+  #   - name: Deploy/Upgrade Helm Charts - ArgoCD
+  #     working-directory: ./kubernetes/helm-charts/argo-cd
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+  
+  get-infrom-from-gke:
     runs-on: ubuntu-latest
-    needs: tf-gcp-gcp2-gke3-deploy
 
     steps:
     - name: Checkout code
@@ -230,10 +311,6 @@ jobs:
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
-    - name: Download Terraform Outputs
-      uses: actions/download-artifact@v3
-      with:
-        name: tf-outputs
 
     - name: Get GKE Cluster Credentials
       env:
@@ -256,41 +333,7 @@ jobs:
         # kubectl get pods --all-namespaces
 
     
-    - name: Install Helm if not present
+    - name: kubectl
       run: |
-        # Check if Helm is installed
-        if ! helm version >/dev/null 2>&1; then
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-          bash get_helm.sh
-        fi
-        helm version
-
-    - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
-      working-directory: ./kubernetes/helm-charts/ingress-nginx
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-
-    - name: Deploy/Upgrade Helm Charts - Cert Manager 
-      working-directory: ./kubernetes/helm-charts/cert-manager
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-    
-    - name: Deploy/Upgrade Helm Charts - ArgoCD
-      working-directory: ./kubernetes/helm-charts/argo-cd
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-
-    # - name: Deploy/Upgrade Helm Charts - Elasticsearch
-    #   working-directory: ./kubernetes/helm-charts/dbs/elk/elasticsearch
-    #   run: |
-    #     chmod +x deploy_elastic.sh
-    #     ./deploy_elastic.sh
-
-    # - name: Deploy/Upgrade Helm Charts - Kibana
-    #   working-directory: ./kubernetes/helm-charts/dbs/elk/kibana
-    #   run: |
-    #     chmod +x deploy_kibana.sh
-    #     ./deploy_kibana.sh
+        kubectl get nodes
+        kubectl -n ingress-nginx get pods 
