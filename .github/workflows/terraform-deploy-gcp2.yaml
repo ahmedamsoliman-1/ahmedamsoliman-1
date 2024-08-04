@@ -246,7 +246,7 @@ jobs:
         echo $ZONE
         echo "get-credentials"
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
-        gcloud container clusters list
+        gcloud container clusters list --project ${{ secrets.GCP2_PROJECT_ID }}
         gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
         # echo "get nodes"
         # kubectl get nodes
