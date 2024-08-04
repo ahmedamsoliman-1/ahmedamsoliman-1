@@ -205,6 +205,8 @@ jobs:
       run: |
         mkdir -p output
         echo "Build output" > output/build.txt
+        pwd
+        ls
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
