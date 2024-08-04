@@ -277,8 +277,14 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
-    - name: Deploy/Upgrade Helm Charts - Dashboard
-      working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
+    - name: Deploy/Upgrade Helm Charts - Elasticsearch
+      working-directory: ./kubernetes/helm-charts/dbs/elk/elasticsearch
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
+
+    - name: Deploy/Upgrade Helm Charts - Kibana
+      working-directory: ./kubernetes/helm-charts/dbs/elk/kibana
       run: |
         chmod +x deploy.sh
         ./deploy.sh
