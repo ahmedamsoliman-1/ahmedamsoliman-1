@@ -203,10 +203,60 @@ jobs:
     steps:
       - name: Testing
         run: pwd
-  subsequent-gke-2:
+
+  helm-gcp-gcp2-gke3-deploy:
     runs-on: ubuntu-latest
     needs: terraform-gcp-gcp2-gke3-deploy
 
     steps:
-      - name: Testing
-        run: kubectl get nodes
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        version: 'latest'
+
+    - name: Install GKE Cloud Auth plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+
+    - name: Authenticate with Google Cloud
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+      run: |
+        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+      continue-on-error: true
+
+    - name: Get GKE Cluster Credentials
+      run: |
+        gcloud container clusters get-credentials aams-gke2-gcp2-gke-primary-cluster --zone us-east1-b --project ${{ secrets.GCP2_PROJECT_ID }}
+        kubectl get nodes
+        kubectl get namespaces
+        kubectl get pods --all-namespaces
+      continue-on-error: true
+    
+    # - name: Install Helm if not present
+    #   run: |
+    #     # Check if Helm is installed
+    #     if ! helm version >/dev/null 2>&1; then
+    #       curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    #       bash get_helm.sh
+    #     fi
+    #     helm version
+    #   continue-on-error: true
+
+    # - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
+    #   working-directory: ./kubernetes/helm-charts/ingress-nginx
+    #   run: |
+    #     chmod +x deploy.sh
+    #     ./deploy.sh
+    #   continue-on-error: true
+
+    # - name: Deploy/Upgrade Helm Charts - Cert Manager 
+    #   working-directory: ./kubernetes/helm-charts/cert-manager
+    #   run: |
+    #     chmod +x deploy.sh
+    #     ./deploy.sh
+    #   continue-on-error: true
