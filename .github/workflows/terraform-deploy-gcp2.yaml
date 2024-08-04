@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -74,7 +74,7 @@ jobs:
         working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
@@ -126,7 +126,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -175,11 +175,11 @@ jobs:
     defaults:
       run:
         working-directory: ./IasC/terraform/GCP/gke/gke3
-
+  
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
+      uses: actions/checkout@v4
+  
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
@@ -189,12 +189,12 @@ jobs:
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-
+  
     - name: Terraform Plan
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       run: terraform plan
-
+  
     - name: Terraform Apply
       if: github.event_name == 'push'
       env:
@@ -202,18 +202,20 @@ jobs:
       run: terraform apply -auto-approve
     
     - name: Terraform Output
+      id: terraform_output
       env:
         TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      id: terraform_output
       run: |
         terraform output -json > terraform_outputs.json
+        ls -al
         cat terraform_outputs.json
-
+  
     - name: Upload Terraform Outputs
       uses: actions/upload-artifact@v3
       with:
         name: terraform-outputs
         path: terraform_outputs.json
+  
 
   subsequent-gke:
     runs-on: ubuntu-latest
@@ -229,7 +231,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download Terraform Outputs
       uses: actions/download-artifact@v3
