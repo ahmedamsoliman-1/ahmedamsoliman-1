@@ -31,9 +31,24 @@ resource "google_dns_managed_zone" "aamsdn" {
   description = "Managed zone for aamsdn.com"
 }
 
+# Create the A record
+resource "google_dns_record_set" "a_record" {
+  name         = "${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
 
 variable "project_id" { type = string }
 variable "region" { type = string }
+
+variable "ingress_ip" {
+  description = "Ingress IP address"
+  type        = string
+  default     = ""
+}
 
 variable "dns_name" { default = "aamsd.com" }
 variable "ddns_name" { default = "aamsd.com." }
