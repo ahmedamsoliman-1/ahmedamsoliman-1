@@ -9,14 +9,15 @@ import {
   FaGitlab,
 } from "react-icons/fa";
 
+import avatar from "../assets/avatar2.jpg";
+
 const Main = () => {
   return (
     <div id="main">
       <img
         className="w-full h-screen object-cover object-left scale-x-[-1]"
-        alt="/"
-        src="src/assets/avatar2.jpg"
-        // src="http://aams-sd-web-resume.s3-website.me-central-1.amazonaws.com/avatar.jpg"
+        alt="Avatar"
+        src={avatar} // Use the imported image
       />
       <div className="w-full h-screen absolute top-0 left-0 bg-white/50">
         <div className="max-w-[700px] m-auto h-full w-full flex flex-col justify-center lg:items-start items-center">
