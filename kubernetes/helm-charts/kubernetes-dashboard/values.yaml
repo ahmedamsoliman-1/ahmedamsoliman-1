@@ -94,13 +94,13 @@ app:
 
   # values.yaml
   ingress:
-    enabled: true
+    enabled: false
     hosts:
     - dashboard.aamsd.com
     ingressClassName: nginx
     useDefaultIngressClass: false
     useDefaultAnnotations: true
-    pathType: Prefix
+    pathType: Prefixx
     path: /
     issuer:
       name: letsencrypt-prod
@@ -375,7 +375,7 @@ metrics-server:
 ## Required Kong sub-chart with DBless configuration to act as a gateway
 ## for our all containers.
 kong:
-  enabled: true
+  enabled: false
   ## Configuration reference: https://docs.konghq.com/gateway/3.6.x/reference/configuration
   env:
     dns_order: LAST,A,CNAME,AAAA,SRV

@@ -64,6 +64,21 @@ output "resume_dev_subdomain" { value = "${var.resume_dev_subdomain}.${var.dns_n
 
 
 
+resource "google_dns_record_set" "dashboard_subdomain" {
+  name         = "${var.dashboard_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "dashboard_subdomain" { default = "dashboard" }
+output "dashboard_subdomain" { value = "${var.dashboard_subdomain}.${var.dns_name}" }
+
+
+
+
+
 
 
 resource "google_dns_record_set" "resume_data_subdomain" {
