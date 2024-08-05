@@ -267,13 +267,13 @@ ingress:
   className: "nginx"
   pathtype: ImplementationSpecific
   hosts:
-  - host: elk.ahmedalimsoliman.com
+  - host: elk.aamsd.com
     paths:
     - path: /
   tls:
   - secretName: elasticsearch-tls
     hosts:
-    - elk.ahmedalimsoliman.com
+    - elk.aamsd.com
 
 nameOverride: ""
 fullnameOverride: ""

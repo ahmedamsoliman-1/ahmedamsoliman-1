@@ -42,7 +42,7 @@ crds:
 global:
   # -- Default domain used by all components
   ## Used for ingresses, certificates, SSO, notifications, etc.
-  domain: argo.ahmedalimsoliman.com
+  domain: argo.aamsd.com
 
   # -- Common labels for the all resources
   additionalLabels: {}
@@ -2001,7 +2001,7 @@ server:
     enabled: true
     # -- Certificate primary domain (commonName)
     # @default -- `""` (defaults to global.domain)
-    domain: "argo.ahmedalimsoliman.com"
+    domain: "argo.aamsd.com"
     # -- Certificate Subject Alternate Names (SANs)
     additionalHosts: []
     # -- The requested 'duration' (i.e. lifetime) of the certificate.
@@ -2173,7 +2173,7 @@ server:
     ingressClassName: "nginx"
 
     # -- Argo CD server hostname
-    hostname: argo.ahmedalimsoliman.com
+    hostname: argo.aamsd.com
 
     # -- The path to Argo CD server
     path: /
@@ -2196,7 +2196,7 @@ server:
     # -- Additional TLS configuration (optional)
     extraTls:
     - hosts:
-      - argo.ahmedalimsoliman.com
+      - argo.aamsd.com
       secretName: argocd-server-tls
       # ingress:
       #   # -- Enable an ingress resource for the Argo CD server
@@ -2219,7 +2219,7 @@ server:
 
       #   # -- Argo CD server hostname
       #   # @default -- `""` (defaults to global.domain)
-      #   hostname: "argo.ahmedalimsoliman.com"
+      #   hostname: "argo.aamsd.com"
 
       #   # -- The path to Argo CD server
       #   path: /

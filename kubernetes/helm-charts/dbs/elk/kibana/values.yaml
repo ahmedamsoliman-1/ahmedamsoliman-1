@@ -142,13 +142,13 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
   hosts:
-  - host: kibana.ahmedalimsoliman.com
+  - host: kibana.aamsd.com
     paths:
     - path: /
   tls:
   - secretName: kibana-tls
     hosts:
-    - kibana.ahmedalimsoliman.com
+    - kibana.aamsd.com
 
 readinessProbe:
   failureThreshold: 3

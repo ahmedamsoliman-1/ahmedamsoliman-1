@@ -96,7 +96,7 @@ app:
   ingress:
     enabled: true
     hosts:
-    - dashboard.ahmedalimsoliman.com
+    - dashboard.aamsd.com
     ingressClassName: nginx
     useDefaultIngressClass: false
     useDefaultAnnotations: true

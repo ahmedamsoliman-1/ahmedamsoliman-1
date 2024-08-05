@@ -5,6 +5,7 @@
       "!DOCKER_REGISTRY",
       "!VERSION_CHANGED",
       "!VERSION",
+      "!INGRESS_IP",
       
       "!VERSION",
       "!BRANCH_NAME"
