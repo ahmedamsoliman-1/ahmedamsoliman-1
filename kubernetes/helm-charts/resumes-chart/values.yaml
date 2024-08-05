@@ -13,7 +13,7 @@ data:
     type: ClusterIP
     port: 80
   domain:
-    name: resume.data.aamsd.com
+    name: dataresume.aamsd.com
 
 dev:
   namespace: resumes
@@ -26,7 +26,7 @@ dev:
     type: ClusterIP
     port: 80
   domain:
-    name: resume.dev.aamsd.com
+    name: devresume.aamsd.com
 
 ts:
   namespace: resumes
@@ -39,7 +39,7 @@ ts:
     type: ClusterIP
     port: 80
   domain:
-    name: resume.ts.aamsd.com
+    name: tsresume.aamsd.com
 
 devops:
   namespace: resumes
@@ -52,5 +52,5 @@ devops:
     type: ClusterIP
     port: 80
   domain:
-    name: resume.devops.aamsd.com
+    name: devopsresume.aamsd.com
 

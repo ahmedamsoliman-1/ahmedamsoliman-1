@@ -8,6 +8,12 @@ resource "google_dns_record_set" "argo_subdomain" {
 
   rrdatas = [var.ingress_ip]
 }
+variable "argo_subdomain" { default = "argo" }
+output "argo_subdomain" { value = "${var.argo_subdomain}.${var.dns_name}" }
+
+
+
+
 
 resource "google_dns_record_set" "portfolio_subdomain" {
   name         = "${var.portfolio_subdomain}.${var.dns_name}."
@@ -17,6 +23,13 @@ resource "google_dns_record_set" "portfolio_subdomain" {
 
   rrdatas = [var.ingress_ip]
 }
+variable "portfolio_subdomain" { default = "portfolio" }
+output "portfolio_subdomain" { value = "${var.portfolio_subdomain}.${var.dns_name}" }
+
+
+
+
+
 
 
 
@@ -28,8 +41,13 @@ resource "google_dns_record_set" "resume_devops_subdomain" {
 
   rrdatas = [var.ingress_ip]
 }
-variable "resume_devops_subdomain" { default = "resume.devops" }
+variable "resume_devops_subdomain" { default = "devopsresume" }
 output "resume_devops_subdomain" { value = "${var.resume_devops_subdomain}.${var.dns_name}" }
+
+
+
+
+
 
 resource "google_dns_record_set" "resume_dev_subdomain" {
   name         = "${var.resume_dev_subdomain}.${var.dns_name}."
@@ -39,7 +57,7 @@ resource "google_dns_record_set" "resume_dev_subdomain" {
 
   rrdatas = [var.ingress_ip]
 }
-variable "resume_dev_subdomain" { default = "resume.dev" }
+variable "resume_dev_subdomain" { default = "devresume" }
 output "resume_dev_subdomain" { value = "${var.resume_dev_subdomain}.${var.dns_name}" }
 
 
@@ -56,7 +74,7 @@ resource "google_dns_record_set" "resume_data_subdomain" {
 
   rrdatas = [var.ingress_ip]
 }
-variable "resume_data_subdomain" { default = "resume.data" }
+variable "resume_data_subdomain" { default = "dataresume" }
 output "resume_data_subdomain" { value = "${var.resume_data_subdomain}.${var.dns_name}" }
 
 resource "google_dns_record_set" "resume_ts_subdomain" {
@@ -67,12 +85,12 @@ resource "google_dns_record_set" "resume_ts_subdomain" {
 
   rrdatas = [var.ingress_ip]
 }
-variable "resume_ts_subdomain" { default = "resume.ts" }
+variable "resume_ts_subdomain" { default = "tsresume" }
 output "resume_ts_subdomain" { value = "${var.resume_ts_subdomain}.${var.dns_name}" }
 
 
 resource "google_dns_record_set" "ahmed_subdomain" {
-  name         = "${var.resume_ts_subdomain}.${var.dns_name}."
+  name         = "${var.ahmed_subdomain}.${var.dns_name}."
   managed_zone = google_dns_managed_zone.aamsdn.name
   type         = "A"
   ttl          = 300
@@ -84,14 +102,3 @@ output "ahmed_subdomain" { value = "${var.ahmed_subdomain}.${var.dns_name}" }
 
 
 
-
-
-
-
-
-variable "argo_subdomain" { default = "argo" }
-variable "portfolio_subdomain" { default = "portfolio" }
-
-
-output "argo_subdomain" { value = "${var.argo_subdomain}.${var.dns_name}" }
-output "portfolio_subdomain" { value = "${var.portfolio_subdomain}.${var.dns_name}" }
