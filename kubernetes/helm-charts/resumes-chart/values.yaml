@@ -4,7 +4,7 @@ argocd:
 
 data:
   namespace: resumes
-  name: resumes-data-engineer
+  name: aams-resume-data-eng-pdf
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-data-eng-pdf"
@@ -17,7 +17,7 @@ data:
 
 dev:
   namespace: resumes
-  name: resumes-developer
+  name: aams-resume-dev-pdf
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-dev-pdf"
@@ -30,7 +30,7 @@ dev:
 
 ts:
   namespace: resumes
-  name: resumes-ts
+  name: aams-resume-ts-pdf
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-ts-pdf"
@@ -43,7 +43,7 @@ ts:
 
 devops:
   namespace: resumes
-  name: resumes-devops-engineer
+  name: aams-resume-devops-pdf
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-devops-pdf"
