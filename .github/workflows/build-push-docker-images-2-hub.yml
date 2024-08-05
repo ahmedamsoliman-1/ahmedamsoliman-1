@@ -88,8 +88,8 @@ jobs:
         run: |
           echo $BRANCH_NAME
           echo $GITHUB_ENV
-          echo ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:latest
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:latest --push ./apps/nodejs/personal-cloud
+          echo ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:2
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:2 --push ./apps/nodejs/personal-cloud
 
   build-push-image-frontend-svc:
     runs-on: ubuntu-latest
@@ -116,7 +116,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-frontend-svc:latest --push ./apps/nodejs/frontend-svc
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-frontend-svc:2 --push ./apps/nodejs/frontend-svc
 
   build-push-image-order-svc:
     runs-on: ubuntu-latest
@@ -143,7 +143,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-order-svc:latest --push ./apps/nodejs/order-svc
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-order-svc:2 --push ./apps/nodejs/order-svc
   
   build-push-image-user-svc:
     runs-on: ubuntu-latest
@@ -170,7 +170,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-user-svc:latest --push ./apps/nodejs/user-svc
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-user-svc:2 --push ./apps/nodejs/user-svc
 
   build-push-image-node-templates:
     runs-on: ubuntu-latest
@@ -197,7 +197,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-node-templates:latest --push ./apps/nodejs/node-templates
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-node-templates:2 --push ./apps/nodejs/node-templates
      
   ###### Resumes
   build-push-image-data-eng:
@@ -225,7 +225,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-data-eng-pdf:latest --push ./apps/static/resume-data-eng-pdf
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-data-eng-pdf:2 --push ./apps/static/resume-data-eng-pdf
 
   build-push-image-dev:
     runs-on: ubuntu-latest
@@ -252,7 +252,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-pdf:latest --push ./apps/static/resume-dev-pdf
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-pdf:2 --push ./apps/static/resume-dev-pdf
     
   build-push-image-dev-web:
     runs-on: ubuntu-latest
@@ -274,7 +274,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-web:latest --push ./apps/static/resume-dev-web
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-web:2 --push ./apps/static/resume-dev-web
   
   build-push-image-devops:
     runs-on: ubuntu-latest
@@ -301,7 +301,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-devops-pdf:latest --push ./apps/static/resume-devops-pdf
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-devops-pdf:2 --push ./apps/static/resume-devops-pdf
 
   build-push-image-ts:
     runs-on: ubuntu-latest
@@ -328,7 +328,7 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-ts-pdf:latest --push ./apps/static/resume-ts-pdf
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-ts-pdf:2 --push ./apps/static/resume-ts-pdf
   
   ##### Portfolio
   build-push-image-portfolio:
@@ -357,4 +357,4 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-portfolio:latest --push ./apps/NextJS/portfolio
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-portfolio:2 --push ./apps/NextJS/portfolio

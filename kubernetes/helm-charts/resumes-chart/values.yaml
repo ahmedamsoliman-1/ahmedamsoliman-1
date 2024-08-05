@@ -8,7 +8,7 @@ data:
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-data-eng-pdf"
-    tag: "latest"
+    tag: "2"
   service:
     type: ClusterIP
     port: 80
@@ -21,7 +21,7 @@ dev:
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-dev-pdf"
-    tag: "latest"
+    tag: "2"
   service:
     type: ClusterIP
     port: 80
@@ -34,7 +34,7 @@ ts:
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-ts-pdf"
-    tag: "latest"
+    tag: "2"
   service:
     type: ClusterIP
     port: 80
@@ -47,7 +47,7 @@ devops:
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-devops-pdf"
-    tag: "latest"
+    tag: "2"
   service:
     type: ClusterIP
     port: 80
