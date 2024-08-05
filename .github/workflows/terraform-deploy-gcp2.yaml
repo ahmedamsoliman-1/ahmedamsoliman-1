@@ -329,29 +329,29 @@ jobs:
         fi
         helm version
 
-    # - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
-    #   working-directory: ./kubernetes/helm-charts/ingress-nginx
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
+    - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
+      working-directory: ./kubernetes/helm-charts/ingress-nginx
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
 
-    # - name: Deploy/Upgrade Helm Charts - Cert Manager 
-    #   working-directory: ./kubernetes/helm-charts/cert-manager
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
+    - name: Deploy/Upgrade Helm Charts - Cert Manager 
+      working-directory: ./kubernetes/helm-charts/cert-manager
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
     
-    # - name: Deploy/Upgrade Helm Charts - ArgoCD
-    #   working-directory: ./kubernetes/helm-charts/argo-cd
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
+    - name: Deploy/Upgrade Helm Charts - ArgoCD
+      working-directory: ./kubernetes/helm-charts/argo-cd
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
 
-    # - name: Deploy/Upgrade Helm Charts - portfolio
-    #   working-directory: ./kubernetes/helm-charts/portfolio-chart
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
+    - name: Deploy/Upgrade Helm Charts - portfolio
+      working-directory: ./kubernetes/helm-charts/portfolio-chart
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
   
     - name: Get Ingress IP
       run: |
