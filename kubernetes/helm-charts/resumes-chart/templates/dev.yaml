@@ -78,17 +78,17 @@ spec:
     - {{ .Values.dev.domain.name }}
     secretName: {{ .Values.dev.name }}-cert-tls
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: {{ .Values.dev.name }}-cert
-  namespace: {{ .Values.dev.namespace }}
-spec:
-  secretName: {{ .Values.dev.name }}-cert-tls
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  commonName: {{ .Values.dev.domain.name }}
-  dnsNames:
-  - {{ .Values.dev.domain.name }}
----
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: {{ .Values.dev.name }}-cert
+#   namespace: {{ .Values.dev.namespace }}
+# spec:
+#   secretName: {{ .Values.dev.name }}-cert-tls
+#   issuerRef:
+#     name: letsencrypt-prod
+#     kind: ClusterIssuer
+#   commonName: {{ .Values.dev.domain.name }}
+#   dnsNames:
+#   - {{ .Values.dev.domain.name }}
+# ---
