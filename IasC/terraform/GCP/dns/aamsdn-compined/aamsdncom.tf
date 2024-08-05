@@ -31,32 +31,6 @@ resource "google_dns_managed_zone" "aamsdn" {
   description = "Managed zone for aamsdn.com"
 }
 
-# # Create the A record
-# resource "google_dns_record_set" "a_record" {
-#   name         = "${var.dns_name}."
-#   managed_zone = google_dns_managed_zone.aamsdn.name
-#   type         = "A"
-#   ttl          = 300
-
-#   rrdatas = [var.ingress_ip]
-# }
-# Create the A record for the subdomain
-resource "google_dns_record_set" "argo_subdomain" {
-  name         = "${var.argo_subdomain}.${var.dns_name}."
-  managed_zone = google_dns_managed_zone.aamsdn.name
-  type         = "A"
-  ttl          = 300
-
-  rrdatas = [var.ingress_ip]
-}
-resource "google_dns_record_set" "portfolio_subdomain" {
-  name         = "${var.portfolio_subdomain}.${var.dns_name}."
-  managed_zone = google_dns_managed_zone.aamsdn.name
-  type         = "A"
-  ttl          = 300
-
-  rrdatas = [var.ingress_ip]
-}
 
 variable "project_id" { type = string }
 variable "region" { type = string }
@@ -66,8 +40,7 @@ variable "ingress_ip" { type = string }
 variable "dns_name" { default = "aamsd.com" }
 variable "ddns_name" { default = "aamsd.com." }
 variable "zdns_name" { default = "aamsd-com" }
-variable "argo_subdomain" { default = "argo" }
-variable "portfolio_subdomain" { default = "portfolio" }
+
 
 variable "recipients" { default = "Mohamed Ali Ali Mohamed Soliman" }
 variable "mobile" { default = "+971507065214" }
