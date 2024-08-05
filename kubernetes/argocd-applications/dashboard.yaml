@@ -1,25 +1,25 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: dashboard
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
-    targetRevision: main
-    path: kubernetes/helm-charts/kubernetes-dashboard
-    helm:
-      valueFiles:
-      - values.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: kubernetes-dashboard
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
-    syncOptions:
-    - CreateNamespace=true
-    - ApplyOutOfSyncOnly=true
----
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: dashboard
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
+#     targetRevision: main
+#     path: kubernetes/helm-charts/kubernetes-dashboard
+#     helm:
+#       valueFiles:
+#       - values.yaml
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: kubernetes-dashboard
+#   syncPolicy:
+#     automated:
+#       prune: false
+#       selfHeal: false
+#     syncOptions:
+#     - CreateNamespace=true
+#     - ApplyOutOfSyncOnly=true
+# ---
