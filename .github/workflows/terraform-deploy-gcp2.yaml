@@ -358,6 +358,12 @@ jobs:
       run: |
         chmod +x deploy.sh
         ./deploy.sh
+    
+    - name: Deploy/Upgrade Helm Charts - ahmed
+      working-directory: ./kubernetes/helm-charts/ahmed-chart
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
   
     - name: Get Ingress IP
       run: |

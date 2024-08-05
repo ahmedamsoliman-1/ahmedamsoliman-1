@@ -1,0 +1,17 @@
+
+name: ahmed
+namespace: ahmed
+
+replicaCount: 2
+
+
+image:
+  repository: "ahmedalimsolimansd/aams-portfolio"
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+
+domain:
+  name: ahmed.aamsd.com

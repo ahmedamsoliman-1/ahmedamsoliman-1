@@ -71,6 +71,17 @@ variable "resume_ts_subdomain" { default = "resume.ts" }
 output "resume_ts_subdomain" { value = "${var.resume_ts_subdomain}.${var.dns_name}" }
 
 
+resource "google_dns_record_set" "ahmed_subdomain" {
+  name         = "${var.resume_ts_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "ahmed_subdomain" { default = "ahmed" }
+output "ahmed_subdomain" { value = "${var.ahmed_subdomain}.${var.dns_name}" }
+
 
 
 
