@@ -28,6 +28,20 @@ dev:
   domain:
     name: devresume.aamsd.com
 
+
+devweb:
+  namespace: resumes
+  name: aams-resume-dev-pdf
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-resume-dev-web"
+    tag: "2"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: devweb.aamsd.com
+
 ts:
   namespace: resumes
   name: aams-resume-ts-pdf
