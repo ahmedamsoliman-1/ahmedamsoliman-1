@@ -40,7 +40,7 @@ devweb:
     type: ClusterIP
     port: 80
   domain:
-    name: devweb.aamsd.com
+    name: webresume.aamsd.com
 
 ts:
   namespace: resumes
