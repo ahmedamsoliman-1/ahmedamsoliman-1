@@ -185,3 +185,39 @@ variable "kibana_subdomain" { default = "kibana" }
 output "kibana_subdomain" { value = "${var.kibana_subdomain}.${var.dns_name}" }
 
 
+
+
+
+
+
+
+
+
+
+
+resource "google_dns_record_set" "prom_subdomain" {
+  name         = "${var.prom_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "prom_subdomain" { default = "prom" }
+output "prom_subdomain" { value = "${var.prom_subdomain}.${var.dns_name}" }
+
+
+
+
+resource "google_dns_record_set" "grafana_subdomain" {
+  name         = "${var.grafana_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "grafana_subdomain" { default = "grafana" }
+output "grafana_subdomain" { value = "${var.grafana_subdomain}.${var.dns_name}" }
+
+
