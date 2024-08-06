@@ -31,7 +31,7 @@ dev:
 
 devweb:
   namespace: resumes
-  name: aams-resume-dev-pdf
+  name: aams-resume-dev-web
   replicaCount: 1
   image:
     repository: "ahmedalimsolimansd/aams-resume-dev-web"
