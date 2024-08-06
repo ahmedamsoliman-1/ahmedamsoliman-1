@@ -1,0 +1,34 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+
+  - job_name: cs2-backend-1
+    honor_labels: true
+    honor_timestamps: true
+    scheme: http
+    scrape_interval: 60s
+    scrape_timeout: 55s
+    metrics_path: /cs2-prometheus-metrics
+    static_configs:
+      - targets: [ 'host.docker.internal:3001' ]
+
+  # - job_name: cs2-backend-1-alpha
+  #   honor_labels: true
+  #   honor_timestamps: true
+  #   scheme: http
+  #   scrape_interval: 60s
+  #   scrape_timeout: 55s
+  #   metrics_path: /cs2-prometheus-metrics
+  #   static_configs:
+  #     - targets: [ 'alpha-backend.infinitychess.com' ]
+
+  # - job_name: cs2-backend-1-beta
+  #   honor_labels: true
+  #   honor_timestamps: true
+  #   scheme: http
+  #   scrape_interval: 60s
+  #   scrape_timeout: 55s
+  #   metrics_path: /cs2-prometheus-metrics
+  #   static_configs:
+  #     - targets: [ 'beta-backend.infinitychess.com' ]

@@ -34,6 +34,7 @@ helm upgrade --install $NAMESPACE-release . -n $NAMESPACE -f values.yaml
 
 box_text "Admin password" 36
 kubectl -n $NAMESPACE get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
+# kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
 
 
 #!/bin/bash
