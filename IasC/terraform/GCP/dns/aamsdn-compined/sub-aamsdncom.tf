@@ -130,3 +130,37 @@ variable "supper_subdomain" { default = "supper" }
 output "supper_subdomain" { value = "${var.supper_subdomain}.${var.dns_name}" }
 
 
+
+
+
+
+
+
+
+
+resource "google_dns_record_set" "elk_subdomain" {
+  name         = "${var.elk_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "elk_subdomain" { default = "elk" }
+output "elk_subdomain" { value = "${var.elk_subdomain}.${var.dns_name}" }
+
+
+
+
+resource "google_dns_record_set" "kibana_subdomain" {
+  name         = "${var.kibana_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "kibana_subdomain" { default = "kibana" }
+output "kibana_subdomain" { value = "${var.kibana_subdomain}.${var.dns_name}" }
+
+
