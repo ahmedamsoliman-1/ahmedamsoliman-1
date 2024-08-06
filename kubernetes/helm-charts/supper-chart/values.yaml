@@ -1,0 +1,17 @@
+
+name: ahmed
+namespace: ahmed
+
+replicaCount: 2
+
+
+image:
+  repository: "ahmedalimsolimansd/aams-node-templates"
+  tag: "2"
+
+service:
+  type: ClusterIP
+  port: 80
+
+domain:
+  name: supper.aamsd.com

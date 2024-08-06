@@ -117,3 +117,16 @@ output "ahmed_subdomain" { value = "${var.ahmed_subdomain}.${var.dns_name}" }
 
 
 
+
+resource "google_dns_record_set" "supper_subdomain" {
+  name         = "${var.supper_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "supper_subdomain" { default = "supper" }
+output "supper_subdomain" { value = "${var.supper_subdomain}.${var.dns_name}" }
+
+
