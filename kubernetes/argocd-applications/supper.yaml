@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: supper
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
+    targetRevision: main
+    path: kubernetes/helm-charts/supper-chart
+    helm:
+      valueFiles:
+      - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true

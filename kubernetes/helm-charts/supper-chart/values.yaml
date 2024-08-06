@@ -1,6 +1,6 @@
 
-name: ahmed
-namespace: ahmed
+name: supper
+namespace: supper
 
 replicaCount: 2
 
