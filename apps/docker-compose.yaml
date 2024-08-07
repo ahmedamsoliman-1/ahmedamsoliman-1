@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build:
+      context: ./NextJS/portfolio
+      dockerfile: Dockerfile
+    container_name: portfolio
+    ports:
+      - "8080:80"
+
+  resume-dev-web:
+    build:
+      context: ./static/resume-dev-web
+      dockerfile: Dockerfile
+    container_name: resume-dev-web
+    ports:
+      - "8081:80"
+  
+  react-app-simple:
+    build:
+      context: ./React/react-app-simple
+      dockerfile: Dockerfile
+    container_name: react-app-simple
+    ports:
+      - "8082:80"
+  
+  frontend-svc:
+    build:
+      context: ./NodeJS/frontend-svc
+      dockerfile: Dockerfile
+    container_name: frontend-svc
+    ports:
+      - "8083:8080"
+  order-svc:
+    build:
+      context: ./NodeJS/order-svc
+      dockerfile: Dockerfile
+    container_name: order-svc
+    ports:
+      - "8084:8080"
+  user-svc:
+    build:
+      context: ./NodeJS/user-svc
+      dockerfile: Dockerfile
+    container_name: user-svc
+    ports:
+      - "8085:8080"
+  
+  # cpp-web-app-1:
+  #   build:
+  #     context: ./Cpp/cppwebapp1
+  #     dockerfile: Dockerfile
+  #   container_name: cpp-web-app-1
+  #   ports:
+  #     - "8086:8080"
