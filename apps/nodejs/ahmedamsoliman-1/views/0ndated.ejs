@@ -1,0 +1,37 @@
+<%- include ('partials/header') %>
+
+<div class="container">
+  <header class="jumbotron">
+    <div class="container">
+      <h1>Weclome To My gallary!</h1>
+      <a>my ALL pics throuh <strong><%= y %></strong></a>
+      <div><a>Number of image: <%= array1.length %></a></div>
+    </div>
+  </header>
+</div>
+
+<header class="jumbotron">
+  <div class="container">
+    <h2><%= y %></h2>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row text-center" style="display: flex; flex-wrap: wrap">
+    <% for (var i = 0; i < array1.length; i++) { %> <% var item1 = array1[i]; %>
+    <% var item2 = array2[i]; %> <% var fileName =
+    item1.substring(item1.lastIndexOf('/') + 1, item1.lastIndexOf('.')); %>
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <img src="<%= item2 %>" />
+        <div class="caption">
+          <h4><%= fileName %></h4>
+          <a target="_blank" href="<%= item1 %>" class="btn btn-sm btn-info"
+            >Open</a
+          >
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

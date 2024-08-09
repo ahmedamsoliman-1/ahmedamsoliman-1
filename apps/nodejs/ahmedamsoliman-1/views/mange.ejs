@@ -1,0 +1,23 @@
+<%- include ('partials/header') %>
+
+<div class="container">
+  <h1>Current Registered user</h1>
+</div>
+
+<div class="row text-center" style="display: flex; flex-wrap: wrap">
+  <% _user.forEach(function(_u) { %>
+  <div class="col-md-3 col-sm-6">
+    <div class="thumbnail">
+      <div class="caption">
+        <h4><%= _u.fullname %></h4>
+        <img height="200" width="200" src="<%= _u.image %>" />
+      </div>
+      <p>
+        <a href="/profile/<%= _u._id %>" class="btn btn-primary">Profile</a>
+      </p>
+    </div>
+  </div>
+  <% }); %>
+</div>
+
+<%- include ('partials/footer') %>

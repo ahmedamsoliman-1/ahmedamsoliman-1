@@ -1,0 +1,39 @@
+<%- include ('partials/header') %>
+
+<div class="container">
+  <h1>Signup</h1>
+
+  <form action="/register" method="POST">
+    <div class="form-group">
+      <input type="text" name="fullname" placeholder="fullname" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="username" placeholder="username" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="age" placeholder="Age" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="image" placeholder="Image link" />
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="arabic_name" placeholder="Arabic Name" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="email" placeholder="Email Address" />
+    </div>
+    <div class="form-group">
+      <input type="text" name="mobile_number" placeholder="Mobile Number" />
+    </div>
+
+    <div class="form-group">
+      <input type="password" name="password" placeholder="password" />
+    </div>
+    <div class="form-group">
+      <input class="btn btn-primary" type="submit" value="Submit" />
+    </div>
+  </form>
+</div>
+
+<%- include ('partials/footer') %>

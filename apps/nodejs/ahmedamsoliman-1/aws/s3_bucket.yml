@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: A template to create S3 bucket
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: ACMC ertificate DNS Name
+    Default: xxx
+
+Outputs:
+  S3BucketName:
+    Value:
+      Ref: S3Bucket
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      BucketName: !Ref S3BucketName

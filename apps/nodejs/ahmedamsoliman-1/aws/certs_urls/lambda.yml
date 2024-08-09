@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CloudFormation template creates Lambda function to URLs from S3 Bucket
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Default: aams-urls-s3-bucket-zipped-files-1
+  S3KeyName:
+    Type: String
+    Default: xxx
+
+Resources:
+  PermissionForURLInvoke:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref LambdaFunction
+      FunctionUrlAuthType: "NONE"
+      Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+  LambdaFunctionURL:
+    Type: AWS::Lambda::Url
+    DependsOn: LambdaFunction
+    Properties:
+      AuthType: NONE
+      TargetFunctionArn: !GetAtt LambdaFunction.Arn
+  LambdaFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: LambdaFunctionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - s3:*
+                Resource: "*"
+  LambdaFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: LambdaFunction
+    Properties:
+      RetentionInDays: 1
+      LogGroupName: !Join
+        - ""
+        - - "/aws/lambda/"
+          - !Ref LambdaFunction
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.9
+      Timeout: 500
+      Handler: lambda_handler.lambda_handler
+      Role: !GetAtt LambdaFunctionRole.Arn
+      Description: Lambda function returns URLs from S3 Bucket
+      Code:
+        S3Bucket: !Ref S3BucketName
+        S3Key: !Ref S3KeyName
+Outputs:
+  LambdaFunctionName:
+    Value: !Ref LambdaFunction

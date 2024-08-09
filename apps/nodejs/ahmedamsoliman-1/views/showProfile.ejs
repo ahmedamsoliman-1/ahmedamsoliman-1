@@ -1,0 +1,43 @@
+<%- include ('partials/header') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="thumbnail">
+        <div class="caption-full">
+          <h4><a><%= fuser.name %></a></h4>
+          <h2><strong><%= fuser.fullname %></strong></h2>
+          <h2><%= fuser.arabic_name %></h2>
+          <br />
+          <img
+            class="center"
+            height="400"
+            width="400"
+            src="<%= fuser.image %>"
+          />
+          <br />
+          <p>username: <strong><%= fuser.username %></strong></p>
+          <p>age: <strong><%= fuser.age %></strong></p>
+          <p>email: <strong><%= fuser.email %></strong></p>
+          <p>mobile: <strong><%= fuser.mobile_number %></strong></p>
+
+          <form
+            id="delete-form"
+            action="/mange/profile/<%= fuser._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-large btn-danger">Delete</button>
+            <a
+              href="/mange/profile/<%= fuser._id %>/edituser"
+              class="btn btn-large btn-warning"
+              >Edit</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-left">
+    <a class="btn btn-default" href="/mange">Back</a>
+  </div>
+</div>

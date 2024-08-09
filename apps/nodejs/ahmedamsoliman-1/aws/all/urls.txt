@@ -1,0 +1,39 @@
+Function Name: list-urls-iam-thumb-lambda-function-LambdaFunction-wsvEWYnClCr8
+Invoke URL: https://ekqsfn5afkaawq32bpefikwy5a0lkewo.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-oau-original-lambda-funct-LambdaFunction-03nRyYbygw1L
+Invoke URL: https://kd4vpvrrtieg4wn6ru2yszraue0ozebi.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-instagram-lambda-function-LambdaFunction-UCSI1jsDMlqw
+Invoke URL: https://h6n5trfwjqcg4qfipwwdzdlrau0rzvzr.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-screenshots-thumb-lambda--LambdaFunction-e8zxm0jG4w61
+Invoke URL: https://akj6r2av3xhdjalr5dcha65qfy0tclsb.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-videos-lambda-function-LambdaFunction-uFDOIoS6GKbU
+Invoke URL: https://6tyl2fqtfume5ofjdemhj6v4xy0ygcnx.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-videos-thumb-lambda-funct-LambdaFunction-B6tLcZ6WmaPb
+Invoke URL: https://wzyjjqvmx2qekx7ua2pbojarqu0npffx.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-fellas-thumb-lambda-funct-LambdaFunction-sOzgRxwShWcv
+Invoke URL: https://6hevdqwdrjuyoz7molygj7v75m0bopsg.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-certs-thumb-lambda-functi-LambdaFunction-Oqj1aub4ywKg
+Invoke URL: https://gf2y4ponw5mqhjl4upgr73hwpa0ffysn.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-fellas-original-lambda-fu-LambdaFunction-WA0Oz0g63olc
+Invoke URL: https://5x4xxwfz4d2oye7uis5xsmgac40cpvai.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-screenshots-original-lamb-LambdaFunction-LWJogZnzhMX1
+Invoke URL: https://hfhadoe4fue5qidqzul6kqlqzi0smbuw.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-certs-original-lambda-fun-LambdaFunction-PsUhenMRCZZl
+Invoke URL: https://ktldqcnw2a5zkiqdup44s66jbq0zagqi.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-oau-thumb-lambda-function-LambdaFunction-7qKSOOZGYk1J
+Invoke URL: https://wqipuksa6aemoklx3ocktfimz40fgpaq.lambda-url.us-east-1.on.aws/
+
+Function Name: list-urls-iam-original-lambda-funct-LambdaFunction-HQqYTcBeY6A2
+Invoke URL: https://c4ojhmkuikmtz7a432b6pvjt4m0vfryl.lambda-url.us-east-1.on.aws/
+

@@ -62,6 +62,12 @@ new-relic
 # PYTHON
 __pycache__
 *.pyc
+chainlit_app_1
+.chainlit
+_cred.py
+chainlit-examples
+
+
 
 
 

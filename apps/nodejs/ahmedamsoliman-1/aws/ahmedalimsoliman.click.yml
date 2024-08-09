@@ -1,0 +1,214 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Build ahmedalimsoliman NodeJS app and 2 ec2 and place it in custom vc2 and subnets and register the ec2s to target group for a load balancer.
+
+Parameters:
+  ImageIdName:
+    Type: String
+    Default: xxx 
+  KeyNameName:
+    Type: String
+    Default: xxx
+  InstanceTypeName:
+    Type: String
+    Default: xxx 
+
+Resources:
+  AhmecCustomVPC1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/24
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: AhmecCustomVPC1
+  CustomInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: VPC_internet_Gateway
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref AhmecCustomVPC1
+      InternetGatewayId: !Ref CustomInternetGateway
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "us-east-1a"
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref AhmecCustomVPC1
+      CidrBlock: 10.0.0.0/25
+      Tags:
+        - Key: Name
+          Value: PublicSubnet1
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "us-east-1b"
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref AhmecCustomVPC1
+      CidrBlock: 10.0.0.128/25
+
+      Tags:
+        - Key: Name
+          Value: PublicSubnet2
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref AhmecCustomVPC1
+      Tags:
+        - Key: Name
+          Value: PublicRouteTable
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref CustomInternetGateway
+  PublicSubnetRouteTableAssociation1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet1
+      RouteTableId: !Ref PublicRouteTable
+  PublicSubnetRouteTableAssociation2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      RouteTableId: !Ref PublicRouteTable
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref AhmecCustomVPC1
+      GroupName: "AllowEc2Traffic"
+      GroupDescription: "Enable SSH access and HTTP access on the inbound port for EC2"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: InstanceSecurityGroup
+  ahmedalimsoliman1:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageIdName
+      SubnetId: !Ref PublicSubnet1
+      KeyName: !Ref KeyNameName
+      InstanceType: !Ref InstanceTypeName
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      Tags:
+        - Key: Name
+          Value: ahmedalimsoliman1
+      UserData:
+        Fn::Base64: !Sub |
+          # #!/bin/bash -xe
+          # # Enable logs
+          # exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+
+          # Install Git
+          sudo echo "Installing Git"
+          sudo yum update -y
+          sudo yum install git -y
+
+          # Install NodeJS
+          sudo echo "Installing NodeJS"
+          sudo touch .bashrc
+          # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+          # sudo -u ec2-user bash -c '. ~/.nvm/nvm.sh'
+          # # . ~/.nvm/nvm.sh
+          # nvm install 16
+          sudo curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
+          sudo yum install -y nodejs
+
+          # Clone website code
+          sudo echo "Cloning website"
+          mkdir -p /ahmedalimsoliman
+          cd /ahmedalimsoliman
+          sudo git clone https://github.com/ahmedamsoliman-1/ahmedamsoliman-1.git
+          cd ahmedamsoliman-1
+
+          # Install dependencies
+          echo "Installing dependencies"
+          sudo npm install
+
+
+          sudo node app.js
+
+          # # Forward port 80 traffic to port 3000
+          # echo "Forwarding 80 -> 3000"
+          # iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
+
+          # # Install & use pm2 to run Node app in background
+          # echo "Installing & starting pm2"
+          # npm install pm2@latest -g
+          # pm2 start app.js
+
+  ELBTargetGroup:
+    Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+    Properties:
+      Name: "ahmedalimsolimansdn"
+      HealthCheckIntervalSeconds: 6
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      Port: 80
+      Protocol: HTTP
+      UnhealthyThresholdCount: 2
+      VpcId: !Ref AhmecCustomVPC1
+      TargetType: instance
+      Targets:
+        - Id: !Ref ahmedalimsoliman1
+          Port: 80
+  ELBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "ELBTraffic"
+      GroupDescription: "Enable HTTP access on the inbound port for ELB"
+      VpcId: !Ref AhmecCustomVPC1
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: ELBSecurityGroup
+  ElasticLoadBalancer:
+    Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
+    Properties:
+      Name: "ahmedalimsolimansdn"
+      Subnets:
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+      SecurityGroups:
+        - !Ref ELBSecurityGroup
+  ElbListener:
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref ELBTargetGroup
+      LoadBalancerArn: !Ref ElasticLoadBalancer
+      Port: 80
+      Protocol: HTTP
+
+Outputs:
+  outputahmedalimsoliman1:
+    Description: A reference to the created EC2 Instance
+    Value: !Ref ahmedalimsoliman1
+  outputElasticLoadBalancer:
+    Description: A reference to the created Elastic Load Balancer
+    Value: !Ref ElasticLoadBalancer
