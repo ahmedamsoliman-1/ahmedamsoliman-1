@@ -85,6 +85,8 @@ const configObj = {
   },
   MONGO: {
     MONGO_URI: process.env.MONGO_URI,
+    MONGO_URI_AHMED: process.env.MONGO_URI_AHMED,
+    MONGO_URI_MONGO_URI_LOCALHOST_1: process.env.MONGO_URI_MONGO_URI_LOCALHOST_1
   },
   REDIS: {
     REDIS_HOST: process.env.REDIS_HOST || '127.0.0.1',

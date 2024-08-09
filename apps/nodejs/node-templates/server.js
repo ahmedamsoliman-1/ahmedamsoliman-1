@@ -93,12 +93,12 @@ const dbs = require('./routes/db/dbs');
 const cassandra = require('./routes/db/cassandra');
 const cassandraInitializer = require('./db/cassandra/cassandraInitializer');
 const es = require("./routes/db/es");
-// const mongo = require('./routes/db/mongo');
+const mongo = require('./routes/db/mongo');
 const PostgreSQL = require('./routes/db/PostgreSQL');
 app.use(dbs);
 app.use(cassandra);
 app.use(es);
-// app.use(mongo);
+app.use(mongo);
 app.use(PostgreSQL);
 
 

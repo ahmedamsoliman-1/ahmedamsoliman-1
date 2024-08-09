@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tree</title>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Service</title>
+    <link rel="icon" href="/images/ten.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/tree.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/" > <img src="#" alt="Company Logo" class="logo"> </a>
+        <div>
+            <a href="/" class="btn btn-light">Home</a>
+        </div>
+    </div>
+
+  <h1>File Tree</h1>
+  
+  <svg width="960" height="600"></svg>
+
+
+
+
+  <footer class="footer fixed-bottom py-3 bg-dark text-white">
+    <div class="text-center">
+        <span>&copy; <%= new Date().getFullYear() %> Ahmed <img src="/images/ten.jpeg" width="20" height="20">- IOT</span>
+    </div>
+  </footer>
+
+  <script>
+    d3.json('/file-tree').then(function(data) {
+      console.log(data);  // Debug output
+      const width = 960;
+      const height = 600;
+
+      const svg = d3.select('svg');
+      const g = svg.append('g').attr('transform', 'translate(40,0)');
+
+      const tree = d3.tree().size([height, width - 160]);
+
+      // Create a hierarchical structure that D3 can use
+      const root = d3.hierarchy({ name: 'root', children: data });
+
+      tree(root);
+
+      g.selectAll('.link')
+        .data(root.descendants().slice(1))
+        .enter().append('path')
+        .attr('class', 'link')
+        .attr('d', d => `
+          M${d.y},${d.x}
+          C${d.parent.y + 40},${d.x}
+           ${d.parent.y + 40},${d.parent.x}
+           ${d.parent.y},${d.parent.x}
+        `);
+
+      const node = g.selectAll('.node')
+        .data(root.descendants())
+        .enter().append('g')
+        .attr('class', 'node')
+        .attr('transform', d => `translate(${d.y},${d.x})`);
+
+      node.append('circle').attr('r', 4.5);
+
+      node.append('text')
+        .attr('dy', 3)
+        .attr('x', d => d.children ? -8 : 8)
+        .style('text-anchor', d => d.children ? 'end' : 'start')
+        .text(d => d.data.name);
+    });
+  </script>
+</body>
+</html>

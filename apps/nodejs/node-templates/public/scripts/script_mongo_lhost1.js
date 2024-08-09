@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch data from the server
-    fetch('/mongo/list-dbs')
+    fetch('/mongo/list-dbs-lhost1')
         .then(response => response.json())
         .then(data => {
             // Extract the databases array from the response

@@ -1,0 +1,23 @@
+
+
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>MongoDBs</h2>
+</div>
+
+<div class="container">
+    <h1>MongoDB Status</h1>
+    <% mongoURIs.forEach((status, index) => { %>
+        <div class="status">
+            <h2>Database <%= index + 1 %></h2>
+        </div>
+    <% }); %>
+</div>
+
+<div class="jumbotron">
+    <a href="#" class="btn btn-danger">"D"</a>
+</div>
+
+<%- include('partials/footer') %>
