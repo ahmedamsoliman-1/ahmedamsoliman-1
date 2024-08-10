@@ -600,35 +600,43 @@ jobs:
       - build-push-image-portfolio
       - build-push-image-ahmedamsoliman-1
       - build-push-image-cvviewer-1
-    strategy:
-      matrix:
-        artifact-name: [docker-image-aams-frontend-svc, docker-image-aams-order-svc, docker-image-aams-user-svc]
-
+    # strategy:
+    #   matrix:
+    #     artifact-name: [docker-image-aams-frontend-svc, docker-image-aams-order-svc, docker-image-aams-user-svc]
+    
     steps:
-      - name: Download ${{ matrix.artifact-name }} artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: ${{ matrix.artifact-name }}
+      - name: Set up environment
+        run: |
+          echo "ARTIFACTS='docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }} docker-image-${{ env.IMAGE_NAME_ORDER_SVC }} docker-image-${{ env.IMAGE_NAME_USER_SVC }}'" >> $GITHUB_ENV
 
-      # - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
+      - name: Download multiple artifacts
+        run: |
+          for artifact in $ARTIFACTS; do
+            echo "Downloading $artifact"
+            gh run download-artifact -n $artifact
+          done
 
-      # - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
+    # steps:
+    #   - name: Download ${{ matrix.artifact-name }} artifact
+    #     uses: actions/download-artifact@v3
+    #     with:
+    #       name: ${{ matrix.artifact-name }}
 
-      - name: Use artifact
+    #   # - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
+    #   #   uses: actions/download-artifact@v3
+    #   #   with:
+    #   #     name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
+
+    #   # - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
+    #   #   uses: actions/download-artifact@v3
+    #   #   with:
+    #   #     name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
+
+      - name: Ls artifact
         run: |
           ls -R
-          # cat ${{ env.IMAGE_NAME_USER_SVC }}.txt
-          # cat ${{ env.IMAGE_NAME_ORDER_SVC }}.txt
-          # cat ${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
 
       
       - name: echo
         run: |
-          ls
           echo 'DONE'
