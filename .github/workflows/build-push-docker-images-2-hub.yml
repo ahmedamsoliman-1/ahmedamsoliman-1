@@ -613,7 +613,7 @@ jobs:
         run: |
           for artifact in $ARTIFACTS; do
             echo "Downloading $artifact"
-            gh run download-artifact -n $artifact
+            gh run download -n $artifact
           done
 
     # steps:
