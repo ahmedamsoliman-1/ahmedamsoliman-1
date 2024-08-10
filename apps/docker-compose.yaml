@@ -69,7 +69,7 @@ services:
       dockerfile: Dockerfile
     container_name: cvviewer-1
     ports:
-      - "8088:80"
+      - "8088:3000"
 
   # cpp-web-app-1:
   #   build:
