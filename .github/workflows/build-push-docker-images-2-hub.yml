@@ -368,7 +368,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact-image-name
-          path: output/build.txt
+          path: output/image.txt
 
       - name: Install dependencies
         run: |
