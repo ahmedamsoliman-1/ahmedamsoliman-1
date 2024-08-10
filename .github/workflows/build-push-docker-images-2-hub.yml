@@ -600,23 +600,33 @@ jobs:
       - build-push-image-portfolio
       - build-push-image-ahmedamsoliman-1
       - build-push-image-cvviewer-1
+    strategy:
+      matrix:
+        artifact-name: [docker-image-aams-frontend-svc, docker-image-aams-order-svc, docker-image-aams-user-svc]
 
     steps:
-      - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
+      - name: Download ${{ matrix.artifact-name }} artifact
         uses: actions/download-artifact@v3
         with:
-          name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
+          name: ${{ matrix.artifact-name }}
 
-      - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
+      # - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
+
+      # - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
 
       - name: Use artifact
         run: |
-          cat ${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
           cat ${{ env.IMAGE_NAME_USER_SVC }}.txt
+          cat ${{ env.IMAGE_NAME_ORDER_SVC }}.txt
+          cat ${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
 
+      
       - name: echo
         run: |
           echo 'DONE'
