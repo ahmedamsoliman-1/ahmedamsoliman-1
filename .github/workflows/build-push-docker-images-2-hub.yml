@@ -358,6 +358,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Get Image output
+        run: |
+          mkdir -p output
+          echo ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} > output/image.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact-image-name
+          path: output/build.txt
 
       - name: Install dependencies
         run: |
@@ -443,6 +454,11 @@ jobs:
       - build-push-image-portfolio
 
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact-image-name
+
       - name: echo
         run: |
           echo 'DONE'
