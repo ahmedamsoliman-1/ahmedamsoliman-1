@@ -20,6 +20,7 @@ env:
   IMAGE_NAME_CV_VIEWER_DEVOPS: aams-aams-cvviewer-resume-devops
   IMAGE_NAME_CV_VIEWER_TS: aams-aams-cvviewer-resume-ts
   IMAGE_NAME_CV_VIEWER_DATAENG: aams-aams-cvviewer-resume-dataeng
+  IMAGE_NAME_PYTHON_FLASK_1: aams-flask-1
   
   FRONTEND_SVC: ./apps/nodejs/frontend-svc
   USER_SVC: ./apps/nodejs/user-svc
@@ -37,6 +38,7 @@ env:
   CV_VIEWER_DEVOPS: ./apps/typescript/aams-cvviewer-resume-devops
   CV_VIEWER_TS: ./apps/typescript/aams-cvviewer-resume-ts
   CV_VIEWER_DATAENG: ./apps/typescript/aams-cvviewer-resume-dataeng
+  PYTHON_FLASK_1: ./apps/python/flask/flask_app_1
 
 on:
   push:
@@ -86,13 +88,21 @@ jobs:
         run: |
           echo 'Hello world, typescripts'
   
-  portfolio-pare:
+  portfolio:
     runs-on: ubuntu-latest
     needs: leader
     steps:
       - name: echo
         run: |
           echo 'Hello world, abbas'
+  
+  python-flask-chainlit:
+    runs-on: ubuntu-latest
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, python'
 
   ##### Personal Cloud
   personal-cloud:
@@ -409,9 +419,9 @@ jobs:
   
   
   ##### Portfolio
-  portfolio:
+  my-portfolio:
     runs-on: ubuntu-latest
-    needs: portfolio-pare
+    needs: portfolio
     env:
       IMAGE_NAME: aams-portfolio
 
@@ -637,9 +647,42 @@ jobs:
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
-  
-  
-  
+
+  flask-1:
+    runs-on: ubuntu-latest
+    needs: python-flask-chainlit
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install dependencies
+        run: |
+          cd ${{ env.PYTHON_FLASK_1 }}
+          # npm install
+
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
+          mkdir -p output
+          echo $IMAGE > output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}
+          path: output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
   
   all-done:
     runs-on: ubuntu-latest
@@ -658,6 +701,7 @@ jobs:
       - cvviewer-devops
       - cvviewer-ts
       - cvviewer-dataeng
+      - flask-1
 
     steps:
       - name: Download artifact
