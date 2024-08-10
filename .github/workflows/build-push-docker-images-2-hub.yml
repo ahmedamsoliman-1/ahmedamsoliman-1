@@ -614,6 +614,7 @@ jobs:
           for artifact in $ARTIFACTS; do
             echo "Downloading $artifact"
             gh run download -n $artifact
+            cat $artifact
           done
 
     # steps:
