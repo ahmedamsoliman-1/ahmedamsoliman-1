@@ -622,11 +622,13 @@ jobs:
 
       - name: Use artifact
         run: |
-          cat ${{ env.IMAGE_NAME_USER_SVC }}.txt
-          cat ${{ env.IMAGE_NAME_ORDER_SVC }}.txt
-          cat ${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
+          ls -R
+          # cat ${{ env.IMAGE_NAME_USER_SVC }}.txt
+          # cat ${{ env.IMAGE_NAME_ORDER_SVC }}.txt
+          # cat ${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
 
       
       - name: echo
         run: |
+          ls
           echo 'DONE'
