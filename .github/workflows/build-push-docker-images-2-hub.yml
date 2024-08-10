@@ -368,7 +368,8 @@ jobs:
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --push ./apps/next-js/portfolio
+          # docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} --push ./apps/next-js/portfolio
+          echo ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
   
   # build-push-image-ahmedamsoliman-1:
   #   runs-on: ubuntu-latest
