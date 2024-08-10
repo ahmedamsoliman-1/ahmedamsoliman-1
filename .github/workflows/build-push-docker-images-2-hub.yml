@@ -2,7 +2,7 @@ name: 'build-push-docker-images-2-hub'
 
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
-  LATEST_TAG: 3
+  LATEST_TAG: 1.0.1
 
   IMAGE_NAME_FRONTEND_SVC: aams-frontend-svc
   IMAGE_NAME_USER_SVC: aams-user-svc
@@ -679,7 +679,6 @@ jobs:
 
           # Loop over each file and concatenate its contents
           for file in "${files[@]}"; do
-              echo "Contents of $file:"
               cat "$file"
               echo # Print a newline for readability
           done
