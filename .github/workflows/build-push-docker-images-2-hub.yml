@@ -602,14 +602,72 @@ jobs:
       - build-push-image-cvviewer-1
 
     steps:
-      - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
+      - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
-      - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
+          name: docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }}
+
+      - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_ORDER_SVC }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
+        
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_NODE_TEMPLATE }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_RESUME_DATA }}
+
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_RESUME_DEV }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVOPS }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_RESUME_TS }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVWEB }}
+        
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_PORTFOLIO }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER }}
+
       - name: Ls artifact
         run: |
           ls -R
