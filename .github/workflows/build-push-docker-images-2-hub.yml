@@ -66,7 +66,6 @@ jobs:
     needs: nodejss
     env:
       IMAGE_NAME: aams-personal-cloud
-      IMAGE_TAG: 2
 
     steps:
       - name: Checkout code
@@ -103,10 +102,16 @@ jobs:
         run: |
           echo $BRANCH_NAME
           echo $GITHUB_ENV
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          echo $IMAGE
-          echo ${{ env.ALL_PLATFORMS }}
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.LATEST_TAG }}
           # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ./apps/nodejs/personal-cloud
+          mkdir -p output
+          echo $IMAGE >> output/images.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: output/images.txt
 
   # build-push-image-frontend-svc:
   #   runs-on: ubuntu-latest
