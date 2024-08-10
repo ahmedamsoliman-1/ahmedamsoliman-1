@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  db:
+    extends:
+      file: docker-compose.db.yaml
+      service: db
+
+  web:
+    extends:
+      file: docker-compose.web.yml
+      service: web

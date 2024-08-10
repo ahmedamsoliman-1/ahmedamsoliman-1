@@ -3,7 +3,7 @@ name: 'build-push-docker-images-2-hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
@@ -48,292 +48,320 @@ jobs:
         run: |
           echo 'Hello world, abbas'
 
-  ##### Personal Cloud
-  build-push-image-personal-cloud:
-    runs-on: ubuntu-latest
-    needs: nodejss
+  # ##### Personal Cloud
+  # build-push-image-personal-cloud:
+  #   runs-on: ubuntu-latest
+  #   needs: nodejss
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract branch name
-        id: extract_version
-        run: |
-          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-          # Handle PRs and replace slashes
-          if [[ $GITHUB_REF == refs/pull/* ]]; then
-            BRANCH_NAME="pr-${GITHUB_REF##*/}"
-          fi
-          # Sanitize branch name for Docker tags
-          BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+  #     - name: Extract branch name
+  #       id: extract_version
+  #       run: |
+  #         BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+  #         # Handle PRs and replace slashes
+  #         if [[ $GITHUB_REF == refs/pull/* ]]; then
+  #           BRANCH_NAME="pr-${GITHUB_REF##*/}"
+  #         fi
+  #         # Sanitize branch name for Docker tags
+  #         BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/_/g')
+  #         echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/nodejs/personal-cloud
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/nodejs/personal-cloud
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          echo $BRANCH_NAME
-          echo $GITHUB_ENV
-          echo ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:2
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:2 --push ./apps/nodejs/personal-cloud
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         echo $BRANCH_NAME
+  #         echo $GITHUB_ENV
+  #         echo ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:2
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-personal-cloud:2 --push ./apps/nodejs/personal-cloud
 
-  build-push-image-frontend-svc:
-    runs-on: ubuntu-latest
-    needs: svcs
+  # build-push-image-frontend-svc:
+  #   runs-on: ubuntu-latest
+  #   needs: svcs
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/nodejs/frontend-svc
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/nodejs/frontend-svc
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-frontend-svc:2 --push ./apps/nodejs/frontend-svc
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-frontend-svc:2 --push ./apps/nodejs/frontend-svc
 
-  build-push-image-order-svc:
-    runs-on: ubuntu-latest
-    needs: svcs
+  # build-push-image-order-svc:
+  #   runs-on: ubuntu-latest
+  #   needs: svcs
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/nodejs/order-svc
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/nodejs/order-svc
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-order-svc:2 --push ./apps/nodejs/order-svc
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-order-svc:2 --push ./apps/nodejs/order-svc
   
-  build-push-image-user-svc:
-    runs-on: ubuntu-latest
-    needs: svcs
+  # build-push-image-user-svc:
+  #   runs-on: ubuntu-latest
+  #   needs: svcs
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/nodejs/user-svc
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/nodejs/user-svc
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-user-svc:2 --push ./apps/nodejs/user-svc
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-user-svc:2 --push ./apps/nodejs/user-svc
 
-  build-push-image-node-templates:
-    runs-on: ubuntu-latest
-    needs: nodejss
+  # build-push-image-node-templates:
+  #   runs-on: ubuntu-latest
+  #   needs: nodejss
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/nodejs/node-templates
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/nodejs/node-templates
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-node-templates:2 --push ./apps/nodejs/node-templates
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-node-templates:2 --push ./apps/nodejs/node-templates
      
-  ###### Resumes
-  build-push-image-data-eng:
-    runs-on: ubuntu-latest
-    needs: resumes
+  # ###### Resumes
+  # build-push-image-data-eng:
+  #   runs-on: ubuntu-latest
+  #   needs: resumes
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/static/resume-data-eng-pdf
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/static/resume-data-eng-pdf
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-data-eng-pdf:2 --push ./apps/static/resume-data-eng-pdf
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-data-eng-pdf:2 --push ./apps/static/resume-data-eng-pdf
 
-  build-push-image-dev:
-    runs-on: ubuntu-latest
-    needs: resumes
+  # build-push-image-dev:
+  #   runs-on: ubuntu-latest
+  #   needs: resumes
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/static/resume-dev-pdf
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/static/resume-dev-pdf
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-pdf:2 --push ./apps/static/resume-dev-pdf
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-pdf:2 --push ./apps/static/resume-dev-pdf
     
-  build-push-image-dev-web:
-    runs-on: ubuntu-latest
-    needs: resumes
+  # build-push-image-dev-web:
+  #   runs-on: ubuntu-latest
+  #   needs: resumes
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-web:2 --push ./apps/static/resume-dev-web
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-dev-web:2 --push ./apps/static/resume-dev-web
   
-  build-push-image-devops:
-    runs-on: ubuntu-latest
-    needs: resumes
+  # build-push-image-devops:
+  #   runs-on: ubuntu-latest
+  #   needs: resumes
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/static/resume-devops-pdf
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/static/resume-devops-pdf
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-devops-pdf:2 --push ./apps/static/resume-devops-pdf
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-devops-pdf:2 --push ./apps/static/resume-devops-pdf
 
-  build-push-image-ts:
-    runs-on: ubuntu-latest
-    needs: resumes
+  # build-push-image-ts:
+  #   runs-on: ubuntu-latest
+  #   needs: resumes
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ./apps/static/resume-ts-pdf
-          npm install
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/static/resume-ts-pdf
+  #         npm install
 
-      - name: Build and push Docker images
-        if: success()
-        run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-ts-pdf:2 --push ./apps/static/resume-ts-pdf
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-resume-ts-pdf:2 --push ./apps/static/resume-ts-pdf
   
-  ##### Portfolio
-  build-push-image-portfolio:
+  # ##### Portfolio
+  # build-push-image-portfolio:
+  #   runs-on: ubuntu-latest
+  #   needs: portfolio
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
+
+  #     - name: Install dependencies
+  #       run: |
+  #         cd ./apps/NextJS/portfolio
+  #         npm install
+  #         npm run build
+
+  #     - name: Build and push Docker images
+  #       if: success()
+  #       run: |
+  #         docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-portfolio:2 --push ./apps/NextJS/portfolio
+  
+  build-push-image-ahmedamsoliman-1:
     runs-on: ubuntu-latest
-    needs: portfolio
+    needs: nodejss
 
     steps:
       - name: Checkout code
@@ -350,11 +378,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ./apps/NextJS/portfolio
+          cd ./apps/nodejs/ahmedamsoliman-1
           npm install
-          npm run build
 
       - name: Build and push Docker images
         if: success()
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-portfolio:2 --push ./apps/NextJS/portfolio
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/aams-ahmedamsoliman-1:2 --push ./apps/nodejs/ahmedamsoliman-1
