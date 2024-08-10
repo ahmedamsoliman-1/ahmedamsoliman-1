@@ -86,7 +86,7 @@ jobs:
         run: |
           echo 'Hello world, typescripts'
   
-  portfolio:
+  portfolio-pare:
     runs-on: ubuntu-latest
     needs: leader
     steps:
@@ -95,7 +95,7 @@ jobs:
           echo 'Hello world, abbas'
 
   ##### Personal Cloud
-  build-push-image-personal-cloud:
+  personal-cloud:
     runs-on: ubuntu-latest
     needs: nodejss
     env:
@@ -145,7 +145,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
           path: output/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
 
-  build-push-image-frontend-svc:
+  frontend-svc:
     runs-on: ubuntu-latest
     needs: svcs
     env:
@@ -183,7 +183,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }}
           path: output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
 
-  build-push-image-order-svc:
+  order-svc:
     runs-on: ubuntu-latest
     needs: svcs
     env:
@@ -221,7 +221,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_ORDER_SVC }}
           path: output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
   
-  build-push-image-user-svc:
+  user-svc:
     runs-on: ubuntu-latest
     needs: svcs
     env:
@@ -259,7 +259,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
           path: output/${{ env.IMAGE_NAME_USER_SVC }}.txt
 
-  build-push-image-node-templates:
+  node-templates:
     runs-on: ubuntu-latest
     needs: nodejss
     env:
@@ -298,7 +298,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_NODE_TEMPLATE }}.txt
      
   ###### Resumes
-  build-push-image-data-eng:
+  cv-data-eng:
     runs-on: ubuntu-latest
     needs: resumes
     env:
@@ -336,7 +336,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DATA }}
           path: output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
 
-  build-push-image-dev:
+  cv-dev:
     runs-on: ubuntu-latest
     needs: resumes
     env:
@@ -374,7 +374,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEV }}
           path: output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
     
-  build-push-image-dev-web:
+  cv-dev-web:
     runs-on: ubuntu-latest
     needs: resumes
     env:
@@ -407,76 +407,11 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVWEB }}
           path: output/${{ env.IMAGE_NAME_RESUME_DEVWEB }}.txt
   
-  # build-push-image-devops:
-  #   runs-on: ubuntu-latest
-  #   needs: resumes
-  #   env:
-  #     IMAGE_NAME: aams-resume-devops-pdf
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v2
-
-  #     - name: Log in to Docker Hub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
-
-  #     - name: Build and push Docker image - ${{ env.IMAGE_NAME_RESUME_DEVOPS }}
-  #       if: success()
-  #       run: |
-  #         IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEVOPS }}:${{ env.LATEST_TAG }}
-  #         docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWERR }}
-  #         mkdir -p output
-  #         echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEVOPS }}.txt
-      
-  #     - name: Upload artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVOPS }}
-  #         path: output/${{ env.IMAGE_NAME_RESUME_DEVOPS }}.txt
-
-  # build-push-image-ts:
-  #   runs-on: ubuntu-latest
-  #   needs: resumes
-  #   env:
-  #     IMAGE_NAME: aams-resume-ts-pdf
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v2
-
-  #     - name: Log in to Docker Hub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
-
-  #     - name: Build and push Docker image - ${{ env.IMAGE_NAME_RESUME_TS }}
-  #       if: success()
-  #       run: |
-  #         IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_TS }}:${{ env.LATEST_TAG }}
-  #         docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWERR }}
-  #         mkdir -p output
-  #         echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_TS }}.txt
-      
-  #     - name: Upload artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: docker-image-${{ env.IMAGE_NAME_RESUME_TS }}
-  #         path: output/${{ env.IMAGE_NAME_RESUME_TS }}.txt
   
   ##### Portfolio
-  build-push-image-portfolio:
+  portfolio:
     runs-on: ubuntu-latest
-    needs: portfolio
+    needs: portfolio-pare
     env:
       IMAGE_NAME: aams-portfolio
 
@@ -513,7 +448,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_PORTFOLIO }}
           path: output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
   
-  build-push-image-ahmedamsoliman-1:
+  ahmedamsoliman-1:
     runs-on: ubuntu-latest
     needs: nodejss
     env:
@@ -551,7 +486,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}
           path: output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
   
-  build-push-image-cvviewer-dev:
+  cvviewer-dev:
     runs-on: ubuntu-latest
     needs: typescripts
     env:
@@ -589,7 +524,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
   
-  build-push-image-cvviewer-devops:
+  cvviewer-devops:
     runs-on: ubuntu-latest
     needs: typescripts
     env:
@@ -627,7 +562,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
   
-  build-push-image-cvviewer-ts:
+  cvviewer-ts:
     runs-on: ubuntu-latest
     needs: typescripts
     env:
@@ -665,7 +600,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
   
-  build-push-image-cvviewer-dataeng:
+  cvviewer-dataeng:
     runs-on: ubuntu-latest
     needs: typescripts
     env:
@@ -709,22 +644,20 @@ jobs:
   all-done:
     runs-on: ubuntu-latest
     needs: 
-      - build-push-image-personal-cloud
-      - build-push-image-frontend-svc
-      - build-push-image-order-svc
-      - build-push-image-user-svc
-      - build-push-image-node-templates
-      - build-push-image-data-eng
-      - build-push-image-dev-web
-      - build-push-image-dev
-      # - build-push-image-devops
-      # - build-push-image-ts
-      - build-push-image-portfolio
-      - build-push-image-ahmedamsoliman-1
-      - build-push-image-cvviewer-dev
-      - build-push-image-cvviewer-devops
-      - build-push-image-cvviewer-ts
-      - build-push-image-cvviewer-dataeng
+      - personal-cloud
+      - frontend-svc
+      - order-svc
+      - user-svc
+      - node-templates
+      - cv-data-eng
+      - cv-dev-web
+      - cv-dev
+      - portfolio
+      - ahmedamsoliman-1
+      - cvviewer-dev
+      - cvviewer-devops
+      - cvviewer-ts
+      - cvviewer-dataeng
 
     steps:
       - name: Download artifact
