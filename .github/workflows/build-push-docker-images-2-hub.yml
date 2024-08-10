@@ -580,8 +580,8 @@ jobs:
       - build-push-image-data-eng
       - build-push-image-dev-web
       - build-push-image-dev
-      - build-push-image-devops
-      - build-push-image-ts
+      # - build-push-image-devops
+      # - build-push-image-ts
       - build-push-image-portfolio
       - build-push-image-ahmedamsoliman-1
       - build-push-image-cvviewer-1
