@@ -600,60 +600,19 @@ jobs:
       - build-push-image-portfolio
       - build-push-image-ahmedamsoliman-1
       - build-push-image-cvviewer-1
-    # strategy:
-    #   matrix:
-    #     artifact-name: [docker-image-aams-frontend-svc, docker-image-aams-order-svc, docker-image-aams-user-svc]
-    
+
     steps:
-      - name: Install GitHub CLI
-        run: sudo apt-get install gh
-
-      - name: Set up environment
-        run: |
-          echo "ARTIFACTS='docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }} docker-image-${{ env.IMAGE_NAME_ORDER_SVC }} docker-image-${{ env.IMAGE_NAME_USER_SVC }}'" >> $GITHUB_ENV
-
-      - name: Authenticate GitHub CLI
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh auth setup-git
-      
-      # - name: Authenticate GitHub CLI
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     echo "Authenticating GitHub CLI"
-      #     gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Download multiple artifacts
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          for artifact in $ARTIFACTS; do
-            echo "Downloading $artifact"
-            gh run download -n $artifact
-          done
-
-    # steps:
-    #   - name: Download ${{ matrix.artifact-name }} artifact
-    #     uses: actions/download-artifact@v3
-    #     with:
-    #       name: ${{ matrix.artifact-name }}
-
-    #   # - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
-    #   #   uses: actions/download-artifact@v3
-    #   #   with:
-    #   #     name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
-
-    #   # - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
-    #   #   uses: actions/download-artifact@v3
-    #   #   with:
-    #   #     name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
-
+      - name: Download ${{ env.IMAGE_NAME_PERSONAL_CLOUD }} artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
+      - name: Download ${{ env.IMAGE_NAME_USER_SVC }} artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
       - name: Ls artifact
         run: |
           ls -R
-
-      
       - name: echo
         run: |
           echo 'DONE'
