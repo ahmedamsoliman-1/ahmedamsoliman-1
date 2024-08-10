@@ -1,5 +1,13 @@
 name: 'build-push-docker-images-2-hub'
 
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
   LATEST_TAG: 1.0.1
@@ -39,14 +47,6 @@ env:
   CV_VIEWER_TS: ./apps/typescript/aams-cvviewer-resume-ts
   CV_VIEWER_DATAENG: ./apps/typescript/aams-cvviewer-resume-dataeng
   PYTHON_FLASK_1: ./apps/python/flask/flask_app_1
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - master
 
 jobs:
   leader:
