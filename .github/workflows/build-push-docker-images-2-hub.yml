@@ -638,15 +638,15 @@ jobs:
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEV }}
 
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVOPS }}
+      # - name: Download artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVOPS }}
 
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_RESUME_TS }}
+      # - name: Download artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: docker-image-${{ env.IMAGE_NAME_RESUME_TS }}
 
       - name: Download artifact
         uses: actions/download-artifact@v3
