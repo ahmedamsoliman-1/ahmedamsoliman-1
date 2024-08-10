@@ -103,14 +103,14 @@ jobs:
           echo $BRANCH_NAME
           echo $GITHUB_ENV
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ./apps/nodejs/personal-cloud
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ./apps/nodejs/personal-cloud
           mkdir -p output
-          echo $IMAGE >> output/images.txt
+          echo $IMAGE > output/images.txt
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-artifact
+          name: ${{ env.IMAGE_NAME }}
           path: output/images.txt
 
   # build-push-image-frontend-svc:
@@ -436,14 +436,14 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ./apps/typescript/cvviewer
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ./apps/typescript/cvviewer
           mkdir -p output
-          echo $IMAGE >> output/images.txt
+          echo $IMAGE > output/images.txt
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-artifact
+          name: ${{ env.IMAGE_NAME }}
           path: output/images.txt
   
   all-done:
