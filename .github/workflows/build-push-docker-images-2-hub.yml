@@ -671,6 +671,19 @@ jobs:
       - name: Ls artifact
         run: |
           ls -R
+      
+      - name: Cat text file
+        run: |
+          # Find all .txt files and store them in an array
+          files=($(find . -type f -name "*.txt"))
+
+          # Loop over each file and concatenate its contents
+          for file in "${files[@]}"; do
+              echo "Contents of $file:"
+              cat "$file"
+              echo # Print a newline for readability
+          done
+
       - name: echo
         run: |
-          echo 'DONE'
+          echo 'ALL DONE'
