@@ -605,16 +605,27 @@ jobs:
     #     artifact-name: [docker-image-aams-frontend-svc, docker-image-aams-order-svc, docker-image-aams-user-svc]
     
     steps:
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh
+
       - name: Set up environment
         run: |
           echo "ARTIFACTS='docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }} docker-image-${{ env.IMAGE_NAME_ORDER_SVC }} docker-image-${{ env.IMAGE_NAME_USER_SVC }}'" >> $GITHUB_ENV
 
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        run: |
+          echo "Authenticating GitHub CLI"
+          gh auth login --with-token <<< "${{ secrets.PERSONAL_TOKEN }}"
+
       - name: Download multiple artifacts
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           for artifact in $ARTIFACTS; do
             echo "Downloading $artifact"
             gh run download -n $artifact
-            cat $artifact
           done
 
     # steps:
