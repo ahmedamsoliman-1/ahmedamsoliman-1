@@ -16,7 +16,10 @@ env:
   IMAGE_NAME_RESUME_DEVWEB: aams-resume-dev-web
   IMAGE_NAME_PORTFOLIO: aams-portfolio
   IMAGE_NAME_AHMEDAMSOLIMAN: aams-ahmedamsoliman-1
-  IMAGE_NAME_CV_VIEWER: aams-cvviewer
+  IMAGE_NAME_CV_VIEWER_DEV: aams-aams-cvviewer-resume-dev
+  IMAGE_NAME_CV_VIEWER_DEVOPS: aams-aams-cvviewer-resume-devops
+  IMAGE_NAME_CV_VIEWER_TS: aams-aams-cvviewer-resume-ts
+  IMAGE_NAME_CV_VIEWER_DATAENG: aams-aams-cvviewer-resume-dataeng
   
   FRONTEND_SVC: ./apps/nodejs/frontend-svc
   USER_SVC: ./apps/nodejs/user-svc
@@ -30,7 +33,10 @@ env:
   RESUME_DEVWEB: ./apps/static/resume-dev-web
   PORTFOLIO: ./apps/next-js/portfolio
   AHMEDAMSOLIMAN: ./apps/nodejs/ahmedamsoliman-1
-  CV_VIEWER: ./apps/typescript/cvviewer
+  CV_VIEWER_DEV: ./apps/typescript/aams-cvviewer-resume-dev
+  CV_VIEWER_DEVOPS: ./apps/typescript/aams-cvviewer-resume-devops
+  CV_VIEWER_TS: ./apps/typescript/aams-cvviewer-resume-ts
+  CV_VIEWER_DATAENG: ./apps/typescript/aams-cvviewer-resume-dataeng
 
 on:
   push:
@@ -545,7 +551,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}
           path: output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
   
-  build-push-image-cvviewer-1:
+  build-push-image-cvviewer-dev:
     runs-on: ubuntu-latest
     needs: typescripts
     env:
@@ -566,22 +572,138 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ${{ env.CV_VIEWER }}
+          cd ${{ env.CV_VIEWER_DEV }}
           npm install
 
-      - name: Build and push Docker image - ${{ env.IMAGE_NAME_CV_VIEWER }}
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
         if: success()
         run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER }}
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
           mkdir -p output
-          echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER }}.txt
+          echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
       
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER }}
-          path: output/${{ env.IMAGE_NAME_CV_VIEWER }}.txt
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
+          path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
+  
+  build-push-image-cvviewer-devops:
+    runs-on: ubuntu-latest
+    needs: typescripts
+    env:
+      IMAGE_NAME: aams-cvviewer
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install dependencies
+        run: |
+          cd ${{ env.CV_VIEWER_DEVOPS }}
+          npm install
+
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
+          mkdir -p output
+          echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
+          path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
+  
+  build-push-image-cvviewer-ts:
+    runs-on: ubuntu-latest
+    needs: typescripts
+    env:
+      IMAGE_NAME: aams-cvviewer
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install dependencies
+        run: |
+          cd ${{ env.CV_VIEWER_TS }}
+          npm install
+
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_CV_VIEWER_TS }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_TS }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
+          mkdir -p output
+          echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
+          path: output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
+  
+  build-push-image-cvviewer-dataeng:
+    runs-on: ubuntu-latest
+    needs: typescripts
+    env:
+      IMAGE_NAME: aams-cvviewer
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Install dependencies
+        run: |
+          cd ${{ env.CV_VIEWER_DATAENG }}
+          npm install
+
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
+          mkdir -p output
+          echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
+          path: output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
+  
+  
   
   
   all-done:
@@ -599,7 +721,10 @@ jobs:
       # - build-push-image-ts
       - build-push-image-portfolio
       - build-push-image-ahmedamsoliman-1
-      - build-push-image-cvviewer-1
+      - build-push-image-cvviewer-dev
+      - build-push-image-cvviewer-devops
+      - build-push-image-cvviewer-ts
+      - build-push-image-cvviewer-dataeng
 
     steps:
       - name: Download artifact
@@ -638,16 +763,6 @@ jobs:
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEV }}
 
-      # - name: Download artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVOPS }}
-
-      # - name: Download artifact
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: docker-image-${{ env.IMAGE_NAME_RESUME_TS }}
-
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
@@ -666,7 +781,19 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER }}
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
 
       - name: Ls artifact
         run: |

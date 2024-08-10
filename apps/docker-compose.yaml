@@ -63,13 +63,37 @@ services:
     ports:
       - "8087:80"
   
-  cvviewer-1:
+  aams-cvviewer-resume-dev:
     build:
-      context: ./typescript/cvviewer
+      context: ./typescript/aams-cvviewer-resume-dev
       dockerfile: Dockerfile
-    container_name: cvviewer-1
+    container_name: aams-cvviewer-resume-dev
     ports:
       - "8088:3000"
+  
+  aams-cvviewer-resume-dataeng:
+    build:
+      context: ./typescript/aams-cvviewer-resume-dataeng
+      dockerfile: Dockerfile
+    container_name: aams-cvviewer-resume-dataeng
+    ports:
+      - "8089:3000"
+  
+  aams-cvviewer-resume-devops:
+    build:
+      context: ./typescript/aams-cvviewer-resume-devops
+      dockerfile: Dockerfile
+    container_name: aams-cvviewer-resume-devops
+    ports:
+      - "8090:3000"
+
+  aams-cvviewer-resume-ts:
+    build:
+      context: ./typescript/aams-cvviewer-resume-ts
+      dockerfile: Dockerfile
+    container_name: aams-cvviewer-resume-ts
+    ports:
+      - "8091:3000"
 
   # cpp-web-app-1:
   #   build:
