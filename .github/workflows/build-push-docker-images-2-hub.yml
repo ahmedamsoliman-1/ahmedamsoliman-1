@@ -122,7 +122,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
 
   build-push-image-frontend-svc:
@@ -160,7 +160,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
 
   build-push-image-order-svc:
@@ -198,7 +198,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
   
   build-push-image-user-svc:
@@ -236,7 +236,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
 
   build-push-image-node-templates:
@@ -258,10 +258,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: Install dependencies
-        run: |
-          cd ${{ env.NODE_TEMPLATE }}
-          npm install
+      # - name: Install dependencies
+      #   run: |
+      #     cd ${{ env.NODE_TEMPLATE }}
+      #     npm install
 
       - name: Build and push Docker image - ${{ env.IMAGE_NAME }}
         if: success()
@@ -274,7 +274,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
      
   ###### Resumes
@@ -313,7 +313,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
 
   build-push-image-dev:
@@ -351,7 +351,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
     
   build-push-image-dev-web:
@@ -384,7 +384,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
   
   # build-push-image-devops:
@@ -417,7 +417,7 @@ jobs:
   #     - name: Upload artifact
   #       uses: actions/upload-artifact@v3
   #       with:
-  #         name: ${{ env.IMAGE_NAME }}
+  #         name: docker-image-${{ env.IMAGE_NAME }}
   #         path: output/images.txt
 
   # build-push-image-ts:
@@ -450,7 +450,7 @@ jobs:
   #     - name: Upload artifact
   #       uses: actions/upload-artifact@v3
   #       with:
-  #         name: ${{ env.IMAGE_NAME }}
+  #         name: docker-image-${{ env.IMAGE_NAME }}
   #         path: output/images.txt
   
   ##### Portfolio
@@ -490,7 +490,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
   
   build-push-image-ahmedamsoliman-1:
@@ -528,7 +528,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
   
   build-push-image-cvviewer-1:
@@ -566,7 +566,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.IMAGE_NAME }}
+          name: docker-image-${{ env.IMAGE_NAME }}
           path: output/images.txt
   
   all-done:
