@@ -192,7 +192,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PERSONAL_CLOUD }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PERSONAL_CLOUD }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
       
@@ -231,7 +231,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_FRONTEND_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
       
@@ -269,7 +269,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_ORDER_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.ORDER_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.ORDER_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
       
@@ -307,7 +307,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_USER_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.USER_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.USER_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_USER_SVC }}.txt
       
@@ -345,7 +345,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_NODE_TEMPLATE }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.NODE_TEMPLATE }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.NODE_TEMPLATE }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_NODE_TEMPLATE }}.txt
       
@@ -384,7 +384,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DATA }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DATA }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DATA }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
       
@@ -422,7 +422,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEV }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEV }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEV }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
       
@@ -455,7 +455,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEVWEB }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEVWEB }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEVWEB }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEVWEB }}.txt
       
@@ -496,7 +496,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PORTFOLIO }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PORTFOLIO }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PORTFOLIO }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
       
@@ -534,7 +534,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.AHMEDAMSOLIMAN }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.AHMEDAMSOLIMAN }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
       
@@ -572,7 +572,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
       
@@ -610,7 +610,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
       
@@ -648,7 +648,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_TS }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
       
@@ -686,7 +686,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
       
@@ -722,7 +722,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
       
