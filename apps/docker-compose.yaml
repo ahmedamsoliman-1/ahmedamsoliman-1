@@ -1,99 +1,107 @@
 version: '3.8'
 
 services:
-  portfolio:
-    build:
-      context: ./next-js/portfolio
-      dockerfile: Dockerfile
-    container_name: portfolio
-    ports:
-      - "8001:80"
+  # portfolio:
+  #   build:
+  #     context: ./next-js/portfolio
+  #     dockerfile: Dockerfile
+  #   container_name: portfolio
+  #   ports:
+  #     - "8001:80"
 
-  resume-dev-web:
-    build:
-      context: ./static/resume-dev-web
-      dockerfile: Dockerfile
-    container_name: resume-dev-web
-    ports:
-      - "8002:80"
+  # resume-dev-web:
+  #   build:
+  #     context: ./static/resume-dev-web
+  #     dockerfile: Dockerfile
+  #   container_name: resume-dev-web
+  #   ports:
+  #     - "8002:80"
   
-  react-app-simple:
-    build:
-      context: ./react/react-app-simple
-      dockerfile: Dockerfile
-    container_name: react-app-simple
-    ports:
-      - "8003:80"
+  # react-app-simple:
+  #   build:
+  #     context: ./react/react-app-simple
+  #     dockerfile: Dockerfile
+  #   container_name: react-app-simple
+  #   ports:
+  #     - "8003:80"
   
-  frontend-svc:
-    build:
-      context: ./nodejs/frontend-svc
-      dockerfile: Dockerfile
-    container_name: frontend-svc
-    ports:
-      - "8004:8080"
-  order-svc:
-    build:
-      context: ./nodejs/order-svc
-      dockerfile: Dockerfile
-    container_name: order-svc
-    ports:
-      - "8005:8080"
-  user-svc:
-    build:
-      context: ./nodejs/user-svc
-      dockerfile: Dockerfile
-    container_name: user-svc
-    ports:
-      - "8006:8080"
+  # frontend-svc:
+  #   build:
+  #     context: ./nodejs/frontend-svc
+  #     dockerfile: Dockerfile
+  #   container_name: frontend-svc
+  #   ports:
+  #     - "8004:8080"
+  # order-svc:
+  #   build:
+  #     context: ./nodejs/order-svc
+  #     dockerfile: Dockerfile
+  #   container_name: order-svc
+  #   ports:
+  #     - "8005:8080"
+  # user-svc:
+  #   build:
+  #     context: ./nodejs/user-svc
+  #     dockerfile: Dockerfile
+  #   container_name: user-svc
+  #   ports:
+  #     - "8006:8080"
   
-  ahmedamsoliman-1:
-    build:
-      context: ./nodejs/ahmedamsoliman-1
-      dockerfile: Dockerfile
-    container_name: ahmedamsoliman-1
-    ports:
-      - "8087:8080"
+  # ahmedamsoliman-1:
+  #   build:
+  #     context: ./nodejs/ahmedamsoliman-1
+  #     dockerfile: Dockerfile
+  #   container_name: ahmedamsoliman-1
+  #   ports:
+  #     - "8087:8080"
   
-  flask-1:
-    build:
-      context: ./python/flask/flask_app_1
-      dockerfile: Dockerfile
-    container_name: flask-1
-    ports:
-      - "8008:80"
+  # flask-1:
+  #   build:
+  #     context: ./python/flask/flask_app_1
+  #     dockerfile: Dockerfile
+  #   container_name: flask-1
+  #   ports:
+  #     - "8008:80"
   
-  aams-cvviewer-resume-dev:
-    build:
-      context: ./typescript/aams-cvviewer-resume-dev
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-dev
-    ports:
-      - "8009:3000"
+  # aams-cvviewer-resume-dev:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-dev
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-dev
+  #   ports:
+  #     - "8009:3000"
   
-  aams-cvviewer-resume-dataeng:
-    build:
-      context: ./typescript/aams-cvviewer-resume-dataeng
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-dataeng
-    ports:
-      - "8010:3000"
+  # aams-cvviewer-resume-dataeng:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-dataeng
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-dataeng
+  #   ports:
+  #     - "8010:3000"
   
-  aams-cvviewer-resume-devops:
-    build:
-      context: ./typescript/aams-cvviewer-resume-devops
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-devops
-    ports:
-      - "8011:3000"
+  # aams-cvviewer-resume-devops:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-devops
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-devops
+  #   ports:
+  #     - "8011:3000"
 
-  aams-cvviewer-resume-ts:
+  # aams-cvviewer-resume-ts:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-ts
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-ts
+  #   ports:
+  #     - "8012:3000"
+
+  go-linktree-1:
     build:
-      context: ./typescript/aams-cvviewer-resume-ts
+      context: ./go/linktree
       dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-ts
+    container_name: go-linktree-1
     ports:
-      - "8012:3000"
+      - "8013:8080"
 
   # cpp-web-app-1:
   #   build:
