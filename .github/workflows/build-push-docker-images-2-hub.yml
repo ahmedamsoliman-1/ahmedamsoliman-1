@@ -741,17 +741,17 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }}
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_ORDER_SVC }}
 
@@ -780,19 +780,19 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
 
@@ -820,18 +820,18 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DATA }}
 
       
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEV }}
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVWEB }}
 
@@ -864,22 +864,22 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
         
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_NODE_TEMPLATE }}
         
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_PORTFOLIO }}
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}
 
