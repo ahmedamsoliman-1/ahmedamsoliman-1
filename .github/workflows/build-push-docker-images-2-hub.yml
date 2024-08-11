@@ -1,6 +1,5 @@
 name: 'build-push-docker-images-2-hub'
 
-
 on:
   push:
     branches:
@@ -8,6 +7,46 @@ on:
   pull_request:
     branches:
       - master
+
+env:
+  ALL_PLATFORMS: linux/amd64,linux/arm64
+  LATEST_TAG: 1.0.1
+
+  IMAGE_NAME_FRONTEND_SVC: aams-frontend-svc
+  IMAGE_NAME_USER_SVC: aams-user-svc
+  IMAGE_NAME_ORDER_SVC: aams-order-svc
+  IMAGE_NAME_PERSONAL_CLOUD: aams-personal-cloud
+  IMAGE_NAME_NODE_TEMPLATE: aams-node-templates
+  IMAGE_NAME_RESUME_DATA: aams-resume-data-eng-pdf
+  IMAGE_NAME_RESUME_DEV: aams-resume-dev-pdf
+  IMAGE_NAME_RESUME_DEVOPS: aams-resume-devops-pdf
+  IMAGE_NAME_RESUME_TS: aams-resume-ts-pdf
+  IMAGE_NAME_RESUME_DEVWEB: aams-resume-dev-web
+  IMAGE_NAME_PORTFOLIO: aams-portfolio
+  IMAGE_NAME_AHMEDAMSOLIMAN: aams-ahmedamsoliman-1
+  IMAGE_NAME_CV_VIEWER_DEV: aams-aams-cvviewer-resume-dev
+  IMAGE_NAME_CV_VIEWER_DEVOPS: aams-aams-cvviewer-resume-devops
+  IMAGE_NAME_CV_VIEWER_TS: aams-aams-cvviewer-resume-ts
+  IMAGE_NAME_CV_VIEWER_DATAENG: aams-aams-cvviewer-resume-dataeng
+  IMAGE_NAME_PYTHON_FLASK_1: aams-flask-1
+  
+  FRONTEND_SVC: ./apps/nodejs/frontend-svc
+  USER_SVC: ./apps/nodejs/user-svc
+  ORDER_SVC: ./apps/nodejs/order-svc
+  PERSONAL_CLOUD: ./apps/nodejs/personal-cloud
+  NODE_TEMPLATE: ./apps/nodejs/node-templates
+  RESUME_DATA: ./apps/static/resume-data-eng-pdf
+  RESUME_DEV: ./apps/static/resume-dev-pdf
+  RESUME_DEVOPS: ./apps/static/resume-devops-pdf
+  RESUME_TS: ./apps/static/resume-ts-pdf
+  RESUME_DEVWEB: ./apps/static/resume-dev-web
+  PORTFOLIO: ./apps/next-js/portfolio
+  AHMEDAMSOLIMAN: ./apps/nodejs/ahmedamsoliman-1
+  CV_VIEWER_DEV: ./apps/typescript/aams-cvviewer-resume-dev
+  CV_VIEWER_DEVOPS: ./apps/typescript/aams-cvviewer-resume-devops
+  CV_VIEWER_TS: ./apps/typescript/aams-cvviewer-resume-ts
+  CV_VIEWER_DATAENG: ./apps/typescript/aams-cvviewer-resume-dataeng
+  PYTHON_FLASK_1: ./apps/python/flask/flask_app_1
 
 jobs:
   leader:
@@ -106,7 +145,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PERSONAL_CLOUD }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PERSONAL_CLOUD }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
       
@@ -144,7 +183,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_FRONTEND_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
+          # # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
       
@@ -182,7 +221,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_ORDER_SVC }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.ORDER_SVC }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.ORDER_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
       
@@ -220,7 +259,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_USER_SVC }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.USER_SVC }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.USER_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_USER_SVC }}.txt
       
@@ -258,7 +297,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_NODE_TEMPLATE }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.NODE_TEMPLATE }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.NODE_TEMPLATE }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_NODE_TEMPLATE }}.txt
       
@@ -297,7 +336,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DATA }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DATA }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DATA }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
       
@@ -335,7 +374,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEV }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEV }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEV }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
       
@@ -368,7 +407,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEVWEB }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEVWEB }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEVWEB }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEVWEB }}.txt
       
@@ -409,7 +448,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PORTFOLIO }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PORTFOLIO }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PORTFOLIO }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
       
@@ -447,7 +486,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.AHMEDAMSOLIMAN }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.AHMEDAMSOLIMAN }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
       
@@ -485,7 +524,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
       
@@ -523,7 +562,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
       
@@ -561,7 +600,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_TS }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
       
@@ -599,7 +638,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
       
@@ -635,7 +674,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
       
@@ -644,25 +683,13 @@ jobs:
         with:
           name: docker-image-${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}
           path: output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
-  
-  all-done:
+    
+  svcs-artificat:
     runs-on: ubuntu-latest
     needs: 
-      - personal-cloud
       - frontend-svc
       - order-svc
       - user-svc
-      - node-templates
-      - cv-data-eng
-      - cv-dev-web
-      - cv-dev
-      - portfolio
-      - ahmedamsoliman-1
-      - cvviewer-dev
-      - cvviewer-devops
-      - cvviewer-ts
-      - cvviewer-dataeng
-      - flask-1
 
     steps:
       - name: Download artifact
@@ -680,6 +707,77 @@ jobs:
         with:
           name: docker-image-${{ env.IMAGE_NAME_ORDER_SVC }}
 
+      - name: Ls artifact
+        run: |
+          ls -R
+      
+      - name: Cat text file
+        run: |
+          files=($(find . -type f -name "*.txt"))
+          for file in "${files[@]}"; do
+              cat "$file"
+          done
+
+      - name: echo
+        run: |
+          echo 'ALL DONE'
+  
+  cvviewers-artificat:
+    runs-on: ubuntu-latest
+    needs: 
+      - cvviewer-dev
+      - cvviewer-devops
+      - cvviewer-ts
+      - cvviewer-dataeng
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
+
+      - name: Ls artifact
+        run: |
+          ls -R
+      
+      - name: Cat text file
+        run: |
+          files=($(find . -type f -name "*.txt"))
+          for file in "${files[@]}"; do
+              cat "$file"
+          done
+
+      - name: echo
+        run: |
+          echo 'ALL DONE'
+  
+  all-done:
+    runs-on: ubuntu-latest
+    needs: 
+      - personal-cloud
+      - node-templates
+      - cv-data-eng
+      - cv-dev-web
+      - cv-dev
+      - portfolio
+      - ahmedamsoliman-1
+      - flask-1
+      - cvviewers-artificat
+      - svcs-artificat
+
+    steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
@@ -715,23 +813,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: docker-image-${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}
-      
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
 
       - name: Ls artifact
         run: |
