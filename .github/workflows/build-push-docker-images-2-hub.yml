@@ -217,7 +217,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -236,7 +236,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_FRONTEND_SVC }}
           path: output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
@@ -255,7 +255,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -274,7 +274,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_ORDER_SVC }}
           path: output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
@@ -293,7 +293,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -312,7 +312,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_USER_SVC }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_USER_SVC }}
           path: output/${{ env.IMAGE_NAME_USER_SVC }}.txt
@@ -331,7 +331,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -350,7 +350,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_NODE_TEMPLATE }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_NODE_TEMPLATE }}
           path: output/${{ env.IMAGE_NAME_NODE_TEMPLATE }}.txt
@@ -370,7 +370,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -389,7 +389,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DATA }}
           path: output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
@@ -408,7 +408,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -427,7 +427,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEV }}
           path: output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
@@ -446,7 +446,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -460,7 +460,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEVWEB }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_RESUME_DEVWEB }}
           path: output/${{ env.IMAGE_NAME_RESUME_DEVWEB }}.txt
@@ -481,7 +481,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -501,7 +501,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_PORTFOLIO }}
           path: output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
@@ -520,7 +520,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -539,7 +539,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}
           path: output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
@@ -558,7 +558,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -577,7 +577,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEV }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
@@ -596,7 +596,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -615,7 +615,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
@@ -634,7 +634,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -653,7 +653,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_TS }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
@@ -672,7 +672,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -691,7 +691,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
@@ -708,7 +708,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -727,7 +727,7 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}
           path: output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
