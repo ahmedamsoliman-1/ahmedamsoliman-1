@@ -75,6 +75,8 @@ env:
   IMAGE_NAME_XX_1: xx_1
   IMAGE_NAME_XX_2: xx_2
   IMAGE_NAME_XX_3: xx_3
+  IMAGE_NAME_XX_4: xx_4
+  IMAGE_NAME_XX_5: xx_5
   
   FRONTEND_SVC: ./apps/nodejs/frontend-svc
   USER_SVC: ./apps/nodejs/user-svc
@@ -97,6 +99,8 @@ env:
   XX_1: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
   XX_2: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
   XX_3: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
+  XX_4: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
+  XX_5: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
 
 jobs:
   leader:
@@ -208,7 +212,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PERSONAL_CLOUD }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PERSONAL_CLOUD }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
       
@@ -247,7 +251,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_FRONTEND_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
       
@@ -285,7 +289,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_ORDER_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.ORDER_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.ORDER_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
       
@@ -323,7 +327,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_USER_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.USER_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.USER_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_USER_SVC }}.txt
       
@@ -361,7 +365,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_NODE_TEMPLATE }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.NODE_TEMPLATE }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.NODE_TEMPLATE }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_NODE_TEMPLATE }}.txt
       
@@ -400,7 +404,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DATA }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DATA }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DATA }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
       
@@ -438,7 +442,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEV }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEV }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEV }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
       
@@ -471,7 +475,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_RESUME_DEVWEB }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEVWEB }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.RESUME_DEVWEB }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_RESUME_DEVWEB }}.txt
       
@@ -512,7 +516,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PORTFOLIO }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PORTFOLIO }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PORTFOLIO }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
       
@@ -550,7 +554,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.AHMEDAMSOLIMAN }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.AHMEDAMSOLIMAN }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
       
@@ -588,7 +592,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEV }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
       
@@ -626,7 +630,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DEVOPS }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
       
@@ -664,7 +668,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_TS }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_TS }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
       
@@ -702,7 +706,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.CV_VIEWER_DATAENG }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
       
@@ -738,7 +742,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.PYTHON_FLASK_1 }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
       
@@ -773,7 +777,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_XX_1 }}:${{ env.LATEST_TAG }}
-          # # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_1 }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_1 }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_XX_1 }}.txt
       
@@ -807,7 +811,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_XX_2 }}:${{ env.LATEST_TAG }}
-          # # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_2 }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_2 }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_XX_2 }}.txt
       
@@ -842,7 +846,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_XX_3 }}:${{ env.LATEST_TAG }}
-          # # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_3 }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_3 }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_XX_3 }}.txt
       
@@ -851,7 +855,76 @@ jobs:
         with:
           name: docker-image-${{ env.IMAGE_NAME_XX_3 }}
           path: output/${{ env.IMAGE_NAME_XX_3 }}.txt
-        
+    
+  xx-4:
+    runs-on: ubuntu-latest
+    needs: xx-parent
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # - name: Install dependencies
+      #   run: |
+      #     pwd
+
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_XX_4 }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_XX_4 }}:${{ env.LATEST_TAG }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_4 }}
+          mkdir -p output
+          echo $IMAGE > output/${{ env.IMAGE_NAME_XX_4 }}.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_XX_4 }}
+          path: output/${{ env.IMAGE_NAME_XX_4 }}.txt
+    
+  xx-5:
+    runs-on: ubuntu-latest
+    needs: xx-parent
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # - name: Install dependencies
+      #   run: |
+      #     pwd
+
+      - name: Build and push Docker image - ${{ env.IMAGE_NAME_XX_5 }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_XX_5 }}:${{ env.LATEST_TAG }}
+          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.XX_5 }}
+          mkdir -p output
+          echo $IMAGE > output/${{ env.IMAGE_NAME_XX_5 }}.txt
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_XX_5 }}
+          path: output/${{ env.IMAGE_NAME_XX_5 }}.txt
     
   xx-artificat:
     runs-on: ubuntu-latest
@@ -859,6 +932,8 @@ jobs:
       - xx-1
       - xx-2
       - xx-3
+      - xx-4
+      - xx-5
 
     steps:
       - name: Download artifact
@@ -875,6 +950,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_XX_3 }}
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_XX_4 }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_XX_5 }}
 
       - name: Ls artifact
         run: |
