@@ -8,6 +8,48 @@ on:
     branches:
       - master
 
+# env:
+#   ALL_PLATFORMS: linux/amd64,linux/arm64
+#   LATEST_TAG: '1.0.2'
+
+#   IMAGE_NAMES:
+#     FRONTEND_SVC: aams-frontend-svc
+#     USER_SVC: aams-user-svc
+#     ORDER_SVC: aams-order-svc
+#     PERSONAL_CLOUD: aams-personal-cloud
+#     NODE_TEMPLATE: aams-node-templates
+#     RESUME_DATA: aams-resume-data-eng-pdf
+#     RESUME_DEV: aams-resume-dev-pdf
+#     RESUME_DEVOPS: aams-resume-devops-pdf
+#     RESUME_TS: aams-resume-ts-pdf
+#     RESUME_DEVWEB: aams-resume-dev-web
+#     PORTFOLIO: aams-portfolio
+#     AHMEDAMSOLIMAN: aams-ahmedamsoliman-1
+#     CV_VIEWER_DEV: aams-aams-cvviewer-resume-dev
+#     CV_VIEWER_DEVOPS: aams-aams-cvviewer-resume-devops
+#     CV_VIEWER_TS: aams-aams-cvviewer-resume-ts
+#     CV_VIEWER_DATAENG: aams-aams-cvviewer-resume-dataeng
+#     PYTHON_FLASK_1: aams-flask-1
+
+#   PATHS:
+#     FRONTEND_SVC: ./apps/nodejs/frontend-svc
+#     USER_SVC: ./apps/nodejs/user-svc
+#     ORDER_SVC: ./apps/nodejs/order-svc
+#     PERSONAL_CLOUD: ./apps/nodejs/personal-cloud
+#     NODE_TEMPLATE: ./apps/nodejs/node-templates
+#     RESUME_DATA: ./apps/static/resume-data-eng-pdf
+#     RESUME_DEV: ./apps/static/resume-dev-pdf
+#     RESUME_DEVOPS: ./apps/static/resume-devops-pdf
+#     RESUME_TS: ./apps/static/resume-ts-pdf
+#     RESUME_DEVWEB: ./apps/static/resume-dev-web
+#     PORTFOLIO: ./apps/next-js/portfolio
+#     AHMEDAMSOLIMAN: ./apps/nodejs/ahmedamsoliman-1
+#     CV_VIEWER_DEV: ./apps/typescript/aams-cvviewer-resume-dev
+#     CV_VIEWER_DEVOPS: ./apps/typescript/aams-cvviewer-resume-devops
+#     CV_VIEWER_TS: ./apps/typescript/aams-cvviewer-resume-ts
+#     CV_VIEWER_DATAENG: ./apps/typescript/aams-cvviewer-resume-dataeng
+#     PYTHON_FLASK_1: ./apps/python/flask/flask_app_1
+
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
   LATEST_TAG: '1.0.2'
@@ -116,15 +158,15 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Set up Node.js 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -155,10 +197,11 @@ jobs:
           echo $IMAGE > output/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
       
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-image-${{ env.IMAGE_NAME_PERSONAL_CLOUD }}
           path: output/${{ env.IMAGE_NAME_PERSONAL_CLOUD }}.txt
+
 
   # frontend-svc:
   #   runs-on: ubuntu-latest
