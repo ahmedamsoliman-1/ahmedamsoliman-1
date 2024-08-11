@@ -7,18 +7,18 @@ services:
     restart: unless-stopped
     ports:
       - "7001:8080"
-  # aams-user-svc:
-  #   image: ahmedalimsolimansd/aams-user-svc:1.0.1
-  #   container_name: aams-user-svc
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7002:8080"
-  # aams-order-svc:
-  #   image: ahmedalimsolimansd/aams-order-svc:1.0.1
-  #   container_name: aams-order-svc
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7003:8080"
+  aams-user-svc:
+    image: ahmedalimsolimansd/aams-user-svc:1.0.2
+    container_name: aams-user-svc
+    restart: unless-stopped
+    ports:
+      - "7002:8080"
+  aams-order-svc:
+    image: ahmedalimsolimansd/aams-order-svc:1.0.2
+    container_name: aams-order-svc
+    restart: unless-stopped
+    ports:
+      - "7003:8080"
   # aams-personal-cloud:
   #   image: ahmedalimsolimansd/aams-personal-cloud:1.0.1
   #   container_name: aams-personal-cloud
