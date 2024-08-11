@@ -1,23 +1,25 @@
 #!/bin/bash
 
 DOCKERHUB_ID=ahmedalimsolimansd
-DOCKER_TAG=1.0.1
+DOCKER_TAG=1.0.2
 
 IMAGES=(
-  "aams-portfolio"
-  "aams-node-templates"
-  "aams-personal-cloud"
-  "aams-resume-data-eng-pdf"
-  "aams-user-svc"
   "aams-frontend-svc"
+  "aams-user-svc"
   "aams-order-svc"
-  "aams-resume-dev-web"
-  "aams-ahmedamsoliman-1"
+  "aams-personal-cloud"
+  "aams-node-templates"
+  "aams-resume-data-eng-pdf"
   "aams-resume-dev-pdf"
-  "aams-cvviewer-resume-dev"
-  "aams-cvviewer-resume-devops"
-  "aams-cvviewer-resume-ts"
-  "aams-cvviewer-resume-dataeng"
+  "aams-resume-devops-pdf"
+  "aams-resume-ts-pdf"
+  "aams-resume-dev-web"
+  "aams-portfolio"
+  "aams-ahmedamsoliman-1"
+  "aams-aams-cvviewer-resume-dev"
+  "aams-aams-cvviewer-resume-devops"
+  "aams-aams-cvviewer-resume-ts"
+  "aams-aams-cvviewer-resume-dataeng"
   "aams-flask-1"
 )
 
