@@ -183,7 +183,7 @@ jobs:
         if: success()
         run: |
           IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME_FRONTEND_SVC }}:${{ env.LATEST_TAG }}
-          # docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ env.FRONTEND_SVC }}
           mkdir -p output
           echo $IMAGE > output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
       
