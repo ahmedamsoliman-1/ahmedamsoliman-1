@@ -19,87 +19,75 @@ services:
     restart: unless-stopped
     ports:
       - "7003:8080"
-  # aams-personal-cloud:
-  #   image: ahmedalimsolimansd/aams-personal-cloud:1.0.1
-  #   container_name: aams-personal-cloud
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7004:3004"
-  # aams-node-templates:
-  #   image: ahmedalimsolimansd/aams-node-templates:1.0.1
-  #   container_name: aams-node-templates
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7005:80"
-  # aams-resume-data-eng-pdf:
-  #   image: ahmedalimsolimansd/aams-resume-data-eng-pdf:1.0.1
-  #   container_name: aams-resume-data-eng-pdf
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7006:80"
-  # aams-resume-dev-pdf:
-  #   image: ahmedalimsolimansd/aams-resume-dev-pdf:1.0.1
-  #   container_name: aams-resume-dev-pdf
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7007:80"
-  # aams-resume-devops-pdf:
-  #   image: ahmedalimsolimansd/aams-resume-devops-pdf:1.0.1
-  #   container_name: aams-resume-devops-pdf
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7008:80"
-  # aams-resume-ts-pdf:
-  #   image: ahmedalimsolimansd/aams-resume-ts-pdf:1.0.1
-  #   container_name: aams-resume-ts-pdf
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7009:80"
-  # aams-resume-dev-web:
-  #   image: ahmedalimsolimansd/aams-resume-dev-web:1.0.1
-  #   container_name: aams-resume-dev-web
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7010:80"
-  # aams-portfolio:
-  #   image: ahmedalimsolimansd/aams-portfolio:1.0.1
-  #   container_name: aams-portfolio
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7011:80"
+  aams-personal-cloud:
+    image: ahmedalimsolimansd/aams-personal-cloud:1.0.2
+    container_name: aams-personal-cloud
+    restart: unless-stopped
+    ports:
+      - "7004:3004"
+  aams-node-templates:
+    image: ahmedalimsolimansd/aams-node-templates:1.0.2
+    container_name: aams-node-templates
+    restart: unless-stopped
+    ports:
+      - "7005:80"
+  aams-resume-data-eng-pdf:
+    image: ahmedalimsolimansd/aams-resume-data-eng-pdf:1.0.2
+    container_name: aams-resume-data-eng-pdf
+    restart: unless-stopped
+    ports:
+      - "7006:80"
+  aams-resume-dev-pdf:
+    image: ahmedalimsolimansd/aams-resume-dev-pdf:1.0.2
+    container_name: aams-resume-dev-pdf
+    restart: unless-stopped
+    ports:
+      - "7007:80"
+  aams-resume-dev-web:
+    image: ahmedalimsolimansd/aams-resume-dev-web:1.0.2
+    container_name: aams-resume-dev-web
+    restart: unless-stopped
+    ports:
+      - "7010:80"
+  aams-portfolio:
+    image: ahmedalimsolimansd/aams-portfolio:1.0.2
+    container_name: aams-portfolio
+    restart: unless-stopped
+    ports:
+      - "7011:80"
   # aams-ahmedamsoliman-1:
-  #   image: ahmedalimsolimansd/aams-ahmedamsoliman-1:1.0.1
+  #   image: ahmedalimsolimansd/aams-ahmedamsoliman-1:1.0.2
   #   container_name: aams-ahmedamsoliman-1
   #   restart: unless-stopped
   #   ports:
-  #     - "7012:8080"
-  # aams-aams-cvviewer-resume-dev:
-  #   image: ahmedalimsolimansd/aams-aams-cvviewer-resume-dev:1.0.1
-  #   container_name: aams-aams-cvviewer-resume-dev
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7013:3000"
-  # aams-aams-cvviewer-resume-devops:
-  #   image: ahmedalimsolimansd/aams-aams-cvviewer-resume-devops:1.0.1
-  #   container_name: aams-aams-cvviewer-resume-devops
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7014:3000"
-  # aams-aams-cvviewer-resume-ts:
-  #   image: ahmedalimsolimansd/aams-aams-cvviewer-resume-ts:1.0.1
-  #   container_name: aams-aams-cvviewer-resume-ts
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7015:3000"
-  # aams-aams-cvviewer-resume-dataeng:
-  #   image: ahmedalimsolimansd/aams-aams-cvviewer-resume-dataeng:1.0.1
-  #   container_name: aams-aams-cvviewer-resume-dataeng
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7016:3000"
-  # aams-flask-1:
-  #   image: ahmedalimsolimansd/aams-flask-1:1.0.1
-  #   container_name: aams-flask-1
-  #   restart: unless-stopped
-  #   ports:
-  #     - "7017:80"
+  #     - "7012:80"
+  aams-aams-cvviewer-resume-dev:
+    image: ahmedalimsolimansd/aams-aams-cvviewer-resume-dev:1.0.2
+    container_name: aams-aams-cvviewer-resume-dev
+    restart: unless-stopped
+    ports:
+      - "7013:3000"
+  aams-aams-cvviewer-resume-devops:
+    image: ahmedalimsolimansd/aams-aams-cvviewer-resume-devops:1.0.2
+    container_name: aams-aams-cvviewer-resume-devops
+    restart: unless-stopped
+    ports:
+      - "7014:3000"
+  aams-aams-cvviewer-resume-ts:
+    image: ahmedalimsolimansd/aams-aams-cvviewer-resume-ts:1.0.2
+    container_name: aams-aams-cvviewer-resume-ts
+    restart: unless-stopped
+    ports:
+      - "7015:3000"
+  aams-aams-cvviewer-resume-dataeng:
+    image: ahmedalimsolimansd/aams-aams-cvviewer-resume-dataeng:1.0.2
+    container_name: aams-aams-cvviewer-resume-dataeng
+    restart: unless-stopped
+    ports:
+      - "7016:3000"
+  aams-flask-1:
+    image: ahmedalimsolimansd/aams-flask-1:1.0.2
+    container_name: aams-flask-1
+    restart: unless-stopped
+    ports:
+      - "7017:80"
