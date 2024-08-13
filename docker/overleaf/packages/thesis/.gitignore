@@ -1,0 +1,16 @@
+thesis.pdf
+*.bbl
+*.blg
+*.log
+*.out
+*.vtc
+*.lof
+*.lot
+*.synctex.gz
+*.toc
+*.thm
+*.xdv
+*.aux
+*-eps-converted-to.pdf
+revision.tex
+metadata.tex

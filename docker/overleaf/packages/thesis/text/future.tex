@@ -1,0 +1,102 @@
+The research on approximate computing during this decade
+has asked more questions than it has answered.
+To bring approximation mainstream, the community will need to address a swath
+of open problems.
+
+\paragraph{Composition}
+Current tools for approximate programmability are stuck in a
+whole-program paradigm.
+ACCEPT's compiler analyses and auto-tuner machinery, from \chref{accept},
+assume that they can observe the entire application at once.
+Probabilistic assertions, from \chref{passert},
+fundamentally describe whole-program properties: they constrain a chance that
+an execution \emph{from program entry} has a certain property.
+This whole-program perspective on result quality prevents approximate
+computing from participating in some of the most powerful concepts in
+programming: local abstractions, separation of concerns, and libraries.
+A recent exception is Carbin \etal's Rely language~\cite{rely},
+where accuracy is a relationship between module inputs and module outputs.
+The next stage of research should continue to define what composition means in
+an approximate context.
+
+\paragraph{Everyday approximation}
+Although the buzzword is new, approximate computing is far from a new idea.
+Approximation is a fundamental in some domains of computer science.
+Digital signal processing pipelines incorporate accuracy parameters at every
+stage;
+work on real-time graphics gets good-enough results more cheaply than an ideal
+renderer;
+and there is an entire subfield in theoretical computer science that designs
+approximation algorithms for intractable problems.
+All of these approaches are approximations, but they look very different from
+the kind of system-level approximations in this dissertation.
+Programming models for approximate computing can learn lessons from these more
+established disciplines.
+And the new techniques developed for approximate computing may also be
+portable in the opposite direction:
+they could help bring programmability to areas where approximation has
+traditionally been difficult to reason about.
+
+\paragraph{High-performance computing \& fault tolerance}
+Approximate computing is not the same as fault tolerance, but there are
+clear connections.
+High-performance computing infrastructures are often large enough that silent
+failures are a fact of life;
+and, meanwhile, many HPC applications can tolerate some errors.
+Approximate computing researchers should build a bridge to domain expertise in
+HPC\@.
+Ideally, approximate programming techniques could help
+express the latent tolerance in
+HPC systems while constraining the potential for numerical instability and
+other failure modes.
+
+\paragraph{Defining quality}
+One of the principles of this research is that programs have
+application-specific quality metrics.
+Determining exactly what constitutes ``quality'' for a given application,
+however, can be deceptively difficult.
+Consider defects in images:
+how many pixels can be wrong, and by what amount, before the user notices?
+Are larger areas of slight discoloration better than smaller areas of more
+intense errors?
+What makes users care more about the quality of certain photographs than
+others?
+These questions are subjective, context sensitive, and poorly defined, but
+they are critical to determining whether an approximation is successful.
+For approximate computing to succeed, we need better methodologies for
+deriving quality metrics.
+As a first step, we have started preliminary work that applies
+crowdsourcing to measure human perception of quality.
+Researchers should also study software engineers' \emph{de facto} processes for
+assessing output quality in approximate application domains.
+
+\paragraph{Connections to probabilistic programming}
+Languages for app\-roximate program\-ming usually need to incorporate probabilistic
+semantics.
+Recently, the programming languages research community has developed a focus
+another area that combines programming with probability:
+\emph{probabilistic programming languages}~\cite{BBGR13, wingate-lightweight,
+  church, chaganty, pfeffersample, probdsl, koller}.%
+\footnote{%
+    For general background on probabilistic programming, see
+    \href{http://probabilistic-programming.org/}{\texttt{probabilistic-programming.org}}.%
+}
+So far, this direction has assumed a relatively narrow focus:
+making it easier to express and work with machine-learning models.
+But the two research areas should cross-pollinate:
+techniques from one should apply to problems from the other.
+Researchers should seek fundamental ideas that underly the two sets of
+programmability challenges.
+
+\vspace{\baselineskip}
+\noindent
+Even with these outstanding challenges, approximate computing research
+has an important role to play in the next era of computer system design.
+As the semiconductor industry exhausts its traditional approaches to scaling
+performance, and as it becomes more expensive for hardware to enforce
+reliability,
+approximation will begin to look less like an academic curiosity.
+It will become harder to justify preserving abstractions that are oblivious to
+the resilience in many high-profile applications,
+and it will become easier to explain the complexity of better
+abstractions that incorporate approximation.

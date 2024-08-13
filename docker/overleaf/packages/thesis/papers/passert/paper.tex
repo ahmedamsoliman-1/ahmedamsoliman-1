@@ -1,0 +1,28 @@
+\input{results/perfdata}
+
+% Tolerate quotes like "this" instead of like ``this''.
+\MakeOuterQuote{"}
+
+\providecommand{\unct}[1]{\ensuremath{\mathit{Uncertain}\langle \mathit{#1} \rangle}\xspace}
+
+\lstset{%
+    language={Python},%
+    emph={assert, passert},%
+}
+
+% Text macros.
+\newcommand{\passert}{\textsf{passert}\xspace}
+\newcommand{\passerts}{\textsf{passert}s\xspace}
+\newcommand{\Passert}{\textsf{Passert}\xspace}
+\newcommand{\Passerts}{\textsf{Passert}s\xspace}
+\newcommand{\tool}{MAYHAP\xspace} % feel free to come up with a better name!
+\newcommand{\mayhap}{MAYHAP\xspace} % feel free to come up with a better name!
+\renewcommand{\lang}{PROB\xspace} % feel free to come up with a better name!
+\newcommand{\corelang}{PROBCORE\xspace} % me too!
+
+\input{introduction}
+\input{model}
+\input{analysis}
+\input{verifying}
+\input{eval}
+\input{conclusion}

@@ -1,0 +1,610 @@
+\section{Introduction}
+\label{sec:intro}
+
+Accuracy and reliability are fundamental tenets in computer system design.
+Programmers can expect that the processor never exposes timing
+errors, and networking stacks typically aim to provide reliable transports
+even on unreliable physical media.
+When errors do occasionally happen, we treat them as exceptional outliers, not
+as part of the system abstraction.
+Cosmic rays can silently flip bits in DRAM, for example,
+but the machine will typically use error-correcting codes to
+maintain the illusion for programmers that the memory is infinitely reliable.
+
+But abstractions with perfect accuracy come at a cost.
+Chips need to choose conservative clock rates to banish timing errors,
+storage and communication channels incur error-correction overhead,
+and parallelism requires expensive synchronization.
+
+Meanwhile, many applications have intrinsic tolerance to inaccuracy.
+Applications in domains like computer vision, media
+processing, machine learning, and sensor data analysis already incorporate
+imprecision into their design.
+Large-scale data analytics focus on aggregate trends rather than the integrity
+of individual data elements.
+In domains such as computer vision and robotics, there are no perfect answers:
+results can vary in their usefulness, and the output quality is always in
+tension with the resources that the software needs to produce them.
+All these applications are \emph{approximate
+programs}: a range of possible values can be considered ``correct'' outputs
+for a given input.
+
+From the perspective of an approximate program, today's
+systems are overprovisioned with accuracy. Since the program is resilient, it
+does
+not need every arithmetic operation to be precisely correct and every bit of
+memory to be preserved at the same level of reliability.
+\emph{Approximate computing} is a research agenda that seeks to better match
+the accuracy in system abstractions with the needs of approximate
+programs.
+
+
+\paragraph{Disciplined approximation}
+
+The central challenge in approximate computing is forging abstractions that
+make imprecision \emph{controlled and predictable} without sacrificing its
+efficiency benefits.
+This goal of this dissertation is to design hardware and software around
+approximation-aware abstractions that, together, make accuracy--efficiency
+trade-offs attainable for programmers.
+My work examines approximate abstractions
+in the contexts of programming languages, computer architecture,
+memory technologies, compilers, and software development
+tools.
+
+\section{Research Principles}
+
+The work in this dissertation is organized around five principles
+for the design of disciplined approximate abstractions.
+These themes represent the collective findings of the concrete research
+projects described later.
+The principles are:
+%
+\begin{enumerate}
+\item Result quality is an application-specific property.
+\item Approximate abstractions should distinguish between safety properties
+    and quality properties.
+\item Hardware and software need to collaborate to reach the best
+    potential of approximate computing.
+\item Approximate programming models need to incorporate probability and
+    statistics.
+\item The granularity of approximation represents a trade-off between
+    generality and potential efficiency.
+\end{enumerate}
+%
+This section outlines each finding in more detail.
+
+\subsection{Result Quality is Application Specific}
+\label{sec:princ:appspecific}
+
+Since approximate computing navigates trade-offs between efficiency and result
+quality, it needs definitions of both sides of the balance.
+While \emph{efficiency} can have universal definitions---the time to
+completion, for example, or the number of joules consumed---output
+\emph{quality} is more subtle.
+A key tenet in this work is is that applications must define ``output
+quality'' case by case:
+the platform cannot define quality without information from the programmer.
+
+Following this philosophy, the system designs in this dissertation assume that
+each approximate program comes with a \emph{quality metric}, expressed as
+executable code, that scores the program's output on a continuous scale from
+0.0 to 1.0.
+A quality metric is the approximate-computing analog to a traditional software
+\emph{specification}, which typically makes a binary decision about whether an
+implementation is correct or incorrect.
+Just as ordinary verification and optimization tools start from a
+specification, approximate-computing tools start with a quality metric.
+
+\subsection{Safety vs.~Quality}
+\label{sec:princ:safety}
+
+At first glance, a quality metric seems like sufficient information to specify
+an application's constraints on approximation.
+If the system can guarantee that a program's output will always have a quality
+score above $q$, and the programmer decides that $q$ is good enough, what
+could possibly go wrong?
+
+In reality, it can be difficult or impossible for systems to prove arbitrary
+quality bounds with perfect certainty.
+Realistic tools can often only certify, for example, that any output's quality
+score will be at least $q$ \emph{with high probability},
+or that \emph{nearly every output} will exceed quality $q$ but rare edge cases
+may do worse.
+Even more fundamentally, it can be difficult for programmers to devise formal
+quality metrics that capture every possible factor in their intuitive notion
+of output quality.
+Quality metrics can be simpler if their scope is narrowed to data where they
+are most relevant: the pixels in an output image, for example, but not the
+header data.
+
+To that end, this dissertation embraces \emph{safety} as a separate concept
+from quality.
+A safety property, in the context of approximate computing, is a guarantee
+that part of a program \emph{never} deviates from its precise counterpart---in
+other words, that it matches the semantics of a traditional, non-approximate
+system.
+A quality property, in contrast, constrains the \emph{amount} that approximate
+program components deviate from their precise counterparts.
+
+In practice, we find a first-order distinction between \emph{no approximation at
+all} and \emph{approximation of some nonzero degree} both simplifies reasoning
+for programmers and makes tools more tractable.
+My work has demonstrated that the two kinds of properties can be amenable to
+very different techniques:
+information flow tracking (\chref{enerj}) is appropriate for safety, for
+example, but statistical hypothesis testing (\chref{passert}) is better for
+quality.
+
+\subsection{Hardware--Software Co-Design}
+
+% Approximate computing techniques cover a broad range of approaches,
+% from hardware to software.
+Some of the most promising ideas unlock new sources of efficiency that are
+only available in hardware:
+exploiting the analog behavior of transistors, for example,
+or mitigating the cost of error correction in memory modules.
+Because approximation techniques have subtle and wide-ranging effects on
+program behavior, however,
+designs that apply them \emph{obliviously} are unworkable.
+Instead, researchers should co-design hardware techniques with their software
+abstractions to ensure that programmers can control imprecision.
+
+Hardware designs can also rely on guarantees from software---the language or
+compiler---to avoid unnecessary complexity.
+The Truffle approximate CPU~\cite{truffle}, for example, avoids expensive
+hardware consistency checks by exploiting EnerJ's compile-time enforcement of
+type safety.
+Wherever possible, hardware researchers should offload responsibilities to
+complementary software systems.
+
+\subsection{Programming with Probabilistic Reasoning}
+
+Often, the most natural ways to reason about approximation and quality use
+probabilistic tools.
+Probabilistic reasoning lets us show show statements such as \emph{this output
+will be high-quality with at least probability $P$} or \emph{an input randomly
+selected from this distribution leads to a high-quality output with
+probability $P'$}.
+These probabilistic statements can simultaneously match the nondeterministic behavior
+of approximate systems~\cite{truffle, npu, approxstorage}
+and correspond to software quality criteria~\cite{decaf, passert}.
+
+To support reasoning about quality, approximate
+programming models need to incorporate abstractions for statistical behavior.
+The DECAF type system, in \chref{decaf}, and
+probabilistic assertions, in \chref{passert}, represent two
+complementary approaches to reasoning about probabilistic quality
+properties.
+
+These approaches dovetail with the recent expansion of interest in
+\emph{probabilistic programming languages}, which seek to augment
+machine-learning techniques with language abstractions~\cite{church}.
+Approximate programming systems can adapt lessons from this body of research.
+
+\subsection{Granularity of Approximation}
+\label{sec:princ:granularity}
+
+The \emph{granularity} at which approximate computing applies is a
+nonintuitive but essential factor in its success.
+My and other researchers' work has explored approximation strategies at
+granularities of both extremes:
+fine-grained approximations that apply to individual instructions and
+individual words of memory (e.g., Truffle~\cite{truffle});
+and coarse-grained approximations that holistically transform entire
+algorithms (e.g., neural acceleration~\cite{npu}).
+
+A technique's granularity affects its
+generality and its efficiency potential.
+A fine-grained approximation can be very general:
+an approximate multiplier unit, for example, can potentially apply to any
+multiplication in a program.
+But the efficiency gains are fundamentally limited to \emph{non-control} components,
+since control errors can disrupt execution arbitrarily.
+Even if an approximate multiplier unit can be very efficient,
+the same technique can never
+improve the efficiency of a branch, an address calculation,
+or even the
+scheduling of an approximate multiply instruction.
+Approximations that work at a coarser granularity can address control costs,
+so their potential gains are larger.
+But these techniques tend to apply more narrowly:
+techniques that pattern-match on algorithm structures~\cite{paraprox},
+for example, place nuanced restrictions on the code they can transform.
+
+The EnerJ language in \chref{enerj} was initially designed for
+fine-grained hardware approximation techniques such as low-voltage functional
+units.
+While the granularity was good for programmability, it was bad for efficiency:
+our detailed hardware design for fine-grained hardware
+approximation~\cite{truffle} demonstrated limited benefit.
+The ACCEPT compiler in \chref{accept} bridges the gap: its analysis
+library and optimizations exploit the fine-grained annotations from EnerJ to
+safely apply coarse-grained optimizations.
+
+
+\section{Abstractions for Disciplined Approximation}
+
+This dissertation supports the above research principles using a set of
+concrete system designs.
+The systems comprise programming-language constructs that express
+applications' resilience to approximation along with system-level
+techniques for exploiting that latent resilience to gain efficiency.
+This section serves as an overview of the interlocking designs;
+Parts~\ref{part:programming} and~\ref{part:systems} give the full details.
+
+\subsection{Controlling Safety and Quality}
+
+The first set of projects consists of language abstractions that give
+programmers control over safety and quality in approximate programs.
+
+\subsubsection{Information Flow Tracking for General Safety}
+
+EnerJ, described in \chref{enerj}, is a type system for enforcing safety in
+the presence of approximation.
+The key insight in EnerJ is that approximate programs tend to consist of two
+intermixed kinds of storage and computation:
+critical control components
+and non-critical data components.
+The latter, which typically form the majority of the program's execution,
+are good candidates for approximation,
+while the former should be protected from error and carry traditional
+semantics.
+
+EnerJ lets programmers enforce a separation between critical and non-critical
+components.
+It uses a type system that
+borrows from static information
+flow systems for security~\cite{jif, infflow-survey} to provide a static
+noninterference guarantee for precise data.
+EnerJ extends Java with two type qualifiers, \code{@Approx} and
+\code{@Precise}, and uses a subtyping relationship to prevent
+approximate-to-precise information flow.
+Using EnerJ, programmers can rely
+on a proof that data marked as precise remains untainted by the errors arising
+from approximation.
+
+A key design goal in EnerJ is its \emph{generality:}
+the language aims to encapsulate a range of approximation strategies under a
+single abstraction.
+Its type system covers approximate storage via the types of variables and
+fields;
+approximate processor logic via overloading of arithmetic operators;
+and even user-defined approximate algorithms using dynamic method dispatch
+based on its approximating qualifiers.
+
+EnerJ addresses safety, not quality:
+a variable with the type \code{@Approx float} can be arbitrarily incorrect and
+EnerJ does not seek to bound its incorrectness.
+By leaving the complementary concern of controlling quality to separate
+mechanisms, EnerJ keeps its type system simple.
+
+\subsubsection{Extending EnerJ with Probability Types}
+
+DECAF, in \chref{decaf}, extends EnerJ's type-based approach to safety with
+quality guarantees.
+The idea is to generalize the original \code{@Approx} type qualifier to a
+parameterized qualifier \code{@Approx($p$)}, where $p$ dictates the
+\emph{degree} of approximation.
+Specifically, in DECAF, $p$ is the lower bound on the probability that a value
+is \emph{correct:} that the value in an approximate execution equals its
+counterpart in a completely precise execution of the same program.
+DECAF defines sound type rules for introducing and propagating these
+correctness probabilities.
+
+DECAF's added sophistication over EnerJ's simple two-level system comes at a
+cost in complexity:
+a type system that requires probability annotations on every expression
+would quickly become infeasible for programmers.
+To mitigate annotation overhead, DECAF adds type inference.
+Sparse probability annotations on the inputs and outputs of coarse-grained
+subcomputations are typically enough for DECAF's inference system to determine
+the less-intuitive probabilities for intermediate values.
+Crucially, DECAF places no constraints on where programmers can write explicit
+annotations:
+developers can write probabilities where they make the most sense and leave
+the remaining details to the compiler.
+
+DECAF addresses the limitations of a conservative quality analysis using
+an optional dynamic-tracking mechanism.
+The inference system also allows efficient code reuse by specializing
+functions according to the accuracy constraints of their calling contexts.
+
+\subsubsection{Probabilistic Assertions}
+
+DECAF's approach to controlling quality achieves strong probabilistic
+guarantees by constraining the range of possible approximation strategies:
+it works only with techniques where errors appear at an operation granularity;
+whey they occur randomly but rarely; and when the error probability is
+independent of the input values.
+
+A complementary project takes the opposite approach:
+it accommodates any probability distribution, but it offers weaker
+guarantees.
+The idea is to use statistical hypothesis tests to prove properties up to a
+\emph{confidence level:}
+to allow a small probability of ``verifying'' a false property.
+
+The technique is based on a new language construct called a
+\emph{probabilistic assertion}.
+The construct is analogous to a traditional assertion: \code{assert $e$}
+expresses that the expression $e$ must always be true.
+A probabilistic assertion:
+%
+\begin{lstlisting}
+passert $e$, $p$, $c$
+\end{lstlisting}
+%
+indicates that $e$ must
+be true with at least probability $p$, and the system has to prove the
+property at confidence level $c$.
+These assertions can encode important quality properties in approximate
+programs, such as bounds on the frequency of ``bad'' pixels produced by an
+image renderer.
+The same construct is useful in other domains where probabilistic behavior is
+essential, such as when dealing with noisy sensors.
+
+\chref{passert} describes probabilistic assertions in more detail
+along with a workflow for verifying them efficiently.
+The verifier uses a symbolic-execution technique to extract a representation
+of a program's probabilistic behavior: a Bayesian network.
+The verifier can optimize this Bayesian-network representation using
+off-the-shelf statistical properties that are difficult to apply to the
+original program code.
+The complete workflow can make probabilistic-assertion verification dozens of
+times faster to check than a naive stress-testing approach.
+
+\subsection{Exploiting Resilience for Efficiency}
+
+The second category of research is on the implementation of systems that
+exploit programs' tolerance for approximation to improve efficiency.
+This dissertation describes two projects: an architectural technique and an
+end-to-end compiler toolchain.
+A primary concern in both systems is exposing an abstraction that fits with
+the safety and quality constraints introduced in the above language
+abstractions.
+
+\subsubsection{Approximate Storage for Solid-State Memory Technologies}
+
+One system design, detailed in \chref{approxstorage}, builds on a trend in hardware technologies.
+It exploits unique properties of new solid-state memories,
+such as flash memory and phase-change memory,
+to implement two orthogonal trade-offs between resource and accuracy.
+
+The first technique recognizes that the underlying material in these memory
+technologies is analog.
+Traditional designs build a clean digital abstraction on top of a
+fundamentally analog memory cell.
+Our technique addresses the cost of that digital abstraction by letting
+applications opt into stochastic data retention.
+
+The second technique embraces resistive memory technologies' tendency to wear
+out.
+Ordinarily, architectures need to detect failed memory blocks and avoid
+storing data in them---limiting the memory module's useful lifetime.
+Instead, in the context of an approximate application, we can harvest the otherwise-unusable
+blocks and store approximate data in them.
+
+Both strategies need a new set of common CPU and operating-system interfaces
+to let software communicate error resilience and bit layout information.
+We develop these abstractions to match the structure and semantics of EnerJ.
+
+\subsubsection{ACCEPT: An Approximate Compiler}
+
+The final system design takes a different tactic:
+rather than simulating hypothetical hardware,
+the idea is to build a practical infrastructure for experimenting with
+approximation in the nearer term.
+\chref{accept} introduces ACCEPT, an open-source compiler workflow designed both for
+practitioners, to try out approximation techniques on their code,
+and for researchers, to prototype and evaluate new ideas for approximation
+strategies.
+
+The first challenge that ACCEPT faces is to bridge the granularity gap (see
+\secref{princ:granularity}, above).
+EnerJ's fine-grained annotations can be more general and easier to apply to
+programs,
+but coarse-grained optimizations can offer better efficiency
+gains---especially in the pure-software domain.
+ACCEPT's interactive optimization architecture,
+compiler analysis library,
+and auto-tuner infrastructure help connect fine-grained safety annotations to
+coarse-grained optimizations.
+
+ACCEPT also addresses a second persistent challenge in approximate
+programmability:
+balancing automation with programmer control.
+Fully manual approximation can be tedious and error prone,
+but fully automatic systems can also frustrate developers by isolating them
+from decisions that can break their code.
+ACCEPT relies on the distinction between quality and safety (see
+\secref{princ:safety}) to reconcile the extremes.
+Type annotations resembling EnerJ's enforce safety, but programmers are kept
+in the loop with an interactive optimization workflow to rule out unexpected
+quality effects.
+Together, the systems leverage the best of both factors:
+programmer insight for preserving application-specific properties
+and automatic compiler reasoning for identifying obscure data flows.
+
+\section{Other Work}
+
+The work in this document is intimately connected to other research I
+collaborated on while at the University of Washington.
+While this dissertation does not fully describe these related projects, their
+influence is evident in the trajectory of projects that do appear here.
+For context, this section describes a handful of other projects on approximate
+hardware and developer tools.
+
+
+\subsection{An Approximate CPU and ISA}
+
+Truffle is a processor architecture that implements EnerJ's semantics to save
+energy~\cite{truffle}. It uses a secondary, subcritical voltage that allows timing errors in
+a portion of the logic and retention errors in a portion of the SRAM.
+
+To expose the two voltages to software, we
+designed an ISA extension that includes a notation of abstract approximation.
+The code can choose dynamically to enable approximation
+per instruction, per register, and per cache line.
+A key challenge in the design was supporting an ISA that could efficiently
+support an EnerJ-like programming model, where the precise and approximate
+components of a program remain distinct but interleave at a fine grain.
+
+Our simulation of the Truffle design space yielded results ranging from a 5\%
+energy consumption \emph{increase} to a 43\% reduction.
+These results emphasize the efficiency limits of very fine-grained
+approximation (see the granularity principle in \secref{princ:granularity}).
+Even in a maximally approximate program---in which every
+arithmetic instruction and every byte of memory is marked as
+approximate---much of Truffle's energy is spent on precise work. Fetching
+code, scheduling instructions, indexing into SRAMs, computing addresses, and
+tracking precision state all must be performed reliably.
+Modern processors spend as much energy on
+control as they do on computation itself, so any technique that optimizes only
+computation will quickly encounter Amdahl's law.
+
+The Truffle work in appears in the dissertation of Hadi
+Esmaeilzadeh~\cite{hadi-thesis}.
+
+
+\subsection{Neural Acceleration}
+\label{sec:npu}
+
+\emph{Neural acceleration} is a technique that explores the opposite end of
+the granularity spectrum~\cite{npu, snnap}.
+The idea is to use machine learning to imitate a portion of a computation by
+observing its input--output behavior.
+Then, we build a configurable hardware accelerator to efficiently execute the
+learned model in place of the original code.
+Our specific design uses neural networks:
+since neural networks have
+efficient hardware implementations, the transformed function can be much
+faster and lower-power than the original code.
+
+The coarse granularity pays off in efficiency: our simulations demonstrated a
+3$\times$ average energy reduction.
+But the coarser granularity comes at a cost of programmer visibility and
+control.
+Since the NPU technique treats the target code as a black box, the
+programmer has no direct influence over the performance and accuracy of the
+resulting neural network.
+These conflicting objectives demonstrate the need for techniques that bridge
+the granularity gap.
+
+The original neural acceleration work also appears in Hadi Esmaeilzadeh's
+dissertation~\cite{hadi-thesis}.
+I also worked on a recent extension of the idea for programmable
+logic~\cite{snnap}.
+
+
+\subsection{Monitoring and Debugging Quality}
+
+Many approaches to making approximation programmable focus on proving
+conservative, static bounds.
+As in traditional software development,
+approximate computing also needs complementary dynamic techniques.
+To this end, I contributed to a pair of techniques for dynamically controlling
+result quality~\cite{approxdebug}.
+
+The first dynamic system is a framework for monitoring quality in deployment.
+The goal is to raise an exception whenever the program produces a ``bad''
+output.
+While the ideal monitoring system would directly measure the quality
+degradation of every output,
+perfect measurement is too expensive for run-time deployment.
+Our framework provides a range of techniques for specific scenarios where we
+can make monitoring cheap enough to be feasible.
+
+The second system is a debugging tool.
+The idea is that certain subcomputations can be more important to
+quality than others, but that this difference is not necessarily obvious to
+programmers.
+The tool identifies and blames specific approximation decisions in a large
+codebase when they are responsible for too much quality degradation.
+
+The work on dynamic quality analysis appears in the dissertation of
+Michael F.\ Ringenburg~\cite{ringenburg-thesis}.
+
+
+\section{Organization}
+
+The next chapter is a literature survey of work on efficiency--accuracy
+trade-offs.
+Historical context is particularly important to this dissertation because the
+fundamental idea of exchanging accuracy for returns in efficiency is so old:
+analog computers and floating-point numbers, for example, are prototypical
+examples of
+approximate-computing strategies.
+
+Parts~\ref{part:programming} and~\ref{part:systems} form the core of the
+dissertation.
+They comprise five independent but interlocking research projects that
+together build up abstractions for making approximate computing both tractable
+and efficient.
+%
+Part~\ref{part:programming} describes three approaches to abstracting
+approximation in programming languages:
+EnerJ, a type system that uses type qualifiers to make approximation safe;
+DECAF, an extension of EnerJ that adds probabilistic reasoning
+about the likelihood that data is correct;
+and probabilistic assertions, a strategy for efficiently verifying complex
+probabilistic properties via sampling.
+%
+Part~\ref{part:systems} describes two system designs for implementing
+efficiency--accuracy trade-offs:
+a hardware architecture that exploits the nuances of resistive memory
+technologies such as phase-change memory;
+and an open-source compiler toolkit that provides the scaffolding to quickly
+implement new approximation strategies while balancing programmability with
+approximation's potential benefits.
+
+Finally, \plurchref{conclusion} and~\ref{ch:future} look forward and
+backward, respectively.
+The retrospective chapter distills lessons from the work in this dissertation
+about approximate computing and hardware--software co-design in general, and
+the prospective chapter suggests next steps for bringing approximation into
+the mainstream.
+
+This dissertation also includes appendices that formalize the
+programming-languages techniques in Part~\ref{part:programming} and prove
+their associated theorems.
+
+
+\section{Previously Published Material}
+
+This dissertation comprises work published elsewhere in conference papers:
+%
+\begin{itemize}
+\item \chref{enerj}:
+\textit{EnerJ: Approximate Data Types for Safe and General Low-Power
+Computation.}
+Adrian Sampson, Werner Dietl, Emily Fortuna, Danushen Gnanapragasam, Luis Ceze, and Dan Grossman.
+In Programming Language Design and Implementation (PLDI), 2011.
+\cite{enerj}
+
+\item \chref{decaf}:
+\textit{Probability Type Inference for Flexible Approximate Programming.}
+Brett Boston, Adrian Sampson, Dan Grossman, and Luis Ceze.
+To appear in Object-Oriented Programming, Systems, Languages, and Applications
+(OOPSLA), 2015.
+\cite{decaf}
+
+\item \chref{passert}:
+\textit{Expressing and Verifying Probabilistic Assertions.}
+Adrian Sampson, Pavel Panchekha, Todd Mytkowicz, Kathryn McKinley, Dan Grossman, and Luis Ceze.
+In Programming Language Design and Implementation (PLDI), 2014.
+\cite{passert}
+
+\item \chref{approxstorage}:
+\textit{Approximate Storage in Solid-State Memories.}
+Adrian Sampson, Jacob Nelson, Karin Strauss, and Luis Ceze.
+In the IEEE/ACM International Symposium on Microarchitecture (MICRO), 2013.
+\cite{approxstorage}
+\end{itemize}
+%
+The appendices draw on expanded material accompanying these papers:
+Appendix~\ref{app:enerj} reflects the EnerJ technical report~\cite{enerj-tr},
+Appendix~\ref{app:decaf} uses text from the DECAF paper's included
+appendix~\cite{decaf}, and
+Appendix~\ref{app:passert} corresponds to the accompanying digital
+material for the probabilistic assertions paper~\cite{passert-tr}.
