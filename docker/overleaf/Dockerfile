@@ -1,13 +1,13 @@
 FROM sharelatex/sharelatex:latest
 
-RUN tlmgr install titlesec enumitem charter xkeyval fontaxes xcolor lastpage mdframed needspace titling lettrine lineno microtype footmisc
+# RUN tlmgr install titlesec enumitem charter xkeyval fontaxes xcolor lastpage mdframed needspace titling lettrine lineno microtype footmisc
 
-RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/fullpage
-RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/lastpage
-RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/CormorantGaramond
-RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/xkeyval
-RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/fontawesome5
-RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/fontspec
+# RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/fullpage
+# RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/lastpage
+# RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/CormorantGaramond
+# RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/xkeyval
+# RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/fontawesome5
+# RUN mkdir -p /usr/local/texlive/texmf-local/tex/latex/fontspec
 
 # COPY packages/collected/fullpage.sty /usr/local/texlive/texmf-local/tex/latex/fullpage/fullpage.sty
 # COPY packages/collected/lastpage.sty /usr/local/texlive/texmf-local/tex/latex/lastpage/lastpage.sty
