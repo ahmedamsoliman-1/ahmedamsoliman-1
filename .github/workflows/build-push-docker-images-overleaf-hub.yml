@@ -14,8 +14,8 @@ env:
 
 jobs:
   overleaf:
-    runs-on: self-hosted
-    # ubuntu-latest
+    runs-on: ubuntu-latest
+    # runs-on: self-managed
 
     steps:
       - name: Checkout code
