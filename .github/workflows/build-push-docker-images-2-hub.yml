@@ -101,7 +101,7 @@ env:
 
   GO_LINKTREE_1: ./apps/go/linktree
   XX_1: ./apps/python/flask/flask_app_1
-  XX_2: ./apps/python/flask/flask_app_1  # ./apps/python/flask/xx
+  XX_2: ./apps/python/flask/flask_app_1
   XX_3: ./apps/python/flask/flask_app_1  # ./apps/python/flask/xx
   XX_4: ./apps/python/flask/flask_app_1  # ./apps/python/flask/xx
   XX_5: ./apps/python/flask/flask_app_1  # ./apps/python/flask/xx
