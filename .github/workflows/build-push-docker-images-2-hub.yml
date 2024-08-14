@@ -1024,6 +1024,37 @@ jobs:
     runs-on: self-hosted
     needs: 
       - go-linktree-1
+    
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          
+          name: docker-image-${{ env.IMAGE_NAME_GO_LINKTREE_1 }}
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_GO_LINKTREE_1 }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image-${{ env.IMAGE_NAME_GO_LINKTREE_1 }}
+
+      - name: Ls artifact
+        run: |
+          ls -R
+      
+      - name: Cat text file
+        run: |
+          files=($(find . -type f -name "*.txt"))
+          for file in "${files[@]}"; do
+              cat "$file"
+          done
+
+      - name: echo
+        run: |
+          echo 'ALL DONE'
   
   svcs-artificat:
     runs-on: self-hosted
