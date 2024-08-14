@@ -6,7 +6,8 @@ on:
 jobs:
   # # # # # GCP Bucket
   tf-prepare-destroy:
-    runs-on: ubuntu-latest
+    runs-on: self-managed
+    #ubuntu-latest
 
     steps:
     - name: Checkout code
