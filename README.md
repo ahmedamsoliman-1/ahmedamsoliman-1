@@ -2,8 +2,6 @@
 
 ## Hi there, I'm Ahmed 👋
 
-![Project Icon](images/image.png)
-
 Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collection for managing various development and DevOps projects. This repository is organized to handle applications, cloud configurations, containerization, infrastructure, and Kubernetes setups in a structured manner.
 
 [![Twitter](https://img.shields.io/twitter/follow/ahmedamsoliman?color=1DA1F2&logo=twitter&style=for-the-badge)](https://twitter.com/ahmedamsoliman)
