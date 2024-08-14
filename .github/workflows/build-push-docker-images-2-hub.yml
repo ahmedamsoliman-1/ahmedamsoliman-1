@@ -104,7 +104,7 @@ env:
   XX_2: ./apps/python/flask/flask_app_1
   XX_3: ./apps/python/flask/flask_app_1
   XX_4: ./apps/python/flask/flask_app_1
-  XX_5: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
+  XX_5: ./apps/python/flask/flask_app_1
 
 jobs:
   leader:
