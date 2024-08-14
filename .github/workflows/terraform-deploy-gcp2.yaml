@@ -7,7 +7,8 @@ on:
   pull_request:
     branches:
       - master
-    
+env:
+  INGRESS_IP: ""
 jobs:
   # # # # # GCP Bucket
   tf-prepare-deploy:
