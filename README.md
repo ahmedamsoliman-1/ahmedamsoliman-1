@@ -1,10 +1,14 @@
 # Ahmed Repository
 
-### Hi there, I'm Ahmed 👋
+## Hi there, I'm Ahmed 👋
+
+![Project Icon](images/image.png)
 
 Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collection for managing various development and DevOps projects. This repository is organized to handle applications, cloud configurations, containerization, infrastructure, and Kubernetes setups in a structured manner.
 
 [![Twitter](https://img.shields.io/twitter/follow/ahmedamsoliman?color=1DA1F2&logo=twitter&style=for-the-badge)](https://twitter.com/ahmedamsoliman)
+
+<!-- markdownlint-disable MD033 -->
 
 ## Languages and Tools
 
@@ -18,11 +22,15 @@ Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collect
 <img align="left" alt="Node.js" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png" />
 <img align="left" alt="SQL" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sql/sql.png" />
 <img align="left" alt="MySQL" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mysql/mysql.png" />
-<img align="left" alt="MongoDB" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" />
+<img align="left" alt="MongoDB" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png"/>
 <img align="left" alt="Git" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" />
 <img align="left" alt="GitHub" width="26px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
 <img align="left" alt="Gitlab" width="96px" src="https://img.shields.io/badge/gitlab-1DA1F2?style=for-the-badge&logo=gitlab&logoColor=white" />
 <img align="left" alt="Terminal" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />
+
+<!-- {% include_relative icons.md %} -->
+
+<br>
 
 ## GitHub stats
 
@@ -75,15 +83,16 @@ Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collect
 
 ## Getting Started
 
-1. **Clone the repository:**
+### **Clone the repository:**
 
 ```{bash}
     git clone https://github.com/your-username/ahmed.git
     cd ahmed
 ```
 
-2. **Explore the directories:**
+### **Explore the directories:**
 
+```{plaintext}
     - **`apps/`**: Find and manage Node.js and Python applications.
     - **`cloud/`**: Access cloud-specific configurations and scripts for AWS, Azure, and GCP.
     - **`docker/`**: Review Docker Compose files and generic Docker configurations.
@@ -91,8 +100,11 @@ Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collect
     - **`IasC/`**: Manage infrastructure as code with Ansible and Terraform.
     - **`kubernetes/`**: View Helm charts and Kubernetes manifests.
     - **`scripts/`**: Use utility scripts for automation and other tasks.
+```
 
-3. **Add your content:**
+### **Add your content:**
+
+```{plaintext}
     - Place your application code in `apps/`.
     - Add cloud-specific scripts and configurations in `cloud/`.
     - Manage Docker-related files in `docker/`.
@@ -100,8 +112,9 @@ Welcome to the **Ahmed Ali Mohamed Soliman** repository, a comprehensive collect
     - Configure infrastructure as code in `IasC/`.
     - Include Kubernetes configurations and Helm charts in `kubernetes/`.
     - Add utility scripts in `scripts/`.
+```
 
-4. **Commit and Push Changes:**
+### **Commit and Push Changes:**
 
 ```{bash}
 git add .
