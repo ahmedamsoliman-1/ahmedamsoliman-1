@@ -114,69 +114,69 @@ jobs:
         run: |
           echo 'Hello world, leader'
 
-  # resumes:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, resumes'
+  resumes:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, resumes'
 
-  # svcs:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, svcs'
+  svcs:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, svcs'
   
-  # nodejss:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, nodejss'
+  nodejss:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, nodejss'
   
-  # typescripts:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, typescripts'
+  typescripts:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, typescripts'
   
-  # portfolio:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, abbas'
+  portfolio:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, abbas'
   
-  # python-flask-chainlit:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, python'
+  python-flask-chainlit:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, python'
   
-  # go:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, golang'
+  go:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, golang'
       
-  # xx-parent:
-  #   runs-on: self-hosted
-  #   needs: leader
-  #   steps:
-  #     - name: echo
-  #       run: |
-  #         echo 'Hello world, XX'
+  xx-parent:
+    runs-on: self-hosted
+    needs: leader
+    steps:
+      - name: echo
+        run: |
+          echo 'Hello world, XX'
 
   # ##### Personal Cloud
   # personal-cloud:
