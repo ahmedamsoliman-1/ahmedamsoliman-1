@@ -14,5 +14,5 @@ fi
 box_text "command: $1"
 box_text "dgx: $2"
 
-python3.11 ~/workspace/ahmed/aams-ahmedamsoliman-1/python/ssh_connect.py --command "$1" dgx-$2
+python3.11 /Users/ahmed.soliman/workspace/ahmed/aams-ahmedamsoliman-1/ahmed/scripts/python/ssh_connect.py --command "$1" dgx-$2
 log "Command '$1' executd successfully on 'dgx-$2'"
