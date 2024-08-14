@@ -100,7 +100,7 @@ env:
   PYTHON_FLASK_1: ./apps/python/flask/flask_app_1
 
   GO_LINKTREE_1: ./apps/go/linktree
-  XX_1: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
+  XX_1: ./apps/python/flask/flask_app_1
   XX_2: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
   XX_3: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
   XX_4: ./apps/python/flask/flask_app_1 # ./apps/python/flask/xx
