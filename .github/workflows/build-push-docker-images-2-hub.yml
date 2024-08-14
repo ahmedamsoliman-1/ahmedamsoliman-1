@@ -3,7 +3,7 @@ name: 'build-push-docker-images-2-hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
@@ -53,6 +53,7 @@ on:
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
   LATEST_TAG: '1.0.2'
+  RUNNER: self-hosted
 
   IMAGE_NAME_FRONTEND_SVC: aams-frontend-svc
   IMAGE_NAME_USER_SVC: aams-user-svc
@@ -107,14 +108,14 @@ env:
 
 jobs:
   leader:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: echo
         run: |
           echo 'Hello world, leader'
 
   resumes:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -122,7 +123,7 @@ jobs:
           echo 'Hello world, resumes'
 
   svcs:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -130,7 +131,7 @@ jobs:
           echo 'Hello world, svcs'
   
   nodejss:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -138,7 +139,7 @@ jobs:
           echo 'Hello world, nodejss'
   
   typescripts:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -146,7 +147,7 @@ jobs:
           echo 'Hello world, typescripts'
   
   portfolio:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -154,7 +155,7 @@ jobs:
           echo 'Hello world, abbas'
   
   python-flask-chainlit:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -162,7 +163,7 @@ jobs:
           echo 'Hello world, python'
   
   go:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -170,7 +171,7 @@ jobs:
           echo 'Hello world, golang'
       
   xx-parent:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: leader
     steps:
       - name: echo
@@ -179,7 +180,7 @@ jobs:
 
   ##### Personal Cloud
   personal-cloud:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: nodejss
     env:
       IMAGE_NAME: aams-personal-cloud
@@ -235,7 +236,7 @@ jobs:
 
 
   frontend-svc:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: svcs
     env:
       IMAGE_NAME: aams-frontend-svc
@@ -273,7 +274,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_FRONTEND_SVC }}.txt
 
   order-svc:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: svcs
     env:
       IMAGE_NAME: aams-order-svc
@@ -311,7 +312,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_ORDER_SVC }}.txt
   
   user-svc:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: svcs
     env:
       IMAGE_NAME: aams-user-svc
@@ -349,7 +350,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_USER_SVC }}.txt
 
   node-templates:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: nodejss
     env:
       IMAGE_NAME: aams-node-templates
@@ -388,7 +389,7 @@ jobs:
      
   ###### Resumes
   cv-data-eng:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: resumes
     env:
       IMAGE_NAME: aams-resume-data-eng-pdf
@@ -426,7 +427,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_RESUME_DATA }}.txt
 
   cv-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: resumes
     env:
       IMAGE_NAME: aams-resume-dev-pdf
@@ -464,7 +465,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_RESUME_DEV }}.txt
     
   cv-dev-web:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: resumes
     env:
       IMAGE_NAME: aams-resume-dev-web
@@ -499,7 +500,7 @@ jobs:
   
   ##### Portfolio
   my-portfolio:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: portfolio
     env:
       IMAGE_NAME: aams-portfolio
@@ -538,7 +539,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_PORTFOLIO }}.txt
   
   ahmedamsoliman-1:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: nodejss
     env:
       IMAGE_NAME: aams-ahmedamsoliman-1
@@ -576,7 +577,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_AHMEDAMSOLIMAN }}.txt
   
   cvviewer-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: typescripts
     env:
       IMAGE_NAME: aams-cvviewer
@@ -614,7 +615,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEV }}.txt
   
   cvviewer-devops:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: typescripts
     env:
       IMAGE_NAME: aams-cvviewer
@@ -652,7 +653,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DEVOPS }}.txt
   
   cvviewer-ts:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: typescripts
     env:
       IMAGE_NAME: aams-cvviewer
@@ -690,7 +691,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_TS }}.txt
   
   cvviewer-dataeng:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: typescripts
     env:
       IMAGE_NAME: aams-cvviewer
@@ -728,7 +729,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_CV_VIEWER_DATAENG }}.txt
 
   flask-1:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: python-flask-chainlit
 
     steps:
@@ -764,7 +765,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_PYTHON_FLASK_1 }}.txt
   
   xx-1:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: xx-parent
 
     steps:
@@ -798,7 +799,7 @@ jobs:
           name: docker-image-${{ env.IMAGE_NAME_XX_1 }}
           path: output/${{ env.IMAGE_NAME_XX_1 }}.txt
   xx-2:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: xx-parent
 
     steps:
@@ -833,7 +834,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_XX_2 }}.txt
     
   xx-3:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: xx-parent
 
     steps:
@@ -868,7 +869,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_XX_3 }}.txt
     
   xx-4:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: xx-parent
 
     steps:
@@ -903,7 +904,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_XX_4 }}.txt
     
   xx-5:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: xx-parent
 
     steps:
@@ -938,7 +939,7 @@ jobs:
           path: output/${{ env.IMAGE_NAME_XX_5 }}.txt
     
   xx-artificat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
       - xx-1
       - xx-2
@@ -988,7 +989,7 @@ jobs:
           echo 'ALL DONE'
     
   go-linktree-1:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: go
 
     steps:
@@ -1020,12 +1021,12 @@ jobs:
           path: output/${{ env.IMAGE_NAME_GO_LINKTREE_1 }}.txt
     
   go-artificat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
       - go-linktree-1
   
   svcs-artificat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
       - frontend-svc
       - order-svc
@@ -1063,7 +1064,7 @@ jobs:
           echo 'ALL DONE'
   
   cvviewers-artificat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
       - cvviewer-dev
       - cvviewer-devops
@@ -1104,7 +1105,7 @@ jobs:
           echo 'ALL DONE'
   
   cvs-artificat:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
       - cv-data-eng
       - cv-dev-web
@@ -1143,7 +1144,7 @@ jobs:
           echo 'ALL DONE'
 
   all-done:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
       - personal-cloud
       - node-templates
