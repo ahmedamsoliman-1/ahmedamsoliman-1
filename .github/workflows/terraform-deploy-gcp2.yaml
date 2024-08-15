@@ -11,8 +11,8 @@ env:
   INGRESS_IP: ""
 jobs:
   # # # # # GCP Bucket
-  tf-prepare-deploy:
-    runs-on: ['self-hosted', 'ubuntu-latest']
+  tf-prepare:
+    runs-on: ['ubuntu-latest']
 
     steps:
     - name: Checkout code
@@ -27,9 +27,9 @@ jobs:
       run: |
         terraform -version
   
-  enable-google-cloud-apis-gcp2:
-    runs-on: ['self-hosted']
-    needs: tf-prepare-deploy
+  enable-gcp2-apis:
+    runs-on: ['ubuntu-latest']
+    needs: tf-prepare
 
     steps:
     - name: Checkout code
@@ -69,7 +69,7 @@ jobs:
   # # # # # # GCP Bucket
   # tf-gcp-gcp2-bucket-deploy:
   #   runs-on: ['self-hosted', 'ubuntu-latest']
-  #   needs: enable-google-cloud-apis-gcp2
+  #   needs: enable-gcp2-apis
   #   defaults:
   #     run:
   #       working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
@@ -112,7 +112,7 @@ jobs:
   # # # # # # GCP Cloud DNS
   # # tf-gcp-gcp2-dns-aamsdn-com-deploy:
   # #   runs-on: ['self-hosted', 'ubuntu-latest']
-  # #   needs: enable-google-cloud-apis-gcp2
+  # #   needs: enable-gcp2-apis
   # #   defaults:
   # #     run:
   # #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
@@ -222,7 +222,7 @@ jobs:
   # # # # # # GCP GKE
   # tf-gcp-gcp2-gke3-deploy:
   #   runs-on: ['self-hosted', 'ubuntu-latest']
-  #   needs: enable-google-cloud-apis-gcp2
+  #   needs: enable-gcp2-apis
   #   defaults:
   #     run:
   #       working-directory: ./IasC/terraform/GCP/gke/gke3
