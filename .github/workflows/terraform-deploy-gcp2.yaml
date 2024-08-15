@@ -3,7 +3,7 @@ name: terraform-gcp-gcp2-deploy
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
@@ -42,13 +42,13 @@ jobs:
 
     - name: Authenticate with Google Cloud
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
       run: |
         echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
     - name: Set project
-      run: gcloud config set project ${{ secrets.GCP2_PROJECT_ID }}
+      run: gcloud config set project ${{ secrets.GCP_STAR_PROJECT_ID }}
 
     - name: Enable Compute Engine API
       run: gcloud services enable compute.googleapis.com
@@ -66,76 +66,28 @@ jobs:
       run: gcloud services enable dns.googleapis.com
 
 
-  # # # # # GCP Bucket
-  tf-gcp-gcp2-bucket-deploy:
-    runs-on: ubuntu-latest
-    needs: enable-google-cloud-apis-gcp2
-    defaults:
-      run:
-        working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
-    - name: Terraform Output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform output
-      
-  
-  subsequent-pwd-bucket:
-    runs-on: ubuntu-latest
-    needs: tf-gcp-gcp2-bucket-deploy
-
-    steps:
-      - name: Testing
-        run: pwd
-
-
-
-  # # # # # GCP Cloud DNS
-  # tf-gcp-gcp2-dns-aamsdn-com-deploy:
+  # # # # # # GCP Bucket
+  # tf-gcp-gcp2-bucket-deploy:
   #   runs-on: ubuntu-latest
   #   needs: enable-google-cloud-apis-gcp2
   #   defaults:
   #     run:
-  #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
-
+  #       working-directory: ./IasC/terraform/GCP/buckets/aamsdn32
   #   steps:
   #   - name: Checkout code
   #     uses: actions/checkout@v4
-
   #   - name: Setup Terraform
   #     uses: hashicorp/setup-terraform@v3
   #     with:
   #       terraform_version: 1.9.2
-        
   #   - name: Terraform Init
   #     env:
   #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
   #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-
   #   - name: Terraform Plan
   #     env:
   #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
   #     run: terraform plan
-
   #   - name: Terraform Apply
   #     if: github.event_name == 'push'
   #     env:
@@ -145,250 +97,298 @@ jobs:
   #     env:
   #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
   #     run: terraform output
+      
+  
+  # subsequent-pwd-bucket:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-gcp-gcp2-bucket-deploy
 
-  tf-gcp-gcp2-dns-aamsdn-com-deploy:
-    runs-on: ubuntu-latest
-    needs: prepare-helm-ktl-gcp2-gke3-deploy
-  
-    defaults:
-      run:
-        working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
-  
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-  
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
-  
-    - name: Download Ingress IP Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: ingress-ip
+  #   steps:
+  #     - name: Testing
+  #       run: pwd
 
-    - name: List Files in Current Directory
-      run: |
-        echo "Listing files in the current directory:"
-        ls -la
-        echo "Listing files in /home/runner/work/ahmed/ahmed:"
-        ls -la /home/runner/work/ahmed/ahmed/
-  
-    - name: Set Ingress IP Environment Variable
-      run: |
-        INGRESS_IP=$(cat /home/runner/work/ahmed/ahmed/ingress_ip.txt)
-        echo "INGRESS_IP=${INGRESS_IP}"
-        echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
+
+
+  # # # # # # GCP Cloud DNS
+  # # tf-gcp-gcp2-dns-aamsdn-com-deploy:
+  # #   runs-on: ubuntu-latest
+  # #   needs: enable-google-cloud-apis-gcp2
+  # #   defaults:
+  # #     run:
+  # #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
+
+  # #   steps:
+  # #   - name: Checkout code
+  # #     uses: actions/checkout@v4
+
+  # #   - name: Setup Terraform
+  # #     uses: hashicorp/setup-terraform@v3
+  # #     with:
+  # #       terraform_version: 1.9.2
         
-    - name: Create terraform.tfvars
-      run: |
-        echo "ingress_ip = \"${{ env.INGRESS_IP }}\"" > terraform.tfvars
+  # #   - name: Terraform Init
+  # #     env:
+  # #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  # #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
 
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-        TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-  
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-        TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
-      run: terraform plan
-  
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-        TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
-      run: terraform apply -auto-approve
-  
-    - name: Terraform Output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform output
-  
-  
-  
-  subsequent-dns-nslookup:
-    runs-on: ubuntu-latest
-    needs: tf-gcp-gcp2-dns-aamsdn-com-deploy
+  # #   - name: Terraform Plan
+  # #     env:
+  # #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  # #     run: terraform plan
 
-    steps:
-      - name: Testing
-        run: nslookup aamsdn.com
+  # #   - name: Terraform Apply
+  # #     if: github.event_name == 'push'
+  # #     env:
+  # #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  # #     run: terraform apply -auto-approve
+  # #   - name: Terraform Output
+  # #     env:
+  # #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  # #     run: terraform output
 
-  # # # # # GCP GKE
-  tf-gcp-gcp2-gke3-deploy:
-    runs-on: ubuntu-latest
-    needs: enable-google-cloud-apis-gcp2
-    defaults:
-      run:
-        working-directory: ./IasC/terraform/GCP/gke/gke3
+  # tf-gcp-gcp2-dns-aamsdn-com-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: prepare-helm-ktl-gcp2-gke3-deploy
   
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/dns/aamsdn-compined
   
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: 1.9.2
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
+  
+  #   - name: Download Ingress IP Artifact
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: ingress-ip
+
+  #   - name: List Files in Current Directory
+  #     run: |
+  #       echo "Listing files in the current directory:"
+  #       ls -la
+  #       echo "Listing files in /home/runner/work/ahmed/ahmed:"
+  #       ls -la /home/runner/work/ahmed/ahmed/
+  
+  #   - name: Set Ingress IP Environment Variable
+  #     run: |
+  #       INGRESS_IP=$(cat /home/runner/work/ahmed/ahmed/ingress_ip.txt)
+  #       echo "INGRESS_IP=${INGRESS_IP}"
+  #       echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
         
-    - name: Terraform Init
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  #   - name: Create terraform.tfvars
+  #     run: |
+  #       echo "ingress_ip = \"${{ env.INGRESS_IP }}\"" > terraform.tfvars
+
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #       TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
   
-    - name: Terraform Plan
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform plan
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #       TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
+  #     run: terraform plan
   
-    - name: Terraform Apply
-      if: github.event_name == 'push'
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: terraform apply -auto-approve
-    
-    - name: Terraform Output
-      id: terraform_output
-      env:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      run: |
-        terraform output -json > terraform_outputs.json
-        ls -al
-        cat terraform_outputs.json
-
-    - name: Upload Terraform Outputs
-      uses: actions/upload-artifact@v3
-      with:
-        name: tf-outputs
-        path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
-
-  prepare-helm-ktl-gcp2-gke3-deploy:
-    runs-on: ubuntu-latest
-    needs: tf-gcp-gcp2-gke3-deploy
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Download Terraform Outputs
-      uses: actions/download-artifact@v3
-      with:
-        name: tf-outputs
-
-    - name: Set up Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
-      with:
-        version: 'latest'
-
-    - name: Install GKE Cloud Auth plugin
-      run: |
-        gcloud components install gke-gcloud-auth-plugin
-
-    - name: Authenticate with Google Cloud
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
-      run: |
-        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
-        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
-
-    - name: Download Terraform Outputs
-      uses: actions/download-artifact@v3
-      with:
-        name: tf-outputs
-
-    - name: Get GKE Cluster Credentials
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
-      run: |
-        echo "Info"
-        CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
-        ZONE=$(jq -r '.location.value' terraform_outputs.json)
-        echo $CLUSTER_NAME
-        echo $ZONE
-        echo "get-credentials"
-        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
-        gcloud container clusters list --project ${{ secrets.GCP2_PROJECT_ID }}
-        gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
-        # echo "get nodes"
-        # kubectl get nodes
-        # echo "get ns"
-        # kubectl get namespaces
-        # echo "get pods"
-        # kubectl get pods --all-namespaces
-    
-    - name: Install Helm if not present
-      run: |
-        # Check if Helm is installed
-        if ! helm version >/dev/null 2>&1; then
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-          bash get_helm.sh
-        fi
-        helm version
-
-    - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
-      working-directory: ./kubernetes/helm-charts/ingress-nginx
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-
-    - name: Deploy/Upgrade Helm Charts - Cert Manager 
-      working-directory: ./kubernetes/helm-charts/cert-manager
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-    
-    - name: Deploy/Upgrade Helm Charts - ArgoCD
-      working-directory: ./kubernetes/helm-charts/argo-cd
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-
-    - name: Deploy/Upgrade Helm Charts - portfolio
-      working-directory: ./kubernetes/helm-charts/portfolio-chart
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-    
-    - name: Deploy/Upgrade Helm Charts - resumes
-      working-directory: ./kubernetes/helm-charts/resumes-chart
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
-    
-    - name: Deploy/Upgrade Helm Charts - ahmed
-      working-directory: ./kubernetes/helm-charts/ahmed-chart
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #       TF_VAR_ingress_ip: ${{ env.INGRESS_IP }}
+  #     run: terraform apply -auto-approve
   
-    - name: Get Ingress IP
-      run: |
-        INGRESS_IP=$(kubectl get ingress --all-namespaces -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}')
-        echo $INGRESS_IP > ingress_ip.txt
-
-    - name: Upload Ingress IP Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ingress-ip
-        path: ingress_ip.txt
+  #   - name: Terraform Output
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform output
   
-  read-ingress-ip:
-    runs-on: ubuntu-latest
-    needs: prepare-helm-ktl-gcp2-gke3-deploy
+  
+  
+  # subsequent-dns-nslookup:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-gcp-gcp2-dns-aamsdn-com-deploy
 
-    steps:
-    - name: Download Ingress IP Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: ingress-ip
+  #   steps:
+  #     - name: Testing
+  #       run: nslookup aamsdn.com
 
-    - name: Display Ingress IP
-      run: |
-        cat ingress_ip.txt
-        cat ingress_ip.txt
-        cat ingress_ip.txt
+  # # # # # # GCP GKE
+  # tf-gcp-gcp2-gke3-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: enable-google-cloud-apis-gcp2
+  #   defaults:
+  #     run:
+  #       working-directory: ./IasC/terraform/GCP/gke/gke3
+  
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  
+  #   - name: Setup Terraform
+  #     uses: hashicorp/setup-terraform@v3
+  #     with:
+  #       terraform_version: 1.9.2
+        
+  #   - name: Terraform Init
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
+  
+  #   - name: Terraform Plan
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform plan
+  
+  #   - name: Terraform Apply
+  #     if: github.event_name == 'push'
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: terraform apply -auto-approve
+    
+  #   - name: Terraform Output
+  #     id: terraform_output
+  #     env:
+  #       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  #     run: |
+  #       terraform output -json > terraform_outputs.json
+  #       ls -al
+  #       cat terraform_outputs.json
+
+  #   - name: Upload Terraform Outputs
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: tf-outputs
+  #       path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
+
+  # prepare-helm-ktl-gcp2-gke3-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: tf-gcp-gcp2-gke3-deploy
+
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+
+  #   - name: Download Terraform Outputs
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: tf-outputs
+
+  #   - name: Set up Google Cloud CLI
+  #     uses: google-github-actions/setup-gcloud@v2
+  #     with:
+  #       version: 'latest'
+
+  #   - name: Install GKE Cloud Auth plugin
+  #     run: |
+  #       gcloud components install gke-gcloud-auth-plugin
+
+  #   - name: Authenticate with Google Cloud
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+  #     run: |
+  #       echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+
+  #   - name: Download Terraform Outputs
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: tf-outputs
+
+  #   - name: Get GKE Cluster Credentials
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+  #     run: |
+  #       echo "Info"
+  #       CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
+  #       ZONE=$(jq -r '.location.value' terraform_outputs.json)
+  #       echo $CLUSTER_NAME
+  #       echo $ZONE
+  #       echo "get-credentials"
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+  #       gcloud container clusters list --project ${{ secrets.GCP2_PROJECT_ID }}
+  #       gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
+  #       # echo "get nodes"
+  #       # kubectl get nodes
+  #       # echo "get ns"
+  #       # kubectl get namespaces
+  #       # echo "get pods"
+  #       # kubectl get pods --all-namespaces
+    
+  #   - name: Install Helm if not present
+  #     run: |
+  #       # Check if Helm is installed
+  #       if ! helm version >/dev/null 2>&1; then
+  #         curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+  #         bash get_helm.sh
+  #       fi
+  #       helm version
+
+  #   - name: Deploy/Upgrade Helm Charts - Nginx Ingress 
+  #     working-directory: ./kubernetes/helm-charts/ingress-nginx
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+
+  #   - name: Deploy/Upgrade Helm Charts - Cert Manager 
+  #     working-directory: ./kubernetes/helm-charts/cert-manager
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+    
+  #   - name: Deploy/Upgrade Helm Charts - ArgoCD
+  #     working-directory: ./kubernetes/helm-charts/argo-cd
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+
+  #   - name: Deploy/Upgrade Helm Charts - portfolio
+  #     working-directory: ./kubernetes/helm-charts/portfolio-chart
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+    
+  #   - name: Deploy/Upgrade Helm Charts - resumes
+  #     working-directory: ./kubernetes/helm-charts/resumes-chart
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+    
+  #   - name: Deploy/Upgrade Helm Charts - ahmed
+  #     working-directory: ./kubernetes/helm-charts/ahmed-chart
+  #     run: |
+  #       chmod +x deploy.sh
+  #       ./deploy.sh
+  
+  #   - name: Get Ingress IP
+  #     run: |
+  #       INGRESS_IP=$(kubectl get ingress --all-namespaces -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}')
+  #       echo $INGRESS_IP > ingress_ip.txt
+
+  #   - name: Upload Ingress IP Artifact
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: ingress-ip
+  #       path: ingress_ip.txt
+  
+  # read-ingress-ip:
+  #   runs-on: ubuntu-latest
+  #   needs: prepare-helm-ktl-gcp2-gke3-deploy
+
+  #   steps:
+  #   - name: Download Ingress IP Artifact
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: ingress-ip
+
+  #   - name: Display Ingress IP
+  #     run: |
+  #       cat ingress_ip.txt
+  #       cat ingress_ip.txt
+  #       cat ingress_ip.txt
