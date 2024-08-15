@@ -28,7 +28,7 @@ jobs:
         terraform -version
   
   enable-google-cloud-apis-gcp2:
-    runs-on: ['self-hosted', 'ubuntu-latest']
+    runs-on: ['self-hosted']
     needs: tf-prepare-deploy
 
     steps:
