@@ -3,7 +3,7 @@ name: terraform-gcp-gcp2-deploy
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
       - master
@@ -12,7 +12,7 @@ env:
 jobs:
   # # # # # GCP Bucket
   tf-prepare-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ['self-hosted', 'ubuntu-latest']
 
     steps:
     - name: Checkout code
@@ -28,7 +28,7 @@ jobs:
         terraform -version
   
   enable-google-cloud-apis-gcp2:
-    runs-on: ubuntu-latest
+    runs-on: ['self-hosted', 'ubuntu-latest']
     needs: tf-prepare-deploy
 
     steps:
@@ -68,7 +68,7 @@ jobs:
 
   # # # # # # GCP Bucket
   # tf-gcp-gcp2-bucket-deploy:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: enable-google-cloud-apis-gcp2
   #   defaults:
   #     run:
@@ -100,7 +100,7 @@ jobs:
       
   
   # subsequent-pwd-bucket:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: tf-gcp-gcp2-bucket-deploy
 
   #   steps:
@@ -111,7 +111,7 @@ jobs:
 
   # # # # # # GCP Cloud DNS
   # # tf-gcp-gcp2-dns-aamsdn-com-deploy:
-  # #   runs-on: ubuntu-latest
+  # #   runs-on: ['self-hosted', 'ubuntu-latest']
   # #   needs: enable-google-cloud-apis-gcp2
   # #   defaults:
   # #     run:
@@ -147,7 +147,7 @@ jobs:
   # #     run: terraform output
 
   # tf-gcp-gcp2-dns-aamsdn-com-deploy:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: prepare-helm-ktl-gcp2-gke3-deploy
   
   #   defaults:
@@ -212,7 +212,7 @@ jobs:
   
   
   # subsequent-dns-nslookup:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: tf-gcp-gcp2-dns-aamsdn-com-deploy
 
   #   steps:
@@ -221,7 +221,7 @@ jobs:
 
   # # # # # # GCP GKE
   # tf-gcp-gcp2-gke3-deploy:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: enable-google-cloud-apis-gcp2
   #   defaults:
   #     run:
@@ -268,7 +268,7 @@ jobs:
   #       path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
 
   # prepare-helm-ktl-gcp2-gke3-deploy:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: tf-gcp-gcp2-gke3-deploy
 
   #   steps:
@@ -378,7 +378,7 @@ jobs:
   #       path: ingress_ip.txt
   
   # read-ingress-ip:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: prepare-helm-ktl-gcp2-gke3-deploy
 
   #   steps:
