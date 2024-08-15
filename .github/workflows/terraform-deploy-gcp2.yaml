@@ -12,7 +12,7 @@ env:
 jobs:
   # # # # # GCP Bucket
   tf-prepare:
-    runs-on: ['self-hosted']
+    runs-on: ['self-hosted', 'ubuntu-latest']
 
     steps:
     - name: Checkout code
@@ -28,7 +28,7 @@ jobs:
         terraform -version
   
   enable-gcp2-apis:
-    runs-on: ['self-hosted']
+    runs-on: ['self-hosted', 'ubuntu-latest']
     needs: tf-prepare
 
     steps:
