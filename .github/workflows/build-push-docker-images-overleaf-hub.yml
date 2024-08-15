@@ -14,7 +14,7 @@ env:
 
 jobs:
   overleaf:
-    runs-on: ubuntu-latest
+    runs-on: ['self-hosted', 'ubuntu-latest']
     # runs-on: self-managed
 
     steps:

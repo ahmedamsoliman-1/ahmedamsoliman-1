@@ -6,7 +6,7 @@ on:
 jobs:
   # # # # # GCP Bucket
   tf-prepare-destroy:
-    runs-on: ubuntu-latest
+    runs-on: ['self-hosted', 'ubuntu-latest']
 
     steps:
     - name: Checkout code
@@ -24,7 +24,7 @@ jobs:
 
   # # # # # GCP Bucket
   tf-gcp-gcp2-bucket-destroy:
-    runs-on: ubuntu-latest
+    runs-on: ['self-hosted', 'ubuntu-latest']
     needs: tf-prepare-destroy
     defaults:
       run:
@@ -51,7 +51,7 @@ jobs:
 
 
   # tf-gcp-gcp2-dns-aamsdn-com-destroy:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ['self-hosted', 'ubuntu-latest']
   #   needs: tf-prepare-destroy
 
   #   defaults:
@@ -105,7 +105,7 @@ jobs:
 
   # # # # # GCP GKE
   tf-gcp-gcp2-gke3-destroy:
-    runs-on: ubuntu-latest
+    runs-on: ['self-hosted', 'ubuntu-latest']
     needs: tf-prepare-destroy
     defaults:
       run:
