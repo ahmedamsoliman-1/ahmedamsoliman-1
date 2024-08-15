@@ -3,7 +3,7 @@ name: terraform-gcp-gcp2-deploy
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
