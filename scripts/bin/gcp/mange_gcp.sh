@@ -163,6 +163,7 @@ case "$1" in
     gke-cred)
         if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
             echo "Usage: $0 gke-cred <cluster-name> <zone> <project-id>"
+            #  mange_gcp gke-cred aamsd-gcp2-gke3-cluster us-east1-b comaamsdngcp2-project-1
             exit 1
         fi
         get_gke_credentials "$2" "$3" "$4"

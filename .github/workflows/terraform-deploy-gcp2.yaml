@@ -172,12 +172,12 @@ jobs:
       run: |
         echo "Listing files in the current directory:"
         ls -la
-        echo "Listing files in /home/runner/work/ahmed/ahmed:"
-        ls -la /home/runner/work/ahmed/ahmed/
+        echo "Listing files in /home/runner/work/ahmedamsoliman-1/ahmedamsoliman-1:"
+        ls -la /home/runner/work/ahmedamsoliman-1/ahmedamsoliman-1/
   
     - name: Set Ingress IP Environment Variable
       run: |
-        INGRESS_IP=$(cat /home/runner/work/ahmed/ahmed/ingress_ip.txt)
+        INGRESS_IP=$(cat /home/runner/work/ahmedamsoliman-1/ahmedamsoliman-1/ingress_ip.txt)
         echo "INGRESS_IP=${INGRESS_IP}"
         echo "INGRESS_IP=${INGRESS_IP}" >> $GITHUB_ENV
         
