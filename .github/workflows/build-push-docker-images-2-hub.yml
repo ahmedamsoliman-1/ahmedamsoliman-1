@@ -412,6 +412,14 @@ jobs:
           npm install
           MONGO=${{ secrets.MONGO_URL_AAMS_LINKS }}
           echo "MONGO_URL_AAMS_LINKS=$MONGO" > .env
+        
+      - name: PWD
+        run: |
+          cd ${{ env.NODE_LINKS }}
+          ls
+          pwd
+          cat .env
+
 
       - name: Build and push Docker image - ${{ env.IMAGE_NAME_NODE_LINKS }}
         if: success()
