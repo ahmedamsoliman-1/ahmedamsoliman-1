@@ -354,7 +354,6 @@ jobs:
       run: |
         kubectl apply -f ahmed.yaml
         kubectl apply -f portfolio.yaml
-        kubectl apply -f dashboard.yaml
         kubectl apply -f cvviewer.yaml
 
     # - name: Deploy/Upgrade Helm Charts - portfolio
