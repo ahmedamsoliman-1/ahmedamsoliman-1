@@ -1,19 +1,50 @@
 #!/bin/bash
 
+box_text() {
+  local text="$1"
+  local color="${2:-32}" # Default to green if no color is specified
+  local padding=40
+
+  # Calculate text length and total width of the box
+  local text_length=${#text}
+  local box_width=$((text_length + padding * 2))
+
+  # Top border
+  echo -e "\033[${color}m$(printf '%*s' "$box_width" '' | tr ' ' '*')\033[0m"
+
+  # Text with padding
+  echo -e "\033[${color}m$(printf '%*s' "$padding" '')$text$(printf '%*s' "$padding" '')\033[0m"
+
+  # Bottom border
+  echo -e "\033[${color}m$(printf '%*s' "$box_width" '' | tr ' ' '*')\033[0m"
+}
 
 
+TAG_1="1"
+TAG_2="1"
+TAG_3="4"
 
-echo "--------------------------------------------------"
-echo "Pull images"
-echo "--------------------------------------------------"
+TAG="$TAG_1.$TAG_2.$TAG_3"
 
-docker pull node:20-alpine
+REGISTRY=ahmedalimsolimansd
+IMAGE_NAME=aams-node-templates
 
+PLATFORM_AMD=linux/amd64
+PLATFORM_ARM=linux/arm64
 
+# command="docker build --platform $PLATFORM_AMD -t $IMAGE_NAME:$TAG ."
+# box_text "BUILDING using [$command]"
+# $command
 
-echo "--------------------------------------------------"
-echo "Build"
-echo "--------------------------------------------------"
+command="docker tag $IMAGE_NAME:$TAG $REGISTRY/$IMAGE_NAME:$TAG"
+box_text "TAGGING using [$command]"
+$command
 
-docker build -t aams .
-docker run -p 3111:3111 aams 
+command="docker push $REGISTRY/$IMAGE_NAME:$TAG"
+box_text "PUSHING using [$command]"
+$command
+
+box_text "Image Summary Created"
+echo "TAG: $TAG"
+echo "REGISTRY: $REGISTRY"
+echo "IMAGE_NAME: $IMAGE_NAME"
