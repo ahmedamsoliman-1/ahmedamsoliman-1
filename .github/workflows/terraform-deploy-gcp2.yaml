@@ -218,7 +218,7 @@ jobs:
 
     steps:
       - name: Testing
-        run: nslookup aamsdn.com
+        run: nslookup argo.aamsd.com
 
   # # # # # GCP GKE
   tf-gcp-gcp2-gke3-deploy:
@@ -354,6 +354,7 @@ jobs:
       run: |
         kubectl apply -f ahmed.yaml
         kubectl apply -f portfolio.yaml
+        kubectl apply -f dashboard.yaml
 
     # - name: Deploy/Upgrade Helm Charts - portfolio
     #   working-directory: ./kubernetes/helm-charts/portfolio-chart
