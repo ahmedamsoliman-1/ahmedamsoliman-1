@@ -7,7 +7,4 @@ RUN npm install
 
 COPY . .
 
-# Copy .env file to the container
-COPY .env .env
-
 CMD ["node", "src/app.js"]
