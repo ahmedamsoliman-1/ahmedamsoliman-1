@@ -412,14 +412,14 @@ jobs:
           npm install
           echo "-----"
           MONGO=${{ secrets.MONGO_URL_AAMS_LINKS }}
-          echo "-----"
           cat $MONGO
-          echo "-----"
-          echo "MONGO_URL_AAMS_LINKS=${{ secrets.MONGO_URL_AAMS_LINKS }}" > .env
-          echo "-----"
-          echo "MONGO_URL_AAMS_LINKS=$MONGO" > .env
-          echo "-----"
-          cat .env
+          cat ${{ secrets.MONGO_URL_AAMS_LINKS }}
+          # echo "-----"
+          # echo "MONGO_URL_AAMS_LINKS=${{ secrets.MONGO_URL_AAMS_LINKS }}" > .env
+          # echo "-----"
+          # echo "MONGO_URL_AAMS_LINKS=$MONGO" > .env
+          # echo "-----"
+          # cat .env
         
       - name: PWD
         run: |
