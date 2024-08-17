@@ -215,7 +215,6 @@ jobs:
     runs-on: ['ubuntu-latest']
     needs: 
       - tf-gcp2-dns-aamsdn-com-deploy
-      - read-ingress-ip
 
     steps:
       - name: Testing
@@ -349,6 +348,12 @@ jobs:
       run: |
         chmod +x deploy.sh
         ./deploy.sh
+    
+    - name: Install ArgoCD Application
+      working-directory: ./kubernetes/argocd-applications
+      run: |
+        kubectl apply -f ahmed.yaml
+        kubectl apply -f portfolio.yaml
 
     # - name: Deploy/Upgrade Helm Charts - portfolio
     #   working-directory: ./kubernetes/helm-charts/portfolio-chart
@@ -379,52 +384,52 @@ jobs:
         name: ingress-ip
         path: ingress_ip.txt
   
-  read-ingress-ip:
-    runs-on: ['ubuntu-latest']
-    needs: prepare-helm-ktl-gcp2-gke3-deploy
-    defaults:
-      run:
-        working-directory: ./kubernetes/argocd-applications
+  # read-ingress-ip:
+  #   runs-on: ['ubuntu-latest']
+  #   needs: prepare-helm-ktl-gcp2-gke3-deploy
+  #   defaults:
+  #     run:
+  #       working-directory: ./kubernetes/argocd-applications
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
 
-    - name: Download Terraform Outputs
-      uses: actions/download-artifact@v3
-      with:
-        name: tf-outputs
+  #   - name: Download Terraform Outputs
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: tf-outputs
 
-    - name: Set up Google Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
-      with:
-        version: 'latest'
+  #   - name: Set up Google Cloud CLI
+  #     uses: google-github-actions/setup-gcloud@v2
+  #     with:
+  #       version: 'latest'
 
-    - name: Install GKE Cloud Auth plugin
-      run: |
-        gcloud components install gke-gcloud-auth-plugin
+  #   - name: Install GKE Cloud Auth plugin
+  #     run: |
+  #       gcloud components install gke-gcloud-auth-plugin
 
-    - name: Authenticate with Google Cloud
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
-      run: |
-        echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
-        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+  #   - name: Authenticate with Google Cloud
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+  #     run: |
+  #       echo "${GOOGLE_APPLICATION_CREDENTIALS}" > $HOME/gcloud-key.json
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
         
-    - name: Get GKE Cluster Credentials
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
-      run: |
-        echo "Info"
-        CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
-        ZONE=$(jq -r '.location.value' terraform_outputs.json)
-        echo $CLUSTER_NAME
-        echo $ZONE
-        echo "get-credentials"
-        gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
-        gcloud container clusters list --project ${{ secrets.GCP2_PROJECT_ID }}
-        gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
+  #   - name: Get GKE Cluster Credentials
+  #     env:
+  #       GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP2_MINIFIED_CREDENTIALS }}
+  #     run: |
+  #       echo "Info"
+  #       CLUSTER_NAME=$(jq -r '.kubernetes_cluster_name.value' terraform_outputs.json)
+  #       ZONE=$(jq -r '.location.value' terraform_outputs.json)
+  #       echo $CLUSTER_NAME
+  #       echo $ZONE
+  #       echo "get-credentials"
+  #       gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
+  #       gcloud container clusters list --project ${{ secrets.GCP2_PROJECT_ID }}
+  #       gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$ZONE" --project ${{ secrets.GCP2_PROJECT_ID }}
 
-    - name: Deploy portfolio argocd application
-      run: kubectl apply -f portfolio.yaml
+  #   - name: Deploy portfolio argocd application
+  #     run: kubectl apply -f portfolio.yaml
