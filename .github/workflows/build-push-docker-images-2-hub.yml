@@ -52,7 +52,7 @@ on:
 
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
-  LATEST_TAG: '1.0.2'
+  LATEST_TAG: '1.0.3'
   # RUNNER: ['ubuntu-latest']
 
   IMAGE_NAME_FRONTEND_SVC: aams-frontend-svc
