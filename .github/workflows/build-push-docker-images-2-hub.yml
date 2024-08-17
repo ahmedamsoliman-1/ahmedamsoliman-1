@@ -372,7 +372,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          cd ${{ env.NODE_LINKS }}
+          cd ${{ env.NODE_TEMPLATE }}
           npm install
           echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> .env
 
