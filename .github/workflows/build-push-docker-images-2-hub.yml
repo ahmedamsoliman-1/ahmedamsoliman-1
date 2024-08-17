@@ -417,6 +417,7 @@ jobs:
         run: |
           cd ${{ env.NODE_LINKS }}
           ls -a
+          cat .env
 
       - name: Build and push Docker image - ${{ env.IMAGE_NAME_NODE_LINKS }}
         if: success()
