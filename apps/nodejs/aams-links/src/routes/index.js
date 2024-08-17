@@ -5,7 +5,7 @@ const ll = require('../middleware/utils');
 const Card = require('../models/Card');
 
 // List all cards, grouped by category
-router.get('/', async (req, res) => {
+router.get('/', ll.ensureAuthenticated ,ll.ensureAuthenticatedIsMe, async (req, res) => {
   const cards = await Card.find();
   const cardStatuses = await Promise.all(cards.map(async (card) => {
     try {
@@ -52,5 +52,14 @@ router.post('/update/:id', async (req, res) => {
   ll.llog('Card updated');
   res.redirect('/');
 });
+
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
+router.get('/register', (req, res) => {
+  res.render('register');
+});
+
 
 module.exports = router;
