@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const ll = require('../middleware/utils');
 const Card = require('../models/Card');
 
