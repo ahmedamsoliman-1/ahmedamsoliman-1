@@ -1,5 +1,3 @@
-// var {insertToElasticsearch } = require("../db/elasticsearch_local")
-
 var middlewares = {};
 
 
@@ -56,6 +54,22 @@ middlewares.llog = function(message, cat) {
 middlewares.handleError = function (error, req, res, next) {
     console.log(error)
     res.sendStatus(500);
+}
+
+
+middlewares.getMongodbAAMSLinksURI = async function () {
+    this.llog(`HCP_API_URL: ${process.env.HCP_API_URL}`);
+    try {
+      const response = await axios.get(HCP_API_URL, {
+        headers: {
+          'Authorization': `Bearer ${HCP_API_TOKEN}`
+        }
+      });
+      console.log(response.data.secrets[3].version);
+      return response.data.secrets[3].version.value;
+    } catch (error) {
+      console.error('Error fetching secrets:');
+    }
 }
 
 module.exports = middlewares;
