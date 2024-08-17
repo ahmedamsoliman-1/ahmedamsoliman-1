@@ -410,8 +410,16 @@ jobs:
         run: |
           cd ${{ env.NODE_LINKS }}
           npm install
+          ech "-----"
           MONGO=${{ secrets.MONGO_URL_AAMS_LINKS }}
+          ech "-----"
+          cat $MONGO
+          ech "-----"
+          echo "MONGO_URL_AAMS_LINKS=${{ secrets.MONGO_URL_AAMS_LINKS }}" > .env
+          ech "-----"
           echo "MONGO_URL_AAMS_LINKS=$MONGO" > .env
+          ech "-----"
+          cat .env
         
       - name: PWD
         run: |
