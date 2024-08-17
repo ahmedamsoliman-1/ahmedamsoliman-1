@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aams-links
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1.git
+    targetRevision: main
+    path: kubernetes/helm-charts/aams-links-chart
+    helm:
+      valueFiles:
+      - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: aams-links
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true

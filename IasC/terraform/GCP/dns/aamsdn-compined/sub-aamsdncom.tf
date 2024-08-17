@@ -221,3 +221,17 @@ variable "grafana_subdomain" { default = "grafana" }
 output "grafana_subdomain" { value = "${var.grafana_subdomain}.${var.dns_name}" }
 
 
+
+
+resource "google_dns_record_set" "links_subdomain" {
+  name         = "${var.links_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "links_subdomain" { default = "links" }
+output "links_subdomain" { value = "${var.links_subdomain}.${var.dns_name}" }
+
+
