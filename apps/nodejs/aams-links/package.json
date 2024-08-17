@@ -1,8 +1,8 @@
 {
-  "name": "frontend-svc",
+  "name": "aams-links",
   "version": "1.0.0",
-  "description": "This service provides a web interface to manage users and orders.",
-  "main": "index.js",
+  "description": "...",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon src/app.js",
     "test": "jest"

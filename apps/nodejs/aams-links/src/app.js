@@ -25,8 +25,10 @@ const currentTime = currentDate.toLocaleString();
 
 app.listen(port, () => {
   ll.llog("Service Information:");
+  ll.llog(`Environment ${process.env.ENV}`);
+  ll.llog(`Environment ${process.env.MONGO_URL}`);
   console.table({
-    "App Name": 'AAMS-Linktree-SVC',
+    "App Name": 'AAMS-Links-SVC',
     "Server Name": node,
     "Start Time": currentTime,
     "Server URL": `http://localhost:${port}`,
