@@ -164,7 +164,7 @@ jobs:
         terraform_version: 1.9.2
   
     - name: Download Ingress IP Artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ingress-ip
 
@@ -263,7 +263,7 @@ jobs:
         cat terraform_outputs.json
 
     - name: Upload Terraform Outputs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tf-outputs
         path: ./IasC/terraform/GCP/gke/gke3/terraform_outputs.json
@@ -277,7 +277,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Download Terraform Outputs
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: tf-outputs
 
@@ -298,7 +298,7 @@ jobs:
         gcloud auth activate-service-account --key-file=$HOME/gcloud-key.json
 
     - name: Download Terraform Outputs
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: tf-outputs
 
@@ -379,7 +379,7 @@ jobs:
         echo $INGRESS_IP > ingress_ip.txt
 
     - name: Upload Ingress IP Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ingress-ip
         path: ingress_ip.txt
@@ -396,7 +396,7 @@ jobs:
   #     uses: actions/checkout@v4
 
   #   - name: Download Terraform Outputs
-  #     uses: actions/download-artifact@v3
+  #     uses: actions/download-artifact@v4
   #     with:
   #       name: tf-outputs
 
