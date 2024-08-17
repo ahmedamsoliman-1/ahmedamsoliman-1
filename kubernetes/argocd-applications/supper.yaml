@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/ahmedamsoliman-1/ahmed.git
+    repoURL: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1.git
     targetRevision: main
     path: kubernetes/helm-charts/supper-chart
     helm:
