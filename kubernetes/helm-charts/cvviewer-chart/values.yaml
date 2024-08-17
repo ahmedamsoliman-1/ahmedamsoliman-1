@@ -1,0 +1,70 @@
+namespace: cvviewer
+argocd:
+  name: cvviewer
+
+data:
+  namespace: cvviewer
+  name: aams-aams-cvviewer-resume-dataeng
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-aams-cvviewer-resume-dataeng"
+    tag: "1.0.2"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: dataresume.aamsd.com
+
+dev:
+  namespace: cvviewer
+  name: aams-aams-cvviewer-resume-dev
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-aams-cvviewer-resume-dev"
+    tag: "1.0.2"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: devresume.aamsd.com
+
+
+devweb:
+  namespace: cvviewer
+  name: aams-resume-dev-web
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-resume-dev-web"
+    tag: "1.0.2"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: webresume.aamsd.com
+
+ts:
+  namespace: cvviewer
+  name: aams-aams-cvviewer-resume-ts
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-aams-cvviewer-resume-ts"
+    tag: "1.0.2"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: tsresume.aamsd.com
+
+devops:
+  namespace: cvviewer
+  name: aams-aams-cvviewer-resume-devops
+  replicaCount: 1
+  image:
+    repository: "ahmedalimsolimansd/aams-aams-cvviewer-resume-devops"
+    tag: "1.0.2"
+  service:
+    type: ClusterIP
+    port: 80
+  domain:
+    name: devopsresume.aamsd.com
+

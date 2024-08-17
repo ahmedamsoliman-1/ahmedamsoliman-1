@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: resumes
+  name: cvviewer
   namespace: argo-cd
 spec:
-  project: default
+  project: resumes
   source:
     repoURL: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1.git
     targetRevision: main
-    path: kubernetes/helm-charts/resumes-chart
+    path: kubernetes/helm-charts/cvviewer-chart
     helm:
       valueFiles:
       - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: resumes
+    namespace: cvviewer
   syncPolicy:
     automated:
       prune: false
