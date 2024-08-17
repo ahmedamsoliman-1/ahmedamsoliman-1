@@ -84,9 +84,9 @@ const configObj = {
     KIBANA_PASSWORD: process.env.ELASTIC_SEARCH_SK_DEV || 'ggimdalbit',
   },
   MONGO: {
-    MONGO_URI: process.env.MONGO_URI,
-    MONGO_URI_AHMED: process.env.MONGO_URI_AHMED,
-    MONGO_URI_MONGO_URI_LOCALHOST_1: process.env.MONGO_URI_MONGO_URI_LOCALHOST_1
+    MONGO_URI: process.env.MONGO_URL,
+    MONGO_URI_AHMED: process.env.MONGO_URL,
+    MONGO_URI_MONGO_URI_LOCALHOST_1: process.env.MONGO_URL
   },
   REDIS: {
     REDIS_HOST: process.env.REDIS_HOST || '127.0.0.1',
