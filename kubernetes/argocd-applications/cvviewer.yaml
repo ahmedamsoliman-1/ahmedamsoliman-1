@@ -4,7 +4,7 @@ metadata:
   name: cvviewer
   namespace: argo-cd
 spec:
-  project: resumes
+  project: default
   source:
     repoURL: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1.git
     targetRevision: main
