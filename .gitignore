@@ -163,3 +163,9 @@ actions-runner
 
 # Kubernetes
 kube
+
+
+
+task-svc
+auth-ts
+profile-ts-svc
