@@ -7,7 +7,7 @@ replicaCount: 1
 
 image:
   repository: "ahmedalimsolimansd/aams-links"
-  tag: "1.0.3"
+  tag: "1.1.4"
 
 service:
   type: ClusterIP
