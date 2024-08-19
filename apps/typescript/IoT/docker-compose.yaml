@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  service-a:
+    build:
+      context: ./svc-a-Device-Management-Service
+    ports:
+      - "3001:3001"
+    depends_on:
+      - service-b
+
+  service-b:
+    build:
+      context: ./svc-b-Data-Collection-Service
+    ports:
+      - "3002:3002"
+    depends_on:
+      - service-c
+
+  service-c:
+    build:
+      context: ./svc-c-Analytics-Notification-Service
+    ports:
+      - "3003:3003"
+
+# curl -X POST http://localhost:3001/devices -H "Content-Type: application/json" -d '{"id":"device1","name":"Temperature Sensor","type":"sensor","status":"active"}'
+# curl -X POST http://localhost:3002/data -H "Content-Type: application/json" -d '{"deviceId":"device1","temperature":22.5,"humidity":55}'
+# curl http://localhost:3003/analytics
