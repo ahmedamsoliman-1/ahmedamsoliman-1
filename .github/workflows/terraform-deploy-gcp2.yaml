@@ -1,15 +1,13 @@
 name: terraform-gcp-gcp2-deploy
 
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     branches:
-#       - master
-
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
     
 env:
   INGRESS_IP: ""
