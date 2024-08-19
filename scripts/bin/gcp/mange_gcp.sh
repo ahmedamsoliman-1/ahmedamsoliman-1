@@ -98,6 +98,7 @@ get_gke_credentials() {
         echo "Please provide the cluster name, zone, and project ID."
         exit 1
     fi
+    echo "project-id: comaamsdngcp2-project-1"
     gcloud container clusters get-credentials "$cluster_name" --zone "$zone" --project "$project_id"
     echo "kubectl context set to use cluster: $cluster_name"
 }
