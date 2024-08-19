@@ -53,7 +53,7 @@ services:
       dockerfile: Dockerfile
     container_name: ahmedamsoliman-1
     ports:
-      - "8087:80"
+      - "8007:8080"
   
   flask-1:
     build:
@@ -111,13 +111,30 @@ services:
     ports:
       - "8014:8080"
   
-  auth-services:
+  auth-service:
     build:
       context: ./typescript/auth-service
       dockerfile: Dockerfile
-    container_name: auth-services
+    container_name: auth-service
     ports:
       - "8015:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+  
+  nodejs-ejs-auth:
+    build:
+      context: ./nodejs/nodejs-ejs-auth
+      dockerfile: Dockerfile
+    container_name: nodejs-ejs-auth
+    depends_on:
+      - auth-service
+    ports:
+      - "8016:4000"
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
+      - JWT_SECRET=${JWT_SECRET}
 
   # cpp-web-app-1:
   #   build:

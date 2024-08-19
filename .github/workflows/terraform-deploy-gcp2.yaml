@@ -1,12 +1,16 @@
 name: terraform-gcp-gcp2-deploy
 
+# on:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+#     branches:
+#       - master
+
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
+    
 env:
   INGRESS_IP: ""
 jobs:
@@ -349,14 +353,20 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
+    - name: Deploy/Upgrade Helm Charts - Kubernetes Dashboard
+      working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
+    
     - name: Install ArgoCD Application
       working-directory: ./kubernetes/argocd-applications
       run: |
         kubectl apply -f ahmed.yaml
         kubectl apply -f portfolio.yaml
-        kubectl apply -f cvviewer.yaml
-        kubectl apply -f aams-links.yaml
-        kubectl apply -f supper.yaml
+        # kubectl apply -f cvviewer.yaml
+        # kubectl apply -f aams-links.yaml
+        # kubectl apply -f supper.yaml
 
     # - name: Deploy/Upgrade Helm Charts - portfolio
     #   working-directory: ./kubernetes/helm-charts/portfolio-chart

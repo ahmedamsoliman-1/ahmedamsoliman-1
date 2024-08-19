@@ -23,8 +23,6 @@ box_text() {
 
 NAMESPACE=kubernetes-dashboard
 
-
-
 box_text "Create namespace $NAMESPACE if it doesn't exist" 36
 kubectl get namespace $NAMESPACE &>/dev/null || kubectl create namespace $NAMESPACE
 
