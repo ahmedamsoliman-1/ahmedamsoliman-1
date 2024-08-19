@@ -1,6 +1,6 @@
-// src/controllers/authController.ts
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
 import winston from 'winston';
 
@@ -15,13 +15,15 @@ const logger = winston.createLogger({
     ],
 });
 
+const SECRET_KEY = 'your_secret_key'; // Replace with your secret key
+
 export const register = async (req: Request, res: Response) => {
     try {
         const { username, password } = req.body;
         if (!username || !password) {
             logger.warn('Registration attempt with missing username or password', { username });
             return res.status(400).json({ message: 'Username and password are required' });
-        }
+        } 
 
         // Check if the username already exists
         const existingUser = await User.findOne({ username });
@@ -62,11 +64,13 @@ export const login = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
+        // Issue JWT
+        const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+
         logger.info('Login successful', { username });
-        res.status(200).json({ message: 'Login successful' });
+        res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         logger.error('Login error', { error, username: req.body.username });
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-

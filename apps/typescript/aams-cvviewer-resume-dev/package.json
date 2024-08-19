@@ -1,7 +1,7 @@
 {
   "name": "aams-cvviewer-resume-dev",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "ts-node ./src/server.ts",
     "build": "tsc",
