@@ -9,6 +9,7 @@ FROM nginx:latest
 # (Optional) Uncomment the following line if you have static files to serve
 # COPY static-html-directory /usr/share/nginx/html
 
+
 # Expose port 80
 EXPOSE 80
 
