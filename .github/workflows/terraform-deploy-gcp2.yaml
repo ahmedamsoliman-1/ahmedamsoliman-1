@@ -351,11 +351,11 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
-    # - name: Deploy/Upgrade Helm Charts - Kubernetes Dashboard
-    #   working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
+    - name: Deploy/Upgrade Helm Charts - Kubernetes Dashboard
+      working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh
     
     - name: Install ArgoCD Application
       working-directory: ./kubernetes/argocd-applications
