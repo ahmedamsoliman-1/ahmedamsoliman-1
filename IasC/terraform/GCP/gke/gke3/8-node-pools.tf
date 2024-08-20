@@ -16,7 +16,8 @@ resource "google_container_node_pool" "general" {
 
   node_config {
     preemptible  = false
-    machine_type = "e2-micro"
+    machine_type = "e2-standard-8"
+    # machine_type = "e2-micro"
     # machine_type = "e2-medium"
     # machine_type = "e2-standard-8"
 

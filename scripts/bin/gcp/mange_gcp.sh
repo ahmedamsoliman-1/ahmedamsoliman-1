@@ -27,6 +27,7 @@ delete_config() {
 # Function to list GKE clusters
 list_gke_clusters() {
     gcloud container clusters list
+    echo "mange_gcp gke-cred aamsd-gcp2-gke3-cluster us-east1-b comaamsdngcp2-project-1"
 }
 
 # Function to login to a GCP account
@@ -162,12 +163,16 @@ case "$1" in
         list_bq_datasets "$2"
         ;;
     gke-cred)
+        echo "mange_gcp gke-cred aamsd-gcp2-gke3-cluster us-east1-b comaamsdngcp2-project-1"
         if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
             echo "Usage: $0 gke-cred <cluster-name> <zone> <project-id>"
             #  mange_gcp gke-cred aamsd-gcp2-gke3-cluster us-east1-b comaamsdngcp2-project-1
             exit 1
         fi
         get_gke_credentials "$2" "$3" "$4"
+        ;;
+    quick)
+        quick
         ;;
     *)
         echo "Usage: $0 {list|switch <config-name>|current|delete <config-name>|gke|login|login-service-account <key-file>|create <config-name>|gce|gcs|dns|bq <project-id>|gke-cred <cluster-name> <zone> <project-id>}"
