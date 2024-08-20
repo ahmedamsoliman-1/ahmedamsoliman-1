@@ -85,6 +85,17 @@ output "resume_web_subdomain" { value = "${var.resume_web_subdomain}.${var.dns_n
 
 
 
+resource "google_dns_record_set" "k8_subdomain" {
+  name         = "${var.k8_subdomain}.${var.dns_name}."
+  managed_zone = google_dns_managed_zone.aamsdn.name
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = [var.ingress_ip]
+}
+variable "k8_subdomain" { default = "k8" }
+output "k8_subdomain" { value = "${var.k8_subdomain}.${var.dns_name}" }
+
 resource "google_dns_record_set" "dashboard_subdomain" {
   name         = "${var.dashboard_subdomain}.${var.dns_name}."
   managed_zone = google_dns_managed_zone.aamsdn.name
@@ -95,8 +106,6 @@ resource "google_dns_record_set" "dashboard_subdomain" {
 }
 variable "dashboard_subdomain" { default = "dashboard" }
 output "dashboard_subdomain" { value = "${var.dashboard_subdomain}.${var.dns_name}" }
-
-
 
 
 
