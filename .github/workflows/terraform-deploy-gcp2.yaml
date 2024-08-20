@@ -362,9 +362,9 @@ jobs:
       run: |
         kubectl apply -f ahmed.yaml
         kubectl apply -f portfolio.yaml
-        # kubectl apply -f cvviewer.yaml
-        # kubectl apply -f aams-links.yaml
-        # kubectl apply -f supper.yaml
+        kubectl apply -f cvviewer.yaml
+        kubectl apply -f aams-links.yaml
+        kubectl apply -f supper.yaml
 
     # - name: Deploy/Upgrade Helm Charts - portfolio
     #   working-directory: ./kubernetes/helm-charts/portfolio-chart
