@@ -16,7 +16,8 @@ resource "google_container_node_pool" "general" {
 
   node_config {
     preemptible  = false
-    machine_type = "e2-medium"
+    machine_type = "e2-micro"
+    # machine_type = "e2-medium"
     # machine_type = "e2-standard-8"
 
     labels = {
@@ -33,7 +34,7 @@ resource "google_container_node_pool" "general" {
 resource "google_container_node_pool" "spot" {
   name    = var.spot_name
   cluster = google_container_cluster.primary.id
-  node_count = 2
+  node_count = 1
 
   management {
     auto_repair  = true
@@ -42,7 +43,7 @@ resource "google_container_node_pool" "spot" {
 
   autoscaling {
     min_node_count = 0
-    max_node_count = 10
+    max_node_count = 3
   }
 
   node_config {
