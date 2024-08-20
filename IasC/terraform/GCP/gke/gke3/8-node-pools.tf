@@ -16,7 +16,7 @@ resource "google_container_node_pool" "general" {
 
   node_config {
     preemptible  = false
-    machine_type = "e2-standard-8"
+    machine_type = "e2-standard-4"
     # machine_type = "e2-micro"
     # machine_type = "e2-medium"
     # machine_type = "e2-standard-8"
@@ -43,7 +43,7 @@ resource "google_container_node_pool" "spot" {
   }
 
   autoscaling {
-    min_node_count = 0
+    min_node_count = 1
     max_node_count = 3
   }
 
