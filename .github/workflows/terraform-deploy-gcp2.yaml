@@ -346,11 +346,22 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
-    # - name: Deploy/Upgrade Helm Charts - ArgoCD
-    #   working-directory: ./kubernetes/helm-charts/argo-cd
-    #   run: |
-    #     chmod +x deploy.sh
-    #     ./deploy.sh
+    - name: Deploy/Upgrade Helm Charts - ArgoCD
+      working-directory: ./kubernetes/helm-charts/argo-cd
+      run: |
+        NAMESPACE=argo-cd
+        echo "Create namespace $NAMESPACE if it doesn't exist"
+        kubectl get namespace $NAMESPACE &>/dev/null || kubectl create namespace $NAMESPACE
+
+        # echo "Get Admin password from HCP valut"
+        # GGS=$(hcp vault-secrets secrets open GGS --format=json | jq -r '.static_version.value')
+        # echo $GGS
+        
+        echo "Install"
+        helm upgrade --install $NAMESPACE-release . \
+          -n $NAMESPACE \
+          -f values.yaml \
+          --set configs.secret.argocdServerAdminPassword=${{ secrets.GSS }}
     
     # - name: Deploy/Upgrade Helm Charts - Kubernetes Dashboard
     #   working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
