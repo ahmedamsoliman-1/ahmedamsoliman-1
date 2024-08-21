@@ -254,15 +254,15 @@ jobs:
           - name: dev
             path: ./apps/typescript/aams-cvviewer-resume-dev
             image_name: aams-aams-cvviewer-resume-dev
-          - name: devops
-            path: ./apps/typescript/aams-cvviewer-resume-devops
-            image_name: aams-aams-cvviewer-resume-devops
-          - name: ts
-            path: ./apps/typescript/aams-cvviewer-resume-ts
-            image_name: aams-aams-cvviewer-resume-ts
-          - name: dataeng
-            path: ./apps/typescript/aams-cvviewer-resume-dataeng
-            image_name: aams-aams-cvviewer-resume-dataeng
+          # - name: devops
+          #   path: ./apps/typescript/aams-cvviewer-resume-devops
+          #   image_name: aams-aams-cvviewer-resume-devops
+          # - name: ts
+          #   path: ./apps/typescript/aams-cvviewer-resume-ts
+          #   image_name: aams-aams-cvviewer-resume-ts
+          # - name: dataeng
+          #   path: ./apps/typescript/aams-cvviewer-resume-dataeng
+          #   image_name: aams-aams-cvviewer-resume-dataeng
 
     steps:
       - name: Checkout code
@@ -299,6 +299,17 @@ jobs:
   gather-artifacts:
     runs-on: ubuntu-latest
     needs: build-push
+    strategy:
+      matrix:
+        app: 
+          - name: dev
+            image_name: aams-aams-cvviewer-resume-dev
+          # - name: devops
+          #   image_name: aams-aams-cvviewer-resume-devops
+          # - name: ts
+          #   image_name: aams-aams-cvviewer-resume-ts
+          # - name: dataeng
+          #   image_name: aams-aams-cvviewer-resume-dataeng
 
     steps:
       - name: Download artifacts
