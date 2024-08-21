@@ -39,9 +39,6 @@ jobs:
           - name: dataeng-cv
             path: ./apps/typescript/aams-cvviewer-resume-dataeng
             image_name: aams-aams-cvviewer-resume-dataeng
-          - name: go-linktree
-            path: ./apps/go/linktree
-            image_name: go-linktree-1
           - name: ejs-auth-svc
             path: ./apps/nodejs/nodejs-ejs-auth
             image_name: aams-nodejs-ejs-auth
