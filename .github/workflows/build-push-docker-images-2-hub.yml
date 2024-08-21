@@ -30,17 +30,9 @@ jobs:
         run: |
           echo 'Hello world, leader'
   
-  typescripts:
-    runs-on: ['ubuntu-latest']
-    needs: leader
-    steps:
-      - name: echo
-        run: |
-          echo 'Hello world, typescripts'
-  
   cvviewer-dev:
     runs-on: ['ubuntu-latest']
-    needs: typescripts
+    needs: leader
     env:
       IMAGE_NAME: aams-cvviewer
 
@@ -78,7 +70,7 @@ jobs:
   
   cvviewer-devops:
     runs-on: ['ubuntu-latest']
-    needs: typescripts
+    needs: leader
     env:
       IMAGE_NAME: aams-cvviewer
 
@@ -116,7 +108,7 @@ jobs:
   
   cvviewer-ts:
     runs-on: ['ubuntu-latest']
-    needs: typescripts
+    needs: leader
     env:
       IMAGE_NAME: aams-cvviewer
 
@@ -154,7 +146,7 @@ jobs:
   
   cvviewer-dataeng:
     runs-on: ['ubuntu-latest']
-    needs: typescripts
+    needs: leader
     env:
       IMAGE_NAME: aams-cvviewer
 
