@@ -345,11 +345,11 @@ jobs:
         chmod +x deploy.sh
         ./deploy.sh
     
-    - name: Deploy/Upgrade Helm Charts - ArgoCD
-      working-directory: ./kubernetes/helm-charts/argo-cd
-      run: |
-        chmod +x deploy.sh
-        ./deploy.sh
+    # - name: Deploy/Upgrade Helm Charts - ArgoCD
+    #   working-directory: ./kubernetes/helm-charts/argo-cd
+    #   run: |
+    #     chmod +x deploy.sh
+    #     ./deploy.sh
     
     # - name: Deploy/Upgrade Helm Charts - Kubernetes Dashboard
     #   working-directory: ./kubernetes/helm-charts/kubernetes-dashboard
@@ -364,7 +364,6 @@ jobs:
         kubectl apply -f portfolio.yaml
         kubectl apply -f cvviewer.yaml
         kubectl apply -f aams-links.yaml
-        kubectl apply -f supper.yaml
 
     # - name: Deploy/Upgrade Helm Charts - portfolio
     #   working-directory: ./kubernetes/helm-charts/portfolio-chart
