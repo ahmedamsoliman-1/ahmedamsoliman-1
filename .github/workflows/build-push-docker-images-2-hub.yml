@@ -3,7 +3,7 @@ name: 'Build CV Docker Images 2 Hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
@@ -18,18 +18,36 @@ jobs:
     strategy:
       matrix:
         app: 
-          - name: dev
+          - name: frontend-svc
+            path: ./apps/nodejs/frontend-svc
+            image_name: aams-frontend-svc
+          - name: user-svc
+            path: ./apps/nodejs/user-svc
+            image_name: aams-user-svc
+          - name: order-svc
+            path: ./apps/nodejs/order-svc
+            image_name: aams-order-svc
+          - name: dev-cv
             path: ./apps/typescript/aams-cvviewer-resume-dev
             image_name: aams-aams-cvviewer-resume-dev
-          - name: devops
+          - name: devops-cv
             path: ./apps/typescript/aams-cvviewer-resume-devops
             image_name: aams-aams-cvviewer-resume-devops
-          - name: ts
+          - name: ts-cv
             path: ./apps/typescript/aams-cvviewer-resume-ts
             image_name: aams-aams-cvviewer-resume-ts
-          - name: dataeng
+          - name: dataeng-cv
             path: ./apps/typescript/aams-cvviewer-resume-dataeng
             image_name: aams-aams-cvviewer-resume-dataeng
+          - name: go-linktree
+            path: ./apps/go/linktree
+            image_name: go-linktree-1
+          - name: ejs-auth-svc
+            path: ./apps/nodejs/nodejs-ejs-auth
+            image_name: aams-nodejs-ejs-auth
+          - name: auth-svc
+            path: ./apps/typescript/auth-service
+            image_name: aams-auth-service
 
     steps:
       - name: Checkout code
