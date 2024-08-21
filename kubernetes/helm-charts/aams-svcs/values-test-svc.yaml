@@ -1,0 +1,15 @@
+
+name: auth-test-svc
+
+replicaCount: 1
+
+image:
+  repository: "ahmedalimsolimansd/aams-nodejs-ejs-auth"
+  tag: "1.0.3"
+
+service:
+  type: ClusterIP
+  port: 4000
+
+domain:
+  name: authtest.aamsd.com

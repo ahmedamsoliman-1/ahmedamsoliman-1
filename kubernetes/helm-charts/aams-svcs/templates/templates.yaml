@@ -1,0 +1,94 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-svc
+  namespace: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}-svc
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}-svc
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-svc
+    spec:
+      containers:
+        - name: {{ .Values.name }}-svc
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.name }}-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}-svc
+  namespace: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}-svc
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '{{ .Values.service.port }}'
+spec:
+  selector:
+    app: {{ .Values.name }}-svc
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+  type: {{ .Values.service.type }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-config
+  namespace: {{ .Values.name }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.name }}-ingress
+  namespace: {{ .Values.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.domain.name }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.name }}-svc
+            port:
+              number: {{ .Values.service.port }}
+  tls:
+  - hosts:
+    - {{ .Values.domain.name }}
+    secretName: {{ .Values.name }}-cert-tls
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: {{ .Values.name }}-cert
+#   namespace: {{ .Values.name }}
+# spec:
+#   secretName: {{ .Values.name }}-cert-tls
+#   issuerRef:
+#     name: letsencrypt-prod
+#     kind: ClusterIssuer
+#   commonName: {{ .Values.domain.name }}
+#   dnsNames:
+#   - {{ .Values.domain.name }}
+# ---
