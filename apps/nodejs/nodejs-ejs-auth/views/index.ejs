@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome, <%= user.username %>!</h1>
+    <img src="https://via.placeholder.com/150" alt="Logged In Image">
+    <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
