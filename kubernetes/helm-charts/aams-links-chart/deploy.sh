@@ -20,7 +20,7 @@ box_text() {
 }
 
 
-NS=ahmed
+NS=aams-links
 
 
 box_text "Create namespace $NS if it doesn't exist" 36

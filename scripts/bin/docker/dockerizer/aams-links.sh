@@ -22,7 +22,7 @@ box_text() {
 
 TAG_1="1"
 TAG_2="1"
-TAG_3="5"
+TAG_3="6"
 
 TAG="$TAG_1.$TAG_2.$TAG_3"
 
