@@ -1,21 +1,21 @@
 version: '3.8'
 
 services:
-  portfolio:
-    build:
-      context: ./next-js/portfolio
-      dockerfile: Dockerfile
-    container_name: portfolio
-    ports:
-      - "8001:80"
+  # portfolio:
+  #   build:
+  #     context: ./next-js/portfolio
+  #     dockerfile: Dockerfile
+  #   container_name: portfolio
+  #   ports:
+  #     - "8001:80"
 
-  resume-dev-web:
-    build:
-      context: ./static/resume-dev-web
-      dockerfile: Dockerfile
-    container_name: resume-dev-web
-    ports:
-      - "8002:80"
+  # resume-dev-web:
+  #   build:
+  #     context: ./static/resume-dev-web
+  #     dockerfile: Dockerfile
+  #   container_name: resume-dev-web
+  #   ports:
+  #     - "8002:80"
   
   # react-app-simple:
   #   build:
@@ -25,43 +25,43 @@ services:
   #   ports:
   #     - "8003:80"
   
-  frontend-svc:
-    build:
-      context: ./nodejs/frontend-svc
-      dockerfile: Dockerfile
-    container_name: frontend-svc
-    ports:
-      - "8004:8080"
-  order-svc:
-    build:
-      context: ./nodejs/order-svc
-      dockerfile: Dockerfile
-    container_name: order-svc
-    ports:
-      - "8005:8080"
-  user-svc:
-    build:
-      context: ./nodejs/user-svc
-      dockerfile: Dockerfile
-    container_name: user-svc
-    ports:
-      - "8006:8080"
+  # frontend-svc:
+  #   build:
+  #     context: ./nodejs/frontend-svc
+  #     dockerfile: Dockerfile
+  #   container_name: frontend-svc
+  #   ports:
+  #     - "8004:8080"
+  # order-svc:
+  #   build:
+  #     context: ./nodejs/order-svc
+  #     dockerfile: Dockerfile
+  #   container_name: order-svc
+  #   ports:
+  #     - "8005:8080"
+  # user-svc:
+  #   build:
+  #     context: ./nodejs/user-svc
+  #     dockerfile: Dockerfile
+  #   container_name: user-svc
+  #   ports:
+  #     - "8006:8080"
   
-  ahmedamsoliman-1:
-    build:
-      context: ./nodejs/ahmedamsoliman-1
-      dockerfile: Dockerfile
-    container_name: ahmedamsoliman-1
-    ports:
-      - "8007:8080"
+  # ahmedamsoliman-1:
+  #   build:
+  #     context: ./nodejs/ahmedamsoliman-1
+  #     dockerfile: Dockerfile
+  #   container_name: ahmedamsoliman-1
+  #   ports:
+  #     - "8007:8080"
   
-  flask-1:
-    build:
-      context: ./python/flask/flask_app_1
-      dockerfile: Dockerfile
-    container_name: flask-1
-    ports:
-      - "8008:80"
+  # flask-1:
+  #   build:
+  #     context: ./python/flask/flask_app_1
+  #     dockerfile: Dockerfile
+  #   container_name: flask-1
+  #   ports:
+  #     - "8008:80"
   
   aams-cvviewer-resume-dev:
     build:
@@ -71,45 +71,45 @@ services:
     ports:
       - "8009:3000"
   
-  aams-cvviewer-resume-dataeng:
-    build:
-      context: ./typescript/aams-cvviewer-resume-dataeng
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-dataeng
-    ports:
-      - "8010:3000"
+  # aams-cvviewer-resume-dataeng:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-dataeng
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-dataeng
+  #   ports:
+  #     - "8010:3000"
   
-  aams-cvviewer-resume-devops:
-    build:
-      context: ./typescript/aams-cvviewer-resume-devops
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-devops
-    ports:
-      - "8011:3000"
+  # aams-cvviewer-resume-devops:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-devops
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-devops
+  #   ports:
+  #     - "8011:3000"
 
-  aams-cvviewer-resume-ts:
-    build:
-      context: ./typescript/aams-cvviewer-resume-ts
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-ts
-    ports:
-      - "8012:3000"
+  # aams-cvviewer-resume-ts:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-ts
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-ts
+  #   ports:
+  #     - "8012:3000"
 
-  go-linktree-1:
-    build:
-      context: ./go/linktree
-      dockerfile: Dockerfile
-    container_name: go-linktree-1
-    ports:
-      - "8013:8080"
+  # go-linktree-1:
+  #   build:
+  #     context: ./go/linktree
+  #     dockerfile: Dockerfile
+  #   container_name: go-linktree-1
+  #   ports:
+  #     - "8013:8080"
   
-  aams-links:
-    build:
-      context: ./nodejs/aams-links
-      dockerfile: Dockerfile
-    container_name: aams-links
-    ports:
-      - "8014:8080"
+  # aams-links:
+  #   build:
+  #     context: ./nodejs/aams-links
+  #     dockerfile: Dockerfile
+  #   container_name: aams-links
+  #   ports:
+  #     - "8014:8080"
   
   auth-service:
     image: ahmedalimsolimansd/aams-auth-service:1.0.3
@@ -137,11 +137,3 @@ services:
     environment:
       - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
       - JWT_SECRET=${JWT_SECRET}
-
-  # cpp-web-app-1:
-  #   build:
-  #     context: ./Cpp/cppwebapp1
-  #     dockerfile: Dockerfile
-  #   container_name: cpp-web-app-1
-  #   ports:
-  #     - "8086:8080"
