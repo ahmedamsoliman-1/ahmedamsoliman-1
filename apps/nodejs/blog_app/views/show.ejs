@@ -1,0 +1,41 @@
+<%- include ('partials/header') %>
+
+<div class="ui main text container segment">
+  <div class="ui huge header"><%= cover.title%></div>
+  <div class="ui top attaced">
+    <div class="item">
+      <!-- <img class="ui centered rounded image" src="<%= cover.image%>" /> -->
+      <div class="content">
+        <span> <%= cover.created.toDateString() %> </span>
+      </div>
+      <br />
+      <br />
+      <!-- <div class="description">
+        <p><%- cover.body %></p>
+      </div> -->
+      <textarea rows="40" cols="80" class="description" id="textbox">
+<%- cover.body %>
+      </textarea>
+      <br />
+      <br />
+      <br />
+      <br />
+      <button id="clipboard" onclick="copyText()" class="ui green full button">
+        Copy
+      </button>
+      <a class="ui blue full button" href="/covers/<%= cover._id%>/edit"
+        >Edit</a
+      >
+      <form
+        id="delete"
+        action="/covers/<%= cover._id%>?_method=DELETE"
+        method="POST"
+      >
+        <button class="ui red full button">Delete</button>
+      </form>
+      <a class="ui black full button" href="/">Back</a>
+    </div>
+  </div>
+</div>
+
+<%- include ('partials/footer') %>

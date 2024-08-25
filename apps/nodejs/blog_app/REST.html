@@ -1,0 +1,143 @@
+<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<div class="container">
+	<div class="row">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10">
+			<div class="jumbotron">
+				<h1>RESTful Routes</h1>
+				<p>A table of all 7 RESTful routes </p>
+			</div>
+			<table class="table table-hover table-bordered">
+			<thead>	
+				<tr class="something">
+					<th>Name</th>
+					<th>Path</th>
+					<th>HTTP Verb</th>
+					<th>Purpose</th>
+					<th>Mongoose Method</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="something">
+					<td>Index</td>
+					<td>/dogs</td>
+					<td>GET</td>
+					<td>List all dogs</td>
+					<td>Dog.find()</td>
+				</tr>
+				<tr class="success">
+					<td>New</td>
+					<td>/dogs/new</td>
+					<td>GET</td>
+					<td>Show new dog form</td>
+					<td>N/A</td>
+				</tr>
+				<tr class="success">
+					<td>Create</td>
+					<td>/dogs</td>
+					<td>POST</td>
+					<td>Create a new dog, then redirect somewhere</td>
+					<td>Dog.create()</td>
+				</tr>
+				<tr class="info">
+					<td>Show</td>
+					<td>/dogs/:id</td>
+					<td>GET</td>
+					<td>Show info about one specific dog</td>
+					<td>Dog.findById()</td>
+				</tr>
+				<tr class="warning">
+					<td>Edit</td>
+					<td>/dogs/:id/edit</td>
+					<td>GET</td>
+					<td>Show edit form for one dog</td>
+					<td>Dog.findById()</td>
+				</tr>
+				<tr class="warning">
+					<td>Update</td>
+					<td>/dogs/:id</td>
+					<td>PUT</td>
+					<td>Update particular dog, then redirect somewhere</td>
+					<td>Dog.findByIdAndUpdate()</td>
+				</tr>
+				<tr class="danger">
+					<td>Destroy</td>
+					<td>/dogs/:id</td>
+					<td>DELETE</td>
+					<td>Delete a particular dog, then redirect somewhere</td>
+					<td>Dog.findByIdAndRemove()</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+	</div>	 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 100px;
+      }
+
+      #textbox {
+        width: 40vw;
+        height: 30vh;
+        position: absolute;
+        margin-left: 50px;
+        margin-top: 20px;
+      }
+
+      button {
+        width: 70px;
+        height: 40px;
+        margin-top: 120px;
+        margin-left: 50px;
+        background-color: green;
+        color: white;
+        border-radius: 10px;
+        box-shadow: grey;
+        position: absolute;
+      }
+
+      #sample {
+        width: 70vw;
+        margin: 50px;
+        background-color: green;
+        color: white;
+        padding: 20px;
+        font-size: x-large;
+        position: absolute;
+      }
+
+      h1 {
+        margin-left: 50px;
+        margin-top: 160px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="sample">Geeksforgeeks is best learning platform.</div>
+    <br />
+
+    <button onclick="copyText()">Copy</button>
+    <br />
+
+    <h1>Copied Text:</h1>
+    <br />
+    <textarea id="textbox"></textarea>
+
+    <script>
+      function copyText() {
+        /* Copy text into clipboard */
+        navigator.clipboard.writeText(
+          "Geeksforgeeks is best learning platform."
+        );
+      }
+    </script>
+  </body>
+</html>

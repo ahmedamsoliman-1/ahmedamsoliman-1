@@ -1,0 +1,25 @@
+<%- include ('partials/header') %>
+
+<div class="ui main text container segment">
+  <div class="ui huge header">New cover</div>
+  <form class="ui form" action="/covers" method="POST">
+    <div class="field">
+      <label>Title</label>
+      <input type="text" name="cover[title]" placeholder="title" />
+    </div>
+
+    <div class="field">
+      <label>Image</label>
+      <input type="text" name="cover[image]" placeholder="image" />
+    </div>
+
+    <div class="field">
+      <label>cover content</label>
+      <textarea name="cover[body]"></textarea>
+    </div>
+
+    <input class="ui violet basic button" type="submit" />
+  </form>
+</div>
+
+<%- include ('partials/footer') %>

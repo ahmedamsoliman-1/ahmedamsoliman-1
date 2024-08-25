@@ -1,0 +1,53 @@
+<%- include ('partials/header') %>
+
+<div class="ui main text container">
+  <div class="ui huge header">Cover Letters Application</div>
+  <p class="ui inverted segment">
+    Current covers count: <%= Object.keys(covers).length; %>
+  </p>
+  <div class="ui top segment">
+    <div class="ui divided items">
+      <% covers.forEach(function(cover) { %>
+      <div class="item">
+        <div class="image">
+          <img src="<%= cover.image %>" />
+        </div>
+
+        <div class="content">
+          <a class="header" href="/covers/<%= cover._id%>">
+            <%= cover.title %>
+          </a>
+          <div class="meta">
+            <span> <%= cover.created.toDateString() %> </span>
+          </div>
+          <!-- <div class="desciption">
+          </div> -->
+          <div>
+            <textarea rows="7" cols="66" class="description" id="textbox">
+<%- cover.body %>
+            </textarea>
+          </div>
+          <div class="extra">
+            <a
+              class="ui floated basic violet button"
+              href="/covers/<%= cover._id%>"
+            >
+              Expand
+              <i class="right chevron icon"></i>
+            </a>
+            <!-- <a
+              id="clipboard"
+              class="ui floated basic violet button"
+              onclick="copyText()"
+            >
+              Copy <i class="down chevron icon"></i
+            ></a> -->
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<%- include ('partials/footer') %>

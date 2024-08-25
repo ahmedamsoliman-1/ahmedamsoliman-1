@@ -63,13 +63,13 @@ services:
   #   ports:
   #     - "8008:80"
   
-  aams-cvviewer-resume-dev:
-    build:
-      context: ./typescript/aams-cvviewer-resume-dev
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-dev
-    ports:
-      - "8009:3000"
+  # aams-cvviewer-resume-dev:
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-dev
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-dev
+  #   ports:
+  #     - "8009:3000"
   
   # aams-cvviewer-resume-dataeng:
   #   build:
@@ -111,29 +111,53 @@ services:
   #   ports:
   #     - "8014:8080"
   
-  auth-service:
-    image: ahmedalimsolimansd/aams-auth-service:1.0.3
-    build:
-      context: ./typescript/auth-service
-      dockerfile: Dockerfile
-    container_name: auth-service
-    ports:
-      - "8015:3000"
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - MONGO_URI=${MONGO_URI}
-      - JWT_SECRET=${JWT_SECRET}
+  # auth-service:
+  #   image: ahmedalimsolimansd/aams-auth-service:1.0.3
+  #   build:
+  #     context: ./typescript/auth-service
+  #     dockerfile: Dockerfile
+  #   container_name: auth-service
+  #   ports:
+  #     - "8015:3000"
+  #   environment:
+  #     - NODE_ENV=${NODE_ENV}
+  #     - MONGO_URI=${MONGO_URI}
+  #     - JWT_SECRET=${JWT_SECRET}
   
-  nodejs-ejs-auth:
-    image: ahmedalimsolimansd/aams-nodejs-ejs-auth:1.0.3
+  # nodejs-ejs-auth:
+  #   image: ahmedalimsolimansd/aams-nodejs-ejs-auth:1.0.3
+  #   build:
+  #     context: ./nodejs/nodejs-ejs-auth
+  #     dockerfile: Dockerfile
+  #   container_name: nodejs-ejs-auth
+  #   depends_on:
+  #     - auth-service
+  #   ports:
+  #     - "8016:4000"
+  #   environment:
+  #     - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
+  #     - JWT_SECRET=${JWT_SECRET}
+
+  blog-app-cover-letter:
     build:
-      context: ./nodejs/nodejs-ejs-auth
+      context: ./nodejs/blog_app
       dockerfile: Dockerfile
-    container_name: nodejs-ejs-auth
-    depends_on:
-      - auth-service
+    container_name: blog-app-cover-letter
     ports:
-      - "8016:4000"
-    environment:
-      - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
-      - JWT_SECRET=${JWT_SECRET}
+      - "8017:3000"
+
+  aams-fgallery:
+    build:
+      context: ./static/aams-fgallery
+      dockerfile: Dockerfile
+    container_name: aams-fgallery
+    ports:
+      - "8018:80"
+      
+  aams-rgb-color-game:
+    build:
+      context: ./static/aams-rgb-color-game
+      dockerfile: Dockerfile
+    container_name: aams-rgb-color-game
+    ports:
+      - "8019:80"
