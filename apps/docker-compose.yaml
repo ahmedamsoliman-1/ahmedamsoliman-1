@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   portfolio:
+    image: ${DOCKER_ID}/portfolio:${IMAGE_TAG}
     build:
       context: ./next-js/portfolio
       dockerfile: Dockerfile
@@ -10,6 +11,7 @@ services:
       - "8001:80"
 
   resume-dev-web:
+    image: ${DOCKER_ID}/resumresume-dev-web:${IMAGE_TAG}
     build:
       context: ./static/resume-dev-web
       dockerfile: Dockerfile
@@ -18,6 +20,7 @@ services:
       - "8002:80"
   
   react-app-simple:
+    image: ${DOCKER_ID}/reacreact-app-simple:${IMAGE_TAG}
     build:
       context: ./react/react-app-simple
       dockerfile: Dockerfile
@@ -26,6 +29,7 @@ services:
       - "8003:80"
   
   frontend-svc:
+    image: ${DOCKER_ID}/frontend-svc:${IMAGE_TAG}
     build:
       context: ./nodejs/frontend-svc
       dockerfile: Dockerfile
@@ -33,6 +37,7 @@ services:
     ports:
       - "8004:8080"
   order-svc:
+    image: ${DOCKER_ID}/order-svc:${IMAGE_TAG}
     build:
       context: ./nodejs/order-svc
       dockerfile: Dockerfile
@@ -40,6 +45,7 @@ services:
     ports:
       - "8005:8080"
   user-svc:
+    image: ${DOCKER_ID}/user-svc:${IMAGE_TAG}
     build:
       context: ./nodejs/user-svc
       dockerfile: Dockerfile
@@ -48,6 +54,7 @@ services:
       - "8006:8080"
   
   ahmedamsoliman-1:
+    image: ${DOCKER_ID}/ahmedamsoliman-1:${IMAGE_TAG}
     build:
       context: ./nodejs/ahmedamsoliman-1
       dockerfile: Dockerfile
@@ -56,6 +63,7 @@ services:
       - "8007:8080"
   
   flask-1:
+    image: ${DOCKER_ID}/flask-1:${IMAGE_TAG}
     build:
       context: ./python/flask/flask_app_1
       dockerfile: Dockerfile
@@ -64,6 +72,7 @@ services:
       - "8008:80"
   
   aams-cvviewer-resume-dev:
+    image: ${DOCKER_ID}/aams-cvviewer-resume-dev:${IMAGE_TAG}
     build:
       context: ./typescript/aams-cvviewer-resume-dev
       dockerfile: Dockerfile
@@ -72,6 +81,7 @@ services:
       - "8009:3000"
   
   aams-cvviewer-resume-dataeng:
+    image: ${DOCKER_ID}/aams-cvviewer-resume-dataeng:${IMAGE_TAG}
     build:
       context: ./typescript/aams-cvviewer-resume-dataeng
       dockerfile: Dockerfile
@@ -80,6 +90,7 @@ services:
       - "8010:3000"
   
   aams-cvviewer-resume-devops:
+    image: ${DOCKER_ID}/aams-cvviewer-resume-devops:${IMAGE_TAG}
     build:
       context: ./typescript/aams-cvviewer-resume-devops
       dockerfile: Dockerfile
@@ -88,6 +99,7 @@ services:
       - "8011:3000"
 
   aams-cvviewer-resume-ts:
+    image: ${DOCKER_ID}/aams-cvviewer-resume-ts:${IMAGE_TAG}
     build:
       context: ./typescript/aams-cvviewer-resume-ts
       dockerfile: Dockerfile
@@ -96,6 +108,7 @@ services:
       - "8012:3000"
 
   go-linktree-1:
+    image: ${DOCKER_ID}/go-linktree-1:${IMAGE_TAG}
     build:
       context: ./go/linktree
       dockerfile: Dockerfile
@@ -104,6 +117,7 @@ services:
       - "8013:8080"
   
   aams-links:
+    image: ${DOCKER_ID}/aams-links:${IMAGE_TAG}
     build:
       context: ./nodejs/aams-links
       dockerfile: Dockerfile
@@ -112,7 +126,7 @@ services:
       - "8014:8080"
   
   auth-service:
-    image: ahmedalimsolimansd/aams-auth-service:1.0.3
+    image: ${DOCKER_ID}/aamauth-service:${IMAGE_TAG}
     build:
       context: ./typescript/auth-service
       dockerfile: Dockerfile
@@ -125,7 +139,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
   
   nodejs-ejs-auth:
-    image: ahmedalimsolimansd/aams-nodejs-ejs-auth:1.0.3
+    image: ${DOCKER_ID}/aams-nodejnodejs-ejs-auth:${IMAGE_TAG}
     build:
       context: ./nodejs/nodejs-ejs-auth
       dockerfile: Dockerfile
@@ -138,15 +152,17 @@ services:
       - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
       - JWT_SECRET=${JWT_SECRET}
 
-  blog-app-cover-letter:
+  blog_app:
+    image: ${DOCKER_ID}/blog_app:${IMAGE_TAG}
     build:
       context: ./nodejs/blog_app
       dockerfile: Dockerfile
-    container_name: blog-app-cover-letter
+    container_name: blog_app
     ports:
       - "8017:3000"
 
   aams-fgallery:
+    image: ${DOCKER_ID}/aams-fgallery:${IMAGE_TAG}
     build:
       context: ./static/aams-fgallery
       dockerfile: Dockerfile
@@ -155,9 +171,28 @@ services:
       - "8018:80"
       
   aams-rgb-color-game:
+    image: ${DOCKER_ID}/aams-rgb-color-game:${IMAGE_TAG}
     build:
       context: ./static/aams-rgb-color-game
       dockerfile: Dockerfile
     container_name: aams-rgb-color-game
     ports:
       - "8019:80"
+  
+  aams-aws-resource-viewer:
+    image: ${DOCKER_ID}/aams-aws-resource-viewer:${IMAGE_TAG}
+    build:
+      context: ./react/aams-aws-resource-viewer
+      dockerfile: Dockerfile
+    container_name: aams-aws-resource-viewer
+    ports:
+      - "8020:80"
+  
+  aams-linktree-react:
+    image: ${DOCKER_ID}/aams-linktree-react:${IMAGE_TAG}
+    build:
+      context: ./react/aams-linktree-react
+      dockerfile: Dockerfile
+    container_name: aams-linktree-react
+    ports:
+      - "8021:80"

@@ -1,26 +1,30 @@
 #!/bin/bash
 
 DOCKERHUB_ID=ahmedalimsolimansd
-DOCKER_TAG=1.0.2
+DOCKER_TAG=1.1.6
 
 IMAGES=(
-  "aams-frontend-svc"
-  "aams-user-svc"
-  "aams-order-svc"
-  "aams-personal-cloud"
-  "aams-node-templates"
-  "aams-resume-data-eng-pdf"
-  "aams-resume-dev-pdf"
-  # "aams-resume-devops-pdf"
-  # "aams-resume-ts-pdf"
-  "aams-resume-dev-web"
-  "aams-portfolio"
-  "aams-ahmedamsoliman-1"
-  "aams-aams-cvviewer-resume-dev"
-  "aams-aams-cvviewer-resume-devops"
-  "aams-aams-cvviewer-resume-ts"
-  "aams-aams-cvviewer-resume-dataeng"
-  "aams-flask-1"
+  "portfolio"
+  "resume-dev-web"
+  "react-app-simple"
+  "frontend-svc"
+  "order-svc"
+  "user-svc"
+  "ahmedamsoliman-1"
+  "flask-1"
+  "aams-cvviewer-resume-dev"
+  "aams-cvviewer-resume-dataeng"
+  "aams-cvviewer-resume-devops"
+  "aams-cvviewer-resume-ts"
+  "go-linktree-1"
+  "aams-links"
+  "auth-service"
+  "nodejs-ejs-auth"
+  "blog_app"
+  "aams-fgallery"
+  "aams-rgb-color-game"
+  "aams-aws-resource-viewer"
+  "aams-linktree-react"
 )
 
 function box_text {
