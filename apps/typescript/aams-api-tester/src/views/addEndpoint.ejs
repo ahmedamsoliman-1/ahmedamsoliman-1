@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Endpoint</title>
+</head>
+<body>
+  <h1>Add a New Endpoint</h1>
+  <form action="/test-endpoint" method="post">
+    <label for="url">URL:</label>
+    <input type="text" id="url" name="url" required><br>
+    <label for="method">Method:</label>
+    <select id="method" name="method">
+      <option value="GET">GET</option>
+      <option value="POST">POST</option>
+      <!-- Add other methods as needed -->
+    </select><br>
+    <label for="headers">Headers (JSON format):</label>
+    <textarea id="headers" name="headers"></textarea><br>
+    <label for="body">Body (for POST/PUT, JSON format):</label>
+    <textarea id="body" name="body"></textarea><br>
+    <button type="submit">Test Endpoint</button>
+  </form>
+</body>
+</html>

@@ -1,2 +1,6 @@
 newrelic-nodejs-app
 newrelic-svc
+e2e
+app3
+dist
+elasticsearchConfig.ts

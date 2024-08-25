@@ -1,0 +1,82 @@
+<%- include ('../partials/header') %>
+
+
+<div class="jumbotron">
+    <h1>AAMS</h1>
+    <h2>AAMS Cloud</h2>
+</div>
+
+
+
+    
+ 
+
+<div class="container">
+  <h2 class="mb-4">Card Links</h2>
+  
+  <% Object.keys(categorizedCards).forEach(category => { %>
+      <h3><%= category %></h3>
+      <div class="row mb-4">
+          <% categorizedCards[category].forEach(card => { %>
+              <div class="col-md-3 mb-4">
+                  <div class="card h-100 <%= card.status === 'up' ? 'bg-success' : 'bg-danger' %>" style="color: white;">
+                      <img src="<%= card.image %>" class="card-img-top" alt="<%= card.title %>">
+                      <div class="card-body">
+                          <h5 class="card-title"><%= card.title %></h5>
+                          <p class="card-text"><%= card.description %></p>
+                          <a href="<%= card.link %>" class="btn btn-light" target="_blank">Visit</a>
+                          <form action="/delete/<%= card._id %>" method="POST" class="d-inline">
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal<%= card._id %>">
+                              Edit
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Edit Modal -->
+              <div class="modal fade" id="editModal<%= card._id %>" tabindex="-1" aria-labelledby="editModalLabel<%= card._id %>" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="editModalLabel<%= card._id %>">Edit Card</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <form action="/update/<%= card._id %>" method="POST">
+                              <div class="modal-body">
+                                  <div class="form-group">
+                                      <input type="text" name="title" class="form-control" placeholder="Title" value="<%= card.title %>" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" name="description" class="form-control" placeholder="Description" value="<%= card.description %>" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" name="image" class="form-control" placeholder="Image URL" value="<%= card.image %>" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" name="link" class="form-control" placeholder="Link URL" value="<%= card.link %>" required>
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" name="category" class="form-control" placeholder="Category" value="<%= card.category %>" required>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          <% }); %>
+      </div>
+  <% }); %>
+</div>
+
+
+
+<%- include ('../partials/footer') %>
+

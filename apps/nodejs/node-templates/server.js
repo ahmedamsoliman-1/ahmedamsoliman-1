@@ -147,6 +147,7 @@ app.use(gcpRoutes);
 
 // const k8 = require("./routes/k8/k8");
 const compose = require("./routes/compose");
+const running_apps = require("./routes/apps/apps");
 const ports = require("./routes/ports");
 const external = require('./routes/external');
 const scraping = require('./routes/scraping');
@@ -156,6 +157,7 @@ const { azure } = require('./SVGs');
 
 // app.use(k8);
 app.use(compose);
+app.use(running_apps);
 app.use(ports);
 app.use(external);
 app.use(scraping);

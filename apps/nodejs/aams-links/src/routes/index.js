@@ -7,6 +7,7 @@ const Card = require('../models/Card');
 // List all cards, grouped by category
 router.get('/', ll.ensureAuthenticated ,ll.ensureAuthenticatedIsMe, async (req, res) => {
   const cards = await Card.find();
+  console.log(cards)
   const cardStatuses = await Promise.all(cards.map(async (card) => {
     try {
       const response = await axios.get(card.link);

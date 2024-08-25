@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Results</title>
+</head>
+<body>
+  <h1>Test Results</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Status Code</th>
+        <th>Response Time (ms)</th>
+        <th>Response</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% results.forEach(function(result) { %>
+        <tr>
+          <td><%= result.endpoint %></td>
+          <td><%= result.statusCode %></td>
+          <td><%= result.responseTime %></td>
+          <td><%= JSON.stringify(result.responseBody) %></td>
+          <td><%= result.timestamp %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
