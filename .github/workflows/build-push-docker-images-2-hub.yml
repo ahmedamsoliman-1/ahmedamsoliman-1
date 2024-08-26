@@ -13,35 +13,101 @@ env:
   LATEST_TAG: '1.0.4'
 
 jobs:
-  build-docker-images-push-hub:
+  nodejs-build-docker-images-push-hub:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         app: 
-          # - name: aams-links
-          #   path: ./apps/nodejs/aams-links
-          #   image_name: aams-links
-          # - name: blog_app
-          #   path: ./apps/nodejs/blog_app
-          #   image_name: blog_app
-          # - name: ejs-auth-svc
-          #   path: ./apps/nodejs/nodejs-ejs-auth
-          #   image_name: aams-nodejs-ejs-auth
+          - name: aams-links
+            path: ./apps/nodejs/aams-links
+            image_name: aams-links
+          - name: blog_app
+            path: ./apps/nodejs/blog_app
+            image_name: blog_app
+          - name: ejs-auth-svc
+            path: ./apps/nodejs/nodejs-ejs-auth
+            image_name: aams-nodejs-ejs-auth
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image - ${{ matrix.app.image_name }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
+          mkdir -p output
+          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
+
+  typescript-build-docker-images-push-hub:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: 
           - name: dev-cv
             path: ./apps/typescript/aams-cvviewer-resume-dev
             image_name: aams-aams-cvviewer-resume-dev
-          # - name: devops-cv
-          #   path: ./apps/typescript/aams-cvviewer-resume-devops
-          #   image_name: aams-aams-cvviewer-resume-devops
-          # - name: ts-cv
-          #   path: ./apps/typescript/aams-cvviewer-resume-ts
-          #   image_name: aams-aams-cvviewer-resume-ts
-          # - name: dataeng-cv
-          #   path: ./apps/typescript/aams-cvviewer-resume-dataeng
-          #   image_name: aams-aams-cvviewer-resume-dataeng
-          # - name: auth-svc
-          #   path: ./apps/typescript/auth-service
-          #   image_name: aams-auth-service
+          - name: devops-cv
+            path: ./apps/typescript/aams-cvviewer-resume-devops
+            image_name: aams-aams-cvviewer-resume-devops
+          - name: ts-cv
+            path: ./apps/typescript/aams-cvviewer-resume-ts
+            image_name: aams-aams-cvviewer-resume-ts
+          - name: dataeng-cv
+            path: ./apps/typescript/aams-cvviewer-resume-dataeng
+            image_name: aams-aams-cvviewer-resume-dataeng
+          - name: auth-svc
+            path: ./apps/typescript/auth-service
+            image_name: aams-auth-service
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image - ${{ matrix.app.image_name }}
+        if: success()
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
+          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
+          mkdir -p output
+          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
+  
+  static-build-docker-images-push-hub:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: 
+          - name: aams-fgallery
+            path: ./apps/static/aams-fgallery
+            image_name: aams-fgallery
+          - name: aams-rgb-color-game
+            path: ./apps/static/aams-rgb-color-game
+            image_name: aams-rgb-color-game
+          - name: resume-dev-web
+            path: ./apps/static/resume-dev-web
+            image_name: resume-dev-web
+          - name: resume-dev-web2
+            path: ./apps/static/resume-dev-web2
+            image_name: resume-dev-web2
 
     steps:
       - name: Checkout code
