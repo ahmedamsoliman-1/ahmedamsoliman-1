@@ -43,35 +43,35 @@ jobs:
           mkdir -p output
           echo $IMAGE > output/${{ matrix.app.image_name }}.txt
 
-  dotnet-build-docker-images-push-hub:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: 
-          - name: aams-dotnet-web-app-1
-            path: ./apps/dotnet/aams-dotnet-web-app-1
-            image_name: aams-dotnet-web-app-1
+  # dotnet-build-docker-images-push-hub:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       app: 
+  #         - name: aams-dotnet-web-app-1
+  #           path: ./apps/dotnet/aams-dotnet-web-app-1
+  #           image_name: aams-dotnet-web-app-1
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v3
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image - ${{ matrix.app.image_name }}
-        if: success()
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-          mkdir -p output
-          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
+  #     - name: Build and push Docker image - ${{ matrix.app.image_name }}
+  #       if: success()
+  #       run: |
+  #         IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
+  #         docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
+  #         mkdir -p output
+  #         echo $IMAGE > output/${{ matrix.app.image_name }}.txt
 
   python-build-docker-images-push-hub:
     runs-on: ubuntu-latest
@@ -139,41 +139,41 @@ jobs:
           mkdir -p output
           echo $IMAGE > output/${{ matrix.app.image_name }}.txt
 
-  react-build-docker-images-push-hub:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: 
-          - name: resource-viewer
-            path: ./apps/react/aams-aws-resource-viewer
-            image_name: aams-aws-resource-viewer
-          - name: linktree-react
-            path: ./apps/react/aams-linktree-react
-            image_name: aams-linktree-react
-          - name: react-simple
-            path: ./apps/react/react-app-simple
-            image_name: react-app-simple
+  # react-build-docker-images-push-hub:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       app: 
+  #         - name: resource-viewer
+  #           path: ./apps/react/aams-aws-resource-viewer
+  #           image_name: aams-aws-resource-viewer
+  #         - name: linktree-react
+  #           path: ./apps/react/aams-linktree-react
+  #           image_name: aams-linktree-react
+  #         - name: react-simple
+  #           path: ./apps/react/react-app-simple
+  #           image_name: react-app-simple
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v3
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image - ${{ matrix.app.image_name }}
-        if: success()
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-          mkdir -p output
-          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
+  #     - name: Build and push Docker image - ${{ matrix.app.image_name }}
+  #       if: success()
+  #       run: |
+  #         IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
+  #         docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
+  #         mkdir -p output
+  #         echo $IMAGE > output/${{ matrix.app.image_name }}.txt
     
   typescript-build-docker-images-push-hub:
     runs-on: ubuntu-latest
