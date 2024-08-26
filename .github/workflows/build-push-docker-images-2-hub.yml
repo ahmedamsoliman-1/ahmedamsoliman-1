@@ -10,7 +10,7 @@ on:
 
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
-  LATEST_TAG: '1.0.3'
+  LATEST_TAG: '1.0.4'
 
 jobs:
   build-docker-images-push-hub:
@@ -18,27 +18,27 @@ jobs:
     strategy:
       matrix:
         app: 
-          - name: aams-links
-            path: ./apps/nodejs/aams-links
-            image_name: aams-links
-          - name: blog_app
-            path: ./apps/nodejs/blog_app
-            image_name: blog_app
-          - name: ejs-auth-svc
-            path: ./apps/nodejs/nodejs-ejs-auth
-            image_name: aams-nodejs-ejs-auth
-          - name: dev-cv
-            path: ./apps/typescript/aams-cvviewer-resume-dev
-            image_name: aams-aams-cvviewer-resume-dev
-          - name: devops-cv
-            path: ./apps/typescript/aams-cvviewer-resume-devops
-            image_name: aams-aams-cvviewer-resume-devops
-          - name: ts-cv
-            path: ./apps/typescript/aams-cvviewer-resume-ts
-            image_name: aams-aams-cvviewer-resume-ts
-          - name: dataeng-cv
-            path: ./apps/typescript/aams-cvviewer-resume-dataeng
-            image_name: aams-aams-cvviewer-resume-dataeng
+          # - name: aams-links
+          #   path: ./apps/nodejs/aams-links
+          #   image_name: aams-links
+          # - name: blog_app
+          #   path: ./apps/nodejs/blog_app
+          #   image_name: blog_app
+          # - name: ejs-auth-svc
+          #   path: ./apps/nodejs/nodejs-ejs-auth
+          #   image_name: aams-nodejs-ejs-auth
+          # - name: dev-cv
+          #   path: ./apps/typescript/aams-cvviewer-resume-dev
+          #   image_name: aams-aams-cvviewer-resume-dev
+          # - name: devops-cv
+          #   path: ./apps/typescript/aams-cvviewer-resume-devops
+          #   image_name: aams-aams-cvviewer-resume-devops
+          # - name: ts-cv
+          #   path: ./apps/typescript/aams-cvviewer-resume-ts
+          #   image_name: aams-aams-cvviewer-resume-ts
+          # - name: dataeng-cv
+          #   path: ./apps/typescript/aams-cvviewer-resume-dataeng
+          #   image_name: aams-aams-cvviewer-resume-dataeng
           - name: auth-svc
             path: ./apps/typescript/auth-service
             image_name: aams-auth-service
@@ -56,10 +56,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies
-        run: |
-          cd ${{ matrix.app.path }}
-          npm install
+      # - name: Install dependencies
+      #   run: |
+      #     cd ${{ matrix.app.path }}
+      #     npm install
 
       - name: Build and push Docker image - ${{ matrix.app.image_name }}
         if: success()
