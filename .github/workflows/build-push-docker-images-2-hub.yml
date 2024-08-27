@@ -10,7 +10,7 @@ on:
 
 env:
   ALL_PLATFORMS: linux/amd64,linux/arm64
-  LATEST_TAG: '1.0.4'
+  LATEST_TAG: '1.2.4'
 
 jobs:
   typescript-build-docker-images-push-hub:
