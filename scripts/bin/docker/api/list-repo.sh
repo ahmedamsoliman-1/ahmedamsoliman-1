@@ -27,4 +27,5 @@ list_docker_hub_repos() {
   done
 }
 
-list_docker_hub_repos
+# Redirect output to a file
+list_docker_hub_repos > $$HOME/workspace/ahmed/ahmedamsoliman-1/scripts/bin/docker/api/list-repo.txt
