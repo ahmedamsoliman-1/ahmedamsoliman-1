@@ -3,7 +3,7 @@ name: 'Build CV Docker Images 2 Hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
@@ -13,101 +13,15 @@ env:
   LATEST_TAG: '1.0.4'
 
 jobs:
-  go-build-docker-images-push-hub:
+  typescript-build-docker-images-push-hub:
     runs-on: ubuntu-latest
+    env: 
+      NODE: "aams-links"
     strategy:
       matrix:
+
         app: 
-          - name: aams-go-linktree
-            path: ./apps/go/aams-glinktree
-            image_name: aams-glinktree
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image - ${{ matrix.app.image_name }}
-        if: success()
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-          mkdir -p output
-          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
-
-  # dotnet-build-docker-images-push-hub:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       app: 
-  #         - name: aams-dotnet-web-app-1
-  #           path: ./apps/dotnet/aams-dotnet-web-app-1
-  #           image_name: aams-dotnet-web-app-1
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v3
-
-  #     - name: Log in to Docker Hub
-  #       uses: docker/login-action@v3
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
-
-  #     - name: Build and push Docker image - ${{ matrix.app.image_name }}
-  #       if: success()
-  #       run: |
-  #         IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-  #         docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-  #         mkdir -p output
-  #         echo $IMAGE > output/${{ matrix.app.image_name }}.txt
-
-  python-build-docker-images-push-hub:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: 
-          - name: flask-app-1
-            path: ./apps/python/flask/flask-app-1
-            image_name: flask-app-1
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image - ${{ matrix.app.image_name }}
-        if: success()
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-          mkdir -p output
-          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
-
-  nodejs-build-docker-images-push-hub:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: 
+          
           - name: aams-links
             path: ./apps/nodejs/aams-links
             image_name: aams-links
@@ -117,69 +31,6 @@ jobs:
           - name: ejs-auth-svc
             path: ./apps/nodejs/nodejs-ejs-auth
             image_name: aams-nodejs-ejs-auth
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image - ${{ matrix.app.image_name }}
-        if: success()
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-          mkdir -p output
-          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
-
-  # react-build-docker-images-push-hub:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       app: 
-  #         - name: resource-viewer
-  #           path: ./apps/react/aams-aws-resource-viewer
-  #           image_name: aams-aws-resource-viewer
-  #         - name: linktree-react
-  #           path: ./apps/react/aams-linktree-react
-  #           image_name: aams-linktree-react
-  #         - name: react-simple
-  #           path: ./apps/react/react-app-simple
-  #           image_name: react-app-simple
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v3
-
-  #     - name: Log in to Docker Hub
-  #       uses: docker/login-action@v3
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
-
-  #     - name: Build and push Docker image - ${{ matrix.app.image_name }}
-  #       if: success()
-  #       run: |
-  #         IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-  #         docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-  #         mkdir -p output
-  #         echo $IMAGE > output/${{ matrix.app.image_name }}.txt
-    
-  typescript-build-docker-images-push-hub:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: 
           - name: dev-cv
             path: ./apps/typescript/aams-cvviewer-resume-dev
             image_name: aams-aams-cvviewer-resume-dev
@@ -195,33 +46,9 @@ jobs:
           - name: auth-svc
             path: ./apps/typescript/auth-service
             image_name: aams-auth-service
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image - ${{ matrix.app.image_name }}
-        if: success()
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/${{ matrix.app.image_name }}:${{ env.LATEST_TAG }}
-          docker buildx build --platform ${{ env.ALL_PLATFORMS }} -t $IMAGE --push ${{ matrix.app.path }}
-          mkdir -p output
-          echo $IMAGE > output/${{ matrix.app.image_name }}.txt
-  
-  static-build-docker-images-push-hub:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        app: 
+          - name: aams-go-linktree
+            path: ./apps/go/aams-glinktree
+            image_name: aams-glinktree
           - name: aams-fgallery
             path: ./apps/static/aams-fgallery
             image_name: aams-fgallery
@@ -234,6 +61,22 @@ jobs:
           - name: resume-dev-web2
             path: ./apps/static/resume-dev-web2
             image_name: resume-dev-web2
+          - name: flask-app-1
+            path: ./apps/python/flask/flask-app-1
+            image_name: flask-app-1
+
+          # - name: aams-dotnet-web-app-1
+          #   path: ./apps/dotnet/aams-dotnet-web-app-1
+          #   image_name: aams-dotnet-web-app-1
+          # - name: resource-viewer
+          #   path: ./apps/react/aams-aws-resource-viewer
+          #   image_name: aams-aws-resource-viewer
+          # - name: linktree-react
+          #   path: ./apps/react/aams-linktree-react
+          #   image_name: aams-linktree-react
+          # - name: react-simple
+          #   path: ./apps/react/react-app-simple
+          #   image_name: react-app-simple
 
     steps:
       - name: Checkout code
