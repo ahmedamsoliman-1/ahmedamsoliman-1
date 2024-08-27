@@ -3,7 +3,7 @@ name: 'Build CV Docker Images 2 Hub'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
       - master
