@@ -62,12 +62,12 @@ services:
     ports:
       - "8007:8080"
   
-  flask-1:
+  flask-app-1:
     image: ${DOCKER_ID}/flask-1:${IMAGE_TAG}
     build:
-      context: ./python/flask/flask_app_1
+      context: ./python/flask/flask-app-1
       dockerfile: Dockerfile
-    container_name: flask-1
+    container_name: flask-app-1
     ports:
       - "8008:80"
   
@@ -107,12 +107,12 @@ services:
     ports:
       - "8012:3000"
 
-  go-linktree-1:
-    image: ${DOCKER_ID}/go-linktree-1:${IMAGE_TAG}
+  aams-glinktree:
+    image: ${DOCKER_ID}/aams-glinktree:${IMAGE_TAG}
     build:
-      context: ./go/linktree
+      context: ./go/aams-glinktree
       dockerfile: Dockerfile
-    container_name: go-linktree-1
+    container_name: aams-glinktree
     ports:
       - "8013:8080"
   
