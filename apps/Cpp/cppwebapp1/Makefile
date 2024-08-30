@@ -1,6 +1,6 @@
 # Variables
 CXX = g++
-CXXFLAGS = -std=c++14 -I../external/Crow/include -I../external/asio/asio/include -pthread
+CXXFLAGS = -std=c++14 -I../cpp_external/Crow/include -I../cpp_external/asio/asio/include -pthread
 SRC_DIR = src
 BUILD_DIR = build
 TARGET = cppwebapp1

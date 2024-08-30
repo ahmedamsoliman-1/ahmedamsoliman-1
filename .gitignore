@@ -142,7 +142,7 @@ comaamsdngcp*.json
 
 
 
-
+*.zip
 
 
 # DOCKER
@@ -171,3 +171,5 @@ kube
 task-svc
 auth-ts
 profile-ts-svc
+
+port_forward_conf.json

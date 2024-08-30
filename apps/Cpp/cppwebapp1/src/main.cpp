@@ -7,7 +7,7 @@ int main()
     // Define a route for the root URL "/"
     CROW_ROUTE(app, "/")
     ([](){
-        return "Hello, World!";
+        return "Hello, World! C++";
     });
 
     // Run the app on port 8080

@@ -1,0 +1,65 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "astra_db",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/python/pure/astra_db/main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true,
+            "args": []
+        },
+        {
+            "name": "chainlit_app_2",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/python/chainlit/chainlit_app_2/app.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true,
+            "args": []
+        },
+        {
+            "name": "flask-app-1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/python/flask/flask-app-1/main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true,
+            "args": []
+        },
+        {
+            "name": "blog_app",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/blog_app/app.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/blog_app"
+        },
+        {
+            "name": "aams-links",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/aams-links/src/app.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/aams-links"
+        },
+        {
+            "name": "personal-cloud",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/personal-cloud/app.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/personal-cloud"
+        }
+    ]
+}

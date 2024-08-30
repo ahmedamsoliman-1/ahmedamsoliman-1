@@ -1,0 +1,191 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-elasticsearch-deployment
+  labels:
+    app: flask-elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-elasticsearch
+  template:
+    metadata:
+      labels:
+        app: flask-elasticsearch
+    spec:
+      containers:
+      - name: flask-elasticsearch
+        image: 10.10.25.207:5000/flask2:1.1.5
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1024Mi
+          limits:
+            cpu: 2000m
+            memory: 2048Mi
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ES_USERNAME
+          value: "ahmed"
+        - name: ES_PASSWORD
+          value: "SolimanRW$12s0"
+        - name: ES_CERT
+          value: "/etc/certs/avrioc.iobundle.crt"
+        - name: ES_HOST
+          value: "ai-es01-dev.avrioc.io"
+        volumeMounts:
+        - name: cert-volume
+          mountPath: /etc/certs
+      volumes:
+      - name: cert-volume
+        secret:
+          secretName: es-avrioc-io-certificate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-elasticsearch-service
+  labels:
+    app: flask-elasticsearch
+spec:
+  type: ClusterIP # Use ClusterIP for internal access
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: flask-elasticsearch
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flask-elasticsearch-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ai-vega.avrioc.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: flask-elasticsearch-service
+            port:
+              number: 80
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: flask-elasticsearch-deployment
+#   labels:
+#     app: flask-elasticsearch
+# spec:
+#   replicas: 3 # Number of replicas you want to run
+#   selector:
+#     matchLabels:
+#       app: flask-elasticsearch
+#   template:
+#     metadata:
+#       labels:
+#         app: flask-elasticsearch
+#     spec:
+#       containers:
+#       - name: flask-elasticsearch
+#         image: ahmedalimsolimansd/aams-flask-app-2:1.1.4
+#         resources:
+#           requests:
+#             cpu: 1000m
+#             memory: 1024Mi
+#           limits:
+#             cpu: 2000m
+#             memory: 2048Mi
+#         ports:
+#         - containerPort: 5000
+#         env:
+#         - name: ES_USERNAME
+#           value: "ahmed"
+#         - name: ES_PASSWORD
+#           value: "SolimanRW$12s0"
+#         - name: ES_CERT
+#           value: "/path/to/certificates/avrioc.iobundle.crt" # Update path as needed
+#         - name: ES_HOST
+#           value: "ai-es01-dev.avrioc.io"
+#         volumeMounts:
+#         - name: cert-volume
+#           mountPath: /path/to/certificates # Update mount path as needed
+#       volumes:
+#       - name: cert-volume
+#         hostPath:
+#           path: /Users/ahmed.soliman/workspace/cs2/certs
+#           type: Directory
+
+
+#           # apiVersion: apps/v1
+# # kind: Deployment
+# # metadata:
+# #   name: flask-app-deployment
+# #   labels:
+# #     app: flask-app
+# # spec:
+# #   replicas: 1
+# #   selector:
+# #     matchLabels:
+# #       app: flask-app
+# #   template:
+# #     metadata:
+# #       labels:
+# #         app: flask-app
+# #     spec:
+# #       containers:
+# #       - name: flask-app
+# #         image: ahmedalimsolimansd/aams-flask-app-2:1.1.4
+# #         resources:
+# #           requests:
+# #             cpu: 1000m
+# #             memory: 1024Mi
+# #           limits:
+# #             cpu: 2000m
+# #             memory: 2048Mi
+# #         ports:
+# #         - containerPort: 5000
+# #         env:
+# #         - name: ES_HOST
+# #           value: ai-es01-dev.avrioc.io
+# #         - name: ES_USERNAME
+# #           valueFrom:
+# #             secretKeyRef:
+# #               name: es-secrets
+# #               key: ES_USERNAME
+# #         - name: ES_PASSWORD
+# #           valueFrom:
+# #             secretKeyRef:
+# #               name: es-secrets
+# #               key: ES_PASSWORD
+# #         - name: ES_CERT
+# #           valueFrom:
+# #             secretKeyRef:
+# #               name: es-secrets
+# #               key: ES_CERT
+# #         volumeMounts:
+# #         - name: es-cert-volume
+# #           mountPath: /app/certs
+# #           readOnly: true
+# #       volumes:
+# #       - name: es-cert-volume
+# #         secret:
+# #           secretName: es-secrets
+# # ---
+# # apiVersion: v1
+# # kind: Service
+# # metadata:
+# #   name: flask-app-service
+# # spec:
+# #   type: LoadBalancer
+# #   ports:
+# #   - port: 80
+# #     targetPort: 5000
+# #   selector:
+# #     app: flask-app

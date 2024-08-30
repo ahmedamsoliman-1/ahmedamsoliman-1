@@ -4,3 +4,5 @@ e2e
 app3
 dist
 elasticsearchConfig.ts
+
+datastax.py

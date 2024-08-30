@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the include directories
-include_directories(../external/Crow/include)
-include_directories(../external/asio/asio/include)
+include_directories(../cpp_external/Crow/include)
+include_directories(../cpp_external/asio/asio/include)
 
 # Add the source files
 set(SOURCES src/main.cpp)
