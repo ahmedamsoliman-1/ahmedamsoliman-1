@@ -60,6 +60,16 @@
             ],
             "program": "${workspaceFolder}/apps/nodejs/personal-cloud/app.js",
             "cwd": "${workspaceFolder}/apps/nodejs/personal-cloud"
+        },
+        {
+            "name": "not-found",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/not-found/app.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/not-found"
         }
     ]
 }

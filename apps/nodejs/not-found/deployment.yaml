@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: not-found
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: not-found-app
+  namespace: not-found
+  labels:
+    app: not-found
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: not-found
+  template:
+    metadata:
+      labels:
+        app: not-found
+    spec:
+      containers:
+      - name: not-found-container
+        image: image
+        ports:
+        - containerPort: 3009
+        env:
+        - name: NODE_PORT
+          value: "3009"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: not-found-service
+  namespace: not-found
+  labels:
+    app: not-found
+spec:
+  type: ClusterIP
+  selector:
+    app: not-found
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3009
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: not-found-ingress
+  namespace: not-found
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: host
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: not-found-service
+            port:
+              number: 80

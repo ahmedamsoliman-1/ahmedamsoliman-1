@@ -1,198 +1,207 @@
 version: '3.8'
 
 services:
-  portfolio:
-    image: ${DOCKER_ID}/portfolio:${IMAGE_TAG}
-    build:
-      context: ./next-js/portfolio
-      dockerfile: Dockerfile
-    container_name: portfolio
-    ports:
-      - "8001:80"
+  # portfolio:
+  #   image: ${DOCKER_ID}/portfolio:${IMAGE_TAG}
+  #   build:
+  #     context: ./next-js/portfolio
+  #     dockerfile: Dockerfile
+  #   container_name: portfolio
+  #   ports:
+  #     - "8001:80"
 
-  resume-dev-web:
-    image: ${DOCKER_ID}/resumresume-dev-web:${IMAGE_TAG}
-    build:
-      context: ./static/resume-dev-web
-      dockerfile: Dockerfile
-    container_name: resume-dev-web
-    ports:
-      - "8002:80"
+  # resume-dev-web:
+  #   image: ${DOCKER_ID}/resumresume-dev-web:${IMAGE_TAG}
+  #   build:
+  #     context: ./static/resume-dev-web
+  #     dockerfile: Dockerfile
+  #   container_name: resume-dev-web
+  #   ports:
+  #     - "8002:80"
   
-  react-app-simple:
-    image: ${DOCKER_ID}/reacreact-app-simple:${IMAGE_TAG}
-    build:
-      context: ./react/react-app-simple
-      dockerfile: Dockerfile
-    container_name: react-app-simple
-    ports:
-      - "8003:80"
+  # react-app-simple:
+  #   image: ${DOCKER_ID}/reacreact-app-simple:${IMAGE_TAG}
+  #   build:
+  #     context: ./react/react-app-simple
+  #     dockerfile: Dockerfile
+  #   container_name: react-app-simple
+  #   ports:
+  #     - "8003:80"
   
-  frontend-svc:
-    image: ${DOCKER_ID}/frontend-svc:${IMAGE_TAG}
-    build:
-      context: ./nodejs/frontend-svc
-      dockerfile: Dockerfile
-    container_name: frontend-svc
-    ports:
-      - "8004:8080"
-  order-svc:
-    image: ${DOCKER_ID}/order-svc:${IMAGE_TAG}
-    build:
-      context: ./nodejs/order-svc
-      dockerfile: Dockerfile
-    container_name: order-svc
-    ports:
-      - "8005:8080"
-  user-svc:
-    image: ${DOCKER_ID}/user-svc:${IMAGE_TAG}
-    build:
-      context: ./nodejs/user-svc
-      dockerfile: Dockerfile
-    container_name: user-svc
-    ports:
-      - "8006:8080"
+  # frontend-svc:
+  #   image: ${DOCKER_ID}/frontend-svc:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/frontend-svc
+  #     dockerfile: Dockerfile
+  #   container_name: frontend-svc
+  #   ports:
+  #     - "8004:8080"
+  # order-svc:
+  #   image: ${DOCKER_ID}/order-svc:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/order-svc
+  #     dockerfile: Dockerfile
+  #   container_name: order-svc
+  #   ports:
+  #     - "8005:8080"
+  # user-svc:
+  #   image: ${DOCKER_ID}/user-svc:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/user-svc
+  #     dockerfile: Dockerfile
+  #   container_name: user-svc
+  #   ports:
+  #     - "8006:8080"
   
-  ahmedamsoliman-1:
-    image: ${DOCKER_ID}/ahmedamsoliman-1:${IMAGE_TAG}
-    build:
-      context: ./nodejs/ahmedamsoliman-1
-      dockerfile: Dockerfile
-    container_name: ahmedamsoliman-1
-    ports:
-      - "8007:8080"
+  # ahmedamsoliman-1:
+  #   image: ${DOCKER_ID}/ahmedamsoliman-1:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/ahmedamsoliman-1
+  #     dockerfile: Dockerfile
+  #   container_name: ahmedamsoliman-1
+  #   ports:
+  #     - "8007:8080"
   
-  flask-app-1:
-    image: ${DOCKER_ID}/flask-1:${IMAGE_TAG}
-    build:
-      context: ./python/flask/flask-app-1
-      dockerfile: Dockerfile
-    container_name: flask-app-1
-    ports:
-      - "8008:80"
+  # flask-app-1:
+  #   image: ${DOCKER_ID}/flask-1:${IMAGE_TAG}
+  #   build:
+  #     context: ./python/flask/flask-app-1
+  #     dockerfile: Dockerfile
+  #   container_name: flask-app-1
+  #   ports:
+  #     - "8008:80"
   
-  aams-cvviewer-resume-dev:
-    image: ${DOCKER_ID}/aams-cvviewer-resume-dev:${IMAGE_TAG}
-    build:
-      context: ./typescript/aams-cvviewer-resume-dev
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-dev
-    ports:
-      - "8009:3000"
+  # aams-cvviewer-resume-dev:
+  #   image: ${DOCKER_ID}/aams-cvviewer-resume-dev:${IMAGE_TAG}
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-dev
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-dev
+  #   ports:
+  #     - "8009:3000"
   
-  aams-cvviewer-resume-dataeng:
-    image: ${DOCKER_ID}/aams-cvviewer-resume-dataeng:${IMAGE_TAG}
-    build:
-      context: ./typescript/aams-cvviewer-resume-dataeng
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-dataeng
-    ports:
-      - "8010:3000"
+  # aams-cvviewer-resume-dataeng:
+  #   image: ${DOCKER_ID}/aams-cvviewer-resume-dataeng:${IMAGE_TAG}
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-dataeng
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-dataeng
+  #   ports:
+  #     - "8010:3000"
   
-  aams-cvviewer-resume-devops:
-    image: ${DOCKER_ID}/aams-cvviewer-resume-devops:${IMAGE_TAG}
-    build:
-      context: ./typescript/aams-cvviewer-resume-devops
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-devops
-    ports:
-      - "8011:3000"
+  # aams-cvviewer-resume-devops:
+  #   image: ${DOCKER_ID}/aams-cvviewer-resume-devops:${IMAGE_TAG}
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-devops
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-devops
+  #   ports:
+  #     - "8011:3000"
 
-  aams-cvviewer-resume-ts:
-    image: ${DOCKER_ID}/aams-cvviewer-resume-ts:${IMAGE_TAG}
-    build:
-      context: ./typescript/aams-cvviewer-resume-ts
-      dockerfile: Dockerfile
-    container_name: aams-cvviewer-resume-ts
-    ports:
-      - "8012:3000"
+  # aams-cvviewer-resume-ts:
+  #   image: ${DOCKER_ID}/aams-cvviewer-resume-ts:${IMAGE_TAG}
+  #   build:
+  #     context: ./typescript/aams-cvviewer-resume-ts
+  #     dockerfile: Dockerfile
+  #   container_name: aams-cvviewer-resume-ts
+  #   ports:
+  #     - "8012:3000"
 
-  aams-glinktree:
-    image: ${DOCKER_ID}/aams-glinktree:${IMAGE_TAG}
-    build:
-      context: ./go/aams-glinktree
-      dockerfile: Dockerfile
-    container_name: aams-glinktree
-    ports:
-      - "8013:8080"
+  # aams-glinktree:
+  #   image: ${DOCKER_ID}/aams-glinktree:${IMAGE_TAG}
+  #   build:
+  #     context: ./go/aams-glinktree
+  #     dockerfile: Dockerfile
+  #   container_name: aams-glinktree
+  #   ports:
+  #     - "8013:8080"
   
-  aams-links:
-    image: ${DOCKER_ID}/aams-links:${IMAGE_TAG}
-    build:
-      context: ./nodejs/aams-links
-      dockerfile: Dockerfile
-    container_name: aams-links
-    ports:
-      - "8014:8080"
+  # aams-links:
+  #   image: ${DOCKER_ID}/aams-links:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/aams-links
+  #     dockerfile: Dockerfile
+  #   container_name: aams-links
+  #   ports:
+  #     - "8014:8080"
   
-  auth-service:
-    image: ${DOCKER_ID}/aamauth-service:${IMAGE_TAG}
-    build:
-      context: ./typescript/auth-service
-      dockerfile: Dockerfile
-    container_name: auth-service
-    ports:
-      - "8015:3000"
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - MONGO_URI=${MONGO_URI}
-      - JWT_SECRET=${JWT_SECRET}
+  # auth-service:
+  #   image: ${DOCKER_ID}/aamauth-service:${IMAGE_TAG}
+  #   build:
+  #     context: ./typescript/auth-service
+  #     dockerfile: Dockerfile
+  #   container_name: auth-service
+  #   ports:
+  #     - "8015:3000"
+  #   environment:
+  #     - NODE_ENV=${NODE_ENV}
+  #     - MONGO_URI=${MONGO_URI}
+  #     - JWT_SECRET=${JWT_SECRET}
   
-  nodejs-ejs-auth:
-    image: ${DOCKER_ID}/aams-nodejnodejs-ejs-auth:${IMAGE_TAG}
-    build:
-      context: ./nodejs/nodejs-ejs-auth
-      dockerfile: Dockerfile
-    container_name: nodejs-ejs-auth
-    depends_on:
-      - auth-service
-    ports:
-      - "8016:4000"
-    environment:
-      - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
-      - JWT_SECRET=${JWT_SECRET}
+  # nodejs-ejs-auth:
+  #   image: ${DOCKER_ID}/aams-nodejnodejs-ejs-auth:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/nodejs-ejs-auth
+  #     dockerfile: Dockerfile
+  #   container_name: nodejs-ejs-auth
+  #   depends_on:
+  #     - auth-service
+  #   ports:
+  #     - "8016:4000"
+  #   environment:
+  #     - AUTH_SERVICE_URL=http://auth-service:3000/api/auth
+  #     - JWT_SECRET=${JWT_SECRET}
 
-  blog_app:
-    image: ${DOCKER_ID}/blog_app:${IMAGE_TAG}
-    build:
-      context: ./nodejs/blog_app
-      dockerfile: Dockerfile
-    container_name: blog_app
-    ports:
-      - "8017:3000"
+  # blog_app:
+  #   image: ${DOCKER_ID}/blog_app:${IMAGE_TAG}
+  #   build:
+  #     context: ./nodejs/blog_app
+  #     dockerfile: Dockerfile
+  #   container_name: blog_app
+  #   ports:
+  #     - "8017:3000"
 
-  aams-fgallery:
-    image: ${DOCKER_ID}/aams-fgallery:${IMAGE_TAG}
-    build:
-      context: ./static/aams-fgallery
-      dockerfile: Dockerfile
-    container_name: aams-fgallery
-    ports:
-      - "8018:80"
+  # aams-fgallery:
+  #   image: ${DOCKER_ID}/aams-fgallery:${IMAGE_TAG}
+  #   build:
+  #     context: ./static/aams-fgallery
+  #     dockerfile: Dockerfile
+  #   container_name: aams-fgallery
+  #   ports:
+  #     - "8018:80"
       
-  aams-rgb-color-game:
-    image: ${DOCKER_ID}/aams-rgb-color-game:${IMAGE_TAG}
-    build:
-      context: ./static/aams-rgb-color-game
-      dockerfile: Dockerfile
-    container_name: aams-rgb-color-game
-    ports:
-      - "8019:80"
+  # aams-rgb-color-game:
+  #   image: ${DOCKER_ID}/aams-rgb-color-game:${IMAGE_TAG}
+  #   build:
+  #     context: ./static/aams-rgb-color-game
+  #     dockerfile: Dockerfile
+  #   container_name: aams-rgb-color-game
+  #   ports:
+  #     - "8019:80"
   
-  aams-aws-resource-viewer:
-    image: ${DOCKER_ID}/aams-aws-resource-viewer:${IMAGE_TAG}
-    build:
-      context: ./react/aams-aws-resource-viewer
-      dockerfile: Dockerfile
-    container_name: aams-aws-resource-viewer
-    ports:
-      - "8020:80"
+  # aams-aws-resource-viewer:
+  #   image: ${DOCKER_ID}/aams-aws-resource-viewer:${IMAGE_TAG}
+  #   build:
+  #     context: ./react/aams-aws-resource-viewer
+  #     dockerfile: Dockerfile
+  #   container_name: aams-aws-resource-viewer
+  #   ports:
+  #     - "8020:80"
   
-  aams-linktree-react:
-    image: ${DOCKER_ID}/aams-linktree-react:${IMAGE_TAG}
+  # aams-linktree-react:
+  #   image: ${DOCKER_ID}/aams-linktree-react:${IMAGE_TAG}
+  #   build:
+  #     context: ./react/aams-linktree-react
+  #     dockerfile: Dockerfile
+  #   container_name: aams-linktree-react
+  #   ports:
+  #     - "8021:80"
+
+  not-found:
+    # image: ${DOCKER_ID}/not-found:${IMAGE_TAG}
     build:
-      context: ./react/aams-linktree-react
+      context: ./nodejs/not-found
       dockerfile: Dockerfile
-    container_name: aams-linktree-react
+    container_name: not-found
     ports:
-      - "8021:80"
+      - "8022:3009"
