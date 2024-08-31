@@ -7,15 +7,14 @@ const ll = require('../middleware/utils');
 const timeout = 3000;
 
 let es = process.env.ELASTIC_SEARCH;
-let host, host_1, host_2, host_3
+let host_1, host_2, host_3
 let certificate, esuser, espasscode;
 let es_index = '';
 
 if (es === 'dev') {
-  host = process.env.DEV_HOST;
-  host_1 = process.env.DEV_HOST_1;
-  host_2 = process.env.DEV_HOST_2;
-  host_3 = process.env.DEV_HOST_3;
+  host_1 = process.env.ES_HOST_1;
+  host_2 = process.env.ES_HOST_2;
+  host_3 = process.env.ES_HOST_3;
   certificate = process.env.DEV_CERT;
   esuser = process.env.DEV_AK;
   espasscode = process.env.DEV_SK;
