@@ -70,6 +70,16 @@
             ],
             "program": "${workspaceFolder}/apps/nodejs/not-found/app.js",
             "cwd": "${workspaceFolder}/apps/nodejs/not-found"
+        },
+        {
+            "name": "node-templates",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/node-templates/server.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/node-templates"
         }
     ]
 }
