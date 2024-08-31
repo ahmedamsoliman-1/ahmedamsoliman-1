@@ -4,6 +4,7 @@
   "description": "This service provides a web interface to manage users and orders.",
   "main": "index.js",
   "scripts": {
+    "prod": "node src/app.js",
     "start": "nodemon src/app.js",
     "test": "jest"
   },
