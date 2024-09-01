@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 var middleware = require("../../middlewares/db/PostgreSQL");
 
+const config = require('../../config');
 
 
 router.get('/postgresql', async (req, res) => {
@@ -11,6 +12,7 @@ router.get('/postgresql', async (req, res) => {
     user: req.user, 
     time: new Date(),
     dbs: postgresql_databases,
+    host_path: config.HOST_PATH,
     pageTitle: 'PostgreSQL DB'
   });
   res.locals.message = `PostgreSQL DB Main Page Loaded!`;
@@ -24,6 +26,7 @@ router.get('/postgresql/:db_name', async (req, res) => {
     time: new Date(),
     db_name: db_name,
     tables: postgresql_tables,
+    host_path: config.HOST_PATH,
     pageTitle: 'PostgreSQL DB'
   });
   res.locals.message = `PostgreSQL DB Main Page Loaded!`;

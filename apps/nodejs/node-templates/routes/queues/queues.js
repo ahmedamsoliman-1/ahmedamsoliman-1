@@ -3,7 +3,7 @@ var router = express.Router();
 require('dotenv').config();
 
 const SVGs = require('../../SVGs')
-
+const config = require('../../config');
 
 router.get('/queues',  (req, res) => {
   res.render('queues/queues', { 

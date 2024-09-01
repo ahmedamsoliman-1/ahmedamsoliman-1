@@ -1,6 +1,9 @@
 const express = require('express');
 var router = express.Router();
 
+const config = require('../../config');
+
+
 const RabbitConnector = require('../../queues/Rabbit');
 const rabbit = new RabbitConnector();
 rabbit.connect();
@@ -19,6 +22,7 @@ router.get('/rabbit', async (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'RabbitMQ',
+    host_path: config.HOST_PATH,
     rabbitInfo: info,
   });
   res.locals.message = `RabbitMQ Main Page Loaded!`;

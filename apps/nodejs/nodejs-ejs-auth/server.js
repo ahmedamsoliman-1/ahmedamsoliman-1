@@ -21,8 +21,10 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 app.get('/', (req, res) => {
     if (req.session.token) {
+        console.log('Token:', req.session.token);
         jwt.verify(req.session.token, JWT_SECRET, (err, decoded) => {
             if (err) {
+                console.log('err: ', err)
                 return res.redirect('/login');
             }
             res.render('index', { user: decoded.username });
@@ -33,10 +35,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    console.log(AUTH_SERVICE_URL);
-    console.log(AUTH_SERVICE_URL);
-    console.log(AUTH_SERVICE_URL);
-    console.log(AUTH_SERVICE_URL);
+    
     res.render('login');
 });
 
@@ -46,6 +45,7 @@ app.post('/login', async (req, res) => {
             username: req.body.username,
             password: req.body.password,
         });
+        console.log('Login service response:', response.data);
         if (response.data && response.data.message === 'Login successful') {
             req.session.token = response.data.token;
             res.redirect('/');
