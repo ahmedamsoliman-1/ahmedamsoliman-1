@@ -15,6 +15,7 @@ router.get('/cassandra', (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Cassandra',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Cassandra Main Page Loaded!`;
@@ -25,6 +26,7 @@ router.get('/cassandra/cassandra_alpha', (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Cassandra Alpha',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     which_cassandra: 'alpha',
   });
@@ -36,6 +38,7 @@ router.get('/cassandra/cassandra_beta', (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Cassandra Beta',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     which_cassandra: 'beta',
   });
@@ -47,6 +50,7 @@ router.get('/cassandra/cassandra_localhost', (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Cassandra Localhost',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     which_cassandra: 'localhost',
   });

@@ -32,6 +32,7 @@ router.get('/gallery',  (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Gallery', 
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Gallery Main Page Loaded!`;
@@ -52,7 +53,8 @@ router.get('/gallery/images', async (req, res) => {
       user: req.user, 
       time: new Date(),
       pageTitle: 'Gallery', 
-      svgs: SVGs,
+      host_path: config.HOST_PATH,
+    svgs: SVGs,
       images: images
     });
     res.locals.message = `Gallery Main Page Loaded!`;

@@ -13,6 +13,7 @@ router.get('/gitlab',  (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Gitlab',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Gitlab Main Page Loaded!`;

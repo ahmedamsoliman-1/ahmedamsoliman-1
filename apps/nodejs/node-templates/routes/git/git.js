@@ -3,7 +3,7 @@ var router = express.Router();
 
 const { exec } = require('child_process');
 const SVGs = require('../../SVGs')
-
+const config = require('../../config');
 
 const authController = require('../../controllers/authController');
 
@@ -45,6 +45,7 @@ router.get('/git',  (req, res) => {
             branches: branches, 
             status: status, 
             remotes: remotes,
+            host_path: config.HOST_PATH,
             svgs: SVGs,
           });
           res.locals.message = `Git Main Page Loaded!`;

@@ -4,6 +4,7 @@ var middleware = require("../../middlewares/ES");
 require('dotenv').config();
 
 const SVGs = require('../../SVGs')
+const config = require('../../config');
 
 const authController = require('../../controllers/authController');
 
@@ -16,6 +17,7 @@ router.get('/es', (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Elastic Search',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Elastic Search Main Page Loaded!`;
@@ -31,6 +33,7 @@ router.get('/es/dev', middlewaresCollection, async (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'ES Dev',
+    host_path: config.HOST_PATH,
     cluster: req.aliasData['clusterName'],
     version: req.aliasData['version'],
     aliasGroups: req.aliasData['aliasGroups'], // Pass aliasGroups
@@ -45,6 +48,7 @@ router.get('/es/local', middleware.provideAliasData, (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'ES Local',
+    host_path: config.HOST_PATH,
     cluster: req.aliasData['clusterName'],
     version: req.aliasData['version'],
     aliasGroups: req.aliasData['aliasGroups'], // Pass aliasGroups

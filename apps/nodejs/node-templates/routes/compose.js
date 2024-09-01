@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 const middlewares = require('../middlewares/utils');
 const SVGs = require('../SVGs')
 
+const env_config = require('../config');
 
 
 
@@ -128,6 +129,7 @@ router.get('/docker-compose', (req, res) => {
         composeFiles: compose.map(file => path.relative(composeFilesDirectory, file)),
         configFiles: config.map(file => path.relative(configFilesDirectory, file)),
         containers: containers,
+        host_path: env_config.HOST_PATH,
         svgs: SVGs,
       });
       res.locals.message = 'Docker Compose Page Rendered';
@@ -173,6 +175,7 @@ router.get('/docker-compose/display/:file', (req, res) => {
             time: new Date(),
             pageTitle: 'Docker Compose File',
             fileName: fileName,
+            host_path: env_config.HOST_PATH,
             fileContent: data
         });
     });
@@ -257,6 +260,7 @@ router.post('/docker-container/display-compose-logs', (req, res) => {
             time: new Date(),
             pageTitle: 'Docker Compose Logs',
             container: containerName,
+            host_path: env_config.HOST_PATH,
             logs: stdout,
         });
         // res.redirect('/docker-compose');

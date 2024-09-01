@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 var middleware = require("../../middlewares/mongodb");
-const SVGs = require('../../SVGs')
+const SVGs = require('../../SVGs');
+const config = require('../../config');
 
 
 const authController = require('../../controllers/authController');
@@ -11,6 +12,7 @@ router.get('/mongo',  (req, res) => {
   res.render('db/mongo/mongo', {
     user: req.user, 
     time: new Date(),
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     pageTitle: 'Mongo DB'
   });
@@ -21,6 +23,7 @@ router.get('/mongo/ahmed',  (req, res) => {
   res.render('db/mongo/mongo_ahmed', {
     user: req.user, 
     time: new Date(),
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     pageTitle: 'Mongo Ahmed'
   });
@@ -31,6 +34,7 @@ router.get('/mongo/localhost1',  (req, res) => {
   res.render('db/mongo/mongo_lhost1', {
     user: req.user, 
     time: new Date(),
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     pageTitle: 'Mongo 1 Localhost'
   });

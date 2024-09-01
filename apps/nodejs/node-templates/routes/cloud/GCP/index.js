@@ -23,7 +23,8 @@ router.get('/aams/cloud/gcp', async (req, res) => {
       pageTitle: 'GCP',
       connectionStatus: connectionStatus,
       user: req.user,
-      svgs: SVGs,
+      host_path: config.HOST_PATH,
+    svgs: SVGs,
     });
     
   } catch (error) {
@@ -51,7 +52,8 @@ router.get('/aams/cloud/gcp/buckets', async (req, res) => {
       pageTitle: 'GCP Buckets',
       buckets: gcp_buckets,
       user: req.user,
-      svgs: SVGs,
+      host_path: config.HOST_PATH,
+    svgs: SVGs,
     });
   } catch (error) {
     res.status(500).send('Error accessing GCP buckets');

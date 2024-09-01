@@ -14,20 +14,20 @@
  <div class="card-deck">
     
     <div class="card">
-      <a href="/dbs" class="btn btn-light">
+      <a href="<%= host_path %>/dbs" class="btn btn-light">
         <%- svgs.db %>
         DBs
       </a>
     </div>
     
     <div class="card">
-        <a href="/queues" class="btn btn-light">
+        <a href="<%= host_path %>/queues" class="btn btn-light">
           <%- svgs.queue %>
           Queues
       </a>
     </div>
     <div class="card">
-      <a href="/cache" class="btn btn-light">
+      <a href="<%= host_path %>/cache" class="btn btn-light">
         <%- svgs.cache %>
         Cache
       </a>
@@ -52,7 +52,7 @@
 <div class="jumbotron">
  <div class="card-deck">
     <div class="card">
-      <a href="/aws" class="btn btn-light">
+      <a href="<%= host_path %>/aws" class="btn btn-light">
         <%- svgs.aws %> 
         AWS
       </a>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="card">
-      <a href="/aams/cloud/gcp" class="btn btn-light">
+      <a href="<%= host_path %>/aams/cloud/gcp" class="btn btn-light">
         <%- svgs.gcp %> 
         GCP
       </a>
@@ -95,21 +95,21 @@
 <div class="jumbotron">
  <div class="card-deck">
     <div class="card">
-      <a href="/gallery" class="btn btn-light">
+      <a href="<%= host_path %>/gallery" class="btn btn-light">
         <%- svgs.gallery %>
         Gallery
       </a>
     </div>
     
     <div class="card">
-      <a href="/document" class="btn btn-light">
+      <a href="<%= host_path %>/document" class="btn btn-light">
         <%- svgs.document %>
         Document
       </a>
     </div>
 
     <div class="card">
-      <a href="/videos" class="btn btn-light">
+      <a href="<%= host_path %>/videos" class="btn btn-light">
         <%- svgs.video %>
         Videos
       </a>
@@ -136,47 +136,47 @@
 <div class="jumbotron">
   <div class="card-deck">
      <div class="card">
-       <a href="/github" class="btn btn-light">
+       <a href="<%= host_path %>/github" class="btn btn-light">
         <%- svgs.user %>   
          Management
        </a>
      </div>
      <div class="card">
-      <a href="/github" class="btn btn-light">
+      <a href="<%= host_path %>/github" class="btn btn-light">
         <%- svgs.github %> 
         GitHub
       </a>
     </div>
 
      <div class="card">
-       <a href="/gitlab" class="btn btn-light">
+       <a href="<%= host_path %>/gitlab" class="btn btn-light">
         <%- svgs.gitlab %> 
         GitLab
       </a>
     </div>
     
     <div class="card">
-      <a href="/docker-compose" class="btn btn-light">
+      <a href="<%= host_path %>/docker-compose" class="btn btn-light">
         <%- svgs.docker %> 
         Compose
       </a>
     </div>
 
     <div class="card">
-      <a href="/used-ports" class="btn btn-light">
+      <a href="<%= host_path %>/used-ports" class="btn btn-light">
         <%- svgs.ports %> 
         Used Ports
       </a>
     </div>
     <div class="card">
-      <a href="/k8" class="btn btn-light">
+      <a href="<%= host_path %>/k8" class="btn btn-light">
         <%- svgs.k8 %> 
         Kubernetes
       </a>
     </div>
     
     <div class="card">
-      <a href="/aams/apps" class="btn btn-light">
+      <a href="<%= host_path %>/aams/apps" class="btn btn-light">
         <%- svgs.monitor %> 
         Running Apps
       </a>
@@ -191,12 +191,12 @@
 </div>    
   
 <div class="jumbotron">
-  <a href="/api-docs" target="_blank" class="btn btn-info">Swagger</a>
-  <a href="/git" class="btn btn-dark">Git <% user %></a>
-  <a href="/status" target="_blank" class="btn btn-danger">Status</a>
+  <a href="<%= host_path %>/api-docs" target="_blank" class="btn btn-info">Swagger</a>
+  <a href="<%= host_path %>/git" class="btn btn-dark">Git <% user %></a>
+  <a href="<%= host_path %>/status" target="_blank" class="btn btn-danger">Status</a>
   <a href="http://192.168.8.1/html/home.html" target="_blank" class="btn btn-warning">Wifi</a>
-  <a href="/scraping" class="btn btn-success">Scraping</a>
-  <a href="/metrics" target="_blank" class="btn btn-danger">Metrics</a>
+  <a href="<%= host_path %>/scraping" class="btn btn-success">Scraping</a>
+  <a href="<%= host_path %>/metrics" target="_blank" class="btn btn-danger">Metrics</a>
 </div>
 
 

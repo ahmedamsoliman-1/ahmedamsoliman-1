@@ -29,6 +29,7 @@ app.use(session({
 }));
 
 
+const host_path = config.HOST_PATH;
 app.use(function (req, res, next) {
   res.locals.user = req.user;
   res.locals.aws_user_role = req.aws_user_role,
@@ -51,10 +52,10 @@ app.use(middlewares.addTimestamp);
 app.use(middlewares.handleError);
 
 const authRoutes = require('./routes/authRoutes'); 
-app.use('/auth', authRoutes);
+app.use(host_path, authRoutes);
 
 const swagger = require('./swagger');
-app.use(swagger);
+app.use(host_path, swagger);
 
 
 
@@ -67,9 +68,9 @@ app.use(swagger);
 const git = require('./routes/git/git');
 const github = require('./routes/git/github');
 const gitlab = require('./routes/git/gitlab');
-app.use(git);
-app.use(github);
-app.use(gitlab);
+app.use(host_path, git);
+app.use(host_path, github);
+app.use(host_path, gitlab);
 
 
 
@@ -77,9 +78,9 @@ app.use(gitlab);
 const gallery = require('./routes/gallery/gallery');
 const videos = require('./routes/gallery/videos');
 const document = require('./routes/document/document');
-app.use(gallery);
-app.use(videos);
-app.use(document);
+app.use(host_path, gallery);
+app.use(host_path, videos);
+app.use(host_path, document);
 
 
 
@@ -95,11 +96,11 @@ const cassandraInitializer = require('./db/cassandra/cassandraInitializer');
 const es = require("./routes/db/es");
 const mongo = require('./routes/db/mongo');
 const PostgreSQL = require('./routes/db/PostgreSQL');
-app.use(dbs);
-app.use(cassandra);
-app.use(es);
-app.use(mongo);
-app.use(PostgreSQL);
+app.use(host_path, dbs);
+app.use(host_path, cassandra);
+app.use(host_path, es);
+app.use(host_path, mongo);
+app.use(host_path, PostgreSQL);
 
 
 
@@ -113,10 +114,10 @@ const queues = require('./routes/queues/queues');
 const rabbit = require('./routes/queues/rabbit');
 const activemq = require('./routes/queues/activemq');
 // const kafka = require('./routes/queues/kafka');
-app.use(queues);
-app.use(rabbit);
-app.use(activemq);
-// app.use(kafka);
+app.use(host_path, queues);
+app.use(host_path, rabbit);
+app.use(host_path, activemq);
+// app.use(host_path, kafka);
 
 
 
@@ -125,25 +126,25 @@ app.use(activemq);
 const cache = require('./routes/cache/cache');
 const redis = require("./routes/cache/redis");
 const memcached = require("./routes/cache/memcached");
-app.use(cache);
-app.use(redis);
-app.use(memcached);
+app.use(host_path, cache);
+app.use(host_path, redis);
+app.use(host_path, memcached);
 
 
 
 
 
 const index = require("./routes/index");
-app.use(index);
-
 const cloud = require('./routes/cloud/cloud');
 const awsRoutes = require('./routes/cloud/AWS');
 const azureRoutes = require('./routes/cloud/Azure');
 const gcpRoutes = require('./routes/cloud/GCP');
-app.use(cloud);
-app.use(awsRoutes);
-app.use(azureRoutes);
-app.use(gcpRoutes);
+
+app.use(host_path, index);
+app.use(host_path, cloud);
+app.use(host_path, awsRoutes);
+app.use(host_path, azureRoutes);
+app.use(host_path, gcpRoutes);
 
 // const k8 = require("./routes/k8/k8");
 const compose = require("./routes/compose");
@@ -156,11 +157,11 @@ const { azure } = require('./SVGs');
 
 
 // app.use(k8);
-app.use(compose);
-app.use(running_apps);
-app.use(ports);
-app.use(external);
-app.use(scraping);
+app.use(host_path, compose);
+app.use(host_path, running_apps);
+app.use(host_path, ports);
+app.use(host_path, external);
+app.use(host_path, scraping);
 
 
 const AWS = require('./aws/AWSManager');
@@ -171,17 +172,6 @@ const GCP = require('./gcp/GCPManager');
 const gcp = new GCP();
 gcp.checkConnectionToGCP()
 
-// app.use((req, res) => {
-//   res.render('error', {
-//     user: req.user,
-//     time: new Date(),
-//     pageTitle: 'Error',
-//     error: 'Something went wrong',
-//     derror: 'Something went wrong',
-//   });
-  
-// });
-
 
 const port = config.APP_PORT || 3000;
 
@@ -191,5 +181,7 @@ app.listen(port, () => {
     'Server Name': middlewares.nodeMiddleware,
     'Start Time': middlewares.nowMiddleware,
     'Server URL': `http://${middlewares.ipMiddleware}:${port}`,
+    'Environment': config.ENVIRONMENT,
+    'Host path': host_path
   });
 });

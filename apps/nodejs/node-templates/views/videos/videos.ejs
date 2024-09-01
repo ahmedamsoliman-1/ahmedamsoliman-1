@@ -42,7 +42,7 @@
 </div>
 
 <div class="jumbotron">
-  <a href="/videos/upload" class="btn btn-primary mb-4">Upload a new video</a>
+  <a href="<%= host_path %>/videos/upload" class="btn btn-primary mb-4">Upload a new video</a>
   <div class="row">
     <% if (videos.length === 0) { %>
       <p>No videos available.</p>
@@ -63,7 +63,7 @@
               </video>
               <div class="card-body">
                 <h5 class="card-title"><%= video.name %></h5>
-                <a href="/videos/delete/<%= video.name %>" class="btn btn-danger">Delete</a>
+                <a href="<%= host_path %>/videos/delete/<%= video.name %>" class="btn btn-danger">Delete</a>
                 <a href="#" class="btn btn-warning">Soruce <%= video.source %></a>
               </div>
             </div>

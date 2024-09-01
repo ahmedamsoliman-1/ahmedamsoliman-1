@@ -6,7 +6,6 @@ require('dotenv').config();
 const SVGs = require('../../SVGs')
 const config = require('../../config');
 
-
 const authController = require('../../controllers/authController');
 
 
@@ -15,6 +14,7 @@ router.get('/dbs', (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'DBs',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Databases Main Page Loaded!`;

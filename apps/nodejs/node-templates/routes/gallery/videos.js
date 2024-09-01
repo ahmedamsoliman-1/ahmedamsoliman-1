@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const S3Manager = require('../../aws/S3');
+
 const config = require('../../config');
 const SVGs = require('../../SVGs');
 const middlewares = require('../../middlewares/utils');
@@ -24,7 +25,8 @@ router.get('/videos', async (req, res) => {
             user: req.user,
             time: new Date(),
             pageTitle: 'Videos',
-            svgs: SVGs,
+            host_path: config.HOST_PATH,
+    svgs: SVGs,
         });
     } catch (error) {
         res.status(500).send('Error fetching videos');
@@ -37,6 +39,7 @@ router.get('/videos/upload', (req, res) => {
     user: req.user,
     time: new Date(),
     pageTitle: 'Upload Video',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
 });

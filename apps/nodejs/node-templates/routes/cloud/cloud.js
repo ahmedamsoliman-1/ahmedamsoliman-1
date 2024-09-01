@@ -13,7 +13,8 @@ router.get('/aams/cloud',  async (req, res) => {
       time: new Date(),
       pageTitle: 'AAMS Cloud',
       user: req.user,
-      svgs: SVGs,
+      host_path: config.HOST_PATH,
+    svgs: SVGs,
     });
     
   } catch (error) {

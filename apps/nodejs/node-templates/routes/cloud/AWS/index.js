@@ -5,7 +5,7 @@ const authController = require('../../../controllers/authController');
 const middlewares = require('../../../middlewares/utils');
 const SVGs = require('../../../SVGs')
 const config = require('../../../config');
-
+const host_path = require('../../../config').HOST_PATH;
 
 const {
   EC2,
@@ -35,6 +35,7 @@ router.get('/aws',  async (req, res) => {
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
       user: req.user,
+      host_path: config.HOST_PATH,
       svgs: SVGs,
     });
     
@@ -53,6 +54,7 @@ router.get('/aws/s3', async (req, res) => {
     res.render('aws/s3', {
       time: new Date(),
       pageTitle: 'S3',
+      host_path: config.HOST_PATH,
       s3_bucket_list: s3_bucket_list,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
@@ -91,6 +93,7 @@ router.get('/aws/dynamo', async (req, res) => {
     res.render('aws/dynamo', {
       time: new Date(),
       pageTitle: 'Dynamo',
+      host_path: config.HOST_PATH,
       list: list,
     });
   } catch (error) {
@@ -105,6 +108,7 @@ router.get('/aws/sns', async (req, res) => {
     res.render('aws/sns', {
       time: new Date(),
       pageTitle: 'SNS',
+      host_path: config.HOST_PATH,
       sns_topics_list: sns_topics_list,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
@@ -124,6 +128,7 @@ router.get('/aws/ecs', async (req, res) => {
     res.render('aws/ecs', {
       time: new Date(),
       pageTitle: 'ECS',
+      host_path: config.HOST_PATH,
       ecs_clusters: ecs_clusters,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
@@ -147,6 +152,7 @@ router.get('/aws/ecr', async (req, res) => {
     res.render('aws/ecr', {
       time: new Date(),
       pageTitle: 'ECR',
+      host_path: config.HOST_PATH,
       repositories: repositoriesWithImages,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
@@ -166,6 +172,7 @@ router.get('/aws/cloudwatch', async (req, res) => {
     res.render('aws/cloudwatch', {
       time: new Date(),
       pageTitle: 'CloudWatch Logs',
+      host_path: config.HOST_PATH,
       cloud_watch: cloud_watch,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
@@ -212,6 +219,7 @@ router.get('/aws/cloudformation', async (req, res) => {
         user: req.user,
         time: new Date(),
         pageTitle: 'Error',
+        host_path: config.HOST_PATH,
         error: aliasData.m_error,
         derror: aliasData.d_error,
       });
@@ -248,6 +256,7 @@ router.get('/aws/ec2', async (req, res) => {
       time: new Date(),
       pageTitle: 'EC2 Instances',
       instances: instances,
+      host_path: config.HOST_PATH,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
     });
@@ -267,6 +276,7 @@ router.get('/aws/iam', async (req, res) => {
       time: new Date(),
       pageTitle: 'IAM Users',
       users: users,
+      host_path: config.HOST_PATH,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
     });
@@ -283,6 +293,7 @@ router.get('/aws/sqs', async (req, res) => {
       time: new Date(),
       pageTitle: 'SQS',
       sqs: 'sqs',
+      host_path: config.HOST_PATH,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
     });
@@ -299,6 +310,7 @@ router.get('/aws/eks', async (req, res) => {
       time: new Date(),
       pageTitle: 'EKS',
       eks: 'eks',
+      host_path: config.HOST_PATH,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
       cred: middlewares.cred,
@@ -318,6 +330,7 @@ router.get('/aws/lambda', async (req, res) => {
       time: new Date(),
       pageTitle: 'Lambda',
       lambdas: lambdas,
+      host_path: config.HOST_PATH,
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
       cred: middlewares.cred,

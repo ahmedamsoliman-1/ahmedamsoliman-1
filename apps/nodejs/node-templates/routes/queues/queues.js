@@ -10,6 +10,7 @@ router.get('/queues',  (req, res) => {
     user: req.user, 
     time: new Date(),
     pageTitle: 'Queues',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Queues Main Page Loaded!`;

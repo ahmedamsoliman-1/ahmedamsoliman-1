@@ -34,7 +34,8 @@ router.get('/aws',  async (req, res) => {
       profile: config.AWS.AWS_PROFILE,
       region: config.AWS.AWS_REGION,
       user: req.user,
-      svgs: SVGs,
+      host_path: config.HOST_PATH,
+    svgs: SVGs,
     });
     
   } catch (error) {

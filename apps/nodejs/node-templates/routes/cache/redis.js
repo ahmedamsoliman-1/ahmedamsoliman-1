@@ -6,6 +6,7 @@ const redis = require("../../cache/redis/redisConnector");
 
 const authController = require('../../controllers/authController');
 const SVGs = require('../../SVGs')
+const config = require('../../config');
 
 
 router.get('/redis/add/key',  async (req, res) => {
@@ -64,22 +65,24 @@ router.delete('/redis/delete/:key',  async (req, res) => {
 
 
 
-router.get('/redis',  (req, res) => {
+router.get('/cache/redis',  (req, res) => {
   res.render('cach/redis', { 
     user: req.user, 
     time: new Date(),
     pageTitle: 'Redis',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
   });
   res.locals.message = `Redis Main Page Loaded!`;
 });
 
-router.get('/redis/redis_remote_1', async (req, res) => {
+router.get('/cache/redis/redis_remote_1', async (req, res) => {
   const redis_info = await redis.info();  
   res.render('cach/redis_template', { 
     user: req.user, 
     time: new Date(),
     pageTitle: 'Redis',
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     info: redis_info,
   });

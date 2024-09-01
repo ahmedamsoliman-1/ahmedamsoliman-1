@@ -11,6 +11,7 @@ const env = process.env;
 const configObj = {
   ENVIRONMENT: env.ENV,
   APP_VERSION: env.APP_VERSION || '0.0.1',
+  HOST_PATH: env.HOST_PATH || '/supper',
   APP_PORT: env.APP_PORT || 80,
   APP_NAME: env.APP_NAME || 'AAMS Super NodeJS App',
   K8: {

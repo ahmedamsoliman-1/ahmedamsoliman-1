@@ -2,15 +2,15 @@
 <html>
 <head>
     <title>AAMS<%= pageTitle ? ' - ' + pageTitle : '' %></title>
-    <link rel="icon" href="/img/mag.png" type="image/x-icon">
+    <link rel="icon" href="<%= host_path %>/img/mag.png" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     
-    <link rel="stylesheet" href="/styles/quote.css"> 
-    <link rel="stylesheet" href="/styles/main.css"> 
-    <link rel="stylesheet" href="/styles/login.css"> 
-    <link rel="stylesheet" href="/styles/dark-theme.css"> 
+    <link rel="stylesheet" href="<%= host_path %>/styles/quote.css"> 
+    <link rel="stylesheet" href="<%= host_path %>/styles/main.css"> 
+    <link rel="stylesheet" href="<%= host_path %>/styles/login.css"> 
+    <link rel="stylesheet" href="<%= host_path %>/styles/dark-theme.css"> 
     <!-- Add this in the head section of your HTML file -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.1.4/lib/noty.css" />
 <script src="https://cdn.jsdelivr.net/npm/noty@3.1.4/lib/noty.js"></script>
@@ -18,7 +18,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">AAMS</a>
+        <a class="navbar-brand" href="<%= host_path %>/">AAMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,31 +26,31 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/aams/cloud">AAMS Cloud</a>
+                    <a class="nav-link" href="<%= host_path %>/aams/cloud">AAMS Cloud</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/docker-compose">Docker</a>
+                    <a class="nav-link" href="<%= host_path %>/docker-compose">Docker</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/git">Git</a>
+                    <a class="nav-link" href="<%= host_path %>/git">Git</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/dbs">DBs</a>
+                    <a class="nav-link" href="<%= host_path %>/dbs">DBs</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/queues">Queues</a>
+                    <a class="nav-link" href="<%= host_path %>/queues">Queues</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/cache">Cache</a>
+                    <a class="nav-link" href="<%= host_path %>/cache">Cache</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link btn btn-info" href="/external">External</a>
+                    <a class="nav-link btn btn-info" href="<%= host_path %>/external">External</a>
                 </li>
 
                 <li class="nav-item">
@@ -70,17 +70,17 @@
 
         <div>
             <% if (user) { %>
-                <a class="nav-link btn btn-warning" onclick="Notifiy('User <%= user.username %> logged out')" href="/auth/logout">Logout - <%= user.username %></a>
+                <a class="nav-link btn btn-warning" onclick="Notifiy('User <%= user.username %> logged out')" href="<%= host_path %>/auth/logout">Logout - <%= user.username %></a>
             <% } else { %>
-                <a class="nav-link btn btn-warning" href="/auth/login">Login</a>
+                <a class="nav-link btn btn-warning" href="<%= host_path %>/auth/login">Login</a>
             <% } %>
         </div>
         
         <div>
             <% if (user) { %>
-                <a class="nav-link btn btn-success" href="/auth/profile">Profile</a>
+                <a class="nav-link btn btn-success" href="<%= host_path %>/auth/profile">Profile</a>
             <% } else { %>
-                <a class="nav-link btn btn-warning"  href="/auth/signup">Signup</a>
+                <a class="nav-link btn btn-warning"  href="<%= host_path %>/auth/signup">Signup</a>
             <% } %>
         </div>
 

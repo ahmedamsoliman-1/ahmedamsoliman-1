@@ -13,6 +13,7 @@ const config = require('../../config');
 //       time: new Date(),
 //       pageTitle: 'AAMS Running Apps',
 //       user: req.user,
+//       host_path: config.HOST_PATH,
 //       svgs: SVGs,
 //     });
     
@@ -77,6 +78,7 @@ router.get('/aams/apps', (req, res) => {
     time: new Date(),
     pageTitle: 'AAMS Running Apps',
     user: req.user,
+    host_path: config.HOST_PATH,
     svgs: SVGs,
     categorizedCards: categorizedCards
   });

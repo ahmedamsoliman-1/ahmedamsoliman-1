@@ -6,8 +6,8 @@
     </div>
 
     <div class="jumbotron">
-        <a href="/git/git-status" class="btn btn-success">Git Status</a>
-        <a href="/git/update-git" class="btn btn-danger">Update Git</a>
+        <a href="<%= host_path %>/git/git-status" class="btn btn-success">Git Status</a>
+        <a href="<%= host_path %>/git/update-git" class="btn btn-danger">Update Git</a>
 
     </div>
     
@@ -39,14 +39,14 @@
         <div class="card-deck">
 
         <div class="card">
-            <a href="/github" class="btn btn-light">
+            <a href="<%= host_path %>/github" class="btn btn-light">
                 <%- svgs.github %> 
                 GitHub
             </a>
         </div>
 
         <div class="card">
-            <a href="/gitlab" class="btn btn-light">
+            <a href="<%= host_path %>/gitlab" class="btn btn-light">
                 <%- svgs.gitlab %> 
                 GitLab
             </a>
