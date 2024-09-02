@@ -6,3 +6,4 @@ dist
 elasticsearchConfig.ts
 
 datastax.py
+*.csv

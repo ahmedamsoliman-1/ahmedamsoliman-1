@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  redis-commander-cs2:
+    container_name: redis-commander-cs2
+    hostname: redis-commander-cs2
+    image: ghcr.io/joeferner/redis-commander:latest
+    build: .
+    restart: always
+    environment:
+    - REDIS_LABEL=CS2
+    - REDIS_HOST=${REDIS_HOST}
+    - REDIS_PASSWORD=${REDIS_PASSWORD}
+    ports:
+    - "8085:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
