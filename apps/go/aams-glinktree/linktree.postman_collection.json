@@ -1,0 +1,34 @@
+{
+    "info": {
+      "name": "linktree-app",
+      "description": "API collection for Linktree-like app",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "GET Home Page",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{base_url}}/",
+            "host": ["{{base_url}}"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "GET Static Files",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{static_url}}/file-name",
+            "host": ["{{static_url}}", "file-name"]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  

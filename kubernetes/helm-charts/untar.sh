@@ -21,9 +21,12 @@
 # helm repo add jetstack https://charts.jetstack.io --force-update
 # helm pull jetstack/cert-manager --untar
 
-helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
-helm pull kubernetes-dashboard/kubernetes-dashboard --untar
+# helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+# helm pull kubernetes-dashboard/kubernetes-dashboard --untar
 
 # helm repo add argo https://argoproj.github.io/argo-helm
 # helm pull argo/argo-cd --untar
 
+
+# helm repo add utkuozdemir https://utkuozdemir.org/helm-charts
+# helm pull utkuozdemir/plex --untar

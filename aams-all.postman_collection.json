@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "0120a0df-0d44-4da4-b202-4ca07414e399",
+		"name": "aams-all",
+		"description": "API collection for Linktree-like app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31747206",
+		"_collection_link": "https://red-desert-885800.postman.co/workspace/ahmedalimsoliman~3fcc8a08-3936-41d4-949b-2a0bb4e2b4a7/collection/31747206-0120a0df-0d44-4da4-b202-4ca07414e399?action=share&source=collection_link&creator=31747206"
+	},
+	"item": [
+		{
+			"name": "beta.infinitychess",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://beta.infinitychess.com/",
+					"protocol": "https",
+					"host": [
+						"beta",
+						"infinitychess",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "alpha.infinitychess.com/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://beta.infinitychess.com/",
+					"protocol": "https",
+					"host": [
+						"beta",
+						"infinitychess",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beta-backend.infinitychess.com/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://beta-backend.infinitychess.com/",
+					"protocol": "https",
+					"host": [
+						"beta-backend",
+						"infinitychess",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "alpha-backend.infinitychess.com/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://alpha-backend.infinitychess.com/?apiKey=ASIAQRQDVJTJCRPIAG6T32",
+					"protocol": "https",
+					"host": [
+						"alpha-backend",
+						"infinitychess",
+						"com"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "ASIAQRQDVJTJCRPIAG6T32"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ai-luna.avrioc.io/trainingui",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ai-luna.avrioc.io/trainingui",
+					"protocol": "https",
+					"host": [
+						"ai-luna",
+						"avrioc",
+						"io"
+					],
+					"path": [
+						"trainingui"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ai-luna.avrioc.io/trainingui-prod",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ai-luna.avrioc.io/trainingui-prod",
+					"protocol": "https",
+					"host": [
+						"ai-luna",
+						"avrioc",
+						"io"
+					],
+					"path": [
+						"trainingui-prod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ai-vega.avrioc.io/omnium",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ai-vega.avrioc.io/omnium",
+					"protocol": "https",
+					"host": [
+						"ai-vega",
+						"avrioc",
+						"io"
+					],
+					"path": [
+						"omnium"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ai-luna.avrioc.io/omnium",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ai-luna.avrioc.io/omnium",
+					"protocol": "https",
+					"host": [
+						"ai-luna",
+						"avrioc",
+						"io"
+					],
+					"path": [
+						"omnium"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ai-luna.avrioc.io",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://ai-luna.avrioc.io",
+					"protocol": "https",
+					"host": [
+						"ai-luna",
+						"avrioc",
+						"io"
+					],
+					"path": [
+						"omnium"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3001/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3003/trainingui/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/trainingui/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"trainingui",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
