@@ -1,14 +1,14 @@
 # Exported from Render on 2024-09-09T14:10:44Z
 services:
 - type: web
-  name: aams-cppwebapp1
+  name: aams-dotnet-webapp-1
   runtime: docker
   repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
   plan: free
   region: oregon
   dockerContext: .
   dockerfilePath: ./Dockerfile
-  rootDir: apps/Cpp/cppwebapp1
+  rootDir: apps/dotnet/aams-dotnet-web-app-1
 - type: web
   name: aams-cvviewer-resume-dev
   runtime: docker
