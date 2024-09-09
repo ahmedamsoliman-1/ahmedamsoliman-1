@@ -94,6 +94,7 @@ app.listen(port, () => {
   ll.llog("Service Information:");
   console.table({
     "App Name": 'Blog App Cover Letters',
+    "DB": process.env.DB_TYPE,
     "Server Name": `${hostName}/${ipAddress}`,
     "Start Time": new Date().toLocaleString(),
     "Server URL": `http://localhost:${port}`,
