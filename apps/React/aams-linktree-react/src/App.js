@@ -36,7 +36,7 @@ const objs = [
   {
     title: "Instagram",
     link: "https://www.instagram.com/ahmed_ali_m_soliman/",
-    image: "../img/instagram_icon.png",
+    image: "../img/Instagram_icon.png.png",
   },
   {
     title: "Twitter",

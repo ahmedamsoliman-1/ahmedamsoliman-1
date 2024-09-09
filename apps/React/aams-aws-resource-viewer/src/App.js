@@ -287,7 +287,7 @@ function App() {
         <Navbar />
         <br></br>
         <br></br>
-        <h1>This Account</h1>
+        <h1>AWS Account</h1>
         <AccountsTable accounts={accounts} />
         <h1>AWS Resources Overview</h1>
         <Summarization

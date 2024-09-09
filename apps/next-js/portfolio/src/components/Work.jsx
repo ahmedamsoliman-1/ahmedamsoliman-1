@@ -3,40 +3,19 @@ import WorkItem from "./WorkItem";
 
 const data = [
   {
-    year: 2010,
-    title: "Web Developer",
-    duration: "1 year",
+    year: 2019,
+    title: "Senior Software developer",
+    duration: "3 year",
     details:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl nec lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl neclorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl nec",
   },
   {
-    year: 2011,
-    title: "Web Developer",
+    year: 2023,
+    title: "Senior Software developer",
     duration: "1 year",
     details:
       "lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl nec",
-  },
-  {
-    year: 2012,
-    title: "Web Developer",
-    duration: "1 year",
-    details:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl nec",
-  },
-  {
-    year: 2012,
-    title: "Web Developer",
-    duration: "1 year",
-    details:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl nec",
-  },
-  {
-    year: 2012,
-    title: "Web Developer",
-    duration: "1 year",
-    details:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod nisl at dui tincidunt, at ullamcorper est aliquam. Sed eget nisl nec nisl tincidunt viverra. Sed eget nisl nec",
-  },
+  }
 ];
 
 const Work = () => {
