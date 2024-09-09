@@ -1,13 +1,6 @@
 # Exported from Render on 2024-09-09T18:03:29Z
 services:
 - type: web
-  name: aams-adminer
-  runtime: image
-  image:
-    url: docker.io/adminer:latest
-  plan: free
-  region: oregon
-- type: web
   name: aams-cvviewer-resume-dev
   runtime: docker
   repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
