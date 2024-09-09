@@ -44,4 +44,13 @@ services:
   dockerContext: .
   dockerfilePath: ./Dockerfile
   rootDir: apps/go/aams-glinktree
+- type: web
+  name: aams-not-found
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/nodejs/not-found
 version: "1"
