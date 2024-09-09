@@ -18,4 +18,22 @@ services:
   dockerContext: .
   dockerfilePath: ./Dockerfile
   rootDir: apps/typescript/aams-cvviewer-resume-devops
+- type: web
+  name: aams-cvviewer-resume-dataeng
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/typescript/aams-cvviewer-resume-dataeng
+- type: web
+  name: aams-cvviewer-resume-ts
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/typescript/aams-cvviewer-resume-ts
 version: "1"
