@@ -9,4 +9,13 @@ services:
   dockerContext: .
   dockerfilePath: ./Dockerfile
   rootDir: apps/typescript/aams-cvviewer-resume-dev
+- type: web
+  name: aams-cvviewer-resume-devops
+  runtime: docker
+  repo: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/typescript/aams-cvviewer-resume-devops
 version: "1"
