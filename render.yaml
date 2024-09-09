@@ -9,18 +9,6 @@ services:
   dockerContext: .
   dockerfilePath: ./Dockerfile
   rootDir: docker/docker-apps/adminer
-- type: web
-  name: aams-redis-commander
-  runtime: docker
-  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
-  plan: free
-  envVars:
-  - key: CLIENT_URL
-    sync: false
-  region: oregon
-  dockerContext: .
-  dockerfilePath: ./Dockerfile
-  rootDir: docker/docker-apps/redis-commander
 #################################################
 - type: web
   name: aams-cvviewer-resume-dev
