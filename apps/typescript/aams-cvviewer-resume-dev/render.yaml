@@ -1,0 +1,12 @@
+# Exported from Render on 2024-09-09T14:10:44Z
+services:
+- type: web
+  name: aams-cvviewer-resume-dev
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/typescript/aams-cvviewer-resume-dev
+version: "1"
