@@ -12,7 +12,7 @@ services:
 - type: web
   name: aams-cvviewer-resume-devops
   runtime: docker
-  repo: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
   plan: free
   region: oregon
   dockerContext: .
