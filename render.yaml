@@ -9,7 +9,7 @@ databases:
   - source: 0.0.0.0/0
     description: everywhere
   postgresMajorVersion: "16"
-version: "1"
+# version: "1"
 services:
 - type: web
   name: aams-cvviewer-resume-dev
