@@ -35,4 +35,13 @@ services:
   dockerContext: .
   dockerfilePath: ./Dockerfile
   rootDir: apps/typescript/aams-cvviewer-resume-ts
+- type: web
+  name: aams-glinktree
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/go/aams-glinktree
 version: "1"
