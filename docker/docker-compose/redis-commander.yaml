@@ -48,3 +48,22 @@ services:
         limits:
           cpus: '0.1'
           memory: 50M
+
+  redis-commander-render:
+    container_name: redis-commander-render
+    hostname: redis-commander-render
+    image: ghcr.io/joeferner/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_LABEL=Render
+    - REDIS_HOST=${REDIS_HOST_RENDER}
+    - REDIS_USERNAME=${REDIS_USERNAME_RENDER}
+    - REDIS_PASSWORD=${REDIS_PASSWORD_RENDER}
+    - REDIS_TLS=true
+    ports:
+    - "8086:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
