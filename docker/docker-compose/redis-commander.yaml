@@ -1,6 +1,36 @@
 version: '3'
 
 services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:latest
+    restart: always
+    ports:
+    - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: ghcr.io/joeferner/redis-commander:latest
+    build: .
+    restart: always
+    environment:
+    - REDIS_LABEL=Main
+    - REDIS_HOST=redis
+    ports:
+    - "8084:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
+
   redis-commander-cs2:
     container_name: redis-commander-cs2
     hostname: redis-commander-cs2

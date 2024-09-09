@@ -7,3 +7,5 @@ elasticsearchConfig.ts
 
 datastax.py
 *.csv
+
+python/flask/flask-sessions
