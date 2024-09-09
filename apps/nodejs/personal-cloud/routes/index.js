@@ -5,7 +5,7 @@ const router = express.Router();
 const node = require("os").hostname();
 const svgs = require('../SVGs');
 
-const servicesFilePath = path.join(__dirname, 'port_forward_conf.json');
+const servicesFilePath = path.join(__dirname, 'pf.json');
 
 // Utility function to read services from file
 const readServicesFromFile = () => {

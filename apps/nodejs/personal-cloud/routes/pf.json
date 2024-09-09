@@ -1,0 +1,14 @@
+{
+    "monitoring-prometheus-k8s": {
+        "service_name": "svc/prometheus-k8s", 
+        "pod_svc_port": 9090, 
+        "expose_on_port": 7025, 
+        "namespace": "monitoring"
+    },
+    "kubernetes-dashboard": {
+        "service_name": "svc/kubernetes-dashboard",
+        "pod_svc_port": 443,
+        "expose_on_port": 7009,
+        "namespace": "kubernetes-dashboard"
+    }
+}

@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 const express = require("express");
 const app = express();
 const node = require("os").hostname();
