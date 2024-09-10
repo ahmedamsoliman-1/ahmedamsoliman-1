@@ -1,27 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import { register, login } from './controllers/authController';
-import winston from 'winston';
 import { User } from './models/User';
+import { Config } from './utils/config';
+import logger from './utils/logger';
 
-dotenv.config();
 const app = express();
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGO_URI;
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-      winston.format.timestamp(),
-      winston.format.json()
-  ),
-  transports: [
-      new winston.transports.Console(),
-  ],
-});
+const port = Config.port;
+const mongoURI = Config.mongo_uri;
 
 
 

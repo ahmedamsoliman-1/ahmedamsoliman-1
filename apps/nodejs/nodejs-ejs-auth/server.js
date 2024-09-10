@@ -68,6 +68,7 @@ app.post('/register', async (req, res) => {
             username: req.body.username,
             password: req.body.password,
         });
+        console.log(response)
 
         console.log('Register service response:', response.data);
 
@@ -85,4 +86,5 @@ app.get('/logout', (req, res) => {
 
 app.listen(4000, () => {
     console.log('Server running on port 4000');
+    console.log('AUTH_SERVICE_URL:', AUTH_SERVICE_URL);
 });

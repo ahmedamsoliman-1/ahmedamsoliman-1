@@ -2,20 +2,10 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
-import winston from 'winston';
+import { Config } from '../utils/config';
+import logger from '../utils/logger';
 
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.json()
-    ),
-    transports: [
-        new winston.transports.Console(),
-    ],
-});
-
-const SECRET_KEY = 'your_secret_key'; // Replace with your secret key
+const secret_key = Config.secret_key;
 
 export const register = async (req: Request, res: Response) => {
     try {
@@ -65,7 +55,7 @@ export const login = async (req: Request, res: Response) => {
         }
 
         // Issue JWT
-        const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username }, secret_key, { expiresIn: '1h' });
 
         logger.info('Login successful', { username });
         res.status(200).json({ message: 'Login successful', token });

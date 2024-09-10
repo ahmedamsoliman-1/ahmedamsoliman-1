@@ -10,7 +10,7 @@ const logger = createLogger({
     format.splat(),
     format.json()
   ),
-  defaultMeta: { service: 'auth-service' },
+  defaultMeta: { service: 'auth-service', db: 'mongo' },
   transports: [
     new transports.Console({
       format: format.combine(
