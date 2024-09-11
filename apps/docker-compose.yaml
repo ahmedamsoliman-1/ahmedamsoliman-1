@@ -71,14 +71,14 @@ services:
   #   ports:
   #     - "8008:80"
   
-  # aams-cvviewer-resume-dev:
-  #   image: ${DOCKER_ID}/aams-cvviewer-resume-dev:${IMAGE_TAG}
-  #   build:
-  #     context: ./typescript/aams-cvviewer-resume-dev
-  #     dockerfile: Dockerfile
-  #   container_name: aams-cvviewer-resume-dev
-  #   ports:
-  #     - "8009:3000"
+  aams-cvviewer-resume-dev:
+    image: ${DOCKER_ID}/aams-cvviewer-resume-dev:${IMAGE_TAG}
+    build:
+      context: ./typescript/aams-cvviewer-resume-dev
+      dockerfile: Dockerfile
+    container_name: aams-cvviewer-resume-dev
+    ports:
+      - "8009:3000"
   
   # aams-cvviewer-resume-dataeng:
   #   image: ${DOCKER_ID}/aams-cvviewer-resume-dataeng:${IMAGE_TAG}
