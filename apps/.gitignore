@@ -9,3 +9,6 @@ datastax.py
 *.csv
 
 python/flask/flask-sessions
+
+client_secret.json
+token.json

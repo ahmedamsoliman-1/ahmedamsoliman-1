@@ -19,7 +19,6 @@ DESTINATION_PATH=${2:-/tmp/scp}
 DESTINATION_BOX=${3:-dgx-207}
 
 PYTHON_SCRIPT=/Users/ahmed.soliman/workspace/ahmed/aams-ahmedamsoliman-1/ahmed/scripts/python/ssh_connect.py
-# PYTHON_SCRIPT=/Users/ahmed.soliman/workspace/ahmed/aams-ahmedamsoliman-1/python/ssh_connect.py
 
 # Execute the Python script with the provided or default parameters
 box_text "File or Directory: $FILE_OR_DIRECTORY"

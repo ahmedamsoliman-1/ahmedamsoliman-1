@@ -52,7 +52,7 @@ if [ "$REMOVE" = true ]; then
     echo "$IMAGES" | while read -r IMAGE; do
         IMAGE_ID=$(echo $IMAGE | awk '{print $2}')
         box_text "Deleting image: $IMAGE_ID" 31
-        docker rmi $IMAGE_ID
+        # docker rmi $IMAGE_ID
     done
     echo "Images deleted."
 else

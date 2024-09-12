@@ -1,18 +1,17 @@
 
-const ll = require('./middleware/utils');
-const node_name = require('os').hostname();
-require('dotenv').config();
+const middlewares = require('./utils/middlewares');
+const config = require('./utils/config');
+const utils = require('./utils/utils');
 
+const new_relic_app_name = config.APP_NAME;
+const new_relic_app_name_env = `${new_relic_app_name}-ENV::${config.APP_ENVIRONMENT}`
+const new_relic_app_name_host = `${new_relic_app_name}-HOST::${utils.node}`
+const new_relic_app_name_env_host = `${new_relic_app_name}-ENV-HOST::${config.APP_ENVIRONMENT}-${utils.node}`
 
-const new_relic_app_name = `NotFound`;
-const new_relic_app_name_env = `${new_relic_app_name}-ENV::${process.env.ENVIRONMENT}`
-const new_relic_app_name_host = `${new_relic_app_name}-HOST::${node_name}`
-const new_relic_app_name_env_host = `${new_relic_app_name}-ENV-HOST::${process.env.ENVIRONMENT}-${node_name}`
-
-ll.llog(`New Relic Loaded from host ${node_name} :: App Name ${new_relic_app_name}`, 'cyan', 'relic');
-ll.llog(`New Relic Loaded from host ${node_name} :: App Name ${new_relic_app_name_env}`, 'cyan', 'relic');
-ll.llog(`New Relic Loaded from host ${node_name} :: App Name ${new_relic_app_name_host}`, 'cyan', 'relic');
-ll.llog(`New Relic Loaded from host ${node_name} :: App Name ${new_relic_app_name_env_host}`, 'cyan', 'relic');
+middlewares.llog(`New Relic Loaded from host ${utils.node} :: App Name ${new_relic_app_name}`, 'cyan', 'relic');
+middlewares.llog(`New Relic Loaded from host ${utils.node} :: App Name ${new_relic_app_name_env}`, 'cyan', 'relic');
+middlewares.llog(`New Relic Loaded from host ${utils.node} :: App Name ${new_relic_app_name_host}`, 'cyan', 'relic');
+middlewares.llog(`New Relic Loaded from host ${utils.node} :: App Name ${new_relic_app_name_env_host}`, 'cyan', 'relic');
 
 exports.config = {
   app_name: [
@@ -20,9 +19,9 @@ exports.config = {
     new_relic_app_name_env,
     new_relic_app_name_host
   ],
-  license_key: process.env.DEV_NEW_RELIC_ACCESS_KEY,
+  license_key: config.DEV_NEW_RELIC_ACCESS_KEY,
   logging: {
-    level: process.env.NEW_RELIC_LOGGING_LEVEL_INFO
+    level: 'info'
   },
   allow_all_headers: true,
   attributes: {
