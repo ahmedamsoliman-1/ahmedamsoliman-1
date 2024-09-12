@@ -32,6 +32,16 @@
             "args": []
         },
         {
+            "name": "update-fallen-hero-video-title",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/apps/python/pure/utube/run.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true,
+            "args": []
+        },
+        {
             "name": "blog_app",
             "type": "node",
             "request": "launch",
