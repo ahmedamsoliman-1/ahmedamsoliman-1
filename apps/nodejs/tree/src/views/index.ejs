@@ -25,6 +25,7 @@
     </div>
 
   <h1>File Tree</h1>
+  <p>Dir: <%= dir %></p>
   
   <svg width="960" height="600"></svg>
 
@@ -38,7 +39,8 @@
   </footer>
 
   <script>
-    d3.json('/file-tree').then(function(data) {
+    const depth = "<%= depth %>"
+    d3.json(`/file-tree?depth=${depth}`).then(function(data) {
       console.log(data);  // Debug output
       const width = 960;
       const height = 600;

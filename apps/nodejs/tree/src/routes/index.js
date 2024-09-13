@@ -6,18 +6,19 @@ const ll = require('../middleware/utils');
 
 const router = express.Router();
 
-// Function to get the file tree
-function getFileTree(dirPath) {
+// Function to get the file tree with a specified depth
+function getFileTree(dirPath, maxDepth = Infinity, currentDepth = 1) {
   const result = [];
-  const items = fs.readdirSync(dirPath);
+  if (currentDepth > maxDepth) return result;
 
+  const items = fs.readdirSync(dirPath);
   items.forEach(item => {
     const fullPath = path.join(dirPath, item);
     const stats = fs.statSync(fullPath);
     if (stats.isDirectory()) {
       result.push({
         name: item,
-        children: getFileTree(fullPath)
+        children: getFileTree(fullPath, maxDepth, currentDepth + 1)
       });
     } else {
       result.push({
@@ -29,16 +30,24 @@ function getFileTree(dirPath) {
   return result;
 }
 
+const hardcodedPath = '/Users/ahmed.soliman/workspace/ahmed/ahmedamsoliman-1/apps';
+
 router.get('/file-tree', (req, res) => {
-  ll.llog(`Currently working with directory ${__dirname}`);
-  const tree = getFileTree(path.join(__dirname, '../')); 
+  const maxDepth = parseInt(req.query.depth);  // Get depth from query or default to 1
+  ll.llog(`Currently working with directory ${hardcodedPath}, Depth: ${maxDepth}`);
+  const tree = getFileTree(path.join(hardcodedPath, './'), maxDepth);
+  console.log(tree);
   res.json(tree);
 });
 
 router.get('/', (req, res) => {
   ll.llog('Rendering file tree view');
-  res.render('index');
+  res.render('index', {
+    depth: 3,
+    dir: hardcodedPath
+  });
 });
+
 
 
 module.exports = router;
