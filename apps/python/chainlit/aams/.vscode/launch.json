@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "aams",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${env:HOME}/.pyenv/versions/boiler/bin/chainlit",
+            "args": [
+                "run",
+                "main.py"
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}
