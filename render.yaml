@@ -74,7 +74,7 @@ services:
   dockerfilePath: ./Dockerfile
   rootDir: apps/go/aams-glinktree
 - type: web
-  name: aams-not-found
+  name: aams-notfound
   runtime: docker
   repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
   plan: free
