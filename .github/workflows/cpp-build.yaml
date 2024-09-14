@@ -9,10 +9,11 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         build-system: [cmake, make]
 
     steps:
@@ -20,6 +21,7 @@ jobs:
 
     - name: Install CMake
       run: sudo apt-get install -y cmake
+      if: matrix.os == 'ubuntu-latest'
 
     - name: Configure with CMake
       run: |
@@ -32,5 +34,44 @@ jobs:
     - name: Upload Binary Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: cpp-mode-bin
+        name: cpp-mode-bin-${{ matrix.os }}
         path: apps/Cpp/cpp-mod/build/cpp-mode-bin
+
+
+
+        # name: build-cpp-projects
+
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         build-system: [cmake, make]
+
+#     steps:
+#     - uses: actions/checkout@v4
+
+#     - name: Install CMake
+#       run: sudo apt-get install -y cmake
+
+#     - name: Configure with CMake
+#       run: |
+#         cd apps/Cpp/cpp-mod
+#         mkdir build
+#         cd build
+#         cmake ..
+#         make
+
+#     - name: Upload Binary Artifact
+#       uses: actions/upload-artifact@v3
+#       with:
+#         name: cpp-mode-bin
+#         path: apps/Cpp/cpp-mod/build/cpp-mode-bin
