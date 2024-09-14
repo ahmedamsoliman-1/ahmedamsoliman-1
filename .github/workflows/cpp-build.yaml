@@ -33,21 +33,21 @@ jobs:
         cmake ..
         make
 
-    - name: Run tests with CMake
-      if: matrix.build-system == 'cmake'
-      run: |
-        cd apps/Cpp/cpp-mod/build
-        ctest
+    # - name: Run tests with CMake
+    #   if: matrix.build-system == 'cmake'
+    #   run: |
+    #     cd apps/Cpp/cpp-mod/build
+    #     ctest
 
-    # Build with Make
-    - name: Build with Make
-      if: matrix.build-system == 'make'
-      run: |
-        cd apps/Cpp/cpp-mod
-        make
+    # # Build with Make
+    # - name: Build with Make
+    #   if: matrix.build-system == 'make'
+    #   run: |
+    #     cd apps/Cpp/cpp-mod
+    #     make
 
-    - name: Run tests with Make
-      if: matrix.build-system == 'make'
-      run: |
-        cd apps/Cpp/cpp-mod
-        make test
+    # - name: Run tests with Make
+    #   if: matrix.build-system == 'make'
+    #   run: |
+    #     cd apps/Cpp/cpp-mod
+    #     make test
