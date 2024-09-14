@@ -15,7 +15,13 @@ class PostgresDB:
         self.port = Config.POSTGRES_DB_PORT
         self.conn = None
         db_logger.info("Database initialized with the following details:")
-        db_logger.info(f"DB_NAME: {self.dbname}, DB_HOST: {self.host}")
+        db_logger.info(self.host)
+    
+    def db_info(self):
+        """Get PostgreSQL info."""
+        self.connect()
+        info = self.conn.info
+        db_logger.info(f"PostgreSQL DB info: {info}")
 
     def connect(self):
         """Connect to the PostgreSQL database."""

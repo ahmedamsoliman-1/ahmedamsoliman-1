@@ -12,10 +12,14 @@ class MongoDB:
         
         # Initialize MongoClient with the MongoDB URI
         self.client = MongoClient(self.uri)
-        self.db = self.client.get_database()  # You can also specify the database name in URI
+        self.db = self.client.get_database()
 
         mongo_logger.info(f"Connected to MongoDB: {self.db.name}")
     
+    def db_info(self):
+        """Get MongoDB info."""
+        mongo_logger.info(f"MongoDB info: {self.db}")
+        
     def list_databases(self) -> List[str]:
         """List all databases in the MongoDB instance."""
         databases = self.client.list_database_names()

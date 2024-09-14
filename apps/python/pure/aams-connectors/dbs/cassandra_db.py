@@ -22,6 +22,10 @@ class CassandraDB:
         self.create_keyspace(self.keyspace)
         self.session.set_keyspace(self.keyspace)
         cassandra_logger.info(f"Connected to Cassandra keyspace: {self.keyspace}")
+    
+    def db_info(self):
+        """ Get Cassandra info """
+        cassandra_logger.info(f"Cassandra DB info: {self.session}")
 
     def create_keyspace(self, keyspace_name: str) -> None:
         """Create a keyspace if not exists."""

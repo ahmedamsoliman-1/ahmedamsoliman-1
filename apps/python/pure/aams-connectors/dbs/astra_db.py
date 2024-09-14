@@ -10,12 +10,14 @@ class AstraDB:
         self.token = Config.ASTRA_DB_TOKEN
         self.endpoint = Config.ASTRA_DB_ENDPOINT
 
-        astra_logger.info(f"Connecting to Astra DB: {self.endpoint}")
-
         # Initialize the DataAPIClient with the token from config
         self.client = DataAPIClient(self.token)
         self.db = self.client.get_database_by_api_endpoint(self.endpoint)
-        astra_logger.warning(f"Connected to Astra DB: {self.db.list_collection_names()}")
+        astra_logger.info(f"Connected to Astra DB: {Config.ASTRA_DB_ENDPOINT}")
+    
+    def db_info(self):
+        astra_logger.info(self.db.info())
+        pass
 
     def use_namespace(self, namespace_name: str) -> None:
         """Set the current namespace."""
