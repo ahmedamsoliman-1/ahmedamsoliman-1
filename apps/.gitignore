@@ -12,3 +12,6 @@ python/flask/flask-sessions
 
 client_secret.json
 token.json
+
+*.bin
+*-bin
