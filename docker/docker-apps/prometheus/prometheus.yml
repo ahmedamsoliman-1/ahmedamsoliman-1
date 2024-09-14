@@ -9,4 +9,5 @@ scrape_configs:
 
 - job_name: 'aams-not-found'
   static_configs:
-  - targets: ['https://aams-not-found.onrender.com']
+  - targets: ['aams-not-found.onrender.com:443']
+  scheme: https
