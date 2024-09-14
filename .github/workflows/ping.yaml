@@ -1,4 +1,4 @@
-name: Ping Website
+name: Ping-Website
 
 on:
   schedule:
@@ -16,4 +16,4 @@ jobs:
 
     - name: Ping the website
       run: |
-        curl -s -o /dev/null -w "%{http_code}" https://aams-blog-app.onrender.com/
+        curl -s -o /dev/null -w "%{http_code}" https://aams-personal-cloud.onrender.com
