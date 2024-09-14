@@ -13,16 +13,28 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         build-system: [cmake, make]
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install CMake
+    # Install dependencies for Linux and macOS
+    - name: Install CMake on Linux/macOS
       run: sudo apt-get install -y cmake
       if: matrix.os == 'ubuntu-latest'
 
+    # On macOS, CMake is pre-installed, but if needed, you can use Homebrew:
+    - name: Install CMake on macOS
+      run: brew install cmake
+      if: matrix.os == 'macos-latest'
+
+    # Install dependencies on Windows
+    - name: Install CMake on Windows
+      run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+      if: matrix.os == 'windows-latest'
+
+    # Configure and build using CMake
     - name: Configure with CMake
       run: |
         cd apps/Cpp/cpp-mod
@@ -30,48 +42,28 @@ jobs:
         cd build
         cmake ..
         make
+      if: matrix.build-system == 'cmake'
 
-    - name: Upload Binary Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: cpp-mode-bin-${{ matrix.os }}
-        path: apps/Cpp/cpp-mod/build/cpp-mode-bin
+    # Run tests with CMake (if tests are available)
+    - name: Run tests with CMake
+      run: |
+        cd apps/Cpp/cpp-mod/build
+        ctest
+      if: matrix.build-system == 'cmake'
 
+    # Build using Make on non-Windows systems
+    - name: Build with Make
+      run: make
+      if: matrix.build-system == 'make' && matrix.os != 'windows-latest'
 
+    # Build on Windows using CMake (since Make is not available on Windows)
+    - name: Build on Windows with CMake
+      run: |
+        cd apps/Cpp/cpp-mod
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
+      if: matrix.os == 'windows-latest'
 
-        # name: build-cpp-projects
-
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
-
-# jobs:
-#   build:
-
-#     runs-on: ubuntu-latest
-
-#     strategy:
-#       matrix:
-#         build-system: [cmake, make]
-
-#     steps:
-#     - uses: actions/checkout@v4
-
-#     - name: Install CMake
-#       run: sudo apt-get install -y cmake
-
-#     - name: Configure with CMake
-#       run: |
-#         cd apps/Cpp/cpp-mod
-#         mkdir build
-#         cd build
-#         cmake ..
-#         make
-
-#     - name: Upload Binary Artifact
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: cpp-mode-bin
-#         path: apps/Cpp/cpp-mod/build/cpp-mode-bin
+    # Upload the binary as an artifact
