@@ -18,12 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # Step for CMake builds
     - name: Install CMake
-      if: matrix.build-system == 'cmake'
       run: sudo apt-get install -y cmake
 
-    # Build with CMake
     - name: Configure with CMake
       run: |
         cd apps/Cpp/cpp-mod
@@ -31,22 +28,3 @@ jobs:
         cd build
         cmake ..
         make
-
-    # - name: Run tests with CMake
-    #   if: matrix.build-system == 'cmake'
-    #   run: |
-    #     cd apps/Cpp/cpp-mod/build
-    #     ctest
-
-    # # Build with Make
-    # - name: Build with Make
-    #   if: matrix.build-system == 'make'
-    #   run: |
-    #     cd apps/Cpp/cpp-mod
-    #     make
-
-    # - name: Run tests with Make
-    #   if: matrix.build-system == 'make'
-    #   run: |
-    #     cd apps/Cpp/cpp-mod
-    #     make test
