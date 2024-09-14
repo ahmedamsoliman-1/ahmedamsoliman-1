@@ -29,4 +29,7 @@
 
 
 # helm repo add utkuozdemir https://utkuozdemir.org/helm-charts
-# helm pull utkuozdemir/plex --untar
+# helm pull utkuozdemir/plex --untarcd
+
+helm repo add grafana https://grafana.github.io/helm-charts
+helm pull 

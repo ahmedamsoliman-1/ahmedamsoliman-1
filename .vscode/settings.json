@@ -10,6 +10,7 @@
       "!VERSION",
       "!BRANCH_NAME"
     ],
-    "svg.preview.background": "dark-transparent"
+    "svg.preview.background": "dark-transparent",
+    "java.compile.nullAnalysis.mode": "automatic"
   }
   

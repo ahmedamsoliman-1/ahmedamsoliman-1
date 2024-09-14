@@ -9,6 +9,24 @@ services:
   dockerContext: .
   dockerfilePath: ./Dockerfile
   rootDir: docker/docker-apps/adminer
+- type: web
+  name: grafana
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: docker/docker-apps/grafana
+- type: web
+  name: prometheus
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: docker/docker-apps/prometheus
 #################################################
 - type: web
   name: aams-cvviewer-resume-dev
