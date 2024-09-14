@@ -28,3 +28,9 @@ jobs:
         cd build
         cmake ..
         make
+
+    - name: Upload Binary Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: cpp-mode-bin
+        path: apps/Cpp/cpp-mod/cpp-mode-bin
