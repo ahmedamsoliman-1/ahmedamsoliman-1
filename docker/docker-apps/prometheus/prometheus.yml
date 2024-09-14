@@ -11,3 +11,13 @@ scrape_configs:
   static_configs:
   - targets: ['aams-not-found.onrender.com:443']
   scheme: https
+
+- job_name: 'personal-cloud'
+  static_configs:
+  - targets: ['aams-personal-cloud.onrender.com:443']
+  scheme: https
+
+- job_name: 'aams-blog-app'
+  static_configs:
+  - targets: ['aams-blog-app.onrender.com:443']
+  scheme: https

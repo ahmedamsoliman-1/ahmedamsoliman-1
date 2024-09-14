@@ -5,7 +5,12 @@ const node = require("os").hostname();
 const ip = require("ip").address();
 require('dotenv').config();
 
-const currentDate = new Date();
+
+const { setupMetrics } = require('./metrics');
+
+
+setupMetrics(app); const currentDate = new Date();
+
 const currentTime = currentDate.toLocaleString();
 
 const port = process.env.NODE_PORT || 3004;

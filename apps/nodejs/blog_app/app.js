@@ -10,6 +10,11 @@ var hostName = require("os").hostname();
 const ll = require('./middleware/utils');
 const dal = require('./dal');
 
+const { setupMetrics } = require('./metrics');
+
+
+setupMetrics(app); 
+
 // App config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
