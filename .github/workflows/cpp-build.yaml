@@ -25,7 +25,6 @@ jobs:
 
     # Build with CMake
     - name: Configure with CMake
-      if: matrix.build-system == 'cmake'
       run: |
         cd apps/Cpp/cpp-mod
         mkdir build
