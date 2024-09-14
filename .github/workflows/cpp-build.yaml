@@ -7,24 +7,47 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-cpp-mod:
+  build:
 
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: apps/Cpp/cpp-mod
+
+    strategy:
+      matrix:
+        build-system: [cmake, make]
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: configure
-      run: ./configure
-    - name: make
-      working-directory: apps/Cpp/cpp-mod
-      run: make
-    - name: make check
-      working-directory: apps/Cpp/cpp-mod
-      run: make check
-    - name: make distcheck
-      working-directory: apps/Cpp/cpp-mod
-      run: make distcheck
+    # Step for CMake builds
+    - name: Install CMake
+      if: matrix.build-system == 'cmake'
+      run: sudo apt-get install -y cmake
+
+    # Build with CMake
+    - name: Configure with CMake
+      if: matrix.build-system == 'cmake'
+      run: |
+        cd apps/Cpp/cpp-mod
+        mkdir build
+        cd build
+        cmake ..
+        make
+
+    - name: Run tests with CMake
+      if: matrix.build-system == 'cmake'
+      run: |
+        cd apps/Cpp/cpp-mod/build
+        ctest
+
+    # Build with Make
+    - name: Build with Make
+      if: matrix.build-system == 'make'
+      run: |
+        cd apps/Cpp/cpp-mod
+        make
+
+    - name: Run tests with Make
+      if: matrix.build-system == 'make'
+      run: |
+        cd apps/Cpp/cpp-mod
+        make test
