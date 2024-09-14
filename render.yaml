@@ -10,7 +10,7 @@ services:
   dockerfilePath: ./Dockerfile
   rootDir: docker/docker-apps/adminer
 - type: web
-  name: grafana
+  name: aams-grafana
   runtime: docker
   repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
   plan: free
@@ -19,7 +19,7 @@ services:
   dockerfilePath: ./Dockerfile
   rootDir: docker/docker-apps/grafana
 - type: web
-  name: prometheus
+  name: aams-prometheus
   runtime: docker
   repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
   plan: free
