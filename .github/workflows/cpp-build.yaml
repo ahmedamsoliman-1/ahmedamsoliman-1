@@ -6,22 +6,25 @@ on:
   pull_request:
     branches: [ "main" ]
 
-
 jobs:
   build-cpp-mod:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/Cpp/cpp-mod
+    # defaults:
+    #   run:
+    #     working-directory: apps/Cpp/cpp-mod
 
     steps:
     - uses: actions/checkout@v4
+
     - name: configure
       run: ./configure
     - name: make
+      working-directory: apps/Cpp/cpp-mod
       run: make
     - name: make check
+      working-directory: apps/Cpp/cpp-mod
       run: make check
     - name: make distcheck
+      working-directory: apps/Cpp/cpp-mod
       run: make distcheck
