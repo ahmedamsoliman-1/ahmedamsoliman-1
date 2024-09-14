@@ -8,12 +8,12 @@ on:
 
 
 jobs:
-  build:
+  build-cpp-mod:
 
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: apps/cpp-mod
+        working-directory: apps/Cpp/cpp-mod
 
     steps:
     - uses: actions/checkout@v4
