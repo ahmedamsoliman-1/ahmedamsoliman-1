@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-cpp-pod:
 
     runs-on: ${{ matrix.os }}
 
@@ -36,3 +36,48 @@ jobs:
       with:
         name: cpp-mode-bin-${{ matrix.os }}
         path: apps/Cpp/cpp-mod/build/cpp-mode-bin
+
+
+  build-cpp-webapp1:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # Step to fetch external dependencies
+    - name: Clone external dependencies
+      run: |
+        # Clone Crow (HTTP library)
+        git clone https://github.com/CrowCpp/Crow.git apps/Cpp/cpp_external/Crow
+        # Clone Asio (Networking library)
+        git clone https://github.com/chriskohlhoff/asio.git apps/Cpp/cpp_external/asio
+
+    # Install CMake on Linux/macOS
+    - name: Install CMake on Linux/macOS
+      run: sudo apt-get install -y cmake
+      if: matrix.os == 'ubuntu-latest'
+
+    - name: Install CMake on macOS
+      run: brew install cmake
+      if: matrix.os == 'macos-latest'
+
+    # Configure and build with CMake
+    - name: Configure with CMake
+      run: |
+        cd apps/Cpp/cppwebapp1
+        mkdir build
+        cd build
+        cmake ..
+        make
+
+    # Upload the built binary as an artifact
+    - name: Upload Binary Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: cppwebapp1-bin-${{ matrix.os }}
+        path: apps/Cpp/cppwebapp1/build/cppwebapp1*
