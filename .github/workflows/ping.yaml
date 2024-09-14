@@ -2,9 +2,9 @@ name: Ping-Website
 
 on:
   schedule:
-    # - cron: '*/5 * * * *'
     # Runs every minute
-    - cron: '* * * * *'
+    # - cron: '* * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
