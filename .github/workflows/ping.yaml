@@ -5,6 +5,7 @@ on:
     # - cron: '*/5 * * * *'
     # Runs every minute
     - cron: '* * * * *'
+  workflow_dispatch:
 
 jobs:
   ping:
