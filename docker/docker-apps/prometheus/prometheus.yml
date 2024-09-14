@@ -7,6 +7,6 @@ scrape_configs:
   static_configs:
   - targets: ['localhost:9090']
 
-- job_name: 'nodejs-app'
+- job_name: 'aams-not-found'
   static_configs:
-  - targets: ['localhost:3000'] # Replace with your Node.js app's metrics endpoint
+  - targets: ['https://aams-not-found.onrender.com']

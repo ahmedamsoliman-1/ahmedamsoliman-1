@@ -5,6 +5,12 @@ const config = require("./utils/config");
 const utils = require('./utils/utils');
 const middlewares = require("./utils/middlewares");
 
+const { setupMetrics } = require('./metrics');
+
+
+setupMetrics(app); 
+
+
 const cors = require('cors');
 app.use(middlewares.addTimestamp);
 app.use(middlewares.logger);
