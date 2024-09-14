@@ -1,11 +1,11 @@
-# Use official Prometheus image as the base
+# Use the official Prometheus image
 FROM prom/prometheus:latest
 
-# Add Prometheus configuration file
+# Add Prometheus configuration file to the container
 COPY prometheus.yml /etc/prometheus/prometheus.yml
 
 # Expose the default Prometheus port
 EXPOSE 9090
 
-# Start Prometheus server
-CMD [ "/bin/prometheus", "--config.file=/etc/prometheus/prometheus.yml" ]
+# Start Prometheus with the correct command
+CMD ["--config.file=/etc/prometheus/prometheus.yml"]
