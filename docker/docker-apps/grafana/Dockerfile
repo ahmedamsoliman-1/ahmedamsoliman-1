@@ -2,8 +2,8 @@
 FROM grafana/grafana:latest
 
 # Set environment variables for admin credentials
-ENV GF_SECURITY_ADMIN_USER=${ADMIN_USER}
-ENV GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASS}
+ENV GF_SECURITY_ADMIN_USER=admin
+ENV GF_SECURITY_ADMIN_PASSWORD=admin
 
 # Expose the default Grafana port
 EXPOSE 3000
