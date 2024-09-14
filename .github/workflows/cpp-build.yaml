@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: cpp-mode-bin
-        path: apps/Cpp/cpp-mod/cpp-mode-bin
+        path: apps/Cpp/cpp-mod/build/cpp-mode-bin
