@@ -9,7 +9,7 @@ scrape_configs:
 
 - job_name: 'aams-not-found'
   static_configs:
-  - targets: ['aams-not-found.onrender.com:443']
+  - targets: ['aams-nfound.onrender.com:443']
   scheme: https
 
 - job_name: 'personal-cloud'
