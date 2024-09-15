@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1>AAMS Cloud - Service Health</h1>
+</div>
+
+<div class="container">
+    <!-- Statistics Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Health Check Summary</h4>
+                <p>Total Services: <strong><%= services.length %></strong></p>
+                <p>Healthy: <strong><%= services.filter(service => service.status === 200).length %></strong></p>
+                <p>Unhealthy: <strong><%= services.filter(service => service.status !== 200 && service.status !== 'Timeout').length %></strong></p>
+                <p>Timeouts: <strong><%= services.filter(service => service.status === 'Timeout').length %></strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Health Table -->
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>Platform</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% services.forEach((service, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= service.name %></td>
+                            <td><a href="<%= service.url %>" target="_blank" class="text-primary"><%= service.url %></a></td>
+                            <td><%= service.platform %></td>
+                            <td>
+                                <% if (service.status === 200) { %>
+                                    <span class="badge badge-success">Healthy</span>
+                                <% } else if (service.status === 'Timeout') { %>
+                                    <span class="badge badge-warning">Timeout</span>
+                                <% } else { %>
+                                    <span class="badge badge-danger">Unhealthy</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Health Check Summary</h4>
+                <p>Total Services: <strong><%= services.length %></strong></p>
+                <p>Healthy: <strong><%= services.filter(service => service.status === 200).length %></strong></p>
+                <p>Unhealthy: <strong><%= services.filter(service => service.status !== 200 && service.status !== 'Timeout').length %></strong></p>
+                <p>Timeouts: <strong><%= services.filter(service => service.status === 'Timeout').length %></strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<%- include('partials/footer') %>
+
+<!-- Optional: Include Bootstrap CSS if not already included -->

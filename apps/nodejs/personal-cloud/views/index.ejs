@@ -56,6 +56,9 @@
                 <div class="card-body">
                     <p class="card-title" style="font-size: 1.2rem; font-weight: 600;"><%= service.name %></p>
                     <a href="<%= service.url %>" class="btn btn-light mt-3">Visit</a>
+                    <% if (service.repo) { %>
+                        <a href="<%= service.repo %>" class="btn btn-light mt-3">Code</a>
+                    <% } %>
                 </div>
             </div>
         </div>

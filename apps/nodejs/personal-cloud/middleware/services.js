@@ -1,9 +1,8 @@
 const axios = require('axios');
-const fs = require('fs');
 const ll = require('./utils');
 const config = require('../middleware/config');
 
-middlewares = {}
+
 
 const getRenderDeployments = async () => {
     const response = await axios.get('https://api.render.com/v1/services?limit=20', {
@@ -14,11 +13,15 @@ const getRenderDeployments = async () => {
     
     const services = response.data.map(service => ({
         name: service.service.name,
-        url: `https://${service.service.name}.onrender.com/`
+        repo: config.BASE + service.service.rootDir,
+        url: `https://${service.service.name}.onrender.com/`,
     }));
     
+
     return services;
 };
+
+
 const getVercelDeployments = async () => {
     const response = await axios.get('https://api.vercel.com/v9/projects', {
         headers: {
@@ -36,10 +39,6 @@ const getVercelDeployments = async () => {
 };
 
 
-
-
-
-
 const getGithubPagesDeployments = async () => {
     try {
         const response = await axios.get('https://api.github.com/user/repos', {
@@ -48,14 +47,14 @@ const getGithubPagesDeployments = async () => {
             }
         });
 
-        // Extract necessary data: repository name and URL, but only include repos with a homepage URL
         const repositories = response.data
-            .filter(repo => repo.homepage) // Only include repos with a homepage URL
+            .filter(repo => repo.homepage)
             .map(repo => ({
                 name: repo.full_name,
                 url: repo.homepage,
                 repo: repo.html_url,
             }));
+        
 
         return repositories;
     } catch (error) {
@@ -70,7 +69,7 @@ const getGithubPagesDeployments = async () => {
 
 
 
-
+middlewares = {}
 
 
 middlewares.fetchAllServices = async (req, res, next) => {

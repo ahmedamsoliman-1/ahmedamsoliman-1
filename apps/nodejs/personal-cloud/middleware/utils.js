@@ -39,16 +39,20 @@ middlewares.logger = function(req, res, next) {
 
 
 middlewares.llog = function(message, cat) {
-    const time = `${magenta}${new Date(Date.now()).toLocaleString()}${reset}`;
-    switch (cat) {
-        case 'error':
-            cat = `${yellow}${'ERROR'}${reset}`;
-            console.log(`${time}-${cat} ${red}${message}${reset}`);
-            break;
-        default:
-            cat = `${yellow}${'INFO'}${reset}`;
-            console.log(`${time}-${cat} ${green}${message}${reset}`);
-            break;
+    if (typeof(message) === 'object') {
+        console.log(message);
+    } else {
+        const time = `${magenta}${new Date(Date.now()).toLocaleString()}${reset}`;
+        switch (cat) {
+            case 'error':
+                cat = `${yellow}${'ERROR'}${reset}`;
+                console.log(`${time}-${cat} ${red}${message}${reset}`);
+                break;
+            default:
+                cat = `${yellow}${'INFO'}${reset}`;
+                console.log(`${time}-${cat} ${green}${message}${reset}`);
+                break;
+        }
     }
 }
 
