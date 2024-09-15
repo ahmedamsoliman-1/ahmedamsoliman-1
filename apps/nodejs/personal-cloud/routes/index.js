@@ -49,7 +49,7 @@ router.get('/github', middlewares.fetchGithubServices, async (req, res) => {
 
 
 router.get('/health', middlewares.fetchAllServices, async (req, res) => {
-    const timeout = 3000; // 5 seconds timeout
+    const timeout = 5000; 
     const checkHealth = async (url) => {
         try {
             const response = await axios.get(url, { timeout });
