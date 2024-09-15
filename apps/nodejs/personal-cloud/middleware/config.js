@@ -18,6 +18,7 @@ const envs = {
     PORT: process.env.PORT,
     VERCEL_TOKEN: process.env.VERCEL_TOKEN,
     RENDER_TOKEN: process.env.RENDER_TOKEN,
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
 }
 
 module.exports = envs;

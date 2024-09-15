@@ -74,12 +74,21 @@ services:
   dockerfilePath: ./Dockerfile
   rootDir: apps/go/aams-glinktree
 - type: web
-  name: aams-nfound-cloud
+  name: aams-nf404
   runtime: docker
   repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
   plan: free
   region: oregon
   dockerContext: .
   dockerfilePath: ./Dockerfile
-  rootDir: apps/nodejs/not-found
+  rootDir: apps/nodejs/aams-nf404
+- type: web
+  name: node-templates
+  runtime: docker
+  repo: https://github.com/ahmedamsoliman-1/ahmedamsoliman-1
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: ./Dockerfile
+  rootDir: apps/nodejs/node-templates
 version: "1"

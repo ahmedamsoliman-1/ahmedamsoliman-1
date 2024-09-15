@@ -25,6 +25,14 @@
                 </div>
             </div>
         </div>
+        <div class="card text-center" style="min-height: 300px;">
+            <div class="btn btn-light">
+                <img src="/img/gitthub.png" alt="Render Image" class="card-img-top" style="max-width:100%; height:auto;">
+                <div>
+                    <a href="/github" class="btn btn-success mt-3">On GitHub Pages</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -34,6 +42,27 @@
 <div class="jumbotron">
     <a href="#" class="btn btn-danger"><%= node %></a>
 </div>
+
+
+
+<div class="container">
+    <div class="row">
+        <% services.forEach(service => { %>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center" style="min-height: 250px; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 12px; overflow: hidden;">
+                <div class="card-header" style="background-color: <% if (service.platform === 'render') { %> #003366 <% } else if (service.platform === 'vercel') { %> #000 <% } else if (service.platform === 'github') { %> #b22222 <% } %>; color: white; padding: 10px;">
+                    <span style="font-size: 1rem; font-weight: bold;"><%= service.platform === 'render' ? 'Render' : (service.platform === 'vercel' ? 'Vercel' : 'GitHub') %></span>
+                </div>
+                <div class="card-body">
+                    <p class="card-title" style="font-size: 1.2rem; font-weight: 600;"><%= service.name %></p>
+                    <a href="<%= service.url %>" class="btn btn-light mt-3">Visit</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
+
 
 <%- include('partials/footer') %>
 
