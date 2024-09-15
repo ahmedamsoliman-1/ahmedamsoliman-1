@@ -28,6 +28,7 @@
                         <th>Name</th>
                         <th>URL</th>
                         <th>Platform</th>
+                        <th>Code</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <td><%= service.name %></td>
                             <td><a href="<%= service.url %>" target="_blank" class="text-primary"><%= service.url %></a></td>
                             <td><%= service.platform %></td>
+                            <td><%= service.status %></td>
                             <td>
                                 <% if (service.status === 200) { %>
                                     <span class="badge badge-success">Healthy</span>

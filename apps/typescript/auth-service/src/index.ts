@@ -27,6 +27,10 @@ mongoose.connect(mongoURI!)
   .then(() => logger.info('MongoDB connected'))
   .catch(err => logger.error('MongoDB connection error', err));
 
+app.get('/', (req, res) => {
+  res.send('AAMS Auth Server is app');
+});
+
 app.post('/api/auth/register', register);
 app.post('/api/auth/login', login);
 
