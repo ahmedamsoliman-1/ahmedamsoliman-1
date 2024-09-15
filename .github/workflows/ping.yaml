@@ -1,9 +1,8 @@
-name: Ping-Website
+name: ping-websites
 
 on:
   schedule:
-    # Runs every minute
-    # - cron: '* * * * *'
+    # Runs every 5 minutes
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
@@ -15,6 +14,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Ping the website
+    - name: Ping the websites
       run: |
-        curl -s -o /dev/null -w "%{http_code}" https://aams-personal-cloud.onrender.com
+        websites=(
+          "https://aams-personal-cloud.onrender.com"
+          "https://aams-cvviewer-resume-dev.onrender.com"
+          "https://aams-cvviewer-resume-devops.onrender.com"
+          "https://aams-cvviewer-resume-dataeng.onrender.com"
+          "https://aams-cvviewer-resume-ts.onrender.com"
+          "https://aams-glinktree.onrender.com"
+        )
+        for website in "${websites[@]}"; do
+          echo "Pinging $website"
+          http_code=$(curl -s -o /dev/null -w "%{http_code}" "$website")
+          echo "$website returned status code $http_code"
+        done
