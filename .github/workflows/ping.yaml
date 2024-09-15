@@ -1,4 +1,4 @@
-name: ping-websites
+name: aams-ping-websites
 
 on:
   schedule:
