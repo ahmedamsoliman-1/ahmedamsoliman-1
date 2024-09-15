@@ -17,6 +17,12 @@ jobs:
     - name: Ping the websites
       run: |
         websites=(
+          "https://aams-adminer.onrender.com"
+          "https://aams-grafana.onrender.com"
+          "https://aams-prometheus.onrender.com"
+          "https://ahmedamsoliman-1.onrender.com"
+          "https://pghero-dpg-crff8bqj1k6c73dln9c0-a.onrender.com"
+          "https://aams-blog-app.onrender.com"
           "https://aams-personal-cloud.onrender.com"
           "https://aams-cvviewer-resume-dev.onrender.com"
           "https://aams-cvviewer-resume-devops.onrender.com"
