@@ -11,6 +11,7 @@
       "!BRANCH_NAME"
     ],
     "svg.preview.background": "dark-transparent",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "cmake.sourceDirectory": "/Users/ahmed.soliman/workspace/ahmed/ahmedamsoliman-1/apps/Cpp/CppND-Capstone-Snake-Game"
   }
   
