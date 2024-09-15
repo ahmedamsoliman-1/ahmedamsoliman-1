@@ -19,7 +19,7 @@ const port = process.env.NODE_PORT || 3004;
 const ll = require('./middleware/utils');
 
 const index = require("./routes/index");
-const k8 = require("./routes/k8");
+// const k8 = require("./routes/k8");
 
 const cors = require('cors');
 
@@ -34,9 +34,6 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 app.use(index);
-app.use(k8);
-
-
 
 
 
@@ -47,7 +44,7 @@ app.use(express.static(__dirname + "/public"));
 app.listen(port, () => {
   ll.llog("Server Information:");
   console.table({
-    "App Name": 'Avrioc Cloud',
+    "App Name": 'AAMS-Personal-Cloud',
     "Server Name": node,
     "Start Time": currentTime,
     "Server URL": `http://${ip}:${port}`,
