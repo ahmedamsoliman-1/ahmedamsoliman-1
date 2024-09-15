@@ -41,13 +41,22 @@ function extractServiceDetails(yamlFilePath) {
         return [];
     }
 }
+const getRenderProjects = async () => {
+    const response = await axios.get('https://api.render.com/v1/services?limit=20', {
+        headers: {
+            Authorization: `Bearer ${config.RENDER_TOKEN}`
+        }
+    });
+    return response.data;
+}
 router.get('/render', async (req, res) => {
-    const serviceDetails = extractServiceDetails(render_blueprint);
-    ll.llog(`Render services return :: Total ${serviceDetails.length}`)
+
+    const services = await getRenderProjects();
+    ll.llog(`Render services return :: Total ${services.length}`)
     res.render('render', { 
         pageTitle: 'Render', 
         node: node, 
-        services: serviceDetails 
+        services: services 
     });
 });
 

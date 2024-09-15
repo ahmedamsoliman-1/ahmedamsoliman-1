@@ -16,7 +16,8 @@ if (node === 'AVRAST3412') {
 const envs = {
     ENV: process.env.ENV,
     PORT: process.env.PORT,
-    VERCEL_TOKEN: process.env.VERCEL_TOKEN
+    VERCEL_TOKEN: process.env.VERCEL_TOKEN,
+    RENDER_TOKEN: process.env.RENDER_TOKEN,
 }
 
 module.exports = envs;
