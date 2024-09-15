@@ -21,7 +21,8 @@ router.get('/', (req, res) => {
 
 
 
-const render_blueprint = path.join('../../../render.yaml');
+// const render_blueprint = path.join('../../../render.yaml');
+const render_blueprint = path.join('render.yaml');
 function extractServiceDetails(yamlFilePath) {
     try {
         // Load the YAML file

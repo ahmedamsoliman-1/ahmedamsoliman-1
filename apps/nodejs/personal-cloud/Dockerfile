@@ -7,6 +7,7 @@ COPY package.json ./
 RUN npm install
 
 COPY . .
+COPY ../../../render.yaml .
 
 EXPOSE 3004
 
