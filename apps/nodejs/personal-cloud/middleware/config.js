@@ -19,6 +19,7 @@ const envs = {
     VERCEL_TOKEN: process.env.VERCEL_TOKEN,
     RENDER_TOKEN: process.env.RENDER_TOKEN,
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+    HEALTH_CHECK_TIMEOUT: process.env.HEALTH_CHECK_TIMEOUT || 5000,
     BASE: 'https://github.com/ahmedamsoliman-1/ahmedamsoliman-1/tree/main/',
 }
 

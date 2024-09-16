@@ -5,7 +5,7 @@ const axios = require('axios');
 const router = express.Router();
 const node = require("os").hostname();
 const svgs = require('../SVGs');
-
+const Config = require('../middleware/config');
 const ll = require('../middleware/utils');
 const middlewares = require('../middleware/services');
 
@@ -46,10 +46,23 @@ router.get('/github', middlewares.fetchGithubServices, async (req, res) => {
 });
 
 
+router.get('/docker', middlewares.fetchDockerServices, async (req, res) => {
+    ll.llog(`Docker services return :: Total ${req.services.length}`)
+    res.render('svc', {
+        pageTitle: 'Docker',
+        node: node,
+        services: req.services
+    });
+});
+
+
 
 
 router.get('/health', middlewares.fetchAllServices, async (req, res) => {
-    const timeout = 5000; 
+    const timeout = Config.HEALTH_CHECK_TIMEOUT; 
+    ll.llog(`Health check for ${req.services.length} services`);
+    ll.llog(`Health check timeout: ${timeout} ms`);
+
     const checkHealth = async (url) => {
         try {
             const response = await axios.get(url, { timeout });
@@ -58,7 +71,10 @@ router.get('/health', middlewares.fetchAllServices, async (req, res) => {
             if (error.code === 'ECONNABORTED') {
                 return { url, status: 'Timeout' };
             } else {
-                return { url, status: error.response ? error.response.status : 'Error' };
+                return { 
+                    url, 
+                    status: error.response ? error.response.status : 'Error' 
+                };
             }
         }
     };
@@ -84,13 +100,33 @@ router.get('/health', middlewares.fetchAllServices, async (req, res) => {
 
 
 router.get('/', middlewares.fetchAllServices, (req, res) => {
+    // Group services by platform
+    const platforms = req.services.reduce((acc, service) => {
+        acc[service.platform] = acc[service.platform] || [];
+        acc[service.platform].push(service);
+        return acc;
+    }, {});
+
+    // Define platform colors with the updated color scheme
+    const platformColors = {
+        // orange
+        render: '#FFA500',  // Orange
+        render: '#FFA500',  // Dark blue
+        vercel: '#000000',  // Black
+        github: '#b22222',  // Dark red
+        macdocker: '#28a745'
+    };
+
     ll.llog(`Combined services return :: Total ${req.services.length}`);
     ll.llog(`Main page rendered on ${node}`);
+
+    // Render the index page with grouped services and colors
     res.render('index', {
-        pageTitle: '',
+        pageTitle: 'Service Dashboard',
         node: node,
         svgs: svgs,
-        services: req.services
+        platforms: platforms,
+        platformColors: platformColors
     });
 });
 

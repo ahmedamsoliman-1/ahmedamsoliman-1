@@ -55,24 +55,42 @@
 
 <div class="container">
     <div class="row">
-        <% services.forEach(service => { %>
-        <div class="col-md-3 mb-4">
-            <div class="card text-center" style="min-height: 250px; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 12px; overflow: hidden;">
-                <div class="card-header" style="background-color: <% if (service.platform === 'render') { %> #003366 <% } else if (service.platform === 'vercel') { %> #000 <% } else if (service.platform === 'github') { %> #b22222 <% } %>; color: white; padding: 10px;">
-                    <span style="font-size: 1rem; font-weight: bold;"><%= service.platform === 'render' ? 'Render' : (service.platform === 'vercel' ? 'Vercel' : 'GitHub') %></span>
-                </div>
-                <div class="card-body">
-                    <p class="card-title" style="font-size: 1.2rem; font-weight: 600;"><%= service.name %></p>
-                    <a href="<%= service.url %>" class="btn btn-light mt-3">Visit</a>
-                    <% if (service.repo) { %>
-                        <a href="<%= service.repo %>" class="btn btn-light mt-3">Code</a>
-                    <% } %>
+        <% Object.keys(platforms).forEach(platform => { %>
+            <div class="col-12 mb-4">
+                <h2 class="text-center mb-4" style="color: <%= platformColors[platform] %>;">
+                    <%= platform.charAt(0).toUpperCase() + platform.slice(1) %> Services
+                </h2>
+                <div class="row">
+                    <% platforms[platform].forEach(service => { %>
+                        <div class="col-md-3 mb-4">
+                            <div class="card text-center" style="min-height: 250px; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 12px; overflow: hidden;">
+                                <div class="card-header" style="background-color: <%= platformColors[platform] %>; color: white; padding: 10px;">
+                                    <%= platform.charAt(0).toUpperCase() + platform.slice(1) %>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-title" style="font-size: 1.2rem; font-weight: 600;"><%= service.name %></p>
+                                    <a href="<%= service.url %>" class="btn btn-light mt-3">Visit</a>
+                                    <% if (service.repo) { %>
+                                        <a href="<%= service.repo %>" class="btn btn-light mt-3">Code</a>
+                                    <% } %>
+                                    <% if (service.port) { %>
+                                        <a href="#" class="btn btn-light mt-3"><%= service.port %></a>
+                                    <% } %>
+                                    <% if (service.status) { %>
+                                        <a href="#" class="btn btn-light mt-3"><%= service.status %></a>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
                 </div>
             </div>
-        </div>
         <% }); %>
     </div>
 </div>
+
+
+
 
 
 <%- include('partials/footer') %>

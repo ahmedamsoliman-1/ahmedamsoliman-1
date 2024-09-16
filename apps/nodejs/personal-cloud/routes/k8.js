@@ -109,7 +109,6 @@ async function listServices(req, res) {
 
   try {
     const response = await k8sCoreApi.listNamespacedService(namespace);
-    console.log(response);
     const serviceInfo = response.body.items.map(service => ({
       name: service.metadata.name,
       type: service.spec.type,
