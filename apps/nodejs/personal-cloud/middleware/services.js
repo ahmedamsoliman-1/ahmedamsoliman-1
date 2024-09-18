@@ -37,18 +37,12 @@ const getDockerServices = async () => {
         return mappedContainers;
 
     } catch (error) {
-
-        // Handle specific Docker connection error
         if (error.code === 'ENOENT' && error.message.includes('/var/run/docker.sock')) {
             ll.llog('Docker is not running or Docker socket file is missing.');
-
-            // Return an empty array if Docker is not available
             return [];
         } else {
             // Handle other errors
             console.error('Error fetching Docker containers:', error);
-
-            // Return an empty array in case of other errors as well
             return [];
         }
     }

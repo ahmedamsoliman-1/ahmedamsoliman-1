@@ -12,14 +12,15 @@
             "args": []
         },
         {
-            "name": "chainlit_app_2",
+            "name": "sample_data",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/apps/python/chainlit/chainlit_app_2/app.py",
+            "program": "${env:HOME}/.pyenv/versions/boiler/bin/chainlit",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "justMyCode": true,
-            "args": []
+            "args": [
+                "run",
+                "/Users/ahmed.soliman/workspace/ahmed/ahmedamsoliman-1/apps/python/chainlit/sample_data/main.py"
+            ],
         },
         {
             "name": "flask-app-1",
