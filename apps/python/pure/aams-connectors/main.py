@@ -1,7 +1,15 @@
-from dbs import AstraDB, CassandraDB, MongoDB, PostgresDB, ElasticsearchDB
+from dbs import AstraDB, CassandraDB, MongoDB, PostgresDB, ElasticsearchDB, ElasticCloudDB
 from utils import setup_logger
 
 logger = setup_logger('info')
+
+
+
+
+logger.debug("escloudDB")
+escloud_client = ElasticCloudDB()
+escloud_client.db_info()
+
 
 
 

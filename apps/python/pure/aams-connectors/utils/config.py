@@ -3,7 +3,9 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+dotenv_path = os.path.join('../../../../env', 'connectors.env')
+load_dotenv(dotenv_path=dotenv_path)
+
 
 class Config:
     """Configuration class for managing environment variables."""
@@ -31,3 +33,9 @@ class Config:
     ES_USER = os.getenv('ES_USER')
     ES_PASSWORD = os.getenv('ES_PASSWORD')
     ES_CERT_IO_BUNDLE = os.getenv('ES_CERT_IO_BUNDLE')
+
+    ESCLOUD_CLOUD_ID = os.getenv('ESCLOUD_CLOUD_ID')
+    ESCLOUD_CLOUD_APY_KEY = os.getenv('ESCLOUD_CLOUD_APY_KEY')
+    ESCLOUD_USERNAME = os.getenv('ESCLOUD_USERNAME')
+    ESCLOUD_PASSWORD = os.getenv('ESCLOUD_PASSWORD')
+

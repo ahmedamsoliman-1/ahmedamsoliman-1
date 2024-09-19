@@ -17,6 +17,8 @@ ssl_context = SSLContext(PROTOCOL_TLS_CLIENT)
 ssl_context.verify_mode = CERT_REQUIRED
 ssl_context.load_verify_locations(cafile=ES_CERT_IO_BUNDLE)
 
+create_step_counter = 0
+
 class Feedback:
     forId: str
     value: Literal[0, 1]
@@ -65,12 +67,13 @@ class ElasticsearchDataLayer(cl_data.BaseDataLayer):
 
         # Prepare the feedback document
         feedback_doc = {
+            "id": feedback_id,
             "value": feedback_value,
             "comment": feedback_comment
         }
 
         try:
-            # Update the specific step within the thread
+            # Update the specific step within the thread to set feedback directly
             response = await es.update(
                 index=INDEX_NAME,
                 id=thread_id,
@@ -80,18 +83,13 @@ class ElasticsearchDataLayer(cl_data.BaseDataLayer):
                             if (ctx._source.steps != null) {
                                 for (step in ctx._source.steps) {
                                     if (step.id == params.step_id) {
-                                        if (step.feedbacks == null) {
-                                            step.feedbacks = new HashMap();
-                                        }
-                                        // Ensure feedback ID is unique
-                                        step.feedbacks[params.feedback_id] = params.feedback_doc;
+                                        step.feedbacks = params.feedback_doc;
                                     }
                                 }
                             }
                         """,
                         "params": {
                             "step_id": step_id,
-                            "feedback_id": feedback_id,
                             "feedback_doc": feedback_doc
                         }
                     }
@@ -104,6 +102,7 @@ class ElasticsearchDataLayer(cl_data.BaseDataLayer):
         except Exception as e:
             # Handle errors (e.g., log or re-raise the exception)
             raise RuntimeError(f"Error updating feedback: {e}")
+
 
 
     
@@ -168,19 +167,15 @@ class ElasticsearchDataLayer(cl_data.BaseDataLayer):
             if step.get("disableFeedback") is None or step.get("disableFeedback") is True:
                 step["disableFeedback"] = False
             
-            # If the step is the first one, it should be used to set or update the thread's name
             if step.get("name") and step.get("createdAt"):
-                # Fetch the existing thread to update its name
                 thread = await self.get_thread(thread_id)
                 if thread:
-                    # Check if the thread name is empty and update it
                     if not thread.get("name"):
                         await self.update_thread(
                             thread_id=thread_id,
                             name=step.get("name")
                         )
                     
-                    # Add the step to the thread
                     await es.update(
                         index=INDEX_NAME,
                         id=thread_id,
@@ -192,7 +187,6 @@ class ElasticsearchDataLayer(cl_data.BaseDataLayer):
                         }
                     )
         except NotFoundError:
-            # Handle case where thread is not found
             pass
 
 
@@ -209,9 +203,9 @@ class ElasticsearchDataLayer(cl_data.BaseDataLayer):
     async def get_thread(self, thread_id: str):
         try:
             response = await es.get(index=INDEX_NAME, id=thread_id)
-            logger.info(f"Elasticsearch response: {response}")
 
             if "_source" in response:
+                logger.info(f"Elasticsearch response: {response["_source"]["name"]}")
                 thread = response["_source"]
 
                 # Ensure the document type is 'thread'
