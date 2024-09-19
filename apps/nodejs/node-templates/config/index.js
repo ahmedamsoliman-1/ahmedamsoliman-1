@@ -1,11 +1,21 @@
 const dotenv = require('dotenv');
+const node = require("os").hostname();
 process.env.ENV = process.env.ENV || 'development';
-const ENVPATH = process.env.ENVPATH || '.env';
+// const ENVPATH = process.env.ENVPATH || '.env';
 
-const envFound = dotenv.config({ path: ENVPATH });
-if (!envFound) {
-  throw new Error('.env file not found');
+if (node === 'AVRAST3412') {
+  const path = '../../../env/nodetemp.env'
+  dotenv.config({ path: path });
+  console.log(`Loading env from ${path}`)
+} else {
+  ll.llog(`Loading env from process.env`)
+  dotenv.config();
 }
+
+// // const envFound = dotenv.config({ path: ENVPATH });
+// if (!path) {
+//   throw new Error('.env file not found');
+// }
 const env = process.env;
 
 const configObj = {
