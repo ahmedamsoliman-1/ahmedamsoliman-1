@@ -6,16 +6,16 @@ logger = setup_logger('info')
 
 
 
-# logger.debug("escloudDB")
-# escloud_client = ElasticCloudDB()
-# escloud_client.db_info()
+logger.debug("escloudDB")
+escloud_client = ElasticCloudDB()
+escloud_client.db_info()
 
 
 
 
-logger.debug("ElasticsearchDB")
-es_client = ElasticsearchDB()
-es_client.db_info()
+# logger.debug("ElasticsearchDB")
+# es_client = ElasticsearchDB()
+# es_client.db_info()
 
 
 

@@ -3,7 +3,7 @@
 import os
 from dotenv import load_dotenv
 
-dotenv_path = os.path.join('../../../../env', 'connectors.env')
+dotenv_path = os.path.join('env', 'connectors.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 
