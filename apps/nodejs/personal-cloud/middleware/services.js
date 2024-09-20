@@ -7,6 +7,36 @@ const docker = new Docker();
 
 
 
+const fs = require('fs').promises;
+
+const getManualServices = async () => {
+    try {
+        // Read the file contents
+        const data = await fs.readFile('./pf.json', 'utf-8');
+        
+        // Parse the JSON data
+        const services = JSON.parse(data);
+
+        // Map the services to the same format as Docker services
+        const mappedServices = Object.entries(services).map(([key, service]) => {
+            return {
+                id: key, // Use the key as an ID for manual services
+                name: service.name,
+                status: 'Manual',
+                port: '',
+                url: service.url
+            };
+        });
+
+        return mappedServices;
+
+    } catch (error) {
+        console.error('Error reading manual services file:', error);
+        return [];
+    }
+};
+
+
 const getDockerServices = async () => {
     try {
         // Attempt to list Docker containers
@@ -128,19 +158,22 @@ middlewares.fetchAllServices = async (req, res, next) => {
             services_render, 
             services_vercel, 
             services_github_pages, 
-            services_mac_docker
+            services_mac_docker,
+            services_manuall
         ] = await Promise.all([
             getRenderDeployments(), 
             getVercelDeployments(), 
             getGithubPagesDeployments(),
-            getDockerServices()
+            getDockerServices(),
+            getManualServices()
         ]);
 
         req.services = [
-            ...services_render.map(service => ({ ...service, platform: 'render' })),
-            ...services_vercel.map(service => ({ ...service, platform: 'vercel' })),
-            ...services_github_pages.map(service => ({ ...service, platform: 'github' })),
-            ...services_mac_docker.map(service => ({ ...service, platform: 'macdocker' }))
+            // ...services_render.map(service => ({ ...service, platform: 'render' })),
+            // ...services_vercel.map(service => ({ ...service, platform: 'vercel' })),
+            // ...services_github_pages.map(service => ({ ...service, platform: 'github' })),
+            // ...services_mac_docker.map(service => ({ ...service, platform: 'macdocker' })),
+            ...services_manuall.map(service => ({ ...service, platform: 'dgxk8' })),
         ];
         
         next();

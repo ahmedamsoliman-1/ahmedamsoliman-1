@@ -47,6 +47,7 @@ router.get('/github', middlewares.fetchGithubServices, async (req, res) => {
 
 
 router.get('/docker', middlewares.fetchDockerServices, async (req, res) => {
+    console.log(req.services);
     ll.llog(`Docker services return :: Total ${req.services.length}`)
     res.render('svc', {
         pageTitle: 'Docker',
@@ -85,6 +86,7 @@ router.get('/health', middlewares.fetchAllServices, async (req, res) => {
         ...service,
         status: healthChecks[index].status
     }));
+    console.log(servicesWithStatus);
 
     ll.llog(`Total ${servicesWithStatus.length} svc to check for health`);
 
@@ -114,6 +116,7 @@ router.get('/', middlewares.fetchAllServices, (req, res) => {
         render: '#FFA500',  // Dark blue
         vercel: '#000000',  // Black
         github: '#b22222',  // Dark red
+        dgxk8: '#00aced',
         macdocker: '#28a745'
     };
 
