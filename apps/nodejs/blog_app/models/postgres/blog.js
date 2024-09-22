@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config();
 const ll = require('../../middleware/utils');
+let config = require('../../config/config');
 
-const sequelize = new Sequelize(process.env.POSTGRES_DB_URI, {
+
+const sequelize = new Sequelize(config.POSTGRES_DB_URI, {
   dialect: 'postgres',
   protocol: 'postgres',
   dialectOptions: {

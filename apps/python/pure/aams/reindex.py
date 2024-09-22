@@ -102,6 +102,22 @@ if __name__ == "__main__":
     }
     
 
-    alias_name = 'omnium_vega_chats_v_1_3___alias'
+    # # Modifiy index mappins
+    # es_manager.modify_index(old_index, new_index, new_mapping)
+    
+    
+    
+    
+    
 
-    es_manager.modify_index(old_index, new_index, new_mapping, alias_name)
+
+    # Update settings:
+    index = 'new_index_name'
+    settings = {
+        "index": {
+            "number_of_replicas": 3
+        }
+    }
+
+    
+    es_manager.set_index_settings(index, settings)

@@ -4,7 +4,8 @@ const dotenv = require('dotenv');
 const ll = require('../middleware/utils');
 
 if (node === 'AVRAST3412') {
-    const path = '../../../env/aamscloud.env'
+    const path = '/Users/ahmed.soliman/workspace/ahmed/ahmedamsoliman-1/env/aamdcloud/.env'
+    console.log(`Loading env from ${path}`)
     dotenv.config({ path: path });
     ll.llog(`Loading env from ${path}`)
 } else {

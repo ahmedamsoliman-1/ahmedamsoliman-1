@@ -1,3 +1,4 @@
+from elasticsearch import exceptions
 from dbs import ElasticsearchDB
 from utils import setup_logger
 
@@ -63,6 +64,13 @@ class ESIndexManager:
         Check if an index exists in Elasticsearch.
         """
         return self.es_client.indices.exists(index=index_name)
+    
+    def put_settings(self, index_name, settings):
+        """
+        Update settings for an existing index.
+        """
+        self.es_client.indices.close(index=index_name)
+        self.es_client.indices.put_settings(index=index_name, body=settings)
 
 
 class ElasticSearchManager:
@@ -114,3 +122,33 @@ class ElasticSearchManager:
         # Step 3: Reindex data from source_index to target_index
         self.index_manager.reindex_data(source_index, target_index)
         es_manager_logger.info(f"Reindexing from '{source_index}' to '{target_index}' completed.")
+    
+    def set_index_settings(self, index_name, new_settings):
+        """
+        Update the settings of an existing index.
+        """
+        if self.index_manager.index_exists(index_name):
+            try:
+                # Retrieve existing settings (if you need them)
+                existing_settings = self.index_manager.get_index_info(index_name)[index_name]['settings']
+                es_manager_logger.info(f"Existing settings for index '{index_name}': {existing_settings}")
+
+                # Ensure new_settings is structured correctly (flattened)
+                flat_settings = {}
+                for key, value in new_settings['index'].items():
+                    flat_settings[key] = value
+
+                # Update the index settings
+                self.index_manager.put_settings(index_name, flat_settings)
+
+                es_manager_logger.info(f"Updated settings for index '{index_name}'.")
+
+                updated_settings = self.index_manager.get_index_info(index_name)[index_name]['settings']
+                es_manager_logger.info(f"Existing settings for index '{index_name}': {updated_settings}")
+
+            except exceptions.NotFoundError:
+                es_manager_logger.error(f"Index '{index_name}' not found.")
+            except exceptions.ElasticsearchException as e:
+                es_manager_logger.error(f"Error updating settings for index '{index_name}': {e}")
+        else:
+            es_manager_logger.info(f"Index '{index_name}' does not exist.")

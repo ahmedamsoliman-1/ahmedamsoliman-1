@@ -23,8 +23,8 @@ const getManualServices = async () => {
                 id: key, // Use the key as an ID for manual services
                 name: service.name,
                 status: 'Manual',
-                port: '',
-                url: service.url
+                url: service.url,
+                path: service.path
             };
         });
 

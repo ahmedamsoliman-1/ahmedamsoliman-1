@@ -47,7 +47,6 @@ router.get('/github', middlewares.fetchGithubServices, async (req, res) => {
 
 
 router.get('/docker', middlewares.fetchDockerServices, async (req, res) => {
-    console.log(req.services);
     ll.llog(`Docker services return :: Total ${req.services.length}`)
     res.render('svc', {
         pageTitle: 'Docker',

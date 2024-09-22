@@ -3,7 +3,7 @@ var app = express();
 var expressSanitizer = require("express-sanitizer");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-require("dotenv").config();
+var config = require('./config/config');
 var port = process.env.PORT || 3000;
 var ipAddress = require("ip").address();
 var hostName = require("os").hostname();
@@ -99,7 +99,7 @@ app.listen(port, () => {
   ll.llog("Service Information:");
   console.table({
     "App Name": 'Blog App Cover Letters',
-    "DB": process.env.DB_TYPE,
+    "DB": config.DB_TYPE,
     "Server Name": `${hostName}/${ipAddress}`,
     "Start Time": new Date().toLocaleString(),
     "Server URL": `http://localhost:${port}`,

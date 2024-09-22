@@ -2,28 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "astra_db",
+            "name": "aams-main",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/apps/python/pure/astra_db/main.py",
+            "program": "${workspaceFolder}/apps/python/pure/aams/main.py",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "justMyCode": true,
-            "args": []
         },
         {
-            "name": "sample_data",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${env:HOME}/.pyenv/versions/boiler/bin/chainlit",
-            "console": "integratedTerminal",
-            "args": [
-                "run",
-                "/Users/ahmed.soliman/workspace/ahmed/ahmedamsoliman-1/apps/python/chainlit/sample_data/main.py"
-            ],
-        },
-        {
-            "name": "Python: reindex",
+            "name": "aams-reindex",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/apps/python/pure/aams/reindex.py",
@@ -32,13 +20,34 @@
             "justMyCode": true,
         },
         {
-            "name": "Python: managers-main",
-            "type": "debugpy",
+            "name": "personal-cloud",
+            "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}/apps/python/pure/aams/main.py",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "justMyCode": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/personal-cloud/app.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/personal-cloud"
+        },
+        {
+            "name": "aams-nf404",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/aams-nf404/app.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/aams-nf404"
+        },
+        {
+            "name": "node-templates",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/apps/nodejs/node-templates/server.js",
+            "cwd": "${workspaceFolder}/apps/nodejs/node-templates"
         },
         {
             "name": "flask-app-1",
@@ -79,36 +88,6 @@
             ],
             "program": "${workspaceFolder}/apps/nodejs/aams-links/src/app.js",
             "cwd": "${workspaceFolder}/apps/nodejs/aams-links"
-        },
-        {
-            "name": "personal-cloud",
-            "type": "node",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/apps/nodejs/personal-cloud/app.js",
-            "cwd": "${workspaceFolder}/apps/nodejs/personal-cloud"
-        },
-        {
-            "name": "not-found",
-            "type": "node",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/apps/nodejs/not-found/app.js",
-            "cwd": "${workspaceFolder}/apps/nodejs/not-found"
-        },
-        {
-            "name": "node-templates",
-            "type": "node",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/apps/nodejs/node-templates/server.js",
-            "cwd": "${workspaceFolder}/apps/nodejs/node-templates"
         }
     ]
 }

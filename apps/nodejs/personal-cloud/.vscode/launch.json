@@ -5,13 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "personal-cloud",
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/app.js"
-        }
+            "program": "${workspaceFolder}/app.js",
+            // "cwd": "${workspaceFolder}/apps/nodejs/personal-cloud"
+        },
     ]
 }
